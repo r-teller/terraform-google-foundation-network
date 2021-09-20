@@ -1,11 +1,11 @@
 locals {
   subnetworks = merge(flatten([
-    for network in local.network_configs : [
+    for network in var.network_configs : [
       for region, subnetwork in network.subnetworks : {
         for key, value in subnetwork : "${network.name}-${region}-${key}" => merge(
           value, {
-            name    = "${local.prefix}-${local.environment}-${network.name}-subnet-${replace(value.ip_cidr_range, "//|\\./", "-")}"
-            network = "${local.prefix}-${local.environment}-vpc-${network.name}",
+            name    = "${var.prefix}-${var.environment}-${network.name}-subnet-${replace(value.ip_cidr_range, "//|\\./", "-")}"
+            network = "${var.prefix}-${var.environment}-vpc-${network.name}",
             region  = region
           }
         )
@@ -14,13 +14,9 @@ locals {
   ])...)
 }
 
-# output "subnetworks" {
-#   value = local.subnetworks
-# }
-
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_subnetwork
-resource "google_compute_subnetwork" "subnetwork" {
-  project  = local.project_id
+resource "google_compute_subnetwork" "subnetworks" {
+  project  = var.project_id
   for_each = local.subnetworks
 
   name                     = each.value.name

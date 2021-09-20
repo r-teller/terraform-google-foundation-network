@@ -4,9 +4,9 @@ resource "random_id" "random_id_pga" {
 }
 
 locals {
-  private_google_access = [for network in local.network_configs : {
-    network               = "${local.prefix}-${local.environment}-vpc-${network.name}"
-    network_id            = google_compute_network.networks["${local.prefix}-${local.environment}-vpc-${network.name}"].id
+  private_google_access = [for network in var.network_configs : {
+    network               = "${var.prefix}-${var.environment}-vpc-${network.name}"
+    network_id            = google_compute_network.networks["${var.prefix}-${var.environment}-vpc-${network.name}"].id
     private_googleapis    = try(lower(network.private_google_access) == "private", false)
     restricted_googleapis = try(lower(network.private_google_access) == "restricted", false)
     }
@@ -16,7 +16,7 @@ locals {
 resource "google_compute_route" "route_next_hop_gateway_restricted" {
   for_each = { for x in local.private_google_access : x.network => x if x.restricted_googleapis }
 
-  project          = local.project_id
+  project          = var.project_id
   name             = "${each.value.network}-psa-${random_id.random_id_pga[1].hex}"
   network          = each.value.network
   dest_range       = "199.36.153.4/30"
@@ -34,7 +34,7 @@ module "dns_restricted_googleapis_com" {
   source  = "terraform-google-modules/cloud-dns/google"
   version = "3.1.0"
 
-  project_id = local.project_id
+  project_id = var.project_id
   type       = "private"
   name       = "dns-restricted-googleapis-com-${random_id.random_id_pga[1].hex}"
   domain     = "googleapis.com."
@@ -64,7 +64,7 @@ module "dns_restricted_googleapis_com" {
 resource "google_compute_route" "route_next_hop_gateway_private" {
   for_each = { for x in local.private_google_access : x.network => x if x.private_googleapis }
 
-  project          = local.project_id
+  project          = var.project_id
   name             = "${each.value.network}-psa-${random_id.random_id_pga[2].hex}"
   network          = each.value.network
   dest_range       = "199.36.153.8/30"
@@ -82,7 +82,7 @@ module "dns_private_googleapis_com" {
   source  = "terraform-google-modules/cloud-dns/google"
   version = "3.1.0"
 
-  project_id = local.project_id
+  project_id = var.project_id
   type       = "private"
   name       = "dns-private-googleapis-com-${random_id.random_id_pga[2].hex}"
   domain     = "googleapis.com."
