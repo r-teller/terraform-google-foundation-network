@@ -19,7 +19,8 @@ locals {
 }
 
 module "basic_foundation_prod" {
-  source = "./modules/basic"
+  source  = "r-teller/foundation-network/google//modules/basic"
+  version = ">= 0.0.0"
 
   project_id            = local.project_id
   prefix                = local.prefix
