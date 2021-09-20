@@ -3,14 +3,13 @@
     "name": "mgmt-global",
     "routing_mode": "GLOBAL",
     "description": "",
-    "private_google_access": "restricted",
     "subnetworks": {
       "us-central1": {
         "0": {
           "description": "",
           "purpose": "PRIVATE",
           "ip_cidr_range": "10.255.0.0/24",
-          "private_ip_google_access": true,
+          "private_google_access": true,
           "log_config": {
             "aggregation_interval": "INTERVAL_30_SEC",
             "flow_sampling": 1,
@@ -25,7 +24,7 @@
           "description": "",
           "purpose": "PRIVATE",
           "ip_cidr_range": "10.255.32.0/24",
-          "private_ip_google_access": true,
+          "private_google_access": true,
           "log_config": {
             "aggregation_interval": "INTERVAL_30_SEC",
             "flow_sampling": 1,

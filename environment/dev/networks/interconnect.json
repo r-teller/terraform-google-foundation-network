@@ -1,0 +1,10 @@
+[
+  {
+    "name": "interconnect",
+    "routing_mode": "GLOBAL",
+    "description": "",
+    "subnetworks": { },
+    "firewall_rules": [ ],
+    "routes":[ ]
+  }
+]

@@ -1,15 +1,15 @@
 [
   {
-    "name": "inside-global",
+    "name": "dmz-global",
     "routing_mode": "GLOBAL",
     "description": "",
-    "private_google_access": "private",
+    "private_google_apis": true,
     "subnetworks": {
       "us-central1": {
         "0": {
           "description": "",
           "purpose": "PRIVATE",
-          "ip_cidr_range": "172.16.0.0/24",
+          "ip_cidr_range": "192.168.0.0/24",
           "private_ip_google_access": true,
           "log_config": {
             "aggregation_interval": "INTERVAL_30_SEC",
@@ -22,7 +22,7 @@
         "1": {
           "description": "",
           "purpose": "PRIVATE",
-          "ip_cidr_range": "172.16.2.0/24",
+          "ip_cidr_range": "192.168.2.0/24",
           "private_ip_google_access": true,
           "log_config": {
             "aggregation_interval": "INTERVAL_30_SEC",
@@ -32,12 +32,12 @@
           },
           "secondary_ranges": [ ]
         }
-      },
+      },  
       "us-east4": {
         "0": {
           "description": "",
           "purpose": "PRIVATE",
-          "ip_cidr_range": "172.16.32.0/24",
+          "ip_cidr_range": "192.168.32.0/24",
           "private_ip_google_access": true,
           "log_config": {
             "aggregation_interval": "INTERVAL_30_SEC",
@@ -50,7 +50,7 @@
         "1": {
           "description": "",
           "purpose": "PRIVATE",
-          "ip_cidr_range": "172.16.34.0/24",
+          "ip_cidr_range": "192.168.34.0/24",
           "private_ip_google_access": true,
           "log_config": {
             "aggregation_interval": "INTERVAL_30_SEC",
@@ -66,7 +66,13 @@
     "routes":[],
     "peers":[
       {
-        "network": "ngfw-poc-prod-vpc-dmz-global",
+        "network": "foo",
+        "project_id": "bar",
+        "export_custom_routes": true,
+        "import_custom_routes": true
+      },
+      {
+        "network": "ngfw-poc-prod-vpc-inside-global",
         "export_custom_routes": true,
         "import_custom_routes": true
       }

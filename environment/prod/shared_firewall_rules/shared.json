@@ -14,7 +14,7 @@
         ],
         "rules": [
             {
-                "protocol": "tcp",
+                "protocol": "TCP",
                 "ports": [22,80,443,3389]
             }
         ]
@@ -35,7 +35,7 @@
         ],
         "rules": [
             {
-                "protocol": "all",
+                "protocol": "ALL",
                 "ports": []
             }
         ]
@@ -57,7 +57,7 @@
         ],
         "rules": [
             {
-                "protocol": "all",
+                "protocol": "ALL",
                 "ports": []
             }
         ]

@@ -1,16 +1,15 @@
 [
   {
-    "name": "inside-global",
+    "name": "dmz-global",
     "routing_mode": "GLOBAL",
     "description": "",
-    "private_google_access": "private",
     "subnetworks": {
       "us-central1": {
         "0": {
           "description": "",
           "purpose": "PRIVATE",
-          "ip_cidr_range": "172.16.0.0/24",
-          "private_ip_google_access": true,
+          "ip_cidr_range": "192.168.0.0/24",
+          "private_google_access": true,
           "log_config": {
             "aggregation_interval": "INTERVAL_30_SEC",
             "flow_sampling": 1,
@@ -22,8 +21,8 @@
         "1": {
           "description": "",
           "purpose": "PRIVATE",
-          "ip_cidr_range": "172.16.2.0/24",
-          "private_ip_google_access": true,
+          "ip_cidr_range": "192.168.2.0/24",
+          "private_google_access": true,
           "log_config": {
             "aggregation_interval": "INTERVAL_30_SEC",
             "flow_sampling": 1,
@@ -32,13 +31,13 @@
           },
           "secondary_ranges": [ ]
         }
-      },
+      },  
       "us-east4": {
         "0": {
           "description": "",
           "purpose": "PRIVATE",
-          "ip_cidr_range": "172.16.32.0/24",
-          "private_ip_google_access": true,
+          "ip_cidr_range": "192.168.32.0/24",
+          "private_google_access": true,
           "log_config": {
             "aggregation_interval": "INTERVAL_30_SEC",
             "flow_sampling": 1,
@@ -50,8 +49,8 @@
         "1": {
           "description": "",
           "purpose": "PRIVATE",
-          "ip_cidr_range": "172.16.34.0/24",
-          "private_ip_google_access": true,
+          "ip_cidr_range": "192.168.34.0/24",
+          "private_google_access": true,
           "log_config": {
             "aggregation_interval": "INTERVAL_30_SEC",
             "flow_sampling": 1,
@@ -63,13 +62,6 @@
       }
     },
     "firewall_rules":[],
-    "routes":[],
-    "peers":[
-      {
-        "network": "ngfw-poc-prod-vpc-dmz-global",
-        "export_custom_routes": true,
-        "import_custom_routes": true
-      }
-    ]
+    "routes":[]
   }
 ]

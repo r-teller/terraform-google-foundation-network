@@ -1,16 +1,15 @@
 [
   {
-    "name": "mgmt-global",
+    "name": "outside-global",
     "routing_mode": "GLOBAL",
     "description": "",
-    "private_google_access": "restricted",
     "subnetworks": {
       "us-central1": {
         "0": {
           "description": "",
           "purpose": "PRIVATE",
-          "ip_cidr_range": "10.255.0.0/24",
-          "private_ip_google_access": true,
+          "ip_cidr_range": "10.10.0.0/24",
+          "private_google_access": true,
           "log_config": {
             "aggregation_interval": "INTERVAL_30_SEC",
             "flow_sampling": 1,
@@ -24,8 +23,21 @@
         "0": {
           "description": "",
           "purpose": "PRIVATE",
-          "ip_cidr_range": "10.255.32.0/24",
-          "private_ip_google_access": true,
+          "ip_cidr_range": "10.10.32.0/24",
+          "private_google_access": true,
+          "log_config": {
+            "aggregation_interval": "INTERVAL_30_SEC",
+            "flow_sampling": 1,
+            "metadata": "INCLUDE_ALL_METADATA",
+            "metadata_fields": []
+          },
+          "secondary_ranges": []
+        },
+        "1": {
+          "description": "",
+          "purpose": "PRIVATE",
+          "ip_cidr_range": "10.10.3.0/24",
+          "private_google_access": true,
           "log_config": {
             "aggregation_interval": "INTERVAL_30_SEC",
             "flow_sampling": 1,
@@ -36,33 +48,10 @@
         }
       }
     },
-    "firewall_rules": [
-      {
-        "id": "allow-ssh-rteller",
-        "description": "",
-        "action": "allow",
-        "priority": 1000,
-        "direction": "INGRESS",
-        "sources": [
-          "98.247.221.22/32"
-        ],
-        "targets": [
-          "ngfw"
-        ],
-        "rules": [
-          {
-            "protocol": "TCP",
-            "ports": [
-              22,
-              443
-            ]
-          }
-        ]
-      }
-    ],
+    "firewall_rules":[],
     "routes":[
       {
-        "name": "mgmt-global-default",
+        "name": "outside-global-default",
         "dest_range": "0.0.0.0/0",
         "priority": 0,
         "next_hop_gateway": "default-internet-gateway"
