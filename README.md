@@ -1,1 +1,1 @@
-# gcp-terraform-ngfw-deployment
+# terraform-google-foundation-network
