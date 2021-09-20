@@ -1,3 +1,6 @@
+# Local staging directories
+**/.staging/*
+
 # Local .terraform directories
 **/.terraform/*
 
