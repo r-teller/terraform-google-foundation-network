@@ -1,0 +1,14 @@
+[
+  {
+    "name": "cloud-nat-blank",
+    "routing_mode": "GLOBAL",
+    "cloud_nat": {
+    },
+    "subnetworks": [
+      {
+        "region": "us-west1",
+        "ip_cidr_range": "172.16.32.0/24"
+      }
+    ]
+  }
+]

@@ -1,19 +1,39 @@
+## Useful Links
+// Network
+//// Terraform - https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network
+//// GCLOUD - https://cloud.google.com/sdk/gcloud/reference/compute/networks/create
+// Network Peering (To Be Documented)
+//// Terraform - https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network_peering
+//// Terraform - https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network_peering_routes_config
+// Private Service Connection (To Be Built)
+//// Terraform - https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_global_address
+//// Terraform - https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_networking_connection
+
 locals {
+  defaults_network = {
+    routing_mode = "REGIONAL"
+    mtu          = 1460
+    peers        = []
+  }
+
   networks = { for network in var.network_configs : "${var.prefix}-${var.environment}-vpc-${network.name}" => {
-    routing_mode            = network.routing_mode
-    mtu                     = 1460
+    id                      = "projects/${var.project_id}/global/networks/${var.prefix}-${var.environment}-vpc-${network.name}"
+    routing_mode            = try(network.routing_mode, local.defaults_network.routing_mode)
+    mtu                     = try(network.mtu, local.defaults_network.mtu)
     auto_create_subnetworks = false
-    peers                   = try(network.peers, [])
+    peers                   = try(network.peers, local.defaults_network.peers)
+    private_service_connection = {
+      address       = try(split("/", network.private_service_connection.ip_cidr_range)[0], null)
+      prefix_length = try(split("/", network.private_service_connection.ip_cidr_range)[1], network.private_service_connection.ip_cidr_prefix, null)
+
+      import_custom_routes = try(network.private_service_connection.import_custom_routes, false)
+      export_custom_routes = try(network.private_service_connection.export_custom_routes, false)
+    }
   } }
 
   network_peering_maps = flatten([for key, value in local.networks : [
     for peer in value.peers : {
-      name = try(peer.name, null)
-      # If peer.name is set the expectation is that the module should change settings for a connection that is already created
-      create = !(can(peer.name))
-      manage = can(peer.name)
-
-      local_network_id = "projects/${var.project_id}/global/networks/${key}"
+      local_network_id = value.id
       peer_network_id  = try("projects/${try(peer.project_id, var.project_id)}/global/networks/${peer.network}", null)
 
       import_custom_routes = try(peer.import_custom_routes, null)
@@ -27,7 +47,6 @@ locals {
   ]])
 }
 
-# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network
 resource "google_compute_network" "networks" {
   project                         = var.project_id
   for_each                        = local.networks
@@ -38,10 +57,48 @@ resource "google_compute_network" "networks" {
   delete_default_routes_on_create = true
 }
 
-// This is used to create VPC Peers and set import/export actions
-# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network_peering
+
+resource "google_compute_global_address" "global_address" {
+  project  = var.project_id
+  for_each = { for key, value in local.networks : key => value if(value.private_service_connection.prefix_length != null || value.private_service_connection.address != null) }
+
+  name          = each.key
+  purpose       = "VPC_PEERING"
+  address_type  = "INTERNAL"
+  address       = each.value.private_service_connection.address
+  prefix_length = each.value.private_service_connection.prefix_length
+  network       = each.value.id
+
+  depends_on = [
+    google_compute_network.networks
+  ]
+}
+
+resource "google_service_networking_connection" "service_networking_connection" {
+  for_each = google_compute_global_address.global_address
+
+  network = each.value.network
+  service = "servicenetworking.googleapis.com"
+  reserved_peering_ranges = [
+    each.value.name
+  ]
+}
+
+# # "network": "https://www.googleapis.com/compute/v1/projects/rteller-demo-host-aaaa/global/networks/test-cases-vpc-network-private-service-connection-both",
+# # "peering": "servicenetworking-googleapis-com",
+resource "google_compute_network_peering_routes_config" "service_networking_connection_peering" {
+  project  = var.project_id  
+  for_each = google_service_networking_connection.service_networking_connection
+
+  network = each.value.network
+  peering = each.value.peering
+
+  import_custom_routes = true//(lookup(local.networks, regex("global/networks/(?P<network>[^/]*)", each.value.network).network)).private_service_connection.import_custom_routes
+  export_custom_routes = true//(lookup(local.networks, regex("global/networks/(?P<network>[^/]*)", each.value.network).network)).private_service_connection.export_custom_routes
+}
+
 resource "google_compute_network_peering" "network_peering" {
-  for_each = { for peering in local.network_peering_maps : peering.key => peering if peering.create }
+  for_each = { for peering in local.network_peering_maps : peering.key => peering }
 
   name = each.key
 
@@ -53,23 +110,6 @@ resource "google_compute_network_peering" "network_peering" {
 
   import_subnet_routes_with_public_ip = each.value.import_subnet_routes_with_public_ip
   export_subnet_routes_with_public_ip = each.value.export_subnet_routes_with_public_ip
-
-  depends_on = [
-    google_compute_network.networks
-  ]
-}
-
-// This is used to update existing VPC Peers and set import/export actions
-# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network_peering_routes_config
-resource "google_compute_network_peering_routes_config" "network_peering_routes_config" {
-  project  = var.project_id
-  for_each = { for peering in local.network_peering_maps : peering.key => peering if peering.manage }
-
-  peering = each.value.name
-  network = each.value.local_network_id
-
-  import_custom_routes = each.value.import_custom_routes
-  export_custom_routes = each.value.export_custom_routes
 
   depends_on = [
     google_compute_network.networks

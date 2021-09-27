@@ -1,0 +1,15 @@
+[
+  {
+    "name": "cloud-nat-disabled",
+    "routing_mode": "GLOBAL",
+    "cloud_nat": {
+      "subnetworks_to_nat": "DISABLED"
+    },
+    "subnetworks": [
+      {
+        "region": "us-west1",
+        "ip_cidr_range": "172.16.32.0/24"
+      }
+    ]
+  }
+]

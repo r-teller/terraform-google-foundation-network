@@ -1,0 +1,19 @@
+[
+  {
+    "name": "cloud-nat-primary",
+    "routing_mode": "GLOBAL",
+    "cloud_nat": {
+      "subnetworks_to_nat": "ALL_PRIMARY_SUBNETWORKS"
+    },
+    "subnetworks": [
+      {
+        "region": "us-west1",
+        "ip_cidr_range": "172.16.32.0/24"
+      },
+      {
+        "region": "us-central1",
+        "ip_cidr_range": "172.16.64.0/24"
+      }
+    ]
+  }
+]

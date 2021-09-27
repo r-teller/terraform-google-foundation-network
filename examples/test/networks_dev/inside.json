@@ -1,0 +1,121 @@
+[
+  {
+    "name": "inside-use4",
+    "routing_mode": "GLOBAL",
+    "cloud_nat": {
+      "ip_ranges_to_nat": "ALL_SUBNETWORKS_ALL_IP_RANGES"
+    },
+    "subnetworks": [
+      {
+        "region": "us-east4",
+        "description": "",
+        "purpose": "PRIVATE",
+        "ip_cidr_range": "172.16.34.0/24",
+        "private_ip_google_access": true,
+        "log_config": {
+          "aggregation_interval": "INTERVAL_30_SEC",
+          "flow_sampling": 1,
+          "metadata": "INCLUDE_ALL_METADATA",
+          "metadata_fields": []
+        }
+      },
+      {
+        "region": "us-east4",
+        "description": "",
+        "purpose": "PRIVATE",
+        "ip_cidr_range": "172.16.35.0/24",
+        "private_ip_google_access": true,
+        "log_config": {
+          "aggregation_interval": "INTERVAL_30_SEC",
+          "flow_sampling": 1,
+          "metadata": "INCLUDE_ALL_METADATA",
+          "metadata_fields": []
+        }
+      }
+    ]
+  },
+  {
+    "name": "inside-usc1",
+    "routing_mode": "GLOBAL",
+    "cloud_nat": {
+      "ip_ranges_to_nat": "ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES"
+    },
+    "subnetworks": [
+      {
+        "region": "us-central1",
+        "description": "",
+        "purpose": "PRIVATE",
+        "ip_cidr_range": "172.16.34.0/24",
+        "private_ip_google_access": true,
+        "log_config": {
+          "aggregation_interval": "INTERVAL_30_SEC",
+          "flow_sampling": 1,
+          "metadata": "INCLUDE_ALL_METADATA",
+          "metadata_fields": []
+        },
+        "secondary_ranges": []
+      }
+    ]
+  },
+  {
+    "name": "inside-use1",
+    "routing_mode": "GLOBAL",
+    "cloud_nat": {
+      "ip_ranges_to_nat": "SELECTED_SUBNETWORKS_SELECTED_IP_RANGES"
+    },
+    "subnetworks": [
+      {
+        "region": "us-east1",
+        "description": "",
+        "purpose": "PRIVATE",
+        "ip_cidr_range": "172.16.34.0/24",
+        "private_ip_google_access": true,
+        "ip_ranges_to_nat": "SELECTED_IP_RANGES",
+        "cloud_nat_selected": true,        
+        "log_config": {
+          "aggregation_interval": "INTERVAL_30_SEC",
+          "flow_sampling": 1,
+          "metadata": "INCLUDE_ALL_METADATA",
+          "metadata_fields": []
+        },
+        "secondary_ranges": [
+          {
+            "cloud_nat_selected": true,
+            "range_name": "testing-secondary-range-alpha",
+            "ip_cidr_range": "1.1.1.0/24"
+          },
+          {
+            "cloud_nat_selected": false,
+            "range_name": "testing-secondary-range-bravo",
+            "ip_cidr_range": "1.1.2.0/24"
+          }
+        ]
+      },
+      {
+        "region": "us-east1",
+        "description": "",
+        "purpose": "PRIVATE",
+        "ip_cidr_range": "172.16.35.0/24",
+        "private_ip_google_access": true,
+        "ip_ranges_to_nat": "ALL_IP_RANGES",
+        "log_config": {
+          "aggregation_interval": "INTERVAL_30_SEC",
+          "flow_sampling": 1,
+          "metadata": "INCLUDE_ALL_METADATA",
+          "metadata_fields": []
+        },
+        "secondary_ranges": [
+          {
+            "range_name": "testing-secondary-range-alpha",
+            "ip_cidr_range": "2.2.1.0/24"
+          },
+          {
+            "cloud_nat_selected": false,
+            "range_name": "testing-secondary-range-bravo",
+            "ip_cidr_range": "2.2.2.0/24"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "name": "subnetwork-multi-purpose",
+    "subnetworks": [
+      {
+        "region": "us-east4",
+        "ip_cidr_range": "172.16.0.0/24"
+      },
+      {
+        "region": "us-east4",
+        "purpose": "INTERNAL_HTTPS_LOAD_BALANCER",
+        "ip_cidr_range": "172.16.1.0/24"
+      },
+      {
+        "region": "us-central1",
+        "ip_cidr_range": "172.16.32.0/24"
+      },
+      {
+        "region": "us-central1",
+        "purpose": "INTERNAL_HTTPS_LOAD_BALANCER",
+        "role": "ACTIVE",
+        "ip_cidr_range": "172.16.33.0/24"
+      },
+      {
+        "region": "us-central1",
+        "purpose": "INTERNAL_HTTPS_LOAD_BALANCER",
+        "role": "BACKUP",
+        "ip_cidr_range": "172.16.34.0/24"
+      }
+    ]
+  }
+]
