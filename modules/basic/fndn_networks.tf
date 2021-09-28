@@ -77,24 +77,22 @@ resource "google_compute_global_address" "global_address" {
 resource "google_service_networking_connection" "service_networking_connection" {
   for_each = google_compute_global_address.global_address
 
-  network = each.value.network
+  network = regex("(projects/.*)", each.value.network)[0]
   service = "servicenetworking.googleapis.com"
   reserved_peering_ranges = [
     each.value.name
   ]
 }
 
-# # "network": "https://www.googleapis.com/compute/v1/projects/rteller-demo-host-aaaa/global/networks/test-cases-vpc-network-private-service-connection-both",
-# # "peering": "servicenetworking-googleapis-com",
 resource "google_compute_network_peering_routes_config" "service_networking_connection_peering" {
-  project  = var.project_id  
+  project  = var.project_id
   for_each = google_service_networking_connection.service_networking_connection
 
-  network = each.value.network
+  network = regex("global/networks/(?P<network>[^/]*)", each.value.network).network
   peering = each.value.peering
 
-  import_custom_routes = true//(lookup(local.networks, regex("global/networks/(?P<network>[^/]*)", each.value.network).network)).private_service_connection.import_custom_routes
-  export_custom_routes = true//(lookup(local.networks, regex("global/networks/(?P<network>[^/]*)", each.value.network).network)).private_service_connection.export_custom_routes
+  import_custom_routes = (lookup(local.networks, regex("global/networks/(?P<network>[^/]*)", each.value.network).network)).private_service_connection.import_custom_routes
+  export_custom_routes = (lookup(local.networks, regex("global/networks/(?P<network>[^/]*)", each.value.network).network)).private_service_connection.export_custom_routes
 }
 
 resource "google_compute_network_peering" "network_peering" {
