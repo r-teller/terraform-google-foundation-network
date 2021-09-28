@@ -43,7 +43,7 @@ module "test_cases__network" {
 }
 
 module "test_cases__subnetwork" {
-  count  = 0
+  count  = 1
   source = "./modules/basic"
 
   project_id      = local.project_id
@@ -53,7 +53,7 @@ module "test_cases__subnetwork" {
 }
 
 module "test_cases__cloud_nat" {
-  count  = 0
+  count  = 1
   source = "./modules/basic"
 
   project_id      = local.project_id
