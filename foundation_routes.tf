@@ -50,7 +50,7 @@ locals {
     tags             = local.defaults_route.tags
   }]
 
-  merged_routes = { for route in concat(local.routes, local.routes_pga) : "route-${route.network_name}-${uuidv5("x500", "NEXT_HOP_TYPE=${route.next_hop_type}, DESTINATION=${route.dest_range}, PRIORITY=${route.priority}, TAG_COUNT=${length(route.tags)}")}" => route
+  merged_routes = { for route in concat(local.routes, local.routes_pga) : "tf-managed-route-${uuidv5("x500", "PREFIX=${var.prefix},ENVIRONMENT=${var.environment},NETWORK=${route.network_name},NEXT_HOP_TYPE=${route.next_hop_type}, DESTINATION=${route.dest_range}, PRIORITY=${route.priority}, TAG_COUNT=${length(route.tags)}")}" => route
   if contains(["next_hop_gateway", "next_hop_ip"], route.next_hop_type) }
 }
 
@@ -69,7 +69,7 @@ resource "google_compute_route" "route_next_hop" {
   next_hop_instance      = null
   next_hop_instance_zone = null
 
-  next_hop_ilb        = null
+  next_hop_ilb = null
   # next_hop_ilb_region = null
 
   priority = each.value.priority
