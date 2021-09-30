@@ -21,7 +21,13 @@ locals {
     routing_mode            = try(network.routing_mode, local.defaults_network.routing_mode)
     mtu                     = try(network.mtu, local.defaults_network.mtu)
     auto_create_subnetworks = false
-    peers                   = try(network.peers, local.defaults_network.peers)
+
+    peers = try(
+      [for peer in network.peers : merge(peer, {
+        // If the peer.network value matches one of the json network names before prefix and environment use that otherwise use the exact value of peer.network
+        network = contains(var.network_configs.*.name, peer.network) ? "${var.prefix}-${var.environment}-vpc-${peer.network}" : peer.network
+    })], local.defaults_network.peers)
+
     private_service_connection = {
       address       = try(split("/", network.private_service_connection.ip_cidr_range)[0], null)
       prefix_length = try(split("/", network.private_service_connection.ip_cidr_range)[1], network.private_service_connection.ip_cidr_prefix, null)

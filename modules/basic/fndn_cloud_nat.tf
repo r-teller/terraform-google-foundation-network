@@ -164,7 +164,7 @@ resource "google_compute_router" "cloud_nat_routers" {
   region  = each.value.region
 
   depends_on = [
-    google_compute_network.networks
+    google_compute_network.networks,
   ]
 }
 
@@ -188,6 +188,8 @@ resource "google_compute_router_nat" "cloud_nats" {
     }
   }
   depends_on = [
-    google_compute_router.cloud_nat_routers
+    google_compute_network.networks,
+    google_compute_subnetwork.subnetworks,
+    google_compute_router.cloud_nat_routers,
   ]
 }

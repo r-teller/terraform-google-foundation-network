@@ -10,6 +10,7 @@
 
 
 resource "random_id" "random_id_pga" {
+  count       = can(local.map_private_google_access["PRIVATE"]) ? 1 : 0
   byte_length = 2
 }
 
@@ -19,7 +20,9 @@ locals {
   }
 
   private_google_access_networks = [for network in var.network_configs : {
-    name = "${var.prefix}-${var.environment}-vpc-${network.name}"
+    name         = "${var.prefix}-${var.environment}-vpc-${network.name}"
+    network_name = network.name
+
     id   = "projects/${var.project_id}/global/networks/${var.prefix}-${var.environment}-vpc-${network.name}"
     mode = network.private_google_access
     } if try(contains(["PRIVATE", "RESTRICTED"], network.private_google_access), false)
@@ -39,7 +42,7 @@ resource "google_dns_managed_zone" "managed_zone_private" {
 
   project = var.project_id
 
-  name     = "dns-private-googleapis-com-${random_id.random_id_pga.hex}"
+  name     = "dns-private-googleapis-com-${random_id.random_id_pga[0].hex}"
   dns_name = "googleapis.com."
 
 
@@ -88,7 +91,7 @@ resource "google_dns_record_set" "dns_record_set_cname_private" {
 resource "google_dns_managed_zone" "managed_zone_restricted" {
   count    = can(local.map_private_google_access["RESTRICTED"]) ? 1 : 0
   project  = var.project_id
-  name     = "dns-restricted-googleapis-com-${random_id.random_id_pga.hex}"
+  name     = "dns-restricted-googleapis-com-${random_id.random_id_pga[0].hex}"
   dns_name = "googleapis.com."
 
 
@@ -132,32 +135,34 @@ resource "google_dns_record_set" "dns_record_set_cname_restricted" {
   rrdatas = ["restricted.googleapis.com."]
 }
 
-resource "google_compute_route" "route_next_hop_gateway_restricted" {
-  for_each = toset(try([for x in local.map_private_google_access["RESTRICTED"] : regex("global/networks/(?P<network>[^/]*)", x).network], []))
+######## Private/Restricted Google Access Routes ########
 
-  project          = var.project_id
-  name             = "${each.key}-psa-${random_id.random_id_pga.hex}"
-  network          = each.key
-  dest_range       = "199.36.153.4/30"
-  next_hop_gateway = "default-internet-gateway"
-  priority         = 0
+# resource "google_compute_route" "route_next_hop_gateway_restricted" {
+#   for_each = toset(try([for x in local.map_private_google_access["RESTRICTED"] : regex("global/networks/(?P<network>[^/]*)", x).network], []))
 
-  depends_on = [
-    google_compute_network.networks
-  ]
-}
+#   project          = var.project_id
+#   name             = "${each.key}-psa-${random_id.random_id_pga[0].hex}"
+#   network          = each.key
+#   dest_range       = "199.36.153.4/30"
+#   next_hop_gateway = "default-internet-gateway"
+#   priority         = 0
 
-resource "google_compute_route" "route_next_hop_gateway_private" {
-  for_each = toset(try([for x in local.map_private_google_access["PRIVATE"] : regex("global/networks/(?P<network>[^/]*)", x).network], []))
+#   depends_on = [
+#     google_compute_network.networks
+#   ]
+# }
 
-  project          = var.project_id
-  name             = "${each.key}-psa-${random_id.random_id_pga.hex}"
-  network          = each.key
-  dest_range       = "199.36.153.8/30"
-  next_hop_gateway = "default-internet-gateway"
-  priority         = 0
+# resource "google_compute_route" "route_next_hop_gateway_private" {
+#   for_each = toset(try([for x in local.map_private_google_access["PRIVATE"] : regex("global/networks/(?P<network>[^/]*)", x).network], []))
 
-  depends_on = [
-    google_compute_network.networks
-  ]
-}
+#   project          = var.project_id
+#   name             = "${each.key}-psa-${random_id.random_id_pga[0].hex}"
+#   network          = each.key
+#   dest_range       = "199.36.153.8/30"
+#   next_hop_gateway = "default-internet-gateway"
+#   priority         = 0
+
+#   depends_on = [
+#     google_compute_network.networks
+#   ]
+# }
