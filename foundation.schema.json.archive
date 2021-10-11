@@ -1,0 +1,747 @@
+{
+	"$id": "https://example.com/schemas/Foundation/Networking",
+	"type": "array",
+	"items": {
+		"$ref": "/schemas/Network"
+	},
+	"$defs": {
+		"Network": {
+			"$id": "/schemas/Network",
+			"required": [
+				"name"
+			],
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"routing_mode": {
+					"type": "string",
+					"enum": [
+						"GLOBAL",
+						"REGIONAL"
+					],
+					"default": "REGIONAL"
+				},
+				"mtu": {
+					"type": "number",
+					"enum": [
+						1460,
+						1500
+					],
+					"default": 1460
+				},
+				"description": {
+					"type": "string"
+				},
+				"private_google_access": {
+					"type": "string",
+					"enum": [
+						"RESTRICTED",
+						"PRIVATE",
+						"DISABLED"
+					],
+					"default": "DISABLED"
+				},
+				"private_service_connection": {
+					"allOf": [
+						{
+							"type": "object",
+							"properties": {
+								"export_custom_routes": {
+									"type": "boolean",
+									"default": false
+								},
+								"import_custom_routes": {
+									"type": "boolean",
+									"default": false
+								}
+							}
+						},
+						{
+							"oneOf": [{
+									"type": "object",
+									"properties": {
+										"ip_cidr_range": {
+											"type": "string",
+											"description": "IP space allocated to this connection in CIDR format.",
+											"example": "192.168.0.0/24"
+										}
+									}
+								},
+								{
+									"type": "object",
+									"properties": {
+										"ip_cidr_prefix": {
+											"type": "number",
+											"description": "IP CIDR prefix used for this connection. Google will automtically allocated a IP CIDR Range based on the provided prefix",
+											"example": 16
+										}
+									}
+								}
+							]
+						}
+					]
+				},
+				"cloud_nat": {
+					"oneOf": [{
+							"$ref": "/schemas/CloudNAT_GENERIC"
+						},
+						{
+							"$ref": "/schemas/CloudNAT_SELECTED"
+						}
+					],
+					"required": [
+						"subnetworks_to_nat"
+					],
+					"discriminator": {
+						"propertyName": "subnetworks_to_nat",
+						"mapping": {
+							"DISABLED": "/schemas/CloudNAT_GENERIC",
+							"ALL_PRIMARY_SUBNETWORKS": "/schemas/CloudNAT_GENERIC",
+							"ALL_PRIMARY_SUBNETWORKS_ALL_SECONDARY_SUBNETWORKS": "/schemas/CloudNAT_GENERIC",
+							"SELECTED_PRIMARY_SUBNETWORKS_SELECTED_SECONDARY_SUBNETWORKS": "/schemas/CloudNAT_SELECTED"
+						}
+					}
+				},
+				"subnetworks": {
+					"type": "array",
+					"items": {
+						"allOf": [{
+								"type": "object",
+								"properties": {
+									"region": {
+										"$ref": "/schemas/Regions"
+									},
+									"name": {
+										"type": "string",
+										"description": "(OPTIONAL) if this field is not provided ip_cidr_range value will be dynamically generated based on the ip_cidr_range. WARNING, if this field is not set changing the ip_cidr_range will change the name dynamically generated.",
+										"pattern": "^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$",
+										"example": "<prefix>-<environment>-<network>-subnet-<192-168-0-0-24>",
+										"default": null
+									},
+									"ip_cidr_range": {
+										"type": "string",
+										"description": "IP space allocated to this subnetwork in CIDR format.",
+										"example": "192.168.0.0/24",
+										"pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}\\/(([0-9]|[1-2][0-9]|3[0-2]))?$"
+									},
+									"description": {
+										"type": "string",
+										"description": "(OPTIONAL) Description of this subnetwork.",
+										"default": null
+									},
+									"purpose": {
+										"type": "string",
+										"default": "PRIVATE",
+										"enum": ["PRIVATE_SERVICE_CONNECT", "PRIVATE", "INTERNAL_HTTPS_LOAD_BALANCER"]
+									}
+								},
+								"required": [
+									"region",
+									"ip_cidr_range"
+								]
+							},
+							{
+								"allOf": [{
+										"if": {
+											"properties": {
+												"purpose": {
+													"const": "PRIVATE"
+												}
+											}
+										},
+										"then": {
+											"$ref": "/schemas/Subnetwork_PRIVATE"
+										}
+									},
+									{
+										"if": {
+											"properties": {
+												"purpose": {
+													"const": "PRIVATE_SERVICE_CONNECT"
+												}
+											},
+											"required": ["purpose"]
+										},
+										"then": {
+											"properties": {
+												"$ref": "/schemas/Subnetwork_PRIVATE_SERVICE_CONNECT"
+											}
+										}
+									},
+									{
+										"if": {
+											"properties": {
+												"purpose": {
+													"const": "INTERNAL_HTTPS_LOAD_BALANCER"
+												}
+											},
+											"required": ["purpose"]
+										},
+										"then": {
+											"properties": {
+												"$ref": "/schemas/Subnetwork_INTERNAL_HTTPS_LOAD_BALANCER"
+											}
+										}
+									}
+								],
+								"discriminator": {
+									"propertyName": "purpose",
+									"mapping": {
+										"PRIVATE": "/schemas/Subnetwork_PRIVATE",
+										"PRIVATE_SERVICE_CONNECT": "/schemas/Subnetwork_PRIVATE_SERVICE_CONNECT",
+										"INTERNAL_HTTPS_LOAD_BALANCER": "/schemas/Subnetwork_INTERNAL_HTTPS_LOAD_BALANCER"
+									}
+								}
+							}
+						]
+					}
+				},
+				"firewall_rules": {
+					"$ref": "/schemas/FirewallRules"
+				},
+				"routes": {
+					"type": "array",
+					"items": {
+						"oneOf": [{
+								"$ref": "/schemas/Route_NEXTHOP_INTERNET_GATEWAY"
+							},
+							{
+								"$ref": "/schemas/Route_NEXTHOP_ADDRESS"
+							}
+						],
+						"discriminator": {
+							"propertyName": "purpose",
+							"mapping": {
+								"INTERNET_GATEWAY": "/schemas/Route_NEXTHOP_INTERNET_GATEWAY",
+								"ADDRESS": "/schemas/Route_NEXTHOP_ADDRESS"
+							}
+						}
+					}
+				},
+				"peers": {
+					"type": "array",
+					"items": {
+						"oneOf": [{
+							"type": "object",
+							"properties": {
+								"project": {
+									"type": "string",
+									"default": null
+								},
+								"network": {
+									"type": "string"
+								},
+								"export_custom_routes": {
+									"type": "boolean",
+									"default": false
+								},
+								"import_custom_routes": {
+									"type": "boolean",
+									"default": false
+								},
+								"import_subnet_routes_with_public_ip": {
+									"type": "boolean",
+									"default": false
+								},
+								"export_subnet_routes_with_public_ip": {
+									"type": "boolean",
+									"default": false
+								}
+							},
+							"required": [
+								"network"
+							]
+						}]
+					}
+				}
+			}
+		},
+		"Route": {
+			"$id": "/schemas/Route",
+			"type": "object",
+			"properties": {
+				"destination": {
+					"type": "string",
+					"example": "0.0.0.0/0",
+					"pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}\\/(([0-9]|[1-2][0-9]|3[0-2]))?$"
+				},
+				"priority": {
+					"type": "number",
+					"default": 1000
+				},
+				"tags": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"default": []
+				}
+			},
+			"required": [
+				"destination"
+			]
+		},
+		"Route_NEXTHOP_ADDRESS": {
+			"$id": "/schemas/Route_NEXTHOP_ADDRESS",
+			"allOf": [{
+					"$ref": "/schemas/Route"
+				},
+				{
+					"type": "object",
+					"properties": {
+						"next_hop_type": {
+							"type": "string",
+							"default": "ADDRESS",
+							"enum": [
+								"ADDRESS"
+							]
+						},
+						"next_hop_address": {
+							"type": "string",
+							"example": "192.168.0.253",
+							"pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}$"
+						}
+					},
+					"required": [
+						"next_hop_type",
+						"next_hop_address"
+					]
+				}
+			]
+		},
+		"Route_NEXTHOP_INTERNET_GATEWAY": {
+			"$id": "/schemas/Route_NEXTHOP_INTERNET_GATEWAY",
+			"allOf": [{
+					"$ref": "/schemas/Route"
+				},
+				{
+					"type": "object",
+					"properties": {
+						"next_hop_type": {
+							"type": "string",
+							"default": "INTERNET_GATEWAY",
+							"enum": [
+								"INTERNET_GATEWAY"
+							]
+						}
+					}
+				}
+			]
+		},
+		"Subnetwork_PRIVATE": {
+			"$id": "/schemas/Subnetwork_PRIVATE",
+			"allOf": [{
+				"type": "object",
+				"properties": {
+					"purpose": {
+						"type": "string",
+						"default": "PRIVATE"
+					},
+					"secondary_subnetworks": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"nat_group_id": {
+									"type": "string",
+									"default": "nat-group"
+								},
+								"ip_cidr_range": {
+									"type": "string",
+									"example": "10.10.10.0/24",
+									"pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}\\/(([0-9]|[1-2][0-9]|3[0-2]))?$"
+								}
+							},
+							"required": [
+								"ip_cidr_range"
+							]
+						}
+					},
+					"private_ip_google_access": {
+						"type": "string",
+						"description": "(OPTIONAL) Provide access to Google Cloud APIs from this subnet for instances without a public ip address.",
+						"enum": [
+							"ENABLED",
+							"DISABLED"
+						],
+						"default": "ENABLED"
+					},
+					"log_config": {
+						"type": "object",
+						"properties": {
+							"enabled": {
+								"type": "boolean",
+								"description": "Enable/disable VPC Flow Logs for this subnet.",
+								"default": false
+							},
+							"aggregation_interval": {
+								"type": "string",
+								"description": "Toggles the aggregation interval for collecting flow logs. Increasing the interval time will reduce the amount of generated flow logs for long lasting connections.",
+								"enum": [
+									"INTERVAL_5_SEC",
+									"INTERVAL_30_SEC",
+									"INTERVAL_1_MIN",
+									"INTERVAL_5_MIN",
+									"INTERVAL_10_MIN",
+									"INTERVAL_15_MIN"
+								],
+								"default": "INTERVAL_5_SEC"
+							},
+							"flow_sampling": {
+								"type": "number",
+								"description": "Set the sampling rate of VPC flow logs within the subnetwork where 100 means all collected logs are reported, 50 means half of all collected logs are reported and 0 means no logs are reported.",
+								"minLength": 0,
+								"maxLength": 100,
+								"default": 50
+							},
+							"metadata": {
+								"type": "string",
+								"enum": [
+									"INCLUDE_ALL_METADATA",
+									"EXCLUDE_ALL_METADATA",
+									"CUSTOM_METADATA"
+								],
+								"default": "INCLUDE_ALL_METADATA"
+							},
+							"metadata_fields": {
+								"type": "array",
+								"items": {
+									"type": "string"
+								},
+								"default": [],
+								"description": "List of supported fields can be found at https://cloud.google.com/vpc/docs/flow-logs#record_format"
+							}
+						},
+						"required": [
+							"enabled"
+						]
+					},
+					"cloud_nat": {
+						"type": "object",
+						"properties": {
+							"subnetworks_to_nat": {
+								"type": "string",
+								"enum": [
+									"DISABLED",
+									"ALL_SUBNETWORKS",
+									"ALL_SECONDARY_SUBNETWORKS",
+									"PRIMARY_SUBNETWORK",
+									"SELECTED_SECONDARY_SUBNETWORKS",
+									"PRIMARY_SUBNETWORK_SELECTED_SECONDARY_SUBNETWORKS"
+								],
+								"default": "DISABLED"
+							},
+							"nat_group_id": {
+								"type": "string",
+								"default": "nat-group"
+							}
+						},
+						"required": [
+							"subnetworks_to_nat",
+							"nat_group_id"
+						],
+						"default": {}
+					}
+				}
+			}]
+		},
+		"Subnetwork_PRIVATE_SERVICE_CONNECT": {
+			"$id": "/schemas/Subnetwork_PRIVATE_SERVICE_CONNECT",
+			"allOf": [{
+				"type": "object",
+				"properties": {
+					"purpose": {
+						"type": "string",
+						"default": "PRIVATE_SERVICE_CONNECT"
+					}
+				}
+			}]
+		},
+		"Subnetwork_INTERNAL_HTTPS_LOAD_BALANCER": {
+			"$id": "/schemas/Subnetwork_INTERNAL_HTTPS_LOAD_BALANCER",
+			"allOf": [{
+				"type": "object",
+				"properties": {
+					"purpose": {
+						"type": "string",
+						"default": "INTERNAL_HTTPS_LOAD_BALANCER"
+					},
+					"role": {
+						"type": "string",
+						"enum": [
+							"BACKUP",
+							"ACTIVE"
+						],
+						"default": "ACTIVE"
+					}
+				}
+			}]
+		},
+		"CloudNAT_ATTRIBUTES": {
+			"$id": "/schemas/CloudNAT_ATTRIBUTES",
+			"type": "object",
+			"properties": {
+				"log_config": {
+					"type": "string",
+					"enum": [
+						"ALL",
+						"ERRORS_ONLY",
+						"TRANSLATIONS_ONLY",
+						"DISABLED"
+					],
+					"default": "DISABLED",
+					"description": "(Optional) Enable logging for the NAT. Logs will be exported to Stackdriver."
+				},
+				"min_ports_per_vm": {
+					"type": "number",
+					"default": 64,
+					"description": "(Optional) Minimum number of ports allocated to a VM from this NAT."
+				},
+				"udp_idle_timeout": {
+					"type": "number",
+					"default": 30,
+					"description": "(Optional) Timeout in seconds for UDP connections."
+				},
+				"icmp_idle_timeout": {
+					"type": "number",
+					"default": 30,
+					"description": "(Optional) Timeout in seconds for ICMP connections."
+				},
+				"tcp_established_idle_timeout": {
+					"type": "number",
+					"default": 120,
+					"description": "(Optional) Timeout in seconds for TCP established connections."
+				},
+				"tcp_transitory_idle_timeout": {
+					"type": "number",
+					"default": 30,
+					"description": "(Optional) Timeout in seconds for TCP transitory connections."
+				}
+			}
+		},
+		"CloudNAT_GENERIC": {
+			"$id": "/schemas/CloudNAT_GENERIC",
+			"allOf": [{
+					"type": "object",
+					"properties": {
+						"subnetworks_to_nat": {
+							"type": "string",
+							"enum": [
+								"ALL_PRIMARY_SUBNETWORKS_ALL_SECONDARY_SUBNETWORKS",
+								"ALL_PRIMARY_SUBNETWORKS",
+								"DISABLED"
+							],
+							"default": "DISABLED"
+						}
+					}
+				},
+				{
+					"$ref": "/schemas/CloudNAT_ATTRIBUTES"
+				}
+			]
+		},
+		"CloudNAT_SELECTED": {
+			"$id": "/schemas/CloudNAT_SELECTED",
+			"allOf": [{
+				"type": "object",
+				"properties": {
+					"subnetworks_to_nat": {
+						"type": "string",
+						"enum": [
+							"SELECTED_PRIMARY_SUBNETWORKS_SELECTED_SECONDARY_SUBNETWORKS",
+							"DISABLED"
+						],
+						"default": "SELECTED_PRIMARY_SUBNETWORKS_SELECTED_SECONDARY_SUBNETWORKS"
+					},
+					"nat_groups": {
+						"type": "array",
+						"items": {
+							"allOf": [{
+									"type": "object",
+									"properties": {
+										"nat_group_id": {
+											"type": "string"
+										}
+									}
+								},
+								{
+									"$ref": "/schemas/CloudNAT_ATTRIBUTES"
+								}
+							]
+						}
+					}
+				}
+			}]
+		},
+		"FirewallRules": {
+			"$id": "/schemas/FirewallRules",
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string",
+						"pattern": "^[a-z][a-z0-9-]{0,23}$",
+						"minLength": 1,
+						"maxLength": 24
+					},
+					"description": {
+						"type": "string"
+					},
+					"action": {
+						"type": "string",
+						"enum": [
+							"allow",
+							"deny"
+						]
+					},
+					"priority": {
+						"type": "integer",
+						"default": 1000
+					},
+					"sources": {
+						"type": "array",
+						"items": {
+							"anyOf": [{
+									"type": "string",
+									"description": "IP space allocated to this subnetwork in CIDR format.",
+									"example": "192.168.0.0/24",
+									"pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}\\/(([0-9]|[1-2][0-9]|3[0-2]))?$"
+								},
+								{
+									"type": "string",
+									"description": "GCP Service-Account in email format",
+									"example": "service-account@google.com"
+								},
+								{
+									"type": "string",
+									"description": "GCP Network Tags in string format",
+									"example": "some-network-tag"
+								}
+							]
+						}
+					},
+					"targets": {
+						"type": "array",
+						"items": {
+							"anyOf": [{
+									"type": "string",
+									"description": "IP space allocated to this subnetwork in CIDR format.",
+									"example": "192.168.0.0/24",
+									"pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}\\/(([0-9]|[1-2][0-9]|3[0-2]))?$"
+								},
+								{
+									"type": "string",
+									"description": "GCP Service-Account in email format",
+									"example": "service-account@google.com"
+								},
+								{
+									"type": "string",
+									"description": "GCP Network Tags in string format",
+									"example": "some-network-tag"
+								}
+							]
+						}
+					},
+					"rules": {
+						"type": "array",
+						"items": {
+							"anyOf": [{
+									"type": "object",
+									"properties": {
+										"protocol": {
+											"type": "string",
+											"enum": [
+												"TCP",
+												"UDP"
+											]
+										},
+										"ports": {
+											"type": "array",
+											"items": {
+												"anyOf": [{
+														"type": "string",
+														"description": "Range of ports to be either allowed or denied",
+														"example": "80-443",
+														"pattern": "^[0-9]+-[0-9]+$"
+													},
+													{
+														"type": "number",
+														"description": "Specified port to be either allowed or denied",
+														"example": 22
+													}
+												]
+											},
+											"minItems": 0
+										}
+									}
+								},
+								{
+									"type": "object",
+									"properties": {
+										"protocol": {
+											"type": "string",
+											"enum": [
+												"ALL",
+												"AH",
+												"ICMP",
+												"IPIP",
+												"AH",
+												"ESP",
+												"SCTP"
+											]
+										},
+										"ports": {
+											"type": "array",
+											"items": {
+												"type": "number"
+											},
+											"maxItems": 0
+										}
+									}
+								}
+							]
+						}
+					}
+				}
+			}
+		},
+		"Regions": {
+			"$id": "/schemas/Regions",
+			"type": "string",
+			"default": "US-CENTRAL1",
+			"enum": [
+				"ASIA-EAST1",
+				"ASIA-EAST2",
+				"ASIA-NORTHEAST1",
+				"ASIA-NORTHEAST2",
+				"ASIA-NORTHEAST3",
+				"ASIA-SOUTH1",
+				"ASIA-SOUTH2",
+				"ASIA-SOUTHEAST1",
+				"ASIA-SOUTHEAST2",
+				"AUSTRALIA-SOUTHEAST1",
+				"AUSTRALIA-SOUTHEAST2",
+				"EUROPE-CENTRAL2",
+				"EUROPE-NORTH1",
+				"EUROPE-WEST1",
+				"EUROPE-WEST2",
+				"EUROPE-WEST3",
+				"EUROPE-WEST4",
+				"EUROPE-WEST6",
+				"NORTHAMERICA-NORTHEAST1",
+				"NORTHAMERICA-NORTHEAST2",
+				"SOUTHAMERICA-EAST1",
+				"US-CENTRAL1",
+				"US-EAST1",
+				"US-EAST4",
+				"US-WEST1",
+				"US-WEST2",
+				"US-WEST3",
+				"US-WEST4"
+			]
+		}
+	}
+}

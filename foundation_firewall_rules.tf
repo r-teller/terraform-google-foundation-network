@@ -79,32 +79,3 @@ resource "google_compute_firewall" "firewall_rule" {
     google_compute_network.networks
   ]
 }
-
-
-# module "shared_firewall_rules" {
-#   source   = "r-teller/firewall-rules/google"
-#   for_each = local.shared_network_firewall_rule_map
-
-#   project_id = var.project_id
-#   network    = each.value.network
-
-#   firewall_rule = each.value
-
-#   depends_on = [
-#     google_compute_network.networks,
-#   ]
-# }
-
-# module "firewall_rules" {
-#   source   = "r-teller/firewall-rules/google"
-#   for_each = local.firewall_rules
-
-#   project_id = var.project_id
-#   network    = each.value.network
-
-#   firewall_rule = each.value
-
-#   depends_on = [
-#     google_compute_network.networks,
-#   ]
-# }

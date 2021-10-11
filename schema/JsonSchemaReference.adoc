@@ -1,0 +1,81 @@
+# Objects
+* [`Buffer View`](#reference-bufferview)
+* [`Extension`](#reference-extension)
+* [`Extras`](#reference-extras)
+* [`Image`](#reference-image)
+   * [`Nested Test Id`](#reference-nestedid)
+* [`Material`](#reference-material)
+   * [`PBR Metallic Roughness`](#reference-material-pbrmetallicroughness)
+* [`nestedTest`](#reference-nestedtest) (root object)
+* [`nestedTest Child of Root Property`](#reference-nestedchildofrootproperty)
+* [`nestedTest Property`](#reference-nestedtestproperty)
+
+
+---------------------------------------
+<a name="schema-reference-bufferview"></a>
+## JSON Schema for Buffer View
+
+[bufferView.schema.json](refs/bufferView.schema.json)
+
+
+---------------------------------------
+<a name="schema-reference-extension"></a>
+## JSON Schema for Extension
+
+[extension.schema.json](refs/extension.schema.json)
+
+
+---------------------------------------
+<a name="schema-reference-extras"></a>
+## JSON Schema for Extras
+
+[extras.schema.json](refs/extras.schema.json)
+
+
+---------------------------------------
+<a name="schema-reference-image"></a>
+## JSON Schema for Image
+
+[image.schema.json](refs/image.schema.json)
+
+
+---------------------------------------
+<a name="schema-reference-material"></a>
+## JSON Schema for Material
+
+[material.schema.json](refs/material.schema.json)
+
+
+---------------------------------------
+<a name="schema-reference-material-pbrmetallicroughness"></a>
+## JSON Schema for Material PBR Metallic Roughness
+
+[material.pbrMetallicRoughness.schema.json](refs/material.pbrMetallicRoughness.schema.json)
+
+
+---------------------------------------
+<a name="schema-reference-nestedid"></a>
+## JSON Schema for Nested Test Id
+
+[nestedID.schema.json](refs/nestedID.schema.json)
+
+
+---------------------------------------
+<a name="schema-reference-nestedtest"></a>
+## JSON Schema for nestedTest
+
+[nestedTest.schema.json](refs/nestedTest.schema.json)
+
+
+---------------------------------------
+<a name="schema-reference-nestedchildofrootproperty"></a>
+## JSON Schema for nestedTest Child of Root Property
+
+[nestedChildOfRootProperty.schema.json](refs/nestedChildOfRootProperty.schema.json)
+
+
+---------------------------------------
+<a name="schema-reference-nestedtestproperty"></a>
+## JSON Schema for nestedTest Property
+
+[nestedTestProperty.schema.json](refs/nestedTestProperty.schema.json)
