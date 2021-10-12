@@ -15,7 +15,7 @@
     },
     "subnetworks": [
       {
-        "region": "us-west1",
+        "region": "US-WEST1",
         "ip_cidr_range": "172.16.32.0/24",
         "cloud_nat": {
             "nat_group_id": "aaaa",
@@ -31,11 +31,11 @@
         ]
       },
       {
-        "region": "us-west1",
+        "region": "US-WEST1",
         "ip_cidr_range": "172.16.33.0/24",
         "cloud_nat": {
             "nat_group_id": "aaaa",
-            "subnetworks_to_nat": "PRIMARY_SUBNETWORK"
+            "subnetworks_to_nat": "PRIMARY_SUBNETWORKS"
         },
         "secondary_subnetworks": [
           {
@@ -47,7 +47,7 @@
         ]
       },
       {
-        "region": "us-west1",
+        "region": "US-WEST1",
         "ip_cidr_range": "172.16.34.0/24",
         "cloud_nat": {
             "nat_group_id": "aaaa",
@@ -63,7 +63,7 @@
         ]
       },
       {
-        "region": "us-west1",
+        "region": "US-WEST1",
         "ip_cidr_range": "172.16.35.0/24",
         "cloud_nat": {
             "nat_group_id": "aaaa",
@@ -81,8 +81,7 @@
         ]
       },
       {
-        "notes_about_test": "this should not create cloud router or configure cloud_nat for this primary subnet ",
-        "region": "us-east4",
+        "region": "US-EAST4",
         "ip_cidr_range": "172.16.64.0/24",
         "cloud_nat": {
             "nat_group_id": "asdfasdf",
@@ -90,16 +89,15 @@
         }
       },
       {
-        "notes_about_test": "this should create cloud router and configure cloud_nat for this primary subnet but not secondary ranges",
-        "region": "us-east4",
+        "region": "US-EAST4",
         "ip_cidr_range": "172.16.65.0/24",
         "cloud_nat": {
             "nat_group_id": "asdfasdf",
-            "subnetworks_to_nat": "primary_SUBNETWORKS"
+            "subnetworks_to_nat": "PRIMARY_SUBNETWORKS"
         }
       },
       {
-        "region": "us-west1",
+        "region": "US-WEST1",
         "ip_cidr_range": "172.16.36.0/24",
         "cloud_nat": {
             "nat_group_id": "aaaa",

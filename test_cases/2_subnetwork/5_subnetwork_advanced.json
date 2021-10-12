@@ -3,7 +3,7 @@
     "name": "subnetwork-advanced-alpha",
     "subnetworks": [
       {
-        "region": "us-east4",
+        "region": "US-EAST4",
         "private_ip_google_access": "ENABLED",
         "log_config": {
           "enabled": false,
@@ -15,12 +15,12 @@
         "ip_cidr_range": "172.16.0.0/24"
       },
       {
-        "region": "us-east4",
+        "region": "US-EAST4",
         "purpose": "INTERNAL_HTTPS_LOAD_BALANCER",
         "ip_cidr_range": "172.16.1.0/24"
       },
       {
-        "region": "us-central1",
+        "region": "US-CENTRAL1",
         "private_ip_google_access": "DISABLED",
         "log_config": {
           "enabled": true,
@@ -32,7 +32,7 @@
         "ip_cidr_range": "172.16.32.0/24"
       },
       {
-        "region": "us-central1",
+        "region": "US-CENTRAL1",
         "name": "custom-subnetwork-name",
         "log_config": {
           "enabled": true,
@@ -44,13 +44,13 @@
         "ip_cidr_range": "172.16.33.0/24"
       },
       {
-        "region": "us-central1",
+        "region": "US-CENTRAL1",
         "purpose": "INTERNAL_HTTPS_LOAD_BALANCER",
         "role": "ACTIVE",
         "ip_cidr_range": "172.16.34.0/24"
       },
       {
-        "region": "us-central1",
+        "region": "US-CENTRAL1",
         "purpose": "INTERNAL_HTTPS_LOAD_BALANCER",
         "role": "BACKUP",
         "ip_cidr_range": "172.16.35.0/24"

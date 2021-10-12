@@ -1,0 +1,140 @@
+{
+    "$id": "networks.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Networks",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+            "name"
+        ],
+        "properties": {
+            "name": {
+                "type": "string"
+            },
+            "description": {
+                "type": [
+                    "string",
+                    "null"
+                ],
+                "default": null
+            },
+            "mtu": {
+                "type": "number",
+                "enum": [
+                    1460,
+                    1500
+                ],
+                "default": 1460
+            },
+            "private_google_access": {
+                "type": "string",
+                "enum": [
+                    "RESTRICTED",
+                    "PRIVATE",
+                    "DISABLED"
+                ],
+                "default": "DISABLED"
+            },
+            "private_service_connection": {
+                "oneOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "export_custom_routes": {
+                                "type": "boolean",
+                                "default": false
+                            },
+                            "import_custom_routes": {
+                                "type": "boolean",
+                                "default": false
+                            },
+                            "ip_cidr_range": {
+                                "type": "string",
+                                "description": "IP space allocated to this connection in CIDR format.",
+                                "examples": [
+                                    "192.168.0.0/24"
+                                ]
+                            }
+                        },
+                        "required": [
+                            "ip_cidr_range"
+                        ]
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "export_custom_routes": {
+                                "type": "boolean",
+                                "default": false
+                            },
+                            "import_custom_routes": {
+                                "type": "boolean",
+                                "default": false
+                            },
+                            "ip_cidr_prefix": {
+                                "type": "integer",
+                                "description": "IP CIDR prefix used for this connection. Google will automtically allocated a IP CIDR Range based on the provided prefix",
+                                "examples": [
+                                    16
+                                ]
+                            }
+                        },
+                        "required": [
+                            "ip_cidr_prefix"
+                        ]
+                    }
+                ]
+            },
+            "routing_mode": {
+                "type": "string",
+                "enum": [
+                    "GLOBAL",
+                    "REGIONAL"
+                ],
+                "default": "REGIONAL"
+            },
+            "subnetworks": {
+                "$ref": "subnetworks.schema.json#/definitions/subnetworks"
+            },
+            "cloud_nat":{
+                "$ref": "cloud_nat.schema.json#/definitions/cloud_nat"
+            },
+            "peers": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "project": {
+                            "type": "string",
+                            "default": null
+                        },
+                        "network": {
+                            "type": "string"
+                        },
+                        "export_custom_routes": {
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "import_custom_routes": {
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "import_subnet_routes_with_public_ip": {
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "export_subnet_routes_with_public_ip": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "required": [
+                        "network"
+                    ]
+                }
+            }
+        }
+    }
+}
