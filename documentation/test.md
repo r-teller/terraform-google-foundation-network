@@ -27,12 +27,12 @@
 
 **Description:** Subnetworks to be configured within GCP VPC
 
-| Property                                       | Pattern | Type   | Deprecated | Definition | Title/Description                                                                    |
-| ---------------------------------------------- | ------- | ------ | ---------- | ---------- | ------------------------------------------------------------------------------------ |
-| + [ip_cidr_range](#subnetworks_ip_cidr_range ) | No      | string | No         | -          | IP space allocated to this subnetwork in CIDR format.                                |
-| - [name](#subnetworks_name )                   | No      | string | No         | -          | if this field is not provided ip_cidr_range value will be dynamically generated  ... |
-| - [description](#subnetworks_description )     | No      | string | No         | -          | Description of this subnetwork.                                                      |
-|                                                |         |        |            |            |                                                                                      |
+| Property                                       | Pattern | Type           | Deprecated | Definition | Title/Description                                                                    |
+| ---------------------------------------------- | ------- | -------------- | ---------- | ---------- | ------------------------------------------------------------------------------------ |
+| + [ip_cidr_range](#subnetworks_ip_cidr_range ) | No      | string         | No         | -          | IP space allocated to this subnetwork in CIDR format.                                |
+| - [name](#subnetworks_name )                   | No      | string or null | No         | -          | if this field is not provided ip_cidr_range value will be dynamically generated  ... |
+| - [description](#subnetworks_description )     | No      | string or null | No         | -          | Description of this subnetwork.                                                      |
+|                                                |         |                |            |            |                                                                                      |
 
 ### <a name="subnetworks_ip_cidr_range"></a>1.1. ![badge](https://img.shields.io/badge/Required-blue) Property `Networking > subnetworks > ip_cidr_range`
 
@@ -50,7 +50,7 @@
 
 ### <a name="subnetworks_name"></a>1.2. ![badge](https://img.shields.io/badge/Optional-yellow) Property `Networking > subnetworks > name`
 
-| Type                      | `string`                                                                                                            |
+| Type                      | `string or null`                                                                                                    |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
 | **Default**               | `null`                                                                                                              |
@@ -65,7 +65,7 @@
 
 ### <a name="subnetworks_description"></a>1.3. ![badge](https://img.shields.io/badge/Optional-yellow) Property `Networking > subnetworks > description`
 
-| Type                      | `string`                                                                                                            |
+| Type                      | `string or null`                                                                                                    |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
 | **Default**               | `null`                                                                                                              |
@@ -74,4 +74,4 @@
 **Description:** Description of this subnetwork.
 
 ----------------------------------------------------------------------------------------------------------------------------
-Generated using [json-schema-for-humans](https://github.com/coveooss/json-schema-for-humans) on 2021-10-11 at 17:04:37 -0700
+Generated using [json-schema-for-humans](https://github.com/coveooss/json-schema-for-humans) on 2021-10-11 at 17:08:05 -0700
