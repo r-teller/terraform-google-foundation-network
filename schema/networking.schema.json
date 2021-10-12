@@ -1,0 +1,17 @@
+{
+    "$id": "https://ihaz.cloud/schemas/foundations/networking",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Networking",
+    "type": "object",
+    "properties": {
+      "subnetworks": {
+        "$ref": "#/definitions/subnetworks"
+      }
+    },
+    "definitions": {
+      "subnetworks": {
+        "description": "Subnetworks to be configured within GCP VPC",
+        "$ref": "subnetworks.schema.json#/definitions/shared"
+      }
+    }
+  }

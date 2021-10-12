@@ -1,0 +1,32 @@
+{
+    "$id": "https://ihaz.cloud/schemas/foundations/networking",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Subnetworks",
+    "type": "object",
+    "definitions": {
+        "shared": {
+            "type": "object",
+            "properties": {
+                "ip_cidr_range": {
+                    "type": "string",
+                    "description": "IP space allocated to this subnetwork in CIDR format.",
+                    "example": "192.168.0.0/24",
+                    "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}\\/(([0-9]|[1-2][0-9]|3[0-2]))?$"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "if this field is not provided ip_cidr_range value will be dynamically generated based on the ip_cidr_range. WARNING, if this field is not set changing the ip_cidr_range will change the name dynamically generated.",
+                    "pattern": "^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$",
+                    "example": "<prefix>-<environment>-<network>-subnet-<192-168-0-0-24>",
+                    "default": null
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description of this subnetwork.",
+                    "default": null
+                }
+            },
+            "required": ["ip_cidr_range"]
+        }
+    }
+}
