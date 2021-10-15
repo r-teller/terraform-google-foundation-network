@@ -7,7 +7,8 @@ locals {
   defaults_route = {
     priority         = 1000,
     tags             = [],
-    next_hop_gateway = "global/gateways/default-internet-gateway",
+    # next_hop_gateway = "global/gateways/default-internet-gateway",
+    next_hop_gateway = "default-internet-gateway",
     next_hop_type    = "UNKNOWN"
     name             = "UNKNOWN"
   }

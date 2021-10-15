@@ -52,13 +52,13 @@ locals {
 
   cloud_nat_networks = merge(distinct([
     for network in var.network_configs : {
-      for primary_subnetwork in network.subnetworks : "${network.name}-${module.gcp_utils.region_short_name_map[primary_subnetwork.region]}-router-nat" => {
-        region            = primary_subnetwork.region
+      for primary_subnetwork in network.subnetworks : "${network.name}-${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}-router-nat" => {
+        region            = lower(primary_subnetwork.region)
         network           = "${var.prefix}-${var.environment}-vpc-${network.name}"
         network_shortname = network.name
 
-        name   = "${network.name}-${module.gcp_utils.region_short_name_map[primary_subnetwork.region]}-router-nat"
-        router = "${network.name}-${module.gcp_utils.region_short_name_map[primary_subnetwork.region]}-router-nat"
+        name   = "${network.name}-${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}-router-nat"
+        router = "${network.name}-${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}-router-nat"
 
         source_subnetwork_ip_ranges_to_nat = try(lookup(local.lookups_source_subnetwork_ip_ranges_to_nat, network.cloud_nat.subnetworks_to_nat), local.defaults_cloud_nat.source_subnetwork_ip_ranges_to_nat)
 
@@ -82,16 +82,16 @@ locals {
   cloud_nat_primary_subnetworks = distinct(flatten([
     for network in var.network_configs : [
       for primary_subnetwork in network.subnetworks : {
-        region            = primary_subnetwork.region
+        region            = lower(primary_subnetwork.region)
         network           = "${var.prefix}-${var.environment}-vpc-${network.name}"
         network_shortname = network.name
 
-        router = "${network.name}-${module.gcp_utils.region_short_name_map[primary_subnetwork.region]}-router-nat"
+        router = "${network.name}-${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}-router-nat"
 
-        primary_subnetwork_name = try(primary_subnetwork.name, "${network.name}-${module.gcp_utils.region_short_name_map[primary_subnetwork.region]}-primary-${replace(primary_subnetwork.ip_cidr_range, "//|\\./", "-")}")
+        primary_subnetwork_name = try(primary_subnetwork.name, "${network.name}-${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}-primary-${replace(primary_subnetwork.ip_cidr_range, "//|\\./", "-")}")
 
         nat_group_id         = primary_subnetwork.cloud_nat.nat_group_id
-        mapping_nat_group_id = "${var.prefix}-${var.environment}-vpc-${network.name}__${primary_subnetwork.cloud_nat.nat_group_id}__${module.gcp_utils.region_short_name_map[primary_subnetwork.region]}"
+        mapping_nat_group_id = "${var.prefix}-${var.environment}-vpc-${network.name}__${primary_subnetwork.cloud_nat.nat_group_id}__${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}"
 
         source_ip_ranges_to_nat = ["PRIMARY_IP_RANGE"]
       } if can(lookup(local.cloud_nat_groups, "${var.prefix}-${var.environment}-vpc-${network.name}__${primary_subnetwork.cloud_nat.nat_group_id}")) &&
@@ -103,17 +103,17 @@ locals {
     for network in var.network_configs : [
       for primary_subnetwork in network.subnetworks : [
         for secondary_subnetwork in primary_subnetwork.secondary_subnetworks : {
-          region            = primary_subnetwork.region
+          region            = lower(primary_subnetwork.region)
           network           = "${var.prefix}-${var.environment}-vpc-${network.name}"
           network_shortname = network.name
 
-          router = "${network.name}-${module.gcp_utils.region_short_name_map[primary_subnetwork.region]}-router-nat"
+          router = "${network.name}-${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}-router-nat"
 
-          primary_subnetwork_name   = try(primary_subnetwork.name, "${network.name}-${module.gcp_utils.region_short_name_map[primary_subnetwork.region]}-primary-${replace(primary_subnetwork.ip_cidr_range, "//|\\./", "-")}")
-          secondary_subnetwork_name = "${network.name}-${module.gcp_utils.region_short_name_map[primary_subnetwork.region]}-secondary-${replace(secondary_subnetwork.ip_cidr_range, "//|\\./", "-")}"
+          primary_subnetwork_name   = try(primary_subnetwork.name, "${network.name}-${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}-primary-${replace(primary_subnetwork.ip_cidr_range, "//|\\./", "-")}")
+          secondary_subnetwork_name = "${network.name}-${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}-secondary-${replace(secondary_subnetwork.ip_cidr_range, "//|\\./", "-")}"
 
           nat_group_id         = secondary_subnetwork.nat_group_id
-          mapping_nat_group_id = "${var.prefix}-${var.environment}-vpc-${network.name}__${secondary_subnetwork.nat_group_id}__${module.gcp_utils.region_short_name_map[primary_subnetwork.region]}"
+          mapping_nat_group_id = "${var.prefix}-${var.environment}-vpc-${network.name}__${secondary_subnetwork.nat_group_id}__${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}"
 
           source_ip_ranges_to_nat = ["LIST_OF_SECONDARY_IP_RANGES"]
         } if can(lookup(local.cloud_nat_groups, "${var.prefix}-${var.environment}-vpc-${network.name}__${secondary_subnetwork.nat_group_id}"))
