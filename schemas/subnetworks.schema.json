@@ -5,64 +5,59 @@
     "definitions": {
         "private": {
             "type": "object",
-            "additionalProperties": false,
             "required": [
                 "ip_cidr_range",
                 "region"
             ],
+            "additionalProperties": false,
             "properties": {
+                "name": {
+                    "title": "Subnetwork Name",
+                    "description": "If this field is not provided ip_cidr_range value will be dynamically generated based on the ip_cidr_range. \nWARNING, if this field is not set changing the ip_cidr_range will change the name dynamically generated.",
+                    "type": "string",
+                    "pattern": "^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$",
+                    "examples": [
+                        "<prefix>-<environment>-<network>-subnet-<192-168-0-0-24>"
+                    ]
+                },
                 "ip_cidr_range": {
                     "type": "string",
                     "description": "IP space allocated to this subnetwork in CIDR format.",
                     "examples": [
                         "192.168.0.0/24"
                     ],
-                    "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}\\/(([0-9]|[1-2][0-9]|3[0-2]))?$"
-                },
-                "name": {
-                    "type": [
-                        "string",
-                        "null"
-                    ],
-                    "description": "if this field is not provided ip_cidr_range value will be dynamically generated based on the ip_cidr_range. WARNING, if this field is not set changing the ip_cidr_range will change the name dynamically generated.",
-                    "pattern": "^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$",
-                    "examples": [
-                        "<prefix>-<environment>-<network>-subnet-<192-168-0-0-24>"
-                    ],
-                    "default": null
+                    "pattern": "^(?:([0-9]|[1-9][0-9]{0,1}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])(\\.([0-9]|[1-9][0-9]{0,1}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])){3}\/(([0-9]|[1-2][0-9]|3[0-2])))$"
                 },
                 "purpose": {
                     "type": "string",
-                    "enum": [
-                        "PRIVATE",
-                        "PRIVATE_SERVICE_CONNECT",
-                        "INTERNAL_HTTPS_LOAD_BALANCER"
-                    ],
-                    "default": "PRIVATE"
+                    "const": "PRIVATE"
                 },
                 "description": {
-                    "type": [
-                        "string",
-                        "null"
-                    ],
-                    "description": "Description of this subnetwork.",
-                    "default": null
+                    "type": "string",
+                    "description": "Description of this subnetwork."
                 },
                 "secondary_subnetworks": {
                     "type": "array",
+                    "minItems": 0,
+                    "maxItems": 30,
                     "items": {
                         "type": "object",
                         "additionalProperties": false,
                         "properties": {
                             "nat_group_id": {
                                 "type": "string",
-                                "examples": ["nat-group"]
+                                "examples": [
+                                    "nat-group"
+                                ]
                             },
                             "ip_cidr_range": {
                                 "type": "string",
+                                "title": "Secondary Subnetwork Range",
                                 "description": "IP space allocated to this subnetwork in CIDR format.",
-                                "examples": ["192.168.0.0/24"],
-                                "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}\\/(([0-9]|[1-2][0-9]|3[0-2]))?$"
+                                "examples": [
+                                    "192.168.0.0/24"
+                                ],
+                                "pattern": "^(?:([0-9]|[1-9][0-9]{0,1}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])(\\.([0-9]|[1-9][0-9]{0,1}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])){3}\/(([0-9]|[1-2][0-9]|3[0-2])))$"
                             }
                         },
                         "required": [
@@ -77,10 +72,28 @@
                         "ENABLED",
                         "DISABLED"
                     ],
-                    "default": "ENABLED"
+                    "default": "ENABLED",
+                    "examples": [
+                        "ENABLED"
+                    ]
                 },
                 "log_config": {
                     "type": "object",
+                    "additionalProperties": false,
+                    "examples": [
+                        {
+                            "enabled": true,
+                            "aggregation_interval": "INTERVAL_1_MIN"
+                        },
+                        {
+                            "enabled": false,
+                            "metadata": "CUSTOM_METADATA",
+                            "metadata_fields": []
+                        }
+                    ],
+                    "required": [
+                        "enabled"
+                    ],
                     "properties": {
                         "enabled": {
                             "type": "boolean",
@@ -117,9 +130,269 @@
                             "default": "INCLUDE_ALL_METADATA"
                         },
                         "metadata_fields": {
+                            "title": "Metadata Fields",
                             "type": "array",
+                            "uniqueItems": true,
                             "items": {
-                                "type": "string"
+                                "title": "Metadata Field",
+                                "type": "string",
+                                "anyOf": [
+                                    {
+                                        "title": "IP Connection",
+                                        "anyOf": [
+                                            {
+                                                "title": "connection",
+                                                "description": "5-Tuple describing this connection.",
+                                                "const": "connection"
+                                            },
+                                            {
+                                                "title": "connection.src_ip",
+                                                "description": "Connection Source IP address",
+                                                "const": "connection.src_ip"
+                                            },
+                                            {
+                                                "title": "connection.src_port",
+                                                "description": "Connection Source port",
+                                                "const": "connection.src_port"
+                                            },
+                                            {
+                                                "title": "connection.dest_ip",
+                                                "description": "Connection Destination IP address",
+                                                "const": "connection.dest_ip"
+                                            },
+                                            {
+                                                "title": "connection.dest_port",
+                                                "description": "Connection Destination Port",
+                                                "const": "connection.dest_port"
+                                            },
+                                            {
+                                                "title": "connection.protocol",
+                                                "description": "Connection IANA protocol number",
+                                                "const": "connection.protocol"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "title": "start_time",
+                                        "description": "Timestamp (RFC 3339 date string format) of the first observed packet during the aggregated time interval.",
+                                        "const": "start_time"
+                                    },
+                                    {
+                                        "title": "end_time",
+                                        "description": "Timestamp (RFC 3339 date string format) of the last observed packet during the aggregated time interval",
+                                        "const": "end_time"
+                                    },
+                                    {
+                                        "title": "bytes_sent",
+                                        "description": "Amount of bytes sent from the source to the destination",
+                                        "const": "bytes_sent"
+                                    },
+                                    {
+                                        "title": "packets_sent",
+                                        "description": "Number of packets sent from the source to the destination",
+                                        "const": "packets_sent"
+                                    },
+                                    {
+                                        "title": "rtt_msec",
+                                        "description": "Latency as measured during the time interval, for TCP flows only. The measured latency is the time elapsed between sending a SEQ and receiving a corresponding ACK. The latency result is the sum of the network RTT and any time consumed by the application",
+                                        "const": "rtt_msec"
+                                    },
+                                    {
+                                        "title": "reporter",
+                                        "description": "The side which reported the flow. Can be either SRC or DEST.",
+                                        "const": "reporter"
+                                    },
+                                    {
+                                        "title": "Source Instance",
+                                        "anyOf": [
+                                            {
+                                                "title": "src_instance",
+                                                "description": "If the source of the connection was a VM located on the same VPC, this field is populated with VM instance details. In a Shared VPC configuration, project_id corresponds to the project that owns the instance, usually the service project.",
+                                                "const": "src_instance"
+                                            },
+                                            {
+                                                "title": "src_instance.project_id",
+                                                "description": "ID of the project containing the VM",
+                                                "const": "src_instance.project_id"
+                                            },
+                                            {
+                                                "title": "src_instance.vm_name",
+                                                "description": "Instance name of the VM",
+                                                "const": "src_instance.vm_name"
+                                            },
+                                            {
+                                                "title": "src_instance.region",
+                                                "description": "Region of the VM",
+                                                "const": "src_instance.region"
+                                            },
+                                            {
+                                                "title": "src_instance.zone",
+                                                "description": "Zone of the VM",
+                                                "const": "src_instance.zone"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "title": "Destination Instance",
+                                        "anyOf": [
+                                            {
+                                                "title": "dest_instance",
+                                                "description": "If the destination of the connection was a VM located on the same VPC, this field is populated with VM instance details. In a Shared VPC configuration, project_id corresponds to the project that owns the instance, usually the service project.",
+                                                "const": "dest_instance"
+                                            },
+                                            {
+                                                "title": "dest_instance.project_id",
+                                                "description": "ID of the project containing the VM",
+                                                "const": "dest_instance.project_id"
+                                            },
+                                            {
+                                                "title": "dest_instance.vm_name",
+                                                "description": "Instance name of the VM",
+                                                "const": "dest_instance.vm_name"
+                                            },
+                                            {
+                                                "title": "dest_instance.region",
+                                                "description": "Region of the VM",
+                                                "const": "dest_instance.region"
+                                            },
+                                            {
+                                                "title": "dest_instance.zone",
+                                                "description": "Zone of the VM",
+                                                "const": "dest_instance.zone"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "title": "Source VPC",
+                                        "anyOf": [
+                                            {
+                                                "title": "src_vpc",
+                                                "description": "If the source of the connection was a VM located on the same VPC, this field is populated with VPC network details. In a Shared VPC configuration, project_id corresponds to that of the host project.",
+                                                "const": "src_vpc"
+                                            },
+                                            {
+                                                "title": "src_vpc.project_id",
+                                                "description": "ID of the project containing the VPC",
+                                                "const": "src_vpc.project_id"
+                                            },
+                                            {
+                                                "title": "src_vpc.vpc_name",
+                                                "description": "VPC on which the VM is operating",
+                                                "const": "src_vpc.project_id"
+                                            },
+                                            {
+                                                "title": "src_vpc.subnetwork_name",
+                                                "description": "Subnetwork on which the VM is operating",
+                                                "const": "src_vpc.subnetwork_name"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "title": "Destination VPC",
+                                        "anyOf": [
+                                            {
+                                                "title": "dest_vpc",
+                                                "description": "If the destination of the connection was a VM located on the same VPC, this field is populated with VPC network details. In a Shared VPC configuration, project_id corresponds to that of the host project.",
+                                                "const": "dest_vpc"
+                                            },
+                                            {
+                                                "title": "dest_vpc.project_id",
+                                                "description": "ID of the project containing the VPC",
+                                                "const": "dest_vpc.project_id"
+                                            },
+                                            {
+                                                "title": "dest_vpc.vpc_name",
+                                                "description": "VPC on which the VM is operating",
+                                                "const": "dest_vpc.project_id"
+                                            },
+                                            {
+                                                "title": "dest_vpc.subnetwork_name",
+                                                "description": "Subnetwork on which the VM is operating",
+                                                "const": "dest_vpc.subnetwork_name"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "title": "Source Geographic Location",
+                                        "anyOf": [
+                                            {
+                                                "title": "src_location",
+                                                "description": "If the source of the connection was external to the VPC, this field is populated with available location metadata.",
+                                                "const": "src_location"
+                                            },
+                                            {
+                                                "title": "src_location.continent",
+                                                "description": "Continent for external endpoints",
+                                                "const": "src_location.continent"
+                                            },
+                                            {
+                                                "title": "src_location.country",
+                                                "description": "Country for external endpoints, represented as ISO 3166-1 Alpha-3 country codes.",
+                                                "const": "src_location.country"
+                                            },
+                                            {
+                                                "title": "src_location.region",
+                                                "description": "Region for external endpoints",
+                                                "const": "src_location.region"
+                                            },
+                                            {
+                                                "title": "src_location.city",
+                                                "description": "City for external endpoints",
+                                                "const": "src_location.city"
+                                            },
+                                            {
+                                                "title": "src_location.asn",
+                                                "description": "The autonomous system number (ASN) of the external network to which this endpoint belongs.",
+                                                "const": "src_location.asn"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "title": "Destination Geographic Location",
+                                        "anyOf": [
+                                            {
+                                                "title": "dest_location",
+                                                "description": "If the destination of the connection was external to the VPC, this field is populated with available location metadata.",
+                                                "const": "dest_location"
+                                            },
+                                            {
+                                                "title": "dest_location.continent",
+                                                "description": "Continent for external endpoints",
+                                                "const": "dest_location.continent"
+                                            },
+                                            {
+                                                "title": "dest_location.country",
+                                                "description": "Country for external endpoints, represented as ISO 3166-1 Alpha-3 country codes.",
+                                                "const": "dest_location.country"
+                                            },
+                                            {
+                                                "title": "dest_location.region",
+                                                "description": "Region for external endpoints",
+                                                "const": "dest_location.region"
+                                            },
+                                            {
+                                                "title": "dest_location.city",
+                                                "description": "City for external endpoints",
+                                                "const": "dest_location.city"
+                                            },
+                                            {
+                                                "title": "dest_location.asn",
+                                                "description": "The autonomous system number (ASN) of the external network to which this endpoint belongs.",
+                                                "const": "dest_location.asn"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "title": "src_gke_details",
+                                        "description": "GKE metadata for source endpoints. Only available if the endpoint is GKE.",
+                                        "const": "src_gke_details"
+                                    },
+                                    {
+                                        "title": "dest_gke_details",
+                                        "description": "GKE metadata for destination endpoints. Only available if the endpoint is GKE.",
+                                        "const": "dest_gke_details"
+                                    }
+                                ]
                             },
                             "default": [],
                             "description": "List of supported fields can be found at https://cloud.google.com/vpc/docs/flow-logs#record_format"
@@ -128,6 +401,7 @@
                 },
                 "cloud_nat": {
                     "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                         "subnetworks_to_nat": {
                             "type": "string",
@@ -143,14 +417,25 @@
                         },
                         "nat_group_id": {
                             "type": "string",
-                            "default": "nat-group"
+                            "examples": [
+                                "nat-group"
+                            ]
                         }
                     },
                     "required": [
                         "subnetworks_to_nat",
                         "nat_group_id"
                     ],
-                    "default": {}
+                    "examples": [
+                        {},
+                        {
+                            "subnetworks_to_nat": "ALL_SUBNETWORKS"
+                        },
+                        {
+                            "subnetworks_to_nat": "SELECTED_SECONDARY_SUBNETWORKS",
+                            "nat_group_id": "nat-group"
+                        }
+                    ]
                 },
                 "region": {
                     "$ref": "regions.schema.json#/definitions/region"
@@ -171,7 +456,7 @@
                     "examples": [
                         "192.168.0.0/24"
                     ],
-                    "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}\\/(([0-9]|[1-2][0-9]|3[0-2]))?$"
+                    "pattern": "^(?:([0-9]|[1-9][0-9]{0,1}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])(\\.([0-9]|[1-9][0-9]{0,1}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])){3}\/(([0-9]|[1-2][0-9]|3[0-2])))$"
                 },
                 "name": {
                     "type": [
@@ -221,7 +506,7 @@
                     "examples": [
                         "192.168.0.0/24"
                     ],
-                    "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}\\/(([0-9]|[1-2][0-9]|3[0-2]))?$"
+                    "pattern": "^(?:([0-9]|[1-9][0-9]{0,1}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])(\\.([0-9]|[1-9][0-9]{0,1}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])){3}\/(([0-9]|[1-2][0-9]|3[0-2])))$"
                 },
                 "name": {
                     "type": [
@@ -302,6 +587,7 @@
                             ]
                         },
                         "then": {
+                            "additionalProperties": false,
                             "$ref": "#/definitions/private_service_connect"
                         }
                     },
@@ -319,6 +605,7 @@
                             ]
                         },
                         "then": {
+                            "additionalProperties": false,
                             "$ref": "#/definitions/internal_https_load_balancer"
                         }
                     }
