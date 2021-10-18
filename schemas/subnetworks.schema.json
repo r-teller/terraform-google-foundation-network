@@ -14,11 +14,11 @@
             "properties": {
                 "name": {
                     "title": "Name",
-                    "$ref": "#/definitions/shared/properties/name"
+                    "$ref": "subnetworks.schema.json#/definitions/shared/properties/name"
                 },
                 "description": {
                     "title": "Description",
-                    "$ref": "#/definitions/shared/properties/description"
+                    "$ref": "subnetworks.schema.json#/definitions/shared/properties/description"
                 },
                 "region": {
                     "title": "Region",
@@ -26,15 +26,17 @@
                 },
                 "ip_cidr_range": {
                     "title": "Primary CIDR Range",
-                    "$ref": "#/definitions/shared/properties/ip_cidr_range"
+                    "$ref": "subnetworks.schema.json#/definitions/shared/properties/ip_cidr_range"
                 },
                 "purpose": {
                     "title": "Purpose",
                     "type": "string",
+                    "description": "The purpose of this subnetwork.",
                     "const": "PRIVATE"
                 },
                 "secondary_subnetworks": {
                     "title": "Secondary Subnetworks",
+                    "description": "Collection of Secondary Subnetworks that are assigned to this Primary Subnetwokr",
                     "type": "array",
                     "minItems": 0,
                     "maxItems": 30,
@@ -54,7 +56,7 @@
                             },
                             "ip_cidr_range": {
                                 "title": "Secondary CIDR Range",
-                                "$ref": "#/definitions/shared/properties/ip_cidr_range"
+                                "$ref": "subnetworks.schema.json#/definitions/shared/properties/ip_cidr_range"
                             }
                         },
                         "required": [
@@ -85,6 +87,7 @@
                 },
                 "log_config": {
                     "title": "Log Config",
+                    "description": "Denotes the logging options for the subnetwork flow logs. If logging is enabled logs will be exported to Stackdriver.",
                     "type": "object",
                     "additionalProperties": false,
                     "required": [
@@ -121,7 +124,25 @@
                         },
                         "metadata": {
                             "title": "Metadata",
+                            "description": "Configures whether metadata fields should be added to the reported logs. ",
                             "type": "string",
+                            "oneOf": [
+                                {
+                                    "title": "Include All Metadata",
+                                    "description": "Include all metadata in VPC flow logs",
+                                    "const": "INCLUDE_ALL_METADATA"
+                                },
+                                {
+                                    "title": "Exclude All Metadata",
+                                    "description": "Exclude all metadata in VPC flow logs",
+                                    "const": "EXCLUDE_ALL_METADATA"
+                                },
+                                {
+                                    "title": "Custom Metadata",
+                                    "description": "Include only specific attributes for metadata in VPC flow logs",
+                                    "const": "CUSTOM_METADATA"
+                                }
+                            ],
                             "enum": [
                                 "INCLUDE_ALL_METADATA",
                                 "EXCLUDE_ALL_METADATA",
@@ -131,6 +152,7 @@
                         },
                         "metadata_fields": {
                             "title": "Metadata Fields",
+                            "description": "List of supported fields can be found at https://cloud.google.com/vpc/docs/flow-logs#record_format",
                             "type": "array",
                             "uniqueItems": true,
                             "items": {
@@ -505,8 +527,7 @@
                                     "connection.dest_ip",
                                     "connection.src_ip"
                                 ]
-                            ],
-                            "description": "List of supported fields can be found at https://cloud.google.com/vpc/docs/flow-logs#record_format"
+                            ]
                         }
                     },
                     "examples": [
@@ -527,46 +548,214 @@
                 },
                 "cloud_nat": {
                     "title": "Cloud Nat",
+                    "description": "This section specifies how Primary and Secondary Subnetworks should be configured to NAT egress traffic.",
                     "type": "object",
                     "additionalProperties": false,
                     "properties": {
                         "subnetworks_to_nat": {
+                            "title": "Subnetworks to NAT",
+                            "description": "Used to determine if NAT should be applied to either Primary, Secondary or Combination of each Subnetworks\nThis section is only implemented if subnetworks_to_nat is set to SELECTED_PRIMARY_SUBNETWORKS_SELECTED_SECONDARY_SUBNETWORKS in the parent cloud_nat section.",
                             "type": "string",
-                            "enum": [
-                                "DISABLED",
-                                "ALL_SUBNETWORKS",
-                                "ALL_SECONDARY_SUBNETWORKS",
-                                "PRIMARY_SUBNETWORKS",
-                                "SELECTED_SECONDARY_SUBNETWORKS",
-                                "PRIMARY_SUBNETWORK_SELECTED_SECONDARY_SUBNETWORKS"
+                            "oneOf": [
+                                {
+                                    "title": "Disabled",
+                                    "description": "Cloud NAT should not be applied to either the primary or secondary subnetworks.\n This does not override cloud_nat configurations in the parent object when set to ALL_PRIMARY_SUBNETWORKS_ALL_SECONDARY_SUBNETWORKS.",
+                                    "const": "DISABLED"
+                                },
+                                {
+                                    "title": "Primary and All Secondary Subnetworks",
+                                    "description": "Cloud NAT Should be applied to the Primary and All Secondary Subnetworks.",
+                                    "const": "ALL_SUBNETWORKS"
+                                },
+                                {
+                                    "title": "Primary Subnetwork",
+                                    "description": "Cloud NAT Should be applied to the Primary Subnetwork.",
+                                    "const": "PRIMARY_SUBNETWORK"
+                                },
+                                {
+                                    "title": "Primary Subnetwork and Selected Secondary Subnetworks",
+                                    "description": "Cloud NAT Should be applied to the Primary and Selected Secondary Subnetworks.",
+                                    "const": "PRIMARY_SUBNETWORK_SELECTED_SECONDARY_SUBNETWORKS"
+                                },
+                                {
+                                    "title": "All Secondary Subnetworks",
+                                    "description": "Cloud NAT Should be applied to All Secondary Subnetworks.",
+                                    "const": "ALL_SECONDARY_SUBNETWORKS"
+                                },
+                                {
+                                    "title": "Selected Secondary Subnetworks",
+                                    "description": "Cloud NAT Should be applied to Selected Secondary Subnetworks.",
+                                    "const": "SELECTED_SECONDARY_SUBNETWORKS"
+                                }
                             ],
                             "default": "DISABLED"
                         },
                         "nat_group_id": {
                             "title": "Nat Group ID",
-                            "description": "Cloud Nat configuration ID to inherrit configruations from.",
+                            "description": "This ID is used to match the corresponding cloud nat configuration in the parent object.",
                             "type": "string",
                             "examples": [
                                 "nat-group-alpha"
                             ]
                         }
                     },
-                    "required": [
-                        "subnetworks_to_nat",
-                        "nat_group_id"
+                    "allOf": [
+                        {
+                            "title": "DISABLED",
+                            "if": {
+                                "properties": {
+                                    "subnetworks_to_nat": {
+                                        "const": "DISABLED"
+                                    }
+                                }
+                            },
+                            "then": {
+                                "required": [
+                                    "subnetworks_to_nat"
+                                ]
+                            }
+                        },
+                        {
+                            "title": "ALL_SUBNETWORKS",
+                            "if": {
+                                "properties": {
+                                    "subnetworks_to_nat": {
+                                        "const": "ALL_SUBNETWORKS"
+                                    }
+                                }
+                            },
+                            "then": {
+                                "required": [
+                                    "subnetworks_to_nat",
+                                    "nat_group_id"
+                                ]
+                            }
+                        },
+                        {
+                            "title": "PRIMARY_SUBNETWORK",
+                            "if": {
+                                "properties": {
+                                    "subnetworks_to_nat": {
+                                        "const": "PRIMARY_SUBNETWORK"
+                                    }
+                                }
+                            },
+                            "then": {
+                                "required": [
+                                    "subnetworks_to_nat",
+                                    "nat_group_id"
+                                ]
+                            }
+                        },
+                        {
+                            "title": "PRIMARY_SUBNETWORK_SELECTED_SECONDARY_SUBNETWORKS",
+                            "if": {
+                                "properties": {
+                                    "subnetworks_to_nat": {
+                                        "const": "PRIMARY_SUBNETWORK_SELECTED_SECONDARY_SUBNETWORKS"
+                                    }
+                                }
+                            },
+                            "then": {
+                                "required": [
+                                    "subnetworks_to_nat",
+                                    "nat_group_id"
+                                ]
+                            }
+                        },
+                        {
+                            "title": "ALL_SECONDARY_SUBNETWORKS",
+                            "if": {
+                                "properties": {
+                                    "subnetworks_to_nat": {
+                                        "const": "ALL_SECONDARY_SUBNETWORKS"
+                                    }
+                                }
+                            },
+                            "then": {
+                                "required": [
+                                    "subnetworks_to_nat"
+                                ]
+                            }
+                        },
+                        {
+                            "title": "SELECTED_SECONDARY_SUBNETWORKS",
+                            "if": {
+                                "properties": {
+                                    "subnetworks_to_nat": {
+                                        "const": "SELECTED_SECONDARY_SUBNETWORKS"
+                                    }
+                                }
+                            },
+                            "then": {
+                                "required": [
+                                    "subnetworks_to_nat"
+                                ]
+                            }
+                        }
                     ],
                     "examples": [
                         {},
                         {
-                            "subnetworks_to_nat": "ALL_SUBNETWORKS"
+                            "subnetworks_to_nat": "ALL_SUBNETWORKS",
+                            "nat_group_id": "nat-group-alpha"
                         },
                         {
                             "subnetworks_to_nat": "SELECTED_SECONDARY_SUBNETWORKS",
                             "nat_group_id": "nat-group-alpha"
+                        },
+                        {
+                            "subnetworks_to_nat": "ALL_SECONDARY_SUBNETWORKS"
                         }
                     ]
                 }
-            }
+            },
+            "examples": [
+                {
+                    "ip_cidr_range": "192.168.0.0/24",
+                    "region": "US-CENTRAL1",
+                    "private_ip_google_access": "ENABLED",
+                    "cloud_nat": {
+                        "subnetworks_to_nat": "SELECTED_SECONDARY_SUBNETWORKS"
+                    },
+                    "purpose": "PRIVATE",
+                    "log_config": {
+                        "enabled": true,
+                        "metadata": "INCLUDE_ALL_METADATA",
+                        "flow_sampling": 50,
+                        "metadata_fields": [],
+                        "aggregation_interval": "INTERVAL_5_SEC"
+                    },
+                    "secondary_subnetworks": [
+                        {
+                            "ip_cidr_range": "192.168.1.0/24",
+                            "nat_group_id": "nat-group-alpha"
+                        }
+                    ]
+                },
+                {
+                    "ip_cidr_range": "192.168.16.0/24",
+                    "region": "US-CENTRAL1",
+                    "private_ip_google_access": "ENABLED",
+                    "cloud_nat": {
+                        "subnetworks_to_nat": "ALL_SUBNETWORKS",
+                        "nat_group_id": "nat-group-alpha"
+                    },
+                    "purpose": "PRIVATE",
+                    "log_config": {
+                        "enabled": true,
+                        "metadata": "INCLUDE_ALL_METADATA",
+                        "flow_sampling": 50,
+                        "metadata_fields": [],
+                        "aggregation_interval": "INTERVAL_5_SEC"
+                    },
+                    "secondary_subnetworks": [
+                        {
+                            "ip_cidr_range": "192.168.17.0/24"
+                        }
+                    ]
+                }
+            ]
         },
         "private_service_connect": {
             "title": "Private Service Connect",
@@ -598,7 +787,14 @@
                     "type": "string",
                     "const": "PRIVATE_SERVICE_CONNECT"
                 }
-            }
+            },
+            "examples": [
+                {
+                    "region": "US-CENTRAL1",
+                    "ip_cidr_range": "192.168.0.0/24",
+                    "purpose": "PRIVATE_SERVICE_CONNECT"
+                }
+            ]
         },
         "internal_https_load_balancer": {
             "title": "Ineranl HTTP(s) Load Balancer",
@@ -639,7 +835,21 @@
                     ],
                     "default": "ACTIVE"
                 }
-            }
+            },
+            "examples": [
+                {
+                    "region": "US-CENTRAL1",
+                    "ip_cidr_range": "192.168.0.0/24",
+                    "purpose": "INTERNAL_HTTPS_LOAD_BALANCER",
+                    "role": "ACTIVE"
+                },
+                {
+                    "region": "US-CENTRAL1",
+                    "ip_cidr_range": "192.168.1.0/24",
+                    "purpose": "INTERNAL_HTTPS_LOAD_BALANCER",
+                    "role": "BACKUP"
+                }
+            ]
         },
         "subnetworks": {
             "type": "array",
