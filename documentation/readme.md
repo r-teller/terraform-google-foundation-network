@@ -361,37 +361,39 @@ Must be one of:
 | **Defined in**            | #/definitions/private                                                                                               |
 |                           |                                                                                                                     |
 
-| Property                                                                                       | Pattern | Type             | Deprecated | Definition                                 | Title/Description                                                                    |
-| ---------------------------------------------------------------------------------------------- | ------- | ---------------- | ---------- | ------------------------------------------ | ------------------------------------------------------------------------------------ |
-| - [name](#items_subnetworks_items_allOf_i0_then_name )                                         | No      | string           | No         | -                                          | Subnetwork Name                                                                      |
-| + [ip_cidr_range](#items_subnetworks_items_allOf_i0_then_ip_cidr_range )                       | No      | string           | No         | -                                          | IP space allocated to this subnetwork in CIDR format.                                |
-| - [purpose](#items_subnetworks_items_allOf_i0_then_purpose )                                   | No      | const            | No         | -                                          | -                                                                                    |
-| - [description](#items_subnetworks_items_allOf_i0_then_description )                           | No      | string           | No         | -                                          | Description of this subnetwork.                                                      |
-| - [secondary_subnetworks](#items_subnetworks_items_allOf_i0_then_secondary_subnetworks )       | No      | array of object  | No         | -                                          | -                                                                                    |
-| - [private_ip_google_access](#items_subnetworks_items_allOf_i0_then_private_ip_google_access ) | No      | enum (of string) | No         | -                                          | (OPTIONAL) Provide access to Google Cloud APIs from this subnet for instances wi ... |
-| - [log_config](#items_subnetworks_items_allOf_i0_then_log_config )                             | No      | object           | No         | -                                          | -                                                                                    |
-| - [cloud_nat](#items_subnetworks_items_allOf_i0_then_cloud_nat )                               | No      | object           | No         | -                                          | -                                                                                    |
-| + [region](#items_subnetworks_items_allOf_i0_then_region )                                     | No      | enum (of string) | No         | In regions.schema.json#/definitions/region | -                                                                                    |
-|                                                                                                |         |                  |            |                                            |                                                                                      |
+| Property                                                                                       | Pattern | Type             | Deprecated | Definition                                       | Title/Description        |
+| ---------------------------------------------------------------------------------------------- | ------- | ---------------- | ---------- | ------------------------------------------------ | ------------------------ |
+| - [name](#items_subnetworks_items_allOf_i0_then_name )                                         | No      | string           | No         | In #/definitions/shared/properties/name          | Name                     |
+| - [description](#items_subnetworks_items_allOf_i0_then_description )                           | No      | string           | No         | In #/definitions/shared/properties/description   | Description              |
+| + [region](#items_subnetworks_items_allOf_i0_then_region )                                     | No      | enum (of string) | No         | In regions.schema.json#/definitions/region       | Region                   |
+| + [ip_cidr_range](#items_subnetworks_items_allOf_i0_then_ip_cidr_range )                       | No      | string           | No         | In #/definitions/shared/properties/ip_cidr_range | Primary CIDR Range       |
+| - [purpose](#items_subnetworks_items_allOf_i0_then_purpose )                                   | No      | const            | No         | -                                                | Purpose                  |
+| - [secondary_subnetworks](#items_subnetworks_items_allOf_i0_then_secondary_subnetworks )       | No      | array of object  | No         | -                                                | Secondary Subnetworks    |
+| - [private_ip_google_access](#items_subnetworks_items_allOf_i0_then_private_ip_google_access ) | No      | enum (of string) | No         | -                                                | Private IP Google Access |
+| - [log_config](#items_subnetworks_items_allOf_i0_then_log_config )                             | No      | object           | No         | -                                                | Log Config               |
+| - [cloud_nat](#items_subnetworks_items_allOf_i0_then_cloud_nat )                               | No      | object           | No         | -                                                | Cloud Nat                |
+|                                                                                                |         |                  |            |                                                  |                          |
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_name"></a>1.7.1.1.1.1. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > then > name</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_name"></a>1.7.1.1.1.1. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > name</strong>  
 
 </summary>
 <blockquote>
 
-**Title:** Subnetwork Name
+**Title:** Name
 
 | Type                      | `string`                                                                                                            |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/shared/properties/name                                                                                |
 |                           |                                                                                                                     |
 
-**Description:** If this field is not provided ip_cidr_range value will be dynamically generated based on the ip_cidr_range. 
-WARNING, if this field is not set changing the ip_cidr_range will change the name dynamically generated.
+**Description:** if this field is not provided ip_cidr_range value will be dynamically generated based on the ip_cidr_range. WARNING, if this field is not set changing the ip_cidr_range will change the name dynamically generated.
 
 | Restrictions                      |                                                                                                                                                                                                                                                             |
 | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Min length**                    | 1                                                                                                                                                                                                                                                           |
+| **Max length**                    | 63                                                                                                                                                                                                                                                          |
 | **Must match regular expression** | ```^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$``` [Test](https://regex101.com/?regex=%5E%28%3F%3A%5Ba-z%5D%28%3F%3A%5B-a-z0-9%5D%7B0%2C61%7D%5Ba-z0-9%5D%29%3F%29%24&testString=%22%3Cprefix%3E-%3Cenvironment%3E-%3Cnetwork%3E-subnet-%3C192-168-0-0-24%3E%22) |
 |                                   |                                                                                                                                                                                                                                                             |
 
@@ -405,14 +407,89 @@ WARNING, if this field is not set changing the ip_cidr_range will change the nam
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_ip_cidr_range"></a>1.7.1.1.1.2. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Private > then > ip_cidr_range</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_description"></a>1.7.1.1.1.2. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > description</strong>  
 
 </summary>
 <blockquote>
 
+**Title:** Description
+
 | Type                      | `string`                                                                                                            |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/shared/properties/description                                                                         |
+|                           |                                                                                                                     |
+
+**Description:** Description of this subnetwork.
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_region"></a>1.7.1.1.1.3. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > region</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Region
+
+| Type                      | `enum (of string)`                                                                                                  |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | regions.schema.json#/definitions/region                                                                             |
+|                           |                                                                                                                     |
+
+Must be one of:
+* "ASIA-EAST1"
+* "ASIA-EAST2"
+* "ASIA-NORTHEAST1"
+* "ASIA-NORTHEAST2"
+* "ASIA-NORTHEAST3"
+* "ASIA-SOUTH1"
+* "ASIA-SOUTH2"
+* "ASIA-SOUTHEAST1"
+* "ASIA-SOUTHEAST2"
+* "AUSTRALIA-SOUTHEAST1"
+* "AUSTRALIA-SOUTHEAST2"
+* "EUROPE-CENTRAL2"
+* "EUROPE-NORTH1"
+* "EUROPE-WEST1"
+* "EUROPE-WEST2"
+* "EUROPE-WEST3"
+* "EUROPE-WEST4"
+* "EUROPE-WEST6"
+* "NORTHAMERICA-NORTHEAST1"
+* "NORTHAMERICA-NORTHEAST2"
+* "SOUTHAMERICA-EAST1"
+* "US-CENTRAL1"
+* "US-EAST1"
+* "US-EAST4"
+* "US-WEST1"
+* "US-WEST2"
+* "US-WEST3"
+* "US-WEST4"
+
+**Example:** 
+
+```json
+"US-CENTRAL1"
+```
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_ip_cidr_range"></a>1.7.1.1.1.4. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > ip_cidr_range</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Primary CIDR Range
+
+| Type                      | `string`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/shared/properties/ip_cidr_range                                                                       |
 |                           |                                                                                                                     |
 
 **Description:** IP space allocated to this subnetwork in CIDR format.
@@ -432,10 +509,12 @@ WARNING, if this field is not set changing the ip_cidr_range will change the nam
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_purpose"></a>1.7.1.1.1.3. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > then > purpose</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_purpose"></a>1.7.1.1.1.5. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > purpose</strong>  
 
 </summary>
 <blockquote>
+
+**Title:** Purpose
 
 | Type                      | `const`                                                                                                             |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
@@ -448,26 +527,12 @@ Specific value: `"PRIVATE"`
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_description"></a>1.7.1.1.1.4. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > then > description</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_secondary_subnetworks"></a>1.7.1.1.1.6. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > secondary_subnetworks</strong>  
 
 </summary>
 <blockquote>
 
-| Type                      | `string`                                                                                                            |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
-|                           |                                                                                                                     |
-
-**Description:** Description of this subnetwork.
-
-</blockquote>
-</details>
-
-<details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_secondary_subnetworks"></a>1.7.1.1.1.5. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > then > secondary_subnetworks</strong>  
-
-</summary>
-<blockquote>
+**Title:** Secondary Subnetworks
 
 | Type                      | `array of object`                                                                                                   |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
@@ -478,60 +543,67 @@ Specific value: `"PRIVATE"`
 | -------------------- | ------------------ |
 | **Min items**        | 0                  |
 | **Max items**        | 30                 |
-| **Items unicity**    | False              |
+| **Items unicity**    | True               |
 | **Additional items** | False              |
 | **Tuple validation** | See below          |
 |                      |                    |
 
-| Each item of this array must be                                             | Description |
-| --------------------------------------------------------------------------- | ----------- |
-| [items](#items_subnetworks_items_allOf_i0_then_secondary_subnetworks_items) | -           |
-|                                                                             |             |
+| Each item of this array must be                                                            | Description |
+| ------------------------------------------------------------------------------------------ | ----------- |
+| [Secondary Subnetwork](#items_subnetworks_items_allOf_i0_then_secondary_subnetworks_items) | -           |
+|                                                                                            |             |
 
-##### <a name="items_subnetworks_items_allOf_i0_then_secondary_subnetworks_items"></a>1.7.1.1.1.5.1. Networks > items > subnetworks > Subnetwork > allOf > Private > then > secondary_subnetworks > items
+##### <a name="items_subnetworks_items_allOf_i0_then_secondary_subnetworks_items"></a>1.7.1.1.1.6.1. Networks > items > subnetworks > Subnetwork > allOf > Private > Private > secondary_subnetworks > Secondary Subnetwork
+
+**Title:** Secondary Subnetwork
 
 | Type                      | `object`                                                                                         |
 | ------------------------- | ------------------------------------------------------------------------------------------------ |
 | **Additional properties** | [![badge](https://img.shields.io/badge/Not+allowed-red)](# "Additional Properties not allowed.") |
 |                           |                                                                                                  |
 
-| Property                                                                                             | Pattern | Type   | Deprecated | Definition | Title/Description          |
-| ---------------------------------------------------------------------------------------------------- | ------- | ------ | ---------- | ---------- | -------------------------- |
-| - [nat_group_id](#items_subnetworks_items_allOf_i0_then_secondary_subnetworks_items_nat_group_id )   | No      | string | No         | -          | -                          |
-| + [ip_cidr_range](#items_subnetworks_items_allOf_i0_then_secondary_subnetworks_items_ip_cidr_range ) | No      | string | No         | -          | Secondary Subnetwork Range |
-|                                                                                                      |         |        |            |            |                            |
+| Property                                                                                             | Pattern | Type   | Deprecated | Definition                                       | Title/Description    |
+| ---------------------------------------------------------------------------------------------------- | ------- | ------ | ---------- | ------------------------------------------------ | -------------------- |
+| - [nat_group_id](#items_subnetworks_items_allOf_i0_then_secondary_subnetworks_items_nat_group_id )   | No      | string | No         | -                                                | Nat Group ID         |
+| + [ip_cidr_range](#items_subnetworks_items_allOf_i0_then_secondary_subnetworks_items_ip_cidr_range ) | No      | string | No         | In #/definitions/shared/properties/ip_cidr_range | Secondary CIDR Range |
+|                                                                                                      |         |        |            |                                                  |                      |
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_secondary_subnetworks_items_nat_group_id"></a>1.7.1.1.1.5.1.1. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > then > secondary_subnetworks > items > nat_group_id</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_secondary_subnetworks_items_nat_group_id"></a>1.7.1.1.1.6.1.1. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > secondary_subnetworks > Secondary Subnetwork > nat_group_id</strong>  
 
 </summary>
 <blockquote>
+
+**Title:** Nat Group ID
 
 | Type                      | `string`                                                                                                            |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
 |                           |                                                                                                                     |
 
+**Description:** Cloud Nat configuration ID to inherrit configruations from.
+
 **Example:** 
 
 ```json
-"nat-group"
+"nat-group-alpha"
 ```
 
 </blockquote>
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_secondary_subnetworks_items_ip_cidr_range"></a>1.7.1.1.1.5.1.2. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Private > then > secondary_subnetworks > items > ip_cidr_range</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_secondary_subnetworks_items_ip_cidr_range"></a>1.7.1.1.1.6.1.2. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > secondary_subnetworks > Secondary Subnetwork > ip_cidr_range</strong>  
 
 </summary>
 <blockquote>
 
-**Title:** Secondary Subnetwork Range
+**Title:** Secondary CIDR Range
 
 | Type                      | `string`                                                                                                            |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/shared/properties/ip_cidr_range                                                                       |
 |                           |                                                                                                                     |
 
 **Description:** IP space allocated to this subnetwork in CIDR format.
@@ -550,14 +622,30 @@ Specific value: `"PRIVATE"`
 </blockquote>
 </details>
 
+**Example:** 
+
+```json
+[
+    {
+        "nat_group_id": "nat-group-alpha",
+        "ip_cidr_range": "192.168.1.0/24"
+    },
+    {
+        "ip_cidr_range": "192.168.2.0/24"
+    }
+]
+```
+
 </blockquote>
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_private_ip_google_access"></a>1.7.1.1.1.6. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > then > private_ip_google_access</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_private_ip_google_access"></a>1.7.1.1.1.7. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > private_ip_google_access</strong>  
 
 </summary>
 <blockquote>
+
+**Title:** Private IP Google Access
 
 | Type                      | `enum (of string)`                                                                                                  |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
@@ -565,40 +653,36 @@ Specific value: `"PRIVATE"`
 | **Default**               | `"ENABLED"`                                                                                                         |
 |                           |                                                                                                                     |
 
-**Description:** (OPTIONAL) Provide access to Google Cloud APIs from this subnet for instances without a public ip address.
+**Description:** Provide access to Google Cloud APIs from this subnet for instances without a public ip address.
 
 Must be one of:
 * "ENABLED"
 * "DISABLED"
 
-**Example:** 
-
-```json
-"ENABLED"
-```
-
 </blockquote>
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_log_config"></a>1.7.1.1.1.7. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_log_config"></a>1.7.1.1.1.8. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config</strong>  
 
 </summary>
 <blockquote>
+
+**Title:** Log Config
 
 | Type                      | `object`                                                                                         |
 | ------------------------- | ------------------------------------------------------------------------------------------------ |
 | **Additional properties** | [![badge](https://img.shields.io/badge/Not+allowed-red)](# "Additional Properties not allowed.") |
 |                           |                                                                                                  |
 
-| Property                                                                                          | Pattern | Type             | Deprecated | Definition | Title/Description                                                                    |
-| ------------------------------------------------------------------------------------------------- | ------- | ---------------- | ---------- | ---------- | ------------------------------------------------------------------------------------ |
-| + [enabled](#items_subnetworks_items_allOf_i0_then_log_config_enabled )                           | No      | boolean          | No         | -          | Enable/disable VPC Flow Logs for this subnet.                                        |
-| - [aggregation_interval](#items_subnetworks_items_allOf_i0_then_log_config_aggregation_interval ) | No      | enum (of string) | No         | -          | Toggles the aggregation interval for collecting flow logs. Increasing the interv ... |
-| - [flow_sampling](#items_subnetworks_items_allOf_i0_then_log_config_flow_sampling )               | No      | integer          | No         | -          | Set the sampling rate of VPC flow logs within the subnetwork where 100 means all ... |
-| - [metadata](#items_subnetworks_items_allOf_i0_then_log_config_metadata )                         | No      | enum (of string) | No         | -          | -                                                                                    |
-| - [metadata_fields](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields )           | No      | array of string  | No         | -          | Metadata Fields                                                                      |
-|                                                                                                   |         |                  |            |            |                                                                                      |
+| Property                                                                                          | Pattern | Type             | Deprecated | Definition | Title/Description    |
+| ------------------------------------------------------------------------------------------------- | ------- | ---------------- | ---------- | ---------- | -------------------- |
+| + [enabled](#items_subnetworks_items_allOf_i0_then_log_config_enabled )                           | No      | boolean          | No         | -          | Enabled              |
+| - [aggregation_interval](#items_subnetworks_items_allOf_i0_then_log_config_aggregation_interval ) | No      | enum (of string) | No         | -          | Aggregation Interval |
+| - [flow_sampling](#items_subnetworks_items_allOf_i0_then_log_config_flow_sampling )               | No      | integer          | No         | -          | Flow Sampling        |
+| - [metadata](#items_subnetworks_items_allOf_i0_then_log_config_metadata )                         | No      | enum (of string) | No         | -          | Metadata             |
+| - [metadata_fields](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields )           | No      | array of string  | No         | -          | Metadata Fields      |
+|                                                                                                   |         |                  |            |            |                      |
 
 **Examples:** 
 
@@ -610,17 +694,23 @@ Must be one of:
 ```
 ```json
 {
-    "enabled": false,
+    "enabled": true,
     "metadata": "CUSTOM_METADATA",
-    "metadata_fields": []
+    "metadata_fields": [
+        "connection",
+        "src_vpc",
+        "dest_vpc"
+    ]
 }
 ```
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_log_config_enabled"></a>1.7.1.1.1.7.1. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > enabled</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_log_config_enabled"></a>1.7.1.1.1.8.1. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > enabled</strong>  
 
 </summary>
 <blockquote>
+
+**Title:** Enabled
 
 | Type                      | `boolean`                                                                                                           |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
@@ -634,10 +724,12 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_log_config_aggregation_interval"></a>1.7.1.1.1.7.2. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > aggregation_interval</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_log_config_aggregation_interval"></a>1.7.1.1.1.8.2. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > aggregation_interval</strong>  
 
 </summary>
 <blockquote>
+
+**Title:** Aggregation Interval
 
 | Type                      | `enum (of string)`                                                                                                  |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
@@ -659,10 +751,12 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_log_config_flow_sampling"></a>1.7.1.1.1.7.3. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > flow_sampling</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_log_config_flow_sampling"></a>1.7.1.1.1.8.3. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > flow_sampling</strong>  
 
 </summary>
 <blockquote>
+
+**Title:** Flow Sampling
 
 | Type                      | `integer`                                                                                                           |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
@@ -682,10 +776,12 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata"></a>1.7.1.1.1.7.4. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata"></a>1.7.1.1.1.8.4. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata</strong>  
 
 </summary>
 <blockquote>
+
+**Title:** Metadata
 
 | Type                      | `enum (of string)`                                                                                                  |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
@@ -702,7 +798,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields"></a>1.7.1.1.1.7.5. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields"></a>1.7.1.1.1.8.5. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields</strong>  
 
 </summary>
 <blockquote>
@@ -731,7 +827,7 @@ Must be one of:
 | [Metadata Field](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items) | -           |
 |                                                                                           |             |
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items"></a>1.7.1.1.1.7.5.1. Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items"></a>1.7.1.1.1.8.5.1. Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field
 
 **Title:** Metadata Field
 
@@ -757,13 +853,13 @@ Must be one of:
 | [Destination VPC](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i10)                 |
 | [Source Geographic Location](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11)      |
 | [Destination Geographic Location](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12) |
-| [src_gke_details](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13)                 |
-| [dest_gke_details](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14)                |
+| [Source Google Kubernetes](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13)        |
+| [Destination Google Kubernetes](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14)   |
 |                                                                                                                      |
 
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0"></a>1.7.1.1.1.7.5.1.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > IP Connection`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0"></a>1.7.1.1.1.8.5.1.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > IP Connection`
 
 **Title:** IP Connection
 
@@ -786,7 +882,7 @@ Must be one of:
 
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0_anyOf_i0"></a>1.7.1.1.1.7.5.1.1.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > IP Connection > anyOf > connection`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0_anyOf_i0"></a>1.7.1.1.1.8.5.1.1.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > IP Connection > anyOf > connection`
 
 **Title:** connection
 
@@ -802,7 +898,7 @@ Specific value: `"connection"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0_anyOf_i1"></a>1.7.1.1.1.7.5.1.1.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > IP Connection > anyOf > connection.src_ip`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0_anyOf_i1"></a>1.7.1.1.1.8.5.1.1.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > IP Connection > anyOf > connection.src_ip`
 
 **Title:** connection.src_ip
 
@@ -818,7 +914,7 @@ Specific value: `"connection.src_ip"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0_anyOf_i2"></a>1.7.1.1.1.7.5.1.1.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > IP Connection > anyOf > connection.src_port`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0_anyOf_i2"></a>1.7.1.1.1.8.5.1.1.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > IP Connection > anyOf > connection.src_port`
 
 **Title:** connection.src_port
 
@@ -834,7 +930,7 @@ Specific value: `"connection.src_port"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0_anyOf_i3"></a>1.7.1.1.1.7.5.1.1.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > IP Connection > anyOf > connection.dest_ip`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0_anyOf_i3"></a>1.7.1.1.1.8.5.1.1.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > IP Connection > anyOf > connection.dest_ip`
 
 **Title:** connection.dest_ip
 
@@ -850,7 +946,7 @@ Specific value: `"connection.dest_ip"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0_anyOf_i4"></a>1.7.1.1.1.7.5.1.1.5. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > IP Connection > anyOf > connection.dest_port`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0_anyOf_i4"></a>1.7.1.1.1.8.5.1.1.5. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > IP Connection > anyOf > connection.dest_port`
 
 **Title:** connection.dest_port
 
@@ -866,7 +962,7 @@ Specific value: `"connection.dest_port"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0_anyOf_i5"></a>1.7.1.1.1.7.5.1.1.6. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > IP Connection > anyOf > connection.protocol`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0_anyOf_i5"></a>1.7.1.1.1.8.5.1.1.6. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > IP Connection > anyOf > connection.protocol`
 
 **Title:** connection.protocol
 
@@ -886,7 +982,7 @@ Specific value: `"connection.protocol"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i1"></a>1.7.1.1.1.7.5.1.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > start_time`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i1"></a>1.7.1.1.1.8.5.1.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > start_time`
 
 **Title:** start_time
 
@@ -902,7 +998,7 @@ Specific value: `"start_time"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i2"></a>1.7.1.1.1.7.5.1.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > end_time`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i2"></a>1.7.1.1.1.8.5.1.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > end_time`
 
 **Title:** end_time
 
@@ -918,7 +1014,7 @@ Specific value: `"end_time"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i3"></a>1.7.1.1.1.7.5.1.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > bytes_sent`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i3"></a>1.7.1.1.1.8.5.1.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > bytes_sent`
 
 **Title:** bytes_sent
 
@@ -934,7 +1030,7 @@ Specific value: `"bytes_sent"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i4"></a>1.7.1.1.1.7.5.1.5. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > packets_sent`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i4"></a>1.7.1.1.1.8.5.1.5. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > packets_sent`
 
 **Title:** packets_sent
 
@@ -950,7 +1046,7 @@ Specific value: `"packets_sent"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i5"></a>1.7.1.1.1.7.5.1.6. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > rtt_msec`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i5"></a>1.7.1.1.1.8.5.1.6. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > rtt_msec`
 
 **Title:** rtt_msec
 
@@ -966,7 +1062,7 @@ Specific value: `"rtt_msec"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i6"></a>1.7.1.1.1.7.5.1.7. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > reporter`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i6"></a>1.7.1.1.1.8.5.1.7. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > reporter`
 
 **Title:** reporter
 
@@ -982,7 +1078,7 @@ Specific value: `"reporter"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i7"></a>1.7.1.1.1.7.5.1.8. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Source Instance`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i7"></a>1.7.1.1.1.8.5.1.8. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Instance`
 
 **Title:** Source Instance
 
@@ -1004,7 +1100,7 @@ Specific value: `"reporter"`
 
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i7_anyOf_i0"></a>1.7.1.1.1.7.5.1.8.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Source Instance > anyOf > src_instance`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i7_anyOf_i0"></a>1.7.1.1.1.8.5.1.8.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Instance > anyOf > src_instance`
 
 **Title:** src_instance
 
@@ -1020,7 +1116,7 @@ Specific value: `"src_instance"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i7_anyOf_i1"></a>1.7.1.1.1.7.5.1.8.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Source Instance > anyOf > src_instance.project_id`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i7_anyOf_i1"></a>1.7.1.1.1.8.5.1.8.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Instance > anyOf > src_instance.project_id`
 
 **Title:** src_instance.project_id
 
@@ -1036,7 +1132,7 @@ Specific value: `"src_instance.project_id"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i7_anyOf_i2"></a>1.7.1.1.1.7.5.1.8.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Source Instance > anyOf > src_instance.vm_name`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i7_anyOf_i2"></a>1.7.1.1.1.8.5.1.8.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Instance > anyOf > src_instance.vm_name`
 
 **Title:** src_instance.vm_name
 
@@ -1052,7 +1148,7 @@ Specific value: `"src_instance.vm_name"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i7_anyOf_i3"></a>1.7.1.1.1.7.5.1.8.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Source Instance > anyOf > src_instance.region`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i7_anyOf_i3"></a>1.7.1.1.1.8.5.1.8.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Instance > anyOf > src_instance.region`
 
 **Title:** src_instance.region
 
@@ -1068,7 +1164,7 @@ Specific value: `"src_instance.region"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i7_anyOf_i4"></a>1.7.1.1.1.7.5.1.8.5. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Source Instance > anyOf > src_instance.zone`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i7_anyOf_i4"></a>1.7.1.1.1.8.5.1.8.5. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Instance > anyOf > src_instance.zone`
 
 **Title:** src_instance.zone
 
@@ -1088,7 +1184,7 @@ Specific value: `"src_instance.zone"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i8"></a>1.7.1.1.1.7.5.1.9. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Destination Instance`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i8"></a>1.7.1.1.1.8.5.1.9. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Instance`
 
 **Title:** Destination Instance
 
@@ -1110,7 +1206,7 @@ Specific value: `"src_instance.zone"`
 
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i8_anyOf_i0"></a>1.7.1.1.1.7.5.1.9.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Destination Instance > anyOf > dest_instance`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i8_anyOf_i0"></a>1.7.1.1.1.8.5.1.9.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Instance > anyOf > dest_instance`
 
 **Title:** dest_instance
 
@@ -1126,7 +1222,7 @@ Specific value: `"dest_instance"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i8_anyOf_i1"></a>1.7.1.1.1.7.5.1.9.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Destination Instance > anyOf > dest_instance.project_id`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i8_anyOf_i1"></a>1.7.1.1.1.8.5.1.9.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Instance > anyOf > dest_instance.project_id`
 
 **Title:** dest_instance.project_id
 
@@ -1142,7 +1238,7 @@ Specific value: `"dest_instance.project_id"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i8_anyOf_i2"></a>1.7.1.1.1.7.5.1.9.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Destination Instance > anyOf > dest_instance.vm_name`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i8_anyOf_i2"></a>1.7.1.1.1.8.5.1.9.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Instance > anyOf > dest_instance.vm_name`
 
 **Title:** dest_instance.vm_name
 
@@ -1158,7 +1254,7 @@ Specific value: `"dest_instance.vm_name"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i8_anyOf_i3"></a>1.7.1.1.1.7.5.1.9.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Destination Instance > anyOf > dest_instance.region`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i8_anyOf_i3"></a>1.7.1.1.1.8.5.1.9.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Instance > anyOf > dest_instance.region`
 
 **Title:** dest_instance.region
 
@@ -1174,7 +1270,7 @@ Specific value: `"dest_instance.region"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i8_anyOf_i4"></a>1.7.1.1.1.7.5.1.9.5. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Destination Instance > anyOf > dest_instance.zone`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i8_anyOf_i4"></a>1.7.1.1.1.8.5.1.9.5. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Instance > anyOf > dest_instance.zone`
 
 **Title:** dest_instance.zone
 
@@ -1194,7 +1290,7 @@ Specific value: `"dest_instance.zone"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i9"></a>1.7.1.1.1.7.5.1.10. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Source VPC`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i9"></a>1.7.1.1.1.8.5.1.10. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source VPC`
 
 **Title:** Source VPC
 
@@ -1215,7 +1311,7 @@ Specific value: `"dest_instance.zone"`
 
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i9_anyOf_i0"></a>1.7.1.1.1.7.5.1.10.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Source VPC > anyOf > src_vpc`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i9_anyOf_i0"></a>1.7.1.1.1.8.5.1.10.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source VPC > anyOf > src_vpc`
 
 **Title:** src_vpc
 
@@ -1231,7 +1327,7 @@ Specific value: `"src_vpc"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i9_anyOf_i1"></a>1.7.1.1.1.7.5.1.10.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Source VPC > anyOf > src_vpc.project_id`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i9_anyOf_i1"></a>1.7.1.1.1.8.5.1.10.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source VPC > anyOf > src_vpc.project_id`
 
 **Title:** src_vpc.project_id
 
@@ -1247,7 +1343,7 @@ Specific value: `"src_vpc.project_id"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i9_anyOf_i2"></a>1.7.1.1.1.7.5.1.10.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Source VPC > anyOf > src_vpc.vpc_name`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i9_anyOf_i2"></a>1.7.1.1.1.8.5.1.10.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source VPC > anyOf > src_vpc.vpc_name`
 
 **Title:** src_vpc.vpc_name
 
@@ -1263,7 +1359,7 @@ Specific value: `"src_vpc.project_id"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i9_anyOf_i3"></a>1.7.1.1.1.7.5.1.10.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Source VPC > anyOf > src_vpc.subnetwork_name`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i9_anyOf_i3"></a>1.7.1.1.1.8.5.1.10.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source VPC > anyOf > src_vpc.subnetwork_name`
 
 **Title:** src_vpc.subnetwork_name
 
@@ -1283,7 +1379,7 @@ Specific value: `"src_vpc.subnetwork_name"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i10"></a>1.7.1.1.1.7.5.1.11. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Destination VPC`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i10"></a>1.7.1.1.1.8.5.1.11. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination VPC`
 
 **Title:** Destination VPC
 
@@ -1304,7 +1400,7 @@ Specific value: `"src_vpc.subnetwork_name"`
 
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i10_anyOf_i0"></a>1.7.1.1.1.7.5.1.11.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Destination VPC > anyOf > dest_vpc`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i10_anyOf_i0"></a>1.7.1.1.1.8.5.1.11.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination VPC > anyOf > dest_vpc`
 
 **Title:** dest_vpc
 
@@ -1320,7 +1416,7 @@ Specific value: `"dest_vpc"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i10_anyOf_i1"></a>1.7.1.1.1.7.5.1.11.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Destination VPC > anyOf > dest_vpc.project_id`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i10_anyOf_i1"></a>1.7.1.1.1.8.5.1.11.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination VPC > anyOf > dest_vpc.project_id`
 
 **Title:** dest_vpc.project_id
 
@@ -1336,7 +1432,7 @@ Specific value: `"dest_vpc.project_id"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i10_anyOf_i2"></a>1.7.1.1.1.7.5.1.11.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Destination VPC > anyOf > dest_vpc.vpc_name`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i10_anyOf_i2"></a>1.7.1.1.1.8.5.1.11.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination VPC > anyOf > dest_vpc.vpc_name`
 
 **Title:** dest_vpc.vpc_name
 
@@ -1352,7 +1448,7 @@ Specific value: `"dest_vpc.project_id"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i10_anyOf_i3"></a>1.7.1.1.1.7.5.1.11.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Destination VPC > anyOf > dest_vpc.subnetwork_name`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i10_anyOf_i3"></a>1.7.1.1.1.8.5.1.11.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination VPC > anyOf > dest_vpc.subnetwork_name`
 
 **Title:** dest_vpc.subnetwork_name
 
@@ -1372,7 +1468,7 @@ Specific value: `"dest_vpc.subnetwork_name"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11"></a>1.7.1.1.1.7.5.1.12. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11"></a>1.7.1.1.1.8.5.1.12. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location`
 
 **Title:** Source Geographic Location
 
@@ -1395,7 +1491,7 @@ Specific value: `"dest_vpc.subnetwork_name"`
 
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11_anyOf_i0"></a>1.7.1.1.1.7.5.1.12.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location > anyOf > src_location`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11_anyOf_i0"></a>1.7.1.1.1.8.5.1.12.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location > anyOf > src_location`
 
 **Title:** src_location
 
@@ -1411,7 +1507,7 @@ Specific value: `"src_location"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11_anyOf_i1"></a>1.7.1.1.1.7.5.1.12.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location > anyOf > src_location.continent`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11_anyOf_i1"></a>1.7.1.1.1.8.5.1.12.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location > anyOf > src_location.continent`
 
 **Title:** src_location.continent
 
@@ -1427,7 +1523,7 @@ Specific value: `"src_location.continent"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11_anyOf_i2"></a>1.7.1.1.1.7.5.1.12.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location > anyOf > src_location.country`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11_anyOf_i2"></a>1.7.1.1.1.8.5.1.12.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location > anyOf > src_location.country`
 
 **Title:** src_location.country
 
@@ -1443,7 +1539,7 @@ Specific value: `"src_location.country"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11_anyOf_i3"></a>1.7.1.1.1.7.5.1.12.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location > anyOf > src_location.region`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11_anyOf_i3"></a>1.7.1.1.1.8.5.1.12.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location > anyOf > src_location.region`
 
 **Title:** src_location.region
 
@@ -1459,7 +1555,7 @@ Specific value: `"src_location.region"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11_anyOf_i4"></a>1.7.1.1.1.7.5.1.12.5. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location > anyOf > src_location.city`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11_anyOf_i4"></a>1.7.1.1.1.8.5.1.12.5. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location > anyOf > src_location.city`
 
 **Title:** src_location.city
 
@@ -1475,7 +1571,7 @@ Specific value: `"src_location.city"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11_anyOf_i5"></a>1.7.1.1.1.7.5.1.12.6. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location > anyOf > src_location.asn`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11_anyOf_i5"></a>1.7.1.1.1.8.5.1.12.6. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location > anyOf > src_location.asn`
 
 **Title:** src_location.asn
 
@@ -1495,7 +1591,7 @@ Specific value: `"src_location.asn"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12"></a>1.7.1.1.1.7.5.1.13. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12"></a>1.7.1.1.1.8.5.1.13. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location`
 
 **Title:** Destination Geographic Location
 
@@ -1518,7 +1614,7 @@ Specific value: `"src_location.asn"`
 
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12_anyOf_i0"></a>1.7.1.1.1.7.5.1.13.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location > anyOf > dest_location`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12_anyOf_i0"></a>1.7.1.1.1.8.5.1.13.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location > anyOf > dest_location`
 
 **Title:** dest_location
 
@@ -1534,7 +1630,7 @@ Specific value: `"dest_location"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12_anyOf_i1"></a>1.7.1.1.1.7.5.1.13.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location > anyOf > dest_location.continent`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12_anyOf_i1"></a>1.7.1.1.1.8.5.1.13.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location > anyOf > dest_location.continent`
 
 **Title:** dest_location.continent
 
@@ -1550,7 +1646,7 @@ Specific value: `"dest_location.continent"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12_anyOf_i2"></a>1.7.1.1.1.7.5.1.13.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location > anyOf > dest_location.country`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12_anyOf_i2"></a>1.7.1.1.1.8.5.1.13.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location > anyOf > dest_location.country`
 
 **Title:** dest_location.country
 
@@ -1566,7 +1662,7 @@ Specific value: `"dest_location.country"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12_anyOf_i3"></a>1.7.1.1.1.7.5.1.13.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location > anyOf > dest_location.region`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12_anyOf_i3"></a>1.7.1.1.1.8.5.1.13.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location > anyOf > dest_location.region`
 
 **Title:** dest_location.region
 
@@ -1582,7 +1678,7 @@ Specific value: `"dest_location.region"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12_anyOf_i4"></a>1.7.1.1.1.7.5.1.13.5. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location > anyOf > dest_location.city`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12_anyOf_i4"></a>1.7.1.1.1.8.5.1.13.5. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location > anyOf > dest_location.city`
 
 **Title:** dest_location.city
 
@@ -1598,7 +1694,7 @@ Specific value: `"dest_location.city"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12_anyOf_i5"></a>1.7.1.1.1.7.5.1.13.6. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location > anyOf > dest_location.asn`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12_anyOf_i5"></a>1.7.1.1.1.8.5.1.13.6. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location > anyOf > dest_location.asn`
 
 **Title:** dest_location.asn
 
@@ -1618,7 +1714,34 @@ Specific value: `"dest_location.asn"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13"></a>1.7.1.1.1.7.5.1.14. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > src_gke_details`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13"></a>1.7.1.1.1.8.5.1.14. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes`
+
+**Title:** Source Google Kubernetes
+
+| Type                      | `combining`                                                                                                         |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+<blockquote>
+
+| Any of(Option)                                                                                                                          |
+| --------------------------------------------------------------------------------------------------------------------------------------- |
+| [src_gke_details](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i0)                           |
+| [src_gke_details.cluster](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i1)                   |
+| [src_gke_details.cluster.cluster_name](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i2)      |
+| [src_gke_details.cluster.cluster_location](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i3)  |
+| [src_gke_details.pod](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i4)                       |
+| [src_gke_details.pod.pod_name](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i5)              |
+| [src_gke_details.pod.pod_namespace](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i6)         |
+| [src_gke_details.service](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i7)                   |
+| [src_gke_details.service.service_name](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i8)      |
+| [src_gke_details.service.service_namespace](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i9) |
+|                                                                                                                                         |
+
+<blockquote>
+
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i0"></a>1.7.1.1.1.8.5.1.14.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details`
 
 **Title:** src_gke_details
 
@@ -1634,7 +1757,182 @@ Specific value: `"src_gke_details"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14"></a>1.7.1.1.1.7.5.1.15. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > then > log_config > metadata_fields > Metadata Field > anyOf > dest_gke_details`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i1"></a>1.7.1.1.1.8.5.1.14.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.cluster`
+
+**Title:** src_gke_details.cluster
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** GKE cluster metadata.
+
+Specific value: `"src_gke_details.cluster"`
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i2"></a>1.7.1.1.1.8.5.1.14.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.cluster.cluster_name`
+
+**Title:** src_gke_details.cluster.cluster_name
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** GKE cluster name.
+
+Specific value: `"src_gke_details.cluster.cluster_name"`
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i3"></a>1.7.1.1.1.8.5.1.14.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.cluster.cluster_location`
+
+**Title:** src_gke_details.cluster.cluster_location
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** Location of the cluster. This can be a zone or a region depending if the cluster is zonal or regional.
+
+Specific value: `"src_gke_details.cluster.cluster_location"`
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i4"></a>1.7.1.1.1.8.5.1.14.5. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.pod`
+
+**Title:** src_gke_details.pod
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** GKE Pod metadata, populated when the source or destination of the traffic is a Pod.
+
+Specific value: `"src_gke_details.pod"`
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i5"></a>1.7.1.1.1.8.5.1.14.6. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.pod.pod_name`
+
+**Title:** src_gke_details.pod.pod_name
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** Name of the Pod.
+
+Specific value: `"src_gke_details.pod.pod_name"`
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i6"></a>1.7.1.1.1.8.5.1.14.7. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.pod.pod_namespace`
+
+**Title:** src_gke_details.pod.pod_namespace
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** Namespace of the Pod.
+
+Specific value: `"src_gke_details.pod.pod_namespace"`
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i7"></a>1.7.1.1.1.8.5.1.14.8. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.service`
+
+**Title:** src_gke_details.service
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** GKE Service metadata, populated in Service endpoints only. The record contains up to two Services. If there are more than two relevant Services, this field contains a single Service with a special MANY_SERVICES marker.
+
+Specific value: `"src_gke_details.service"`
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i8"></a>1.7.1.1.1.8.5.1.14.9. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.service.service_name`
+
+**Title:** src_gke_details.service.service_name
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** Name of the Service. If there are more than two relevant Services, the field is set to a special MANY_SERVICES marker.
+
+Specific value: `"src_gke_details.service.service_name"`
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i9"></a>1.7.1.1.1.8.5.1.14.10. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.service.service_namespace`
+
+**Title:** src_gke_details.service.service_namespace
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** Namespace of the Service.
+
+Specific value: `"src_gke_details.service.service_namespace"`
+
+</blockquote>
+
+</blockquote>
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14"></a>1.7.1.1.1.8.5.1.15. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes`
+
+**Title:** Destination Google Kubernetes
+
+| Type                      | `combining`                                                                                                         |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+<blockquote>
+
+| Any of(Option)                                                                                                                           |
+| ---------------------------------------------------------------------------------------------------------------------------------------- |
+| [dest_gke_details](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i0)                           |
+| [dest_gke_details.cluster](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i1)                   |
+| [dest_gke_details.cluster.cluster_name](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i2)      |
+| [dest_gke_details.cluster.cluster_location](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i3)  |
+| [dest_gke_details.pod](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i4)                       |
+| [dest_gke_details.pod.pod_name](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i5)              |
+| [dest_gke_details.pod.pod_namespace](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i6)         |
+| [dest_gke_details.service](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i7)                   |
+| [dest_gke_details.service.service_name](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i8)      |
+| [dest_gke_details.service.service_namespace](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i9) |
+|                                                                                                                                          |
+
+<blockquote>
+
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i0"></a>1.7.1.1.1.8.5.1.15.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details`
 
 **Title:** dest_gke_details
 
@@ -1648,8 +1946,172 @@ Specific value: `"src_gke_details"`
 Specific value: `"dest_gke_details"`
 
 </blockquote>
+<blockquote>
+
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i1"></a>1.7.1.1.1.8.5.1.15.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.cluster`
+
+**Title:** dest_gke_details.cluster
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** GKE cluster metadata.
+
+Specific value: `"dest_gke_details.cluster"`
 
 </blockquote>
+<blockquote>
+
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i2"></a>1.7.1.1.1.8.5.1.15.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.cluster.cluster_name`
+
+**Title:** dest_gke_details.cluster.cluster_name
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** GKE cluster name.
+
+Specific value: `"dest_gke_details.cluster.cluster_name"`
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i3"></a>1.7.1.1.1.8.5.1.15.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.cluster.cluster_location`
+
+**Title:** dest_gke_details.cluster.cluster_location
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** Location of the cluster. This can be a zone or a region depending if the cluster is zonal or regional.
+
+Specific value: `"dest_gke_details.cluster.cluster_location"`
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i4"></a>1.7.1.1.1.8.5.1.15.5. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.pod`
+
+**Title:** dest_gke_details.pod
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** GKE Pod metadata, populated when the source or destination of the traffic is a Pod.
+
+Specific value: `"dest_gke_details.pod"`
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i5"></a>1.7.1.1.1.8.5.1.15.6. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.pod.pod_name`
+
+**Title:** dest_gke_details.pod.pod_name
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** Name of the Pod.
+
+Specific value: `"dest_gke_details.pod.pod_name"`
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i6"></a>1.7.1.1.1.8.5.1.15.7. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.pod.pod_namespace`
+
+**Title:** dest_gke_details.pod.pod_namespace
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** Namespace of the Pod.
+
+Specific value: `"dest_gke_details.pod.pod_namespace"`
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i7"></a>1.7.1.1.1.8.5.1.15.8. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.service`
+
+**Title:** dest_gke_details.service
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** GKE Service metadata, populated in Service endpoints only. The record contains up to two Services. If there are more than two relevant Services, this field contains a single Service with a special MANY_SERVICES marker.
+
+Specific value: `"dest_gke_details.service"`
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i8"></a>1.7.1.1.1.8.5.1.15.9. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.service.service_name`
+
+**Title:** dest_gke_details.service.service_name
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** Name of the Service. If there are more than two relevant Services, the field is set to a special MANY_SERVICES marker.
+
+Specific value: `"dest_gke_details.service.service_name"`
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i9"></a>1.7.1.1.1.8.5.1.15.10. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.service.service_namespace`
+
+**Title:** dest_gke_details.service.service_namespace
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** Namespace of the Service.
+
+Specific value: `"dest_gke_details.service.service_namespace"`
+
+</blockquote>
+
+</blockquote>
+
+</blockquote>
+
+</blockquote>
+
+**Examples:** 
+
+```json
+[
+    "connection",
+    "src_vpc",
+    "dest_vpc"
+]
+```
+```json
+[
+    "connection.dest_ip",
+    "connection.src_ip"
+]
+```
 
 </blockquote>
 </details>
@@ -1658,10 +2120,12 @@ Specific value: `"dest_gke_details"`
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_cloud_nat"></a>1.7.1.1.1.8. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > then > cloud_nat</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_cloud_nat"></a>1.7.1.1.1.9. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat</strong>  
 
 </summary>
 <blockquote>
+
+**Title:** Cloud Nat
 
 | Type                      | `object`                                                                                         |
 | ------------------------- | ------------------------------------------------------------------------------------------------ |
@@ -1671,7 +2135,7 @@ Specific value: `"dest_gke_details"`
 | Property                                                                                     | Pattern | Type             | Deprecated | Definition | Title/Description |
 | -------------------------------------------------------------------------------------------- | ------- | ---------------- | ---------- | ---------- | ----------------- |
 | + [subnetworks_to_nat](#items_subnetworks_items_allOf_i0_then_cloud_nat_subnetworks_to_nat ) | No      | enum (of string) | No         | -          | -                 |
-| + [nat_group_id](#items_subnetworks_items_allOf_i0_then_cloud_nat_nat_group_id )             | No      | string           | No         | -          | -                 |
+| + [nat_group_id](#items_subnetworks_items_allOf_i0_then_cloud_nat_nat_group_id )             | No      | string           | No         | -          | Nat Group ID      |
 |                                                                                              |         |                  |            |            |                   |
 
 **Examples:** 
@@ -1687,12 +2151,12 @@ Specific value: `"dest_gke_details"`
 ```json
 {
     "subnetworks_to_nat": "SELECTED_SECONDARY_SUBNETWORKS",
-    "nat_group_id": "nat-group"
+    "nat_group_id": "nat-group-alpha"
 }
 ```
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_subnetworks_to_nat"></a>1.7.1.1.1.8.1. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Private > then > cloud_nat > subnetworks_to_nat</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_subnetworks_to_nat"></a>1.7.1.1.1.9.1. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > subnetworks_to_nat</strong>  
 
 </summary>
 <blockquote>
@@ -1715,75 +2179,28 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_nat_group_id"></a>1.7.1.1.1.8.2. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Private > then > cloud_nat > nat_group_id</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_nat_group_id"></a>1.7.1.1.1.9.2. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > nat_group_id</strong>  
 
 </summary>
 <blockquote>
+
+**Title:** Nat Group ID
 
 | Type                      | `string`                                                                                                            |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
 |                           |                                                                                                                     |
 
-**Example:** 
-
-```json
-"nat-group"
-```
-
-</blockquote>
-</details>
-
-</blockquote>
-</details>
-
-<details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_region"></a>1.7.1.1.1.9. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Private > then > region</strong>  
-
-</summary>
-<blockquote>
-
-| Type                      | `enum (of string)`                                                                                                  |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
-| **Defined in**            | regions.schema.json#/definitions/region                                                                             |
-|                           |                                                                                                                     |
-
-Must be one of:
-* "ASIA-EAST1"
-* "ASIA-EAST2"
-* "ASIA-NORTHEAST1"
-* "ASIA-NORTHEAST2"
-* "ASIA-NORTHEAST3"
-* "ASIA-SOUTH1"
-* "ASIA-SOUTH2"
-* "ASIA-SOUTHEAST1"
-* "ASIA-SOUTHEAST2"
-* "AUSTRALIA-SOUTHEAST1"
-* "AUSTRALIA-SOUTHEAST2"
-* "EUROPE-CENTRAL2"
-* "EUROPE-NORTH1"
-* "EUROPE-WEST1"
-* "EUROPE-WEST2"
-* "EUROPE-WEST3"
-* "EUROPE-WEST4"
-* "EUROPE-WEST6"
-* "NORTHAMERICA-NORTHEAST1"
-* "NORTHAMERICA-NORTHEAST2"
-* "SOUTHAMERICA-EAST1"
-* "US-CENTRAL1"
-* "US-EAST1"
-* "US-EAST4"
-* "US-WEST1"
-* "US-WEST2"
-* "US-WEST3"
-* "US-WEST4"
+**Description:** Cloud Nat configuration ID to inherrit configruations from.
 
 **Example:** 
 
 ```json
-"US-CENTRAL1"
+"nat-group-alpha"
 ```
+
+</blockquote>
+</details>
 
 </blockquote>
 </details>
@@ -1810,58 +2227,35 @@ Must be one of:
 | **Defined in**            | #/definitions/private_service_connect                                                                               |
 |                           |                                                                                                                     |
 
-| Property                                                                 | Pattern | Type             | Deprecated | Definition                                 | Title/Description                                                                    |
-| ------------------------------------------------------------------------ | ------- | ---------------- | ---------- | ------------------------------------------ | ------------------------------------------------------------------------------------ |
-| + [ip_cidr_range](#items_subnetworks_items_allOf_i1_then_ip_cidr_range ) | No      | string           | No         | -                                          | IP space allocated to this subnetwork in CIDR format.                                |
-| - [name](#items_subnetworks_items_allOf_i1_then_name )                   | No      | string or null   | No         | -                                          | if this field is not provided ip_cidr_range value will be dynamically generated  ... |
-| - [purpose](#items_subnetworks_items_allOf_i1_then_purpose )             | No      | enum (of string) | No         | -                                          | -                                                                                    |
-| - [description](#items_subnetworks_items_allOf_i1_then_description )     | No      | string or null   | No         | -                                          | Description of this subnetwork.                                                      |
-| + [region](#items_subnetworks_items_allOf_i1_then_region )               | No      | enum (of string) | No         | In regions.schema.json#/definitions/region | -                                                                                    |
-|                                                                          |         |                  |            |                                            |                                                                                      |
+| Property                                                                 | Pattern | Type             | Deprecated | Definition                                       | Title/Description  |
+| ------------------------------------------------------------------------ | ------- | ---------------- | ---------- | ------------------------------------------------ | ------------------ |
+| - [name](#items_subnetworks_items_allOf_i1_then_name )                   | No      | string           | No         | In #/definitions/shared/properties/name          | Name               |
+| - [description](#items_subnetworks_items_allOf_i1_then_description )     | No      | string           | No         | In #/definitions/shared/properties/description   | Description        |
+| + [region](#items_subnetworks_items_allOf_i1_then_region )               | No      | enum (of string) | No         | In regions.schema.json#/definitions/region       | Region             |
+| + [ip_cidr_range](#items_subnetworks_items_allOf_i1_then_ip_cidr_range ) | No      | string           | No         | In #/definitions/shared/properties/ip_cidr_range | Primary CIDR Range |
+| - [purpose](#items_subnetworks_items_allOf_i1_then_purpose )             | No      | const            | No         | -                                                | Purpose            |
+|                                                                          |         |                  |            |                                                  |                    |
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i1_then_ip_cidr_range"></a>1.7.1.2.1.1. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Private Service Connect > then > ip_cidr_range</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i1_then_name"></a>1.7.1.2.1.1. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private Service Connect > Private Service Connect > name</strong>  
 
 </summary>
 <blockquote>
+
+**Title:** Name
 
 | Type                      | `string`                                                                                                            |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
-|                           |                                                                                                                     |
-
-**Description:** IP space allocated to this subnetwork in CIDR format.
-
-| Restrictions                      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Must match regular expression** | ```^(?:([0-9]\|[1-9][0-9]{0,1}\|1[0-9]{1,2}\|2[0-4][0-9]\|25[0-5])(\.([0-9]\|[1-9][0-9]{0,1}\|1[0-9]{1,2}\|2[0-4][0-9]\|25[0-5])){3}/(([0-9]\|[1-2][0-9]\|3[0-2])))$``` [Test](https://regex101.com/?regex=%5E%28%3F%3A%28%5B0-9%5D%7C%5B1-9%5D%5B0-9%5D%7B0%2C1%7D%7C1%5B0-9%5D%7B1%2C2%7D%7C2%5B0-4%5D%5B0-9%5D%7C25%5B0-5%5D%29%28%5C.%28%5B0-9%5D%7C%5B1-9%5D%5B0-9%5D%7B0%2C1%7D%7C1%5B0-9%5D%7B1%2C2%7D%7C2%5B0-4%5D%5B0-9%5D%7C25%5B0-5%5D%29%29%7B3%7D%2F%28%28%5B0-9%5D%7C%5B1-2%5D%5B0-9%5D%7C3%5B0-2%5D%29%29%29%24&testString=%22192.168.0.0%2F24%22) |
-|                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-
-**Example:** 
-
-```json
-"192.168.0.0/24"
-```
-
-</blockquote>
-</details>
-
-<details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i1_then_name"></a>1.7.1.2.1.2. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private Service Connect > then > name</strong>  
-
-</summary>
-<blockquote>
-
-| Type                      | `string or null`                                                                                                    |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
-| **Default**               | `null`                                                                                                              |
+| **Defined in**            | #/definitions/shared/properties/name                                                                                |
 |                           |                                                                                                                     |
 
 **Description:** if this field is not provided ip_cidr_range value will be dynamically generated based on the ip_cidr_range. WARNING, if this field is not set changing the ip_cidr_range will change the name dynamically generated.
 
 | Restrictions                      |                                                                                                                                                                                                                                                             |
 | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Min length**                    | 1                                                                                                                                                                                                                                                           |
+| **Max length**                    | 63                                                                                                                                                                                                                                                          |
 | **Must match regular expression** | ```^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$``` [Test](https://regex101.com/?regex=%5E%28%3F%3A%5Ba-z%5D%28%3F%3A%5B-a-z0-9%5D%7B0%2C61%7D%5Ba-z0-9%5D%29%3F%29%24&testString=%22%3Cprefix%3E-%3Cenvironment%3E-%3Cnetwork%3E-subnet-%3C192-168-0-0-24%3E%22) |
 |                                   |                                                                                                                                                                                                                                                             |
 
@@ -1875,35 +2269,17 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i1_then_purpose"></a>1.7.1.2.1.3. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private Service Connect > then > purpose</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i1_then_description"></a>1.7.1.2.1.2. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private Service Connect > Private Service Connect > description</strong>  
 
 </summary>
 <blockquote>
 
-| Type                      | `enum (of string)`                                                                                                  |
+**Title:** Description
+
+| Type                      | `string`                                                                                                            |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
-| **Default**               | `"PRIVATE"`                                                                                                         |
-|                           |                                                                                                                     |
-
-Must be one of:
-* "PRIVATE"
-* "PRIVATE_SERVICE_CONNECT"
-* "INTERNAL_HTTPS_LOAD_BALANCER"
-
-</blockquote>
-</details>
-
-<details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i1_then_description"></a>1.7.1.2.1.4. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private Service Connect > then > description</strong>  
-
-</summary>
-<blockquote>
-
-| Type                      | `string or null`                                                                                                    |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
-| **Default**               | `null`                                                                                                              |
+| **Defined in**            | #/definitions/shared/properties/description                                                                         |
 |                           |                                                                                                                     |
 
 **Description:** Description of this subnetwork.
@@ -1912,10 +2288,12 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i1_then_region"></a>1.7.1.2.1.5. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Private Service Connect > then > region</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i1_then_region"></a>1.7.1.2.1.3. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Private Service Connect > Private Service Connect > region</strong>  
 
 </summary>
 <blockquote>
+
+**Title:** Region
 
 | Type                      | `enum (of string)`                                                                                                  |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
@@ -1958,6 +2336,54 @@ Must be one of:
 ```json
 "US-CENTRAL1"
 ```
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_subnetworks_items_allOf_i1_then_ip_cidr_range"></a>1.7.1.2.1.4. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Private Service Connect > Private Service Connect > ip_cidr_range</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Primary CIDR Range
+
+| Type                      | `string`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/shared/properties/ip_cidr_range                                                                       |
+|                           |                                                                                                                     |
+
+**Description:** IP space allocated to this subnetwork in CIDR format.
+
+| Restrictions                      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Must match regular expression** | ```^(?:([0-9]\|[1-9][0-9]{0,1}\|1[0-9]{1,2}\|2[0-4][0-9]\|25[0-5])(\.([0-9]\|[1-9][0-9]{0,1}\|1[0-9]{1,2}\|2[0-4][0-9]\|25[0-5])){3}/(([0-9]\|[1-2][0-9]\|3[0-2])))$``` [Test](https://regex101.com/?regex=%5E%28%3F%3A%28%5B0-9%5D%7C%5B1-9%5D%5B0-9%5D%7B0%2C1%7D%7C1%5B0-9%5D%7B1%2C2%7D%7C2%5B0-4%5D%5B0-9%5D%7C25%5B0-5%5D%29%28%5C.%28%5B0-9%5D%7C%5B1-9%5D%5B0-9%5D%7B0%2C1%7D%7C1%5B0-9%5D%7B1%2C2%7D%7C2%5B0-4%5D%5B0-9%5D%7C25%5B0-5%5D%29%29%7B3%7D%2F%28%28%5B0-9%5D%7C%5B1-2%5D%5B0-9%5D%7C3%5B0-2%5D%29%29%29%24&testString=%22192.168.0.0%2F24%22) |
+|                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+
+**Example:** 
+
+```json
+"192.168.0.0/24"
+```
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_subnetworks_items_allOf_i1_then_purpose"></a>1.7.1.2.1.5. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private Service Connect > Private Service Connect > purpose</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Purpose
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+Specific value: `"PRIVATE_SERVICE_CONNECT"`
 
 </blockquote>
 </details>
@@ -1984,59 +2410,36 @@ Must be one of:
 | **Defined in**            | #/definitions/internal_https_load_balancer                                                                          |
 |                           |                                                                                                                     |
 
-| Property                                                                 | Pattern | Type             | Deprecated | Definition                                 | Title/Description                                                                    |
-| ------------------------------------------------------------------------ | ------- | ---------------- | ---------- | ------------------------------------------ | ------------------------------------------------------------------------------------ |
-| + [ip_cidr_range](#items_subnetworks_items_allOf_i2_then_ip_cidr_range ) | No      | string           | No         | -                                          | IP space allocated to this subnetwork in CIDR format.                                |
-| - [name](#items_subnetworks_items_allOf_i2_then_name )                   | No      | string or null   | No         | -                                          | if this field is not provided ip_cidr_range value will be dynamically generated  ... |
-| - [purpose](#items_subnetworks_items_allOf_i2_then_purpose )             | No      | enum (of string) | No         | -                                          | -                                                                                    |
-| - [description](#items_subnetworks_items_allOf_i2_then_description )     | No      | string or null   | No         | -                                          | Description of this subnetwork.                                                      |
-| + [region](#items_subnetworks_items_allOf_i2_then_region )               | No      | enum (of string) | No         | In regions.schema.json#/definitions/region | -                                                                                    |
-| - [role](#items_subnetworks_items_allOf_i2_then_role )                   | No      | enum (of string) | No         | -                                          | -                                                                                    |
-|                                                                          |         |                  |            |                                            |                                                                                      |
+| Property                                                                 | Pattern | Type             | Deprecated | Definition                                       | Title/Description  |
+| ------------------------------------------------------------------------ | ------- | ---------------- | ---------- | ------------------------------------------------ | ------------------ |
+| - [name](#items_subnetworks_items_allOf_i2_then_name )                   | No      | string           | No         | In #/definitions/shared/properties/name          | Name               |
+| - [description](#items_subnetworks_items_allOf_i2_then_description )     | No      | string           | No         | In #/definitions/shared/properties/description   | Description        |
+| + [region](#items_subnetworks_items_allOf_i2_then_region )               | No      | enum (of string) | No         | In regions.schema.json#/definitions/region       | Region             |
+| + [ip_cidr_range](#items_subnetworks_items_allOf_i2_then_ip_cidr_range ) | No      | string           | No         | In #/definitions/shared/properties/ip_cidr_range | Primary CIDR Range |
+| - [purpose](#items_subnetworks_items_allOf_i2_then_purpose )             | No      | const            | No         | -                                                | Purpose            |
+| - [role](#items_subnetworks_items_allOf_i2_then_role )                   | No      | enum (of string) | No         | -                                                | Role               |
+|                                                                          |         |                  |            |                                                  |                    |
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i2_then_ip_cidr_range"></a>1.7.1.3.1.1. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer > then > ip_cidr_range</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i2_then_name"></a>1.7.1.3.1.1. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer > Ineranl HTTP(s) Load Balancer > name</strong>  
 
 </summary>
 <blockquote>
+
+**Title:** Name
 
 | Type                      | `string`                                                                                                            |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
-|                           |                                                                                                                     |
-
-**Description:** IP space allocated to this subnetwork in CIDR format.
-
-| Restrictions                      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Must match regular expression** | ```^(?:([0-9]\|[1-9][0-9]{0,1}\|1[0-9]{1,2}\|2[0-4][0-9]\|25[0-5])(\.([0-9]\|[1-9][0-9]{0,1}\|1[0-9]{1,2}\|2[0-4][0-9]\|25[0-5])){3}/(([0-9]\|[1-2][0-9]\|3[0-2])))$``` [Test](https://regex101.com/?regex=%5E%28%3F%3A%28%5B0-9%5D%7C%5B1-9%5D%5B0-9%5D%7B0%2C1%7D%7C1%5B0-9%5D%7B1%2C2%7D%7C2%5B0-4%5D%5B0-9%5D%7C25%5B0-5%5D%29%28%5C.%28%5B0-9%5D%7C%5B1-9%5D%5B0-9%5D%7B0%2C1%7D%7C1%5B0-9%5D%7B1%2C2%7D%7C2%5B0-4%5D%5B0-9%5D%7C25%5B0-5%5D%29%29%7B3%7D%2F%28%28%5B0-9%5D%7C%5B1-2%5D%5B0-9%5D%7C3%5B0-2%5D%29%29%29%24&testString=%22192.168.0.0%2F24%22) |
-|                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-
-**Example:** 
-
-```json
-"192.168.0.0/24"
-```
-
-</blockquote>
-</details>
-
-<details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i2_then_name"></a>1.7.1.3.1.2. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer > then > name</strong>  
-
-</summary>
-<blockquote>
-
-| Type                      | `string or null`                                                                                                    |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
-| **Default**               | `null`                                                                                                              |
+| **Defined in**            | #/definitions/shared/properties/name                                                                                |
 |                           |                                                                                                                     |
 
 **Description:** if this field is not provided ip_cidr_range value will be dynamically generated based on the ip_cidr_range. WARNING, if this field is not set changing the ip_cidr_range will change the name dynamically generated.
 
 | Restrictions                      |                                                                                                                                                                                                                                                             |
 | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Min length**                    | 1                                                                                                                                                                                                                                                           |
+| **Max length**                    | 63                                                                                                                                                                                                                                                          |
 | **Must match regular expression** | ```^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$``` [Test](https://regex101.com/?regex=%5E%28%3F%3A%5Ba-z%5D%28%3F%3A%5B-a-z0-9%5D%7B0%2C61%7D%5Ba-z0-9%5D%29%3F%29%24&testString=%22%3Cprefix%3E-%3Cenvironment%3E-%3Cnetwork%3E-subnet-%3C192-168-0-0-24%3E%22) |
 |                                   |                                                                                                                                                                                                                                                             |
 
@@ -2050,35 +2453,17 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i2_then_purpose"></a>1.7.1.3.1.3. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer > then > purpose</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i2_then_description"></a>1.7.1.3.1.2. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer > Ineranl HTTP(s) Load Balancer > description</strong>  
 
 </summary>
 <blockquote>
 
-| Type                      | `enum (of string)`                                                                                                  |
+**Title:** Description
+
+| Type                      | `string`                                                                                                            |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
-| **Default**               | `"PRIVATE"`                                                                                                         |
-|                           |                                                                                                                     |
-
-Must be one of:
-* "PRIVATE"
-* "PRIVATE_SERVICE_CONNECT"
-* "INTERNAL_HTTPS_LOAD_BALANCER"
-
-</blockquote>
-</details>
-
-<details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i2_then_description"></a>1.7.1.3.1.4. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer > then > description</strong>  
-
-</summary>
-<blockquote>
-
-| Type                      | `string or null`                                                                                                    |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
-| **Default**               | `null`                                                                                                              |
+| **Defined in**            | #/definitions/shared/properties/description                                                                         |
 |                           |                                                                                                                     |
 
 **Description:** Description of this subnetwork.
@@ -2087,10 +2472,12 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i2_then_region"></a>1.7.1.3.1.5. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer > then > region</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i2_then_region"></a>1.7.1.3.1.3. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer > Ineranl HTTP(s) Load Balancer > region</strong>  
 
 </summary>
 <blockquote>
+
+**Title:** Region
 
 | Type                      | `enum (of string)`                                                                                                  |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
@@ -2138,10 +2525,60 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i2_then_role"></a>1.7.1.3.1.6. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer > then > role</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i2_then_ip_cidr_range"></a>1.7.1.3.1.4. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer > Ineranl HTTP(s) Load Balancer > ip_cidr_range</strong>  
 
 </summary>
 <blockquote>
+
+**Title:** Primary CIDR Range
+
+| Type                      | `string`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/shared/properties/ip_cidr_range                                                                       |
+|                           |                                                                                                                     |
+
+**Description:** IP space allocated to this subnetwork in CIDR format.
+
+| Restrictions                      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Must match regular expression** | ```^(?:([0-9]\|[1-9][0-9]{0,1}\|1[0-9]{1,2}\|2[0-4][0-9]\|25[0-5])(\.([0-9]\|[1-9][0-9]{0,1}\|1[0-9]{1,2}\|2[0-4][0-9]\|25[0-5])){3}/(([0-9]\|[1-2][0-9]\|3[0-2])))$``` [Test](https://regex101.com/?regex=%5E%28%3F%3A%28%5B0-9%5D%7C%5B1-9%5D%5B0-9%5D%7B0%2C1%7D%7C1%5B0-9%5D%7B1%2C2%7D%7C2%5B0-4%5D%5B0-9%5D%7C25%5B0-5%5D%29%28%5C.%28%5B0-9%5D%7C%5B1-9%5D%5B0-9%5D%7B0%2C1%7D%7C1%5B0-9%5D%7B1%2C2%7D%7C2%5B0-4%5D%5B0-9%5D%7C25%5B0-5%5D%29%29%7B3%7D%2F%28%28%5B0-9%5D%7C%5B1-2%5D%5B0-9%5D%7C3%5B0-2%5D%29%29%29%24&testString=%22192.168.0.0%2F24%22) |
+|                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+
+**Example:** 
+
+```json
+"192.168.0.0/24"
+```
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_subnetworks_items_allOf_i2_then_purpose"></a>1.7.1.3.1.5. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer > Ineranl HTTP(s) Load Balancer > purpose</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Purpose
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+Specific value: `"INTERNAL_HTTPS_LOAD_BALANCER"`
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_subnetworks_items_allOf_i2_then_role"></a>1.7.1.3.1.6. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer > Ineranl HTTP(s) Load Balancer > role</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Role
 
 | Type                      | `enum (of string)`                                                                                                  |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
@@ -3240,4 +3677,4 @@ Must be one of:
 </details>
 
 ----------------------------------------------------------------------------------------------------------------------------
-Generated using [json-schema-for-humans](https://github.com/coveooss/json-schema-for-humans) on 2021-10-17 at 12:07:49 -0700
+Generated using [json-schema-for-humans](https://github.com/coveooss/json-schema-for-humans) on 2021-10-17 at 18:11:16 -0700

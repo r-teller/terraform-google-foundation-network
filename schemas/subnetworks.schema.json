@@ -4,6 +4,7 @@
     "title": "Subnetworks",
     "definitions": {
         "private": {
+            "title": "Private",
             "type": "object",
             "required": [
                 "ip_cidr_range",
@@ -12,95 +13,92 @@
             "additionalProperties": false,
             "properties": {
                 "name": {
-                    "title": "Subnetwork Name",
-                    "description": "If this field is not provided ip_cidr_range value will be dynamically generated based on the ip_cidr_range. \nWARNING, if this field is not set changing the ip_cidr_range will change the name dynamically generated.",
-                    "type": "string",
-                    "pattern": "^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$",
-                    "examples": [
-                        "<prefix>-<environment>-<network>-subnet-<192-168-0-0-24>"
-                    ]
+                    "title": "Name",
+                    "$ref": "#/definitions/shared/properties/name"
+                },
+                "description": {
+                    "title": "Description",
+                    "$ref": "#/definitions/shared/properties/description"
+                },
+                "region": {
+                    "title": "Region",
+                    "$ref": "regions.schema.json#/definitions/region"
                 },
                 "ip_cidr_range": {
-                    "type": "string",
-                    "description": "IP space allocated to this subnetwork in CIDR format.",
-                    "examples": [
-                        "192.168.0.0/24"
-                    ],
-                    "pattern": "^(?:([0-9]|[1-9][0-9]{0,1}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])(\\.([0-9]|[1-9][0-9]{0,1}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])){3}\/(([0-9]|[1-2][0-9]|3[0-2])))$"
+                    "title": "Primary CIDR Range",
+                    "$ref": "#/definitions/shared/properties/ip_cidr_range"
                 },
                 "purpose": {
+                    "title": "Purpose",
                     "type": "string",
                     "const": "PRIVATE"
                 },
-                "description": {
-                    "type": "string",
-                    "description": "Description of this subnetwork."
-                },
                 "secondary_subnetworks": {
+                    "title": "Secondary Subnetworks",
                     "type": "array",
                     "minItems": 0,
                     "maxItems": 30,
+                    "uniqueItems": true,
                     "items": {
+                        "title": "Secondary Subnetwork",
                         "type": "object",
                         "additionalProperties": false,
                         "properties": {
                             "nat_group_id": {
+                                "title": "Nat Group ID",
+                                "description": "Cloud Nat configuration ID to inherrit configruations from.",
                                 "type": "string",
                                 "examples": [
-                                    "nat-group"
+                                    "nat-group-alpha"
                                 ]
                             },
                             "ip_cidr_range": {
-                                "type": "string",
-                                "title": "Secondary Subnetwork Range",
-                                "description": "IP space allocated to this subnetwork in CIDR format.",
-                                "examples": [
-                                    "192.168.0.0/24"
-                                ],
-                                "pattern": "^(?:([0-9]|[1-9][0-9]{0,1}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])(\\.([0-9]|[1-9][0-9]{0,1}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])){3}\/(([0-9]|[1-2][0-9]|3[0-2])))$"
+                                "title": "Secondary CIDR Range",
+                                "$ref": "#/definitions/shared/properties/ip_cidr_range"
                             }
                         },
                         "required": [
                             "ip_cidr_range"
                         ]
-                    }
+                    },
+                    "examples": [
+                        [
+                            {
+                                "nat_group_id": "nat-group-alpha",
+                                "ip_cidr_range": "192.168.1.0/24"
+                            },
+                            {
+                                "ip_cidr_range": "192.168.2.0/24"
+                            }
+                        ]
+                    ]
                 },
                 "private_ip_google_access": {
+                    "title": "Private IP Google Access",
                     "type": "string",
-                    "description": "(OPTIONAL) Provide access to Google Cloud APIs from this subnet for instances without a public ip address.",
+                    "description": "Provide access to Google Cloud APIs from this subnet for instances without a public ip address.",
                     "enum": [
                         "ENABLED",
                         "DISABLED"
                     ],
-                    "default": "ENABLED",
-                    "examples": [
-                        "ENABLED"
-                    ]
+                    "default": "ENABLED"
                 },
                 "log_config": {
+                    "title": "Log Config",
                     "type": "object",
                     "additionalProperties": false,
-                    "examples": [
-                        {
-                            "enabled": true,
-                            "aggregation_interval": "INTERVAL_1_MIN"
-                        },
-                        {
-                            "enabled": false,
-                            "metadata": "CUSTOM_METADATA",
-                            "metadata_fields": []
-                        }
-                    ],
                     "required": [
                         "enabled"
                     ],
                     "properties": {
                         "enabled": {
+                            "title": "Enabled",
                             "type": "boolean",
                             "description": "Enable/disable VPC Flow Logs for this subnet.",
                             "default": false
                         },
                         "aggregation_interval": {
+                            "title": "Aggregation Interval",
                             "type": "string",
                             "description": "Toggles the aggregation interval for collecting flow logs. Increasing the interval time will reduce the amount of generated flow logs for long lasting connections.",
                             "enum": [
@@ -114,6 +112,7 @@
                             "default": "INTERVAL_5_SEC"
                         },
                         "flow_sampling": {
+                            "title": "Flow Sampling",
                             "type": "integer",
                             "description": "Set the sampling rate of VPC flow logs within the subnetwork where 100 means all collected logs are reported, 50 means half of all collected logs are reported and 0 means no logs are reported.",
                             "minimum": 0,
@@ -121,6 +120,7 @@
                             "default": 50
                         },
                         "metadata": {
+                            "title": "Metadata",
                             "type": "string",
                             "enum": [
                                 "INCLUDE_ALL_METADATA",
@@ -383,23 +383,150 @@
                                         ]
                                     },
                                     {
-                                        "title": "src_gke_details",
-                                        "description": "GKE metadata for source endpoints. Only available if the endpoint is GKE.",
-                                        "const": "src_gke_details"
+                                        "title": "Source Google Kubernetes",
+                                        "anyOf": [
+                                            {
+                                                "title": "src_gke_details",
+                                                "description": "GKE metadata for source endpoints. Only available if the endpoint is GKE.",
+                                                "const": "src_gke_details"
+                                            },
+                                            {
+                                                "title": "src_gke_details.cluster",
+                                                "description": "GKE cluster metadata.",
+                                                "const": "src_gke_details.cluster"
+                                            },
+                                            {
+                                                "title": "src_gke_details.cluster.cluster_name",
+                                                "description": "GKE cluster name.",
+                                                "const": "src_gke_details.cluster.cluster_name"
+                                            },
+                                            {
+                                                "title": "src_gke_details.cluster.cluster_location",
+                                                "description": "Location of the cluster. This can be a zone or a region depending if the cluster is zonal or regional.",
+                                                "const": "src_gke_details.cluster.cluster_location"
+                                            },
+                                            {
+                                                "title": "src_gke_details.pod",
+                                                "description": "GKE Pod metadata, populated when the source or destination of the traffic is a Pod.",
+                                                "const": "src_gke_details.pod"
+                                            },
+                                            {
+                                                "title": "src_gke_details.pod.pod_name",
+                                                "description": "Name of the Pod.",
+                                                "const": "src_gke_details.pod.pod_name"
+                                            },
+                                            {
+                                                "title": "src_gke_details.pod.pod_namespace",
+                                                "description": "Namespace of the Pod.",
+                                                "const": "src_gke_details.pod.pod_namespace"
+                                            },
+                                            {
+                                                "title": "src_gke_details.service",
+                                                "description": "GKE Service metadata, populated in Service endpoints only. The record contains up to two Services. If there are more than two relevant Services, this field contains a single Service with a special MANY_SERVICES marker.",
+                                                "const": "src_gke_details.service"
+                                            },
+                                            {
+                                                "title": "src_gke_details.service.service_name",
+                                                "description": "Name of the Service. If there are more than two relevant Services, the field is set to a special MANY_SERVICES marker.",
+                                                "const": "src_gke_details.service.service_name"
+                                            },
+                                            {
+                                                "title": "src_gke_details.service.service_namespace",
+                                                "description": "Namespace of the Service.",
+                                                "const": "src_gke_details.service.service_namespace"
+                                            }
+                                        ]
                                     },
                                     {
-                                        "title": "dest_gke_details",
-                                        "description": "GKE metadata for destination endpoints. Only available if the endpoint is GKE.",
-                                        "const": "dest_gke_details"
+                                        "title": "Destination Google Kubernetes",
+                                        "anyOf": [
+                                            {
+                                                "title": "dest_gke_details",
+                                                "description": "GKE metadata for destination endpoints. Only available if the endpoint is GKE.",
+                                                "const": "dest_gke_details"
+                                            },
+                                            {
+                                                "title": "dest_gke_details.cluster",
+                                                "description": "GKE cluster metadata.",
+                                                "const": "dest_gke_details.cluster"
+                                            },
+                                            {
+                                                "title": "dest_gke_details.cluster.cluster_name",
+                                                "description": "GKE cluster name.",
+                                                "const": "dest_gke_details.cluster.cluster_name"
+                                            },
+                                            {
+                                                "title": "dest_gke_details.cluster.cluster_location",
+                                                "description": "Location of the cluster. This can be a zone or a region depending if the cluster is zonal or regional.",
+                                                "const": "dest_gke_details.cluster.cluster_location"
+                                            },
+                                            {
+                                                "title": "dest_gke_details.pod",
+                                                "description": "GKE Pod metadata, populated when the source or destination of the traffic is a Pod.",
+                                                "const": "dest_gke_details.pod"
+                                            },
+                                            {
+                                                "title": "dest_gke_details.pod.pod_name",
+                                                "description": "Name of the Pod.",
+                                                "const": "dest_gke_details.pod.pod_name"
+                                            },
+                                            {
+                                                "title": "dest_gke_details.pod.pod_namespace",
+                                                "description": "Namespace of the Pod.",
+                                                "const": "dest_gke_details.pod.pod_namespace"
+                                            },
+                                            {
+                                                "title": "dest_gke_details.service",
+                                                "description": "GKE Service metadata, populated in Service endpoints only. The record contains up to two Services. If there are more than two relevant Services, this field contains a single Service with a special MANY_SERVICES marker.",
+                                                "const": "dest_gke_details.service"
+                                            },
+                                            {
+                                                "title": "dest_gke_details.service.service_name",
+                                                "description": "Name of the Service. If there are more than two relevant Services, the field is set to a special MANY_SERVICES marker.",
+                                                "const": "dest_gke_details.service.service_name"
+                                            },
+                                            {
+                                                "title": "dest_gke_details.service.service_namespace",
+                                                "description": "Namespace of the Service.",
+                                                "const": "dest_gke_details.service.service_namespace"
+                                            }
+                                        ]
                                     }
                                 ]
                             },
                             "default": [],
+                            "examples": [
+                                [
+                                    "connection",
+                                    "src_vpc",
+                                    "dest_vpc"
+                                ],
+                                [
+                                    "connection.dest_ip",
+                                    "connection.src_ip"
+                                ]
+                            ],
                             "description": "List of supported fields can be found at https://cloud.google.com/vpc/docs/flow-logs#record_format"
                         }
-                    }
+                    },
+                    "examples": [
+                        {
+                            "enabled": true,
+                            "aggregation_interval": "INTERVAL_1_MIN"
+                        },
+                        {
+                            "enabled": true,
+                            "metadata": "CUSTOM_METADATA",
+                            "metadata_fields": [
+                                "connection",
+                                "src_vpc",
+                                "dest_vpc"
+                            ]
+                        }
+                    ]
                 },
                 "cloud_nat": {
+                    "title": "Cloud Nat",
                     "type": "object",
                     "additionalProperties": false,
                     "properties": {
@@ -416,9 +543,11 @@
                             "default": "DISABLED"
                         },
                         "nat_group_id": {
+                            "title": "Nat Group ID",
+                            "description": "Cloud Nat configuration ID to inherrit configruations from.",
                             "type": "string",
                             "examples": [
-                                "nat-group"
+                                "nat-group-alpha"
                             ]
                         }
                     },
@@ -433,16 +562,14 @@
                         },
                         {
                             "subnetworks_to_nat": "SELECTED_SECONDARY_SUBNETWORKS",
-                            "nat_group_id": "nat-group"
+                            "nat_group_id": "nat-group-alpha"
                         }
                     ]
-                },
-                "region": {
-                    "$ref": "regions.schema.json#/definitions/region"
                 }
             }
         },
         "private_service_connect": {
+            "title": "Private Service Connect",
             "type": "object",
             "additionalProperties": false,
             "required": [
@@ -450,49 +577,31 @@
                 "region"
             ],
             "properties": {
-                "ip_cidr_range": {
-                    "type": "string",
-                    "description": "IP space allocated to this subnetwork in CIDR format.",
-                    "examples": [
-                        "192.168.0.0/24"
-                    ],
-                    "pattern": "^(?:([0-9]|[1-9][0-9]{0,1}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])(\\.([0-9]|[1-9][0-9]{0,1}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])){3}\/(([0-9]|[1-2][0-9]|3[0-2])))$"
-                },
                 "name": {
-                    "type": [
-                        "string",
-                        "null"
-                    ],
-                    "description": "if this field is not provided ip_cidr_range value will be dynamically generated based on the ip_cidr_range. WARNING, if this field is not set changing the ip_cidr_range will change the name dynamically generated.",
-                    "pattern": "^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$",
-                    "examples": [
-                        "<prefix>-<environment>-<network>-subnet-<192-168-0-0-24>"
-                    ],
-                    "default": null
-                },
-                "purpose": {
-                    "type": "string",
-                    "enum": [
-                        "PRIVATE",
-                        "PRIVATE_SERVICE_CONNECT",
-                        "INTERNAL_HTTPS_LOAD_BALANCER"
-                    ],
-                    "default": "PRIVATE"
+                    "title": "Name",
+                    "$ref": "#/definitions/shared/properties/name"
                 },
                 "description": {
-                    "type": [
-                        "string",
-                        "null"
-                    ],
-                    "description": "Description of this subnetwork.",
-                    "default": null
+                    "title": "Description",
+                    "$ref": "#/definitions/shared/properties/description"
                 },
                 "region": {
+                    "title": "Region",
                     "$ref": "regions.schema.json#/definitions/region"
+                },
+                "ip_cidr_range": {
+                    "title": "Primary CIDR Range",
+                    "$ref": "#/definitions/shared/properties/ip_cidr_range"
+                },
+                "purpose": {
+                    "title": "Purpose",
+                    "type": "string",
+                    "const": "PRIVATE_SERVICE_CONNECT"
                 }
             }
         },
         "internal_https_load_balancer": {
+            "title": "Ineranl HTTP(s) Load Balancer",
             "type": "object",
             "additionalProperties": false,
             "required": [
@@ -500,47 +609,29 @@
                 "region"
             ],
             "properties": {
-                "ip_cidr_range": {
-                    "type": "string",
-                    "description": "IP space allocated to this subnetwork in CIDR format.",
-                    "examples": [
-                        "192.168.0.0/24"
-                    ],
-                    "pattern": "^(?:([0-9]|[1-9][0-9]{0,1}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])(\\.([0-9]|[1-9][0-9]{0,1}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])){3}\/(([0-9]|[1-2][0-9]|3[0-2])))$"
-                },
                 "name": {
-                    "type": [
-                        "string",
-                        "null"
-                    ],
-                    "description": "if this field is not provided ip_cidr_range value will be dynamically generated based on the ip_cidr_range. WARNING, if this field is not set changing the ip_cidr_range will change the name dynamically generated.",
-                    "pattern": "^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$",
-                    "examples": [
-                        "<prefix>-<environment>-<network>-subnet-<192-168-0-0-24>"
-                    ],
-                    "default": null
-                },
-                "purpose": {
-                    "type": "string",
-                    "enum": [
-                        "PRIVATE",
-                        "PRIVATE_SERVICE_CONNECT",
-                        "INTERNAL_HTTPS_LOAD_BALANCER"
-                    ],
-                    "default": "PRIVATE"
+                    "title": "Name",
+                    "$ref": "#/definitions/shared/properties/name"
                 },
                 "description": {
-                    "type": [
-                        "string",
-                        "null"
-                    ],
-                    "description": "Description of this subnetwork.",
-                    "default": null
+                    "title": "Description",
+                    "$ref": "#/definitions/shared/properties/description"
                 },
                 "region": {
+                    "title": "Region",
                     "$ref": "regions.schema.json#/definitions/region"
                 },
+                "ip_cidr_range": {
+                    "title": "Primary CIDR Range",
+                    "$ref": "#/definitions/shared/properties/ip_cidr_range"
+                },
+                "purpose": {
+                    "title": "Purpose",
+                    "type": "string",
+                    "const": "INTERNAL_HTTPS_LOAD_BALANCER"
+                },
                 "role": {
+                    "title": "Role",
                     "type": "string",
                     "enum": [
                         "BACKUP",
@@ -587,7 +678,6 @@
                             ]
                         },
                         "then": {
-                            "additionalProperties": false,
                             "$ref": "#/definitions/private_service_connect"
                         }
                     },
@@ -605,11 +695,45 @@
                             ]
                         },
                         "then": {
-                            "additionalProperties": false,
                             "$ref": "#/definitions/internal_https_load_balancer"
                         }
                     }
                 ]
+            }
+        },
+        "shared": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "if this field is not provided ip_cidr_range value will be dynamically generated based on the ip_cidr_range. WARNING, if this field is not set changing the ip_cidr_range will change the name dynamically generated.",
+                    "pattern": "^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$",
+                    "minLength": 1,
+                    "maxLength": 63,
+                    "examples": [
+                        "<prefix>-<environment>-<network>-subnet-<192-168-0-0-24>"
+                    ]
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description of this subnetwork."
+                },
+                "ip_cidr_range": {
+                    "type": "string",
+                    "description": "IP space allocated to this subnetwork in CIDR format.",
+                    "examples": [
+                        "192.168.0.0/24"
+                    ],
+                    "pattern": "^(?:([0-9]|[1-9][0-9]{0,1}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])(\\.([0-9]|[1-9][0-9]{0,1}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])){3}\/(([0-9]|[1-2][0-9]|3[0-2])))$"
+                },
+                "purpose": {
+                    "type": "string",
+                    "enum": [
+                        "PRIVATE",
+                        "PRIVATE_SERVICE_CONNECT",
+                        "INTERNAL_HTTPS_LOAD_BALANCER"
+                    ],
+                    "const": "INTERNAL_HTTPS_LOAD_BALANCER"
+                }
             }
         }
     }
