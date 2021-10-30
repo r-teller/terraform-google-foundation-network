@@ -1,0 +1,389 @@
+{
+    "$id": "routes.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Static Routes",
+    "definitions": {
+        "shared": {
+            "properties": {
+                "name": {
+                    "title": "Name",
+                    "type": "string",
+                    "description": "if this field is not provided name value will be dynamically generated.",
+                    "pattern": "^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$",
+                    "minLength": 1,
+                    "maxLength": 63
+                },
+                "destination": {
+                    "title": "Destination",
+                    "description": "The destination range of outgoing packets that the route will apply to.",
+                    "type": "string",
+                    "$ref": "shared.schema.json#/definitions/shared/properties/ip_cidr_range"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "An optional, textual description for the route. "
+                },
+                "priority": {
+                    "title": "Priority",
+                    "description": "Specifies the priority of this route relative to other routes with the same specificity. The lower the value, the higher the priority. ",
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 2147483647,
+                    "default": 1000
+                },
+                "tags": {
+                    "title": "Tags",
+                    "description": "Identifies the set of instances that this route will apply to. If no tags are provided, the route will apply to all instances in the network. ",
+                    "$ref": "shared.schema.json#/definitions/shared/properties/tags"
+                },
+                "next_hop_type": {
+                    "type": "string",
+                    "description": "The type of route to be created.",
+                    "enum": [
+                        "INTERNET_GATEWAY",
+                        "ADDRESS",
+                        "INSTANCE",
+                        "LOAD_BALANCER"
+                    ]
+                }
+            }
+        },
+        "nexthop_internet_gateway": {
+            "title": "Next Hop Internet Gateway",
+            "type": "object",
+            "required": [
+                "destination",
+                "next_hop_type"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "title": "Name",
+                    "$ref": "routes.schema.json#/definitions/shared/properties/name"
+                },
+                "description": {
+                    "title": "Description",
+                    "$ref": "routes.schema.json#/definitions/shared/properties/description"
+                },
+                "destination": {
+                    "title": "Destination",
+                    "$ref": "routes.schema.json#/definitions/shared/properties/destination"
+                },
+                "priority": {
+                    "title": "Priority",
+                    "$ref": "routes.schema.json#/definitions/shared/properties/priority"
+                },
+                "tags": {
+                    "title": "Network Tags",
+                    "$ref": "routes.schema.json#/definitions/shared/properties/tags"
+                },
+                "next_hop_type": {
+                    "title": "Next Hop Type",
+                    "type": "string",
+                    "description": "The type of route to be created.",
+                    "const": "INTERNET_GATEWAY"
+                }
+            },
+            "examples": [
+                {
+                    "destination": "0.0.0.0/0",
+                    "priority": 0,
+                    "next_hop_type": "INTERNET_GATEWAY"
+                },
+                {
+                    "tags": [
+                        "allow-internet"
+                    ],
+                    "destination": "0.0.0.0/0",
+                    "priority": 0,
+                    "next_hop_type": "INTERNET_GATEWAY"
+                }
+            ]
+        },
+        "nexthop_address": {
+            "title": "Next Hop Address",
+            "type": "object",
+            "required": [
+                "destination",
+                "next_hop_type",
+                "next_hop_address"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "title": "Name",
+                    "$ref": "routes.schema.json#/definitions/shared/properties/name"
+                },
+                "description": {
+                    "title": "Description",
+                    "$ref": "routes.schema.json#/definitions/shared/properties/description"
+                },
+                "destination": {
+                    "title": "Destination",
+                    "$ref": "routes.schema.json#/definitions/shared/properties/destination"
+                },
+                "priority": {
+                    "title": "Priority",
+                    "$ref": "routes.schema.json#/definitions/shared/properties/priority"
+                },
+                "tags": {
+                    "title": "Network Tags",
+                    "$ref": "routes.schema.json#/definitions/shared/properties/tags"
+                },
+                "next_hop_type": {
+                    "title": "Next Hop Type",
+                    "type": "string",
+                    "description": "The type of route to be created.",
+                    "const": "ADDRESS"
+                },
+                "next_hop_address": {
+                    "title": "Next Hop Address",
+                    "$ref": "shared.schema.json#/definitions/shared/properties/ip_address"
+                }
+            },
+            "examples": [
+                {
+                    "tags": [
+                        "rf1918-to-ngfw"
+                    ],
+                    "destination": "192.168.0.0/16",
+                    "priority": 0,
+                    "next_hop_type": "ADDRESS",
+                    "next_hop_address": "192.168.0.1"
+                },
+                {
+                    "tags": [
+                        "rf1918-to-ngfw"
+                    ],
+                    "destination": "172.16.0.0/12",
+                    "priority": 100,
+                    "next_hop_type": "ADDRESS",
+                    "next_hop_address": "192.168.0.1"
+                }
+            ]
+        },
+        "nexthop_instance": {
+            "title": "Next Hop Instance",
+            "type": "object",
+            "required": [
+                "destination",
+                "next_hop_type",
+                "next_hop_instance",
+                "next_hop_instance_zone"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "title": "Name",
+                    "$ref": "routes.schema.json#/definitions/shared/properties/name"
+                },
+                "description": {
+                    "title": "Description",
+                    "$ref": "routes.schema.json#/definitions/shared/properties/description"
+                },
+                "destination": {
+                    "title": "Destination",
+                    "$ref": "routes.schema.json#/definitions/shared/properties/destination"
+                },
+                "priority": {
+                    "title": "Priority",
+                    "$ref": "routes.schema.json#/definitions/shared/properties/priority"
+                },
+                "tags": {
+                    "title": "Network Tags",
+                    "$ref": "routes.schema.json#/definitions/shared/properties/tags"
+                },
+                "next_hop_type": {
+                    "title": "Next Hop Type",
+                    "type": "string",
+                    "description": "The type of route to be created.",
+                    "const": "INSTANCE"
+                },
+                "next_hop_instance": {
+                    "title": "Next Hop Instance",
+                    "type": "string"
+                },
+                "next_hop_instance_zone": {
+                    "title": "Next Hop Instance Zone",
+                    "$ref": "regions.schema.json#/definitions/zone"
+                }
+            },
+            "examples": [
+                {
+                    "tags": [
+                        "rf1918-to-ngfw"
+                    ],
+                    "destination": "192.168.0.0/16",
+                    "priority": 0,
+                    "next_hop_type": "INSTANCE",
+                    "next_hop_instance": "MY-INSTANCE",
+                    "next_hop_instance_zone": "US-CENTRAL1-A"
+                }
+            ]
+        },
+        "nexthop_load_balancer": {
+            "title": "Next Hop Load Balancer",
+            "type": "object",
+            "required": [
+                "destination",
+                "next_hop_type",
+                "next_hop_load_balancer"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "title": "Name",
+                    "$ref": "routes.schema.json#/definitions/shared/properties/name"
+                },
+                "description": {
+                    "title": "Description",
+                    "$ref": "routes.schema.json#/definitions/shared/properties/description"
+                },
+                "destination": {
+                    "title": "Destination",
+                    "$ref": "routes.schema.json#/definitions/shared/properties/destination"
+                },
+                "priority": {
+                    "title": "Priority",
+                    "$ref": "routes.schema.json#/definitions/shared/properties/priority"
+                },
+                "tags": {
+                    "title": "Network Tags",
+                    "$ref": "routes.schema.json#/definitions/shared/properties/tags"
+                },
+                "next_hop_type": {
+                    "title": "Next Hop Type",
+                    "type": "string",
+                    "description": "The type of route to be created.",
+                    "const": "LOAD_BALANCER"
+                },
+                "next_hop_load_balancer": {
+                    "title": "Next Hop Load Balancer",
+                    "type": "string"
+                }
+            },
+            "examples": [
+                {
+                    "tags": [
+                        "rf1918-to-ngfw"
+                    ],
+                    "destination": "192.168.0.0/16",
+                    "priority": 0,
+                    "next_hop_type": "LOAD_BALANCER",
+                    "next_hop_load_balancer": "projects/example-project/regions/us-central1/forwardingRules/example-load-balancer"
+                }
+            ]
+        },
+        "routes": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 0,
+            "maxItems": 100,
+            "items": {
+                "type": "object",
+                "title": "Static Route",
+                "properties": {
+                    "next_hop_type": {
+                        "$ref": "routes.schema.json#/definitions/shared/properties/next_hop_type"
+                    }
+                },
+                "allOf": [
+                    {
+                        "title": "Next Hop Internet Gateway",
+                        "if": {
+                            "properties": {
+                                "next_hop_type": {
+                                    "const": "INTERNET_GATEWAY"
+                                }
+                            },
+                            "required": [
+                                "next_hop_type"
+                            ]
+                        },
+                        "then": {
+                            "$ref": "#/definitions/nexthop_internet_gateway"
+                        }
+                    },
+                    {
+                        "title": "Next Hop Address",
+                        "if": {
+                            "properties": {
+                                "next_hop_type": {
+                                    "const": "ADDRESS"
+                                }
+                            },
+                            "required": [
+                                "next_hop_type"
+                            ]
+                        },
+                        "then": {
+                            "$ref": "#/definitions/nexthop_address"
+                        }
+                    },
+                    {
+                        "title": "Next Hop Load Balancer",
+                        "if": {
+                            "properties": {
+                                "next_hop_type": {
+                                    "const": "LOAD_BALANCER"
+                                }
+                            },
+                            "required": [
+                                "next_hop_type"
+                            ]
+                        },
+                        "then": {
+                            "$ref": "#/definitions/nexthop_load_balancer"
+                        }
+                    },
+                    {
+                        "title": "Next Hop Instance",
+                        "if": {
+                            "properties": {
+                                "next_hop_type": {
+                                    "const": "INSTANCE"
+                                }
+                            },
+                            "required": [
+                                "next_hop_type"
+                            ]
+                        },
+                        "then": {
+                            "$ref": "#/definitions/nexthop_instance"
+                        }
+                    }
+                ]
+            },
+            "examples": [
+                [
+                    {
+                        "tags": [
+                            "allow-internet"
+                        ],
+                        "destination": "0.0.0.0/0",
+                        "priority": 0,
+                        "next_hop_type": "INTERNET_GATEWAY"
+                    },
+                    {
+                        "tags": [
+                            "rf1918-to-ngfw"
+                        ],
+                        "destination": "192.168.0.0/16",
+                        "priority": 0,
+                        "next_hop_type": "ADDRESS",
+                        "next_hop_address": "192.168.0.1"
+                    },
+                    {
+                        "tags": [
+                            "rf1918-to-ngfw"
+                        ],
+                        "destination": "172.16.0.0/12",
+                        "priority": 100,
+                        "next_hop_type": "ADDRESS",
+                        "next_hop_address": "192.168.0.1"
+                    }
+                ]
+            ]
+        }
+    }
+}

@@ -1,0 +1,9 @@
+expand_buttons: true
+link_to_reused_ref: false
+templates_directory: ./templates
+template_name: md_nested
+show_toc: false
+markdown_options:  
+  break-on-newline: true
+template_md_options:
+  badge_as_image: true

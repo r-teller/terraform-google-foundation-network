@@ -48,7 +48,7 @@ locals {
 }
 
 module "test_cases__network" {
-  count = 1
+  count = 0
   source = "../"
 
   project_id      = local.project_id
@@ -58,7 +58,7 @@ module "test_cases__network" {
 }
 
 module "test_cases__subnetwork" {
-  count = 1
+  count = 0
   source = "../"
 
   project_id      = local.project_id
@@ -68,7 +68,7 @@ module "test_cases__subnetwork" {
 }
 
 module "test_cases__cloud_nat" {
-  count = 1
+  count = 0
   source = "../"
 
   project_id      = local.project_id
@@ -78,7 +78,7 @@ module "test_cases__cloud_nat" {
 }
 
 module "test_cases__private_google_access" {
-  count = 1
+  count = 0
   source = "../"
 
   project_id      = local.project_id
@@ -98,7 +98,7 @@ module "test_cases__route" {
 }
 
 module "test_cases__firewall_rule" {
-  count  = 1
+  count  = 0
   source = "../"
 
   project_id      = local.project_id

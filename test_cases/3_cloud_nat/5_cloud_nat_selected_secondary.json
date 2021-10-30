@@ -1,6 +1,6 @@
 [
   {
-    "name": "cloud-nat-selected-combo",
+    "name": "cloud-nat-selected-mix",
     "routing_mode": "GLOBAL",
     "cloud_nat": {
       "subnetworks_to_nat": "SELECTED_PRIMARY_SUBNETWORKS_SELECTED_SECONDARY_SUBNETWORKS",

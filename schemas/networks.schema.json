@@ -11,16 +11,17 @@
         ],
         "properties": {
             "name": {
+                "title": "Name",
+                "description": "This field will be used be combine with <environment> and <prefix> to generate a unique VPC name",
                 "type": "string"
             },
             "description": {
-                "type": [
-                    "string",
-                    "null"
-                ],
-                "default": null
+                "title": "Description",
+                "type": "string"
             },
             "mtu": {
+                "title": "MTU",
+                "description": "Maximum transmission unit (MTU) is the size of the largest IP packet that can be transmitted on this network.",
                 "type": "number",
                 "enum": [
                     1460,
@@ -29,34 +30,51 @@
                 "default": 1460
             },
             "private_google_access": {
+                "title": "Private Google Access",
+                "description": "Private Google Access for is an alternative to connecting to Google APIs and services over the internet. Setting this to PRIVATE or RESTRICTED will deploy the required Cloud DNS and Routing functionality to enable this feature.",
                 "type": "string",
-                "enum": [
-                    "RESTRICTED",
-                    "PRIVATE",
-                    "DISABLED"
+                "oneOf": [
+                    {
+                        "title": "Disabled",
+                        "description": "Does not depl",
+                        "const": "DISABLED"
+                    },
+                    {
+                        "title": "Private",
+                        "description": "Enables API access to most Google APIs and services regardless of whether they are supported by VPC Service Controls.",
+                        "const": "PRIVATE"
+                    },
+                    {
+                        "title": "Restricted",
+                        "description": "Provides access to Cloud and Developer APIs that support VPC Service Controls. Blocks access to Google APIs and services that do not support VPC Service Controls.",
+                        "const": "RESTRICTED"
+                    }
                 ],
                 "default": "DISABLED"
             },
             "private_service_connection": {
+                "title": "Private Service Connection",
+                "description": "Allows private consumption of services across VPC networks that belong to different groups, teams, projects, or organizations",
                 "oneOf": [
                     {
+                        "title": "IP CIDR Range",
                         "type": "object",
                         "properties": {
                             "export_custom_routes": {
+                                "title": "Export Custom Routes",
+                                "description": "If true, the network will export custom routes to peer network.",
                                 "type": "boolean",
                                 "default": false
                             },
                             "import_custom_routes": {
+                                "title": "Import Custom Routes",
+                                "description": "If true, the network will import custom routes from peer network.",
                                 "type": "boolean",
                                 "default": false
                             },
                             "ip_cidr_range": {
-                                "type": "string",
-                                "description": "IP space allocated to this connection in CIDR format.",
-                                "examples": [
-                                    "192.168.0.0/24"
-                                ],
-                                "pattern": "^(?:([0-9]|[1-9][0-9]{0,1}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])(\\.([0-9]|[1-9][0-9]{0,1}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])){3}\/(([0-9]|[1-2][0-9]|3[0-2])))$"
+                                "title": "IP CIDR Range",
+                                "$ref": "subnetworks.schema.json#/definitions/shared/properties/ip_cidr_range"
                             }
                         },
                         "required": [
@@ -64,19 +82,27 @@
                         ]
                     },
                     {
+                        "title": "IP CIDR Prefix",
                         "type": "object",
                         "properties": {
                             "export_custom_routes": {
+                                "title": "Export Custom Routes",
+                                "description": "If true, the network will export custom routes to peer network.",
                                 "type": "boolean",
                                 "default": false
                             },
                             "import_custom_routes": {
+                                "title": "Import Custom Routes",
+                                "description": "If true, the network will import custom routes from peer network.",
                                 "type": "boolean",
                                 "default": false
                             },
                             "ip_cidr_prefix": {
-                                "type": "integer",
+                                "title": "IP CIDR PRefix",
                                 "description": "IP CIDR prefix used for this connection. Google will automtically allocated a IP CIDR Range based on the provided prefix",
+                                "type": "integer",
+                                "minimum": 8,
+                                "maximum": 30,
                                 "examples": [
                                     16
                                 ]
@@ -90,43 +116,76 @@
             },
             "routing_mode": {
                 "type": "string",
-                "enum": [
-                    "GLOBAL",
-                    "REGIONAL"
+                "title": "Routing Mode",
+                "description": "The BGP routing mode for this network. ",
+                "oneOf": [
+                    {
+                        "title": "Global",
+                        "description": "Cloud Routers in this network advertise subnetworks from all regions to their BGP peers, and program instances in all regions with the router's best learned BGP routes.",
+                        "const": "GLOBAL"
+                    },
+                    {
+                        "title": "Regional",
+                        "description": "Cloud Routers in this network advertise subnetworks from their local region only to their BGP peers, and program instances in their local region only with the router's best learned BGP routes. ",
+                        "const": "REGIONAL"
+                    }
                 ],
                 "default": "REGIONAL"
             },
             "subnetworks": {
+                "title": "Subnetworks",
                 "$ref": "subnetworks.schema.json#/definitions/subnetworks"
             },
-            "cloud_nat":{
+            "cloud_nat": {
+                "title": "Cloud NAT",
                 "$ref": "cloud_nat.schema.json#/definitions/cloud_nat"
             },
             "peers": {
+                "title": "VPC Network Peers",
+                "description": "Collection of VPC Peers that enables you to connect VPC networks so that workloads in different VPC networks can communicate internally.",
                 "type": "array",
+                "uniqueItems": true,
                 "items": {
+                    "title": "VPC Network Peer",
                     "type": "object",
                     "properties": {
                         "project": {
+                            "title": "Project",
+                            "description": "The name of the project for the peer network. If not specified, defaults to current project.",
                             "type": "string",
-                            "default": null
+                            "examples": [
+                                "remote-project-id"
+                            ]
                         },
                         "network": {
-                            "type": "string"
+                            "title": "Peer Network",
+                            "description": "The name of the network to be peered with the current network.",
+                            "type": "string",
+                            "examples": [
+                                "prod-network"
+                            ]
                         },
                         "export_custom_routes": {
+                            "title": "Export Custom Routes",
+                            "description": "If true, the network will export custom routes to peer network.",
                             "type": "boolean",
                             "default": false
                         },
                         "import_custom_routes": {
+                            "title": "Import Custom Routes",
+                            "description": "If true, the network will import custom routes from peer network.",
                             "type": "boolean",
                             "default": false
                         },
                         "import_subnet_routes_with_public_ip": {
+                            "title": "Import Subnet Routes with Public IP Addresses",
+                            "description": "If true, the network will import subnet routes with addresses in the public IP ranges from peer network.",
                             "type": "boolean",
                             "default": false
                         },
                         "export_subnet_routes_with_public_ip": {
+                            "title": "Export Subnet Routes with Public IP Addresses",
+                            "description": "If true, the network will export subnet routes with addresses in the public IP ranges from peer network.",
                             "type": "boolean",
                             "default": false
                         }
@@ -135,6 +194,10 @@
                         "network"
                     ]
                 }
+            },
+            "routes":{
+                "title": "Static Routes",
+                "$ref": "routes.schema.json#/definitions/routes"
             }
         }
     }

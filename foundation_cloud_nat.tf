@@ -50,10 +50,11 @@ locals {
     } if try((network.cloud_nat.subnetworks_to_nat == "SELECTED_PRIMARY_SUBNETWORKS_SELECTED_SECONDARY_SUBNETWORKS" && 0 < length(network.cloud_nat.nat_groups)), false)
   ]))...)
 
-  cloud_nat_networks = merge(distinct([
-    for network in var.network_configs : {
-      for primary_subnetwork in network.subnetworks : "${network.name}-${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}-router-nat" => {
+  cloud_nat_networks = { for cloud_nat_network in distinct(flatten([
+    for network in var.network_configs : [
+      for primary_subnetwork in network.subnetworks : {
         region            = lower(primary_subnetwork.region)
+        region_shortname  = module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]
         network           = "${var.prefix}-${var.environment}-vpc-${network.name}"
         network_shortname = network.name
 
@@ -69,8 +70,8 @@ locals {
         tcp_established_idle_timeout = try(network.cloud_nat.tcp_established_idle_timeout, local.defaults_cloud_nat.tcp_established_idle_timeout)
         tcp_transitory_idle_timeout  = try(network.cloud_nat.tcp_transitory_idle_timeout, local.defaults_cloud_nat.tcp_transitory_idle_timeout)
       } if try(contains(["ALL_PRIMARY_SUBNETWORKS", "ALL_PRIMARY_SUBNETWORKS_ALL_SECONDARY_SUBNETWORKS"], network.cloud_nat.subnetworks_to_nat), false)
-    } if try(contains(["ALL_PRIMARY_SUBNETWORKS", "ALL_PRIMARY_SUBNETWORKS_ALL_SECONDARY_SUBNETWORKS"], network.cloud_nat.subnetworks_to_nat), false)
-  ])...)
+    ] if try(contains(["ALL_PRIMARY_SUBNETWORKS", "ALL_PRIMARY_SUBNETWORKS_ALL_SECONDARY_SUBNETWORKS"], network.cloud_nat.subnetworks_to_nat), false)
+  ])) : "${cloud_nat_network.network}__${cloud_nat_network.region_shortname}" => cloud_nat_network }
 
   # "DISABLED"                                          = ["DISABLED"]
   # "ALL_SECONDARY_SUBNETWORKS"                         = ["LIST_OF_SECONDARY_IP_RANGES"]
@@ -179,6 +180,18 @@ resource "google_compute_router_nat" "cloud_nats" {
   source_subnetwork_ip_ranges_to_nat = each.value.source_subnetwork_ip_ranges_to_nat
   nat_ip_allocate_option             = "AUTO_ONLY"
 
+  # Cloud NAT Options
+  min_ports_per_vm                 = each.value.min_ports_per_vm
+  tcp_established_idle_timeout_sec = each.value.tcp_established_idle_timeout
+  tcp_transitory_idle_timeout_sec  = each.value.tcp_transitory_idle_timeout
+  icmp_idle_timeout_sec            = each.value.icmp_idle_timeout
+  udp_idle_timeout_sec             = each.value.udp_idle_timeout
+
+  log_config {
+    enable = contains(["ALL", "ERRORS_ONLY", "TRANSLATIONS_ONLY"], each.value.log_config)
+    filter = contains(["ALL", "ERRORS_ONLY", "TRANSLATIONS_ONLY"], each.value.log_config) ? each.value.log_config : "ALL"
+  }
+
   dynamic "subnetwork" {
     for_each = try(each.value.subnetworks, [])
     content {
@@ -187,6 +200,7 @@ resource "google_compute_router_nat" "cloud_nats" {
       source_ip_ranges_to_nat  = subnetwork.value.source_ip_ranges_to_nat
     }
   }
+
   depends_on = [
     google_compute_network.networks,
     google_compute_subnetwork.subnetworks,

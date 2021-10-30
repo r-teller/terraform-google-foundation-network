@@ -1,6 +1,6 @@
 [
     {
-        "name": "routes-nh-igw",
+        "name": "routes-named",
         "subnetworks": [
             {
                 "region": "US-CENTRAL1",
@@ -9,7 +9,10 @@
         ],
         "routes": [
             {
-                "tags": ["allow-internet"],
+                "name": "default-route",
+                "tags": [
+                    "internet-access"
+                ],
                 "destination": "0.0.0.0/0",
                 "priority": 0,
                 "next_hop_type": "INTERNET_GATEWAY"
