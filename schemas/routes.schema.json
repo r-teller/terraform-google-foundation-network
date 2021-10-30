@@ -227,7 +227,7 @@
             "required": [
                 "destination",
                 "next_hop_type",
-                "next_hop_load_balancer"
+                "next_hop_load_balancer_id"
             ],
             "additionalProperties": false,
             "properties": {
@@ -257,9 +257,11 @@
                     "description": "The type of route to be created.",
                     "const": "LOAD_BALANCER"
                 },
-                "next_hop_load_balancer": {
+                "next_hop_load_balancer_id": {
                     "title": "Next Hop Load Balancer",
-                    "type": "string"
+                    "type": "string",
+                    "description": "Target Load Balancer that traffic should be routed to. Expected format is projects/<project_id>/regions/<region>/forwardingRules/<resource_id>",
+                    "pattern": "^(projects\/.*\/regions\/.*\/forwardingRules\/.*)$"
                 }
             },
             "examples": [
@@ -270,7 +272,7 @@
                     "destination": "192.168.0.0/16",
                     "priority": 0,
                     "next_hop_type": "LOAD_BALANCER",
-                    "next_hop_load_balancer": "projects/example-project/regions/us-central1/forwardingRules/example-load-balancer"
+                    "next_hop_load_balancer_id": "projects/example-project/regions/us-central1/forwardingRules/example-load-balancer"
                 }
             ]
         },
