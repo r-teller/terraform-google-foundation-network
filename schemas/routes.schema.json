@@ -359,30 +359,37 @@
             "examples": [
                 [
                     {
-                        "tags": [
-                            "allow-internet"
+                        "name": "......",
+                        "subnetworks": "......",
+                        "routes": [
+                            {
+                                "tags": [
+                                    "allow-internet"
+                                ],
+                                "destination": "0.0.0.0/0",
+                                "priority": 0,
+                                "next_hop_type": "INTERNET_GATEWAY"
+                            },
+                            {
+                                "tags": [
+                                    "rf1918-to-ngfw"
+                                ],
+                                "destination": "192.168.0.0/16",
+                                "priority": 0,
+                                "next_hop_type": "ADDRESS",
+                                "next_hop_address": "192.168.0.1"
+                            },
+                            {
+                                "tags": [
+                                    "rf1918-to-ngfw"
+                                ],
+                                "destination": "172.16.0.0/12",
+                                "priority": 100,
+                                "next_hop_type": "ADDRESS",
+                                "next_hop_address": "192.168.0.1"
+                            }
                         ],
-                        "destination": "0.0.0.0/0",
-                        "priority": 0,
-                        "next_hop_type": "INTERNET_GATEWAY"
-                    },
-                    {
-                        "tags": [
-                            "rf1918-to-ngfw"
-                        ],
-                        "destination": "192.168.0.0/16",
-                        "priority": 0,
-                        "next_hop_type": "ADDRESS",
-                        "next_hop_address": "192.168.0.1"
-                    },
-                    {
-                        "tags": [
-                            "rf1918-to-ngfw"
-                        ],
-                        "destination": "172.16.0.0/12",
-                        "priority": 100,
-                        "next_hop_type": "ADDRESS",
-                        "next_hop_address": "192.168.0.1"
+                        "firewall_rules": "......"
                     }
                 ]
             ]

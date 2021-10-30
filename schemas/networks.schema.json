@@ -4,6 +4,8 @@
     "title": "Networks",
     "type": "array",
     "items": {
+        "title": "Network",
+        "description": "A Virtual Private Cloud (VPC) network implemented inside of Google's production network",
         "type": "object",
         "additionalProperties": false,
         "required": [
@@ -12,11 +14,26 @@
         "properties": {
             "name": {
                 "title": "Name",
-                "description": "This field will be used be combine with <environment> and <prefix> to generate a unique VPC name",
-                "type": "string"
+                "description": "This field will be used be combine with [environment] and [prefix] to generate a unique VPC name",
+                "type": "string",
+                "examples": [
+                    {
+                        "name": "alpha",
+                        "subnetworks": "......",
+                        "routes": "......",
+                        "firewall_rules": "....."
+                    },
+                    {
+                        "name": "bravo",
+                        "subnetworks": "......",
+                        "routes": "......",
+                        "firewall_rules": "....."
+                    }
+                ]
             },
             "description": {
                 "title": "Description",
+                "description": "Description to be used for the created Network",
                 "type": "string"
             },
             "mtu": {
@@ -27,7 +44,25 @@
                     1460,
                     1500
                 ],
-                "default": 1460
+                "default": 1460,
+                "examples": [
+                    [
+                        {
+                            "name": "......",
+                            "mtu": 1460,
+                            "subnetworks": "......",
+                            "routes": "......",
+                            "firewall_rules": "....."
+                        },
+                        {
+                            "name": "......",
+                            "mtu": 1500,
+                            "subnetworks": "......",
+                            "routes": "......",
+                            "firewall_rules": "....."
+                        }
+                    ]
+                ]
             },
             "private_google_access": {
                 "title": "Private Google Access",
@@ -50,7 +85,36 @@
                         "const": "RESTRICTED"
                     }
                 ],
-                "default": "DISABLED"
+                "default": "DISABLED",
+                "examples": [
+                    [
+                        {
+                            "name": "......",
+                            "private_google_access": "DISABLED",
+                            "subnetworks": "......",
+                            "routes": "......",
+                            "firewall_rules": "....."
+                        }
+                    ],
+                    [
+                        {
+                            "name": "......",
+                            "private_google_access": "PRIVATE",
+                            "subnetworks": "......",
+                            "routes": "......",
+                            "firewall_rules": "....."
+                        }
+                    ],
+                    [
+                        {
+                            "name": "......",
+                            "private_google_access": "RESTRICTED",
+                            "subnetworks": "......",
+                            "routes": "......",
+                            "firewall_rules": "....."
+                        }
+                    ]
+                ]
             },
             "private_service_connection": {
                 "title": "Private Service Connection",
@@ -79,6 +143,13 @@
                         },
                         "required": [
                             "ip_cidr_range"
+                        ],
+                        "examples": [
+                            {
+                                "ip_cidr_range": "192.168.0.0/24",
+                                "export_custom_routes": true,
+                                "import_custom_routes": false
+                            }
                         ]
                     },
                     {
@@ -110,8 +181,43 @@
                         },
                         "required": [
                             "ip_cidr_prefix"
+                        ],
+                        "examples": [
+                            {
+                                "ip_cidr_prefix": "16",
+                                "export_custom_routes": true,
+                                "import_custom_routes": false
+                            }
                         ]
                     }
+                ],
+                "examples": [
+                    [
+                        {
+                            "name": "......",
+                            "private_service_connection": {
+                                "ip_cidr_range": "192.168.0.0/24",
+                                "export_custom_routes": true,
+                                "import_custom_routes": false
+                            },
+                            "subnetworks": "......",
+                            "routes": "......",
+                            "firewall_rules": "....."
+                        }
+                    ],
+                    [
+                        {
+                            "name": "......",
+                            "private_service_connection": {
+                                "ip_cidr_prefix": "16",
+                                "export_custom_routes": true,
+                                "import_custom_routes": false
+                            },
+                            "subnetworks": "......",
+                            "routes": "......",
+                            "firewall_rules": "....."
+                        }
+                    ]
                 ]
             },
             "routing_mode": {
@@ -130,7 +236,27 @@
                         "const": "REGIONAL"
                     }
                 ],
-                "default": "REGIONAL"
+                "default": "REGIONAL",
+                "examples": [
+                    [
+                        {
+                            "name": "......",
+                            "routing_mode": "REGIONAL",
+                            "subnetworks": "......",
+                            "routes": "......",
+                            "firewall_rules": "....."
+                        }
+                    ],
+                    [
+                        {
+                            "name": "......",
+                            "routing_mode": "GLOBAL",
+                            "subnetworks": "......",
+                            "routes": "......",
+                            "firewall_rules": "....."
+                        }
+                    ]
+                ]
             },
             "subnetworks": {
                 "title": "Subnetworks",
@@ -192,13 +318,120 @@
                     },
                     "required": [
                         "network"
+                    ],
+                    "examples": [
+                        {
+                            "network": "prod-network"
+                        },
+                        {
+                            "network": "dev-network",
+                            "export_custom_routes": false,
+                            "import_custom_routes": true
+                        },
+                        {
+                            "network": "test-network",
+                            "export_custom_routes": false,
+                            "import_custom_routes": true,
+                            "import_subnet_routes_with_public_ip": false,
+                            "export_subnet_routes_with_public_ip": true
+                        },
+                        {
+                            "project": "remote-project-id",
+                            "network": "remote-network"
+                        }
                     ]
-                }
+                },
+                "examples": [
+                    [
+                        {
+                            "name": "......",
+                            "peers": [
+                                {
+                                    "network": "prod-network"
+                                },
+                                {
+                                    "network": "dev-network",
+                                    "export_custom_routes": false,
+                                    "import_custom_routes": true
+                                },
+                                {
+                                    "project": "remote-project-id",
+                                    "network": "remote-network"
+                                }
+                            ],
+                            "subnetworks": "......",
+                            "routes": "......",
+                            "firewall_rules": "....."
+                        }
+                    ]
+                ]
             },
-            "routes":{
+            "routes": {
                 "title": "Static Routes",
                 "$ref": "routes.schema.json#/definitions/routes"
             }
         }
-    }
+    },
+    "examples": [
+        [
+            {
+                "name": "network-single",
+                "description": "This will create a single VPC Network and nothing else"
+            }
+        ],
+        [
+            {
+                "name": "network-alpha",
+                "description": "This will create a network alpha and nothing else"
+            },
+            {
+                "name": "network-bravo",
+                "description": "This will create a network bravo and nothing else"
+            }
+        ],
+        [
+            {
+                "name": "subnetwork-secondary-subnetworks",
+                "description": "This will create a single VPC Network, Primary Subnetwork and two Secondary Ranges",
+                "subnetworks": [
+                    {
+                        "region": "US-EAST4",
+                        "ip_cidr_range": "172.16.0.0/24",
+                        "secondary_subnetworks": [
+                            {
+                                "ip_cidr_range": "172.16.1.0/24"
+                            },
+                            {
+                                "ip_cidr_range": "172.16.2.0/24"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "name": "cloud-nat-all",
+                "description": "This will create a single VPC Network with Primary and Secondary Subnetworks with Cloud-NAT",
+                "routing_mode": "GLOBAL",
+                "cloud_nat": {
+                    "subnetworks_to_nat": "ALL_PRIMARY_SUBNETWORKS_ALL_SECONDARY_SUBNETWORKS"
+                },
+                "subnetworks": [
+                    {
+                        "region": "US-WEST1",
+                        "ip_cidr_range": "172.16.32.0/24",
+                        "secondary_subnetworks": [
+                            {
+                                "ip_cidr_range": "10.20.32.0/24"
+                            },
+                            {
+                                "ip_cidr_range": "10.20.33.0/24"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    ]
 }

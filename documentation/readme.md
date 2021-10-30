@@ -16,20 +16,24 @@
 | **Tuple validation** | See below          |
 |                      |                    |
 
-| Each item of this array must be | Description |
-| ------------------------------- | ----------- |
-| [items](#items)                 | -           |
-|                                 |             |
+| Each item of this array must be | Description                                                                          |
+| ------------------------------- | ------------------------------------------------------------------------------------ |
+| [Network](#items)               | A Virtual Private Cloud (VPC) network implemented inside of Google's production  ... |
+|                                 |                                                                                      |
 
-## <a name="items"></a>1. Networks > items
+## <a name="items"></a>1. Networks > Network
+
+**Title:** Network
 
 | Type                      | `object`                                                                                         |
 | ------------------------- | ------------------------------------------------------------------------------------------------ |
 | **Additional properties** | [![badge](https://img.shields.io/badge/Not+allowed-red)](# "Additional Properties not allowed.") |
 |                           |                                                                                                  |
 
+**Description:** A Virtual Private Cloud (VPC) network implemented inside of Google's production network
+
 <details>
-<summary><strong> <a name="items_name"></a>1.1. [Required] Property Networks > items > name</strong>  
+<summary><strong> <a name="items_name"></a>1.1. [Required] Property Networks > Network > name</strong>  
 
 </summary>
 <blockquote>
@@ -41,13 +45,32 @@
 | **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
 |                           |                                                                                                                     |
 
-**Description:** This field will be used be combine with <environment> and <prefix> to generate a unique VPC name
+**Description:** This field will be used be combine with [environment] and [prefix] to generate a unique VPC name
+
+**Examples:** 
+
+```json
+{
+    "name": "alpha",
+    "subnetworks": "......",
+    "routes": "......",
+    "firewall_rules": "....."
+}
+```
+```json
+{
+    "name": "bravo",
+    "subnetworks": "......",
+    "routes": "......",
+    "firewall_rules": "....."
+}
+```
 
 </blockquote>
 </details>
 
 <details>
-<summary><strong> <a name="items_description"></a>1.2. [Optional] Property Networks > items > description</strong>  
+<summary><strong> <a name="items_description"></a>1.2. [Optional] Property Networks > Network > description</strong>  
 
 </summary>
 <blockquote>
@@ -59,11 +82,13 @@
 | **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
 |                           |                                                                                                                     |
 
+**Description:** Description to be used for the created Network
+
 </blockquote>
 </details>
 
 <details>
-<summary><strong> <a name="items_mtu"></a>1.3. [Optional] Property Networks > items > mtu</strong>  
+<summary><strong> <a name="items_mtu"></a>1.3. [Optional] Property Networks > Network > mtu</strong>  
 
 </summary>
 <blockquote>
@@ -82,11 +107,32 @@ Must be one of:
 * 1460
 * 1500
 
+**Example:** 
+
+```json
+[
+    {
+        "name": "......",
+        "mtu": 1460,
+        "subnetworks": "......",
+        "routes": "......",
+        "firewall_rules": "....."
+    },
+    {
+        "name": "......",
+        "mtu": 1500,
+        "subnetworks": "......",
+        "routes": "......",
+        "firewall_rules": "....."
+    }
+]
+```
+
 </blockquote>
 </details>
 
 <details>
-<summary><strong> <a name="items_private_google_access"></a>1.4. [Optional] Property Networks > items > private_google_access</strong>  
+<summary><strong> <a name="items_private_google_access"></a>1.4. [Optional] Property Networks > Network > private_google_access</strong>  
 
 </summary>
 <blockquote>
@@ -112,7 +158,7 @@ Must be one of:
 
 <blockquote>
 
-#### <a name="items_private_google_access_oneOf_i0"></a>1.4.1. Property `Networks > items > private_google_access > oneOf > Disabled`
+#### <a name="items_private_google_access_oneOf_i0"></a>1.4.1. Property `Networks > Network > private_google_access > oneOf > Disabled`
 
 **Title:** Disabled
 
@@ -128,7 +174,7 @@ Specific value: `"DISABLED"`
 </blockquote>
 <blockquote>
 
-#### <a name="items_private_google_access_oneOf_i1"></a>1.4.2. Property `Networks > items > private_google_access > oneOf > Private`
+#### <a name="items_private_google_access_oneOf_i1"></a>1.4.2. Property `Networks > Network > private_google_access > oneOf > Private`
 
 **Title:** Private
 
@@ -144,7 +190,7 @@ Specific value: `"PRIVATE"`
 </blockquote>
 <blockquote>
 
-#### <a name="items_private_google_access_oneOf_i2"></a>1.4.3. Property `Networks > items > private_google_access > oneOf > Restricted`
+#### <a name="items_private_google_access_oneOf_i2"></a>1.4.3. Property `Networks > Network > private_google_access > oneOf > Restricted`
 
 **Title:** Restricted
 
@@ -161,11 +207,47 @@ Specific value: `"RESTRICTED"`
 
 </blockquote>
 
+**Examples:** 
+
+```json
+[
+    {
+        "name": "......",
+        "private_google_access": "DISABLED",
+        "subnetworks": "......",
+        "routes": "......",
+        "firewall_rules": "....."
+    }
+]
+```
+```json
+[
+    {
+        "name": "......",
+        "private_google_access": "PRIVATE",
+        "subnetworks": "......",
+        "routes": "......",
+        "firewall_rules": "....."
+    }
+]
+```
+```json
+[
+    {
+        "name": "......",
+        "private_google_access": "RESTRICTED",
+        "subnetworks": "......",
+        "routes": "......",
+        "firewall_rules": "....."
+    }
+]
+```
+
 </blockquote>
 </details>
 
 <details>
-<summary><strong> <a name="items_private_service_connection"></a>1.5. [Optional] Property Networks > items > private_service_connection</strong>  
+<summary><strong> <a name="items_private_service_connection"></a>1.5. [Optional] Property Networks > Network > private_service_connection</strong>  
 
 </summary>
 <blockquote>
@@ -189,7 +271,7 @@ Specific value: `"RESTRICTED"`
 
 <blockquote>
 
-#### <a name="items_private_service_connection_oneOf_i0"></a>1.5.1. Property `Networks > items > private_service_connection > oneOf > IP CIDR Range`
+#### <a name="items_private_service_connection_oneOf_i0"></a>1.5.1. Property `Networks > Network > private_service_connection > oneOf > IP CIDR Range`
 
 **Title:** IP CIDR Range
 
@@ -198,8 +280,18 @@ Specific value: `"RESTRICTED"`
 | **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
 |                           |                                                                                                                     |
 
+**Example:** 
+
+```json
+{
+    "ip_cidr_range": "192.168.0.0/24",
+    "export_custom_routes": true,
+    "import_custom_routes": false
+}
+```
+
 <details>
-<summary><strong> <a name="items_private_service_connection_oneOf_i0_export_custom_routes"></a>1.5.1.1. [Optional] Property Networks > items > private_service_connection > oneOf > IP CIDR Range > export_custom_routes</strong>  
+<summary><strong> <a name="items_private_service_connection_oneOf_i0_export_custom_routes"></a>1.5.1.1. [Optional] Property Networks > Network > private_service_connection > oneOf > IP CIDR Range > export_custom_routes</strong>  
 
 </summary>
 <blockquote>
@@ -218,7 +310,7 @@ Specific value: `"RESTRICTED"`
 </details>
 
 <details>
-<summary><strong> <a name="items_private_service_connection_oneOf_i0_import_custom_routes"></a>1.5.1.2. [Optional] Property Networks > items > private_service_connection > oneOf > IP CIDR Range > import_custom_routes</strong>  
+<summary><strong> <a name="items_private_service_connection_oneOf_i0_import_custom_routes"></a>1.5.1.2. [Optional] Property Networks > Network > private_service_connection > oneOf > IP CIDR Range > import_custom_routes</strong>  
 
 </summary>
 <blockquote>
@@ -237,7 +329,7 @@ Specific value: `"RESTRICTED"`
 </details>
 
 <details>
-<summary><strong> <a name="items_private_service_connection_oneOf_i0_ip_cidr_range"></a>1.5.1.3. [Required] Property Networks > items > private_service_connection > oneOf > IP CIDR Range > ip_cidr_range</strong>  
+<summary><strong> <a name="items_private_service_connection_oneOf_i0_ip_cidr_range"></a>1.5.1.3. [Required] Property Networks > Network > private_service_connection > oneOf > IP CIDR Range > ip_cidr_range</strong>  
 
 </summary>
 <blockquote>
@@ -269,7 +361,7 @@ Specific value: `"RESTRICTED"`
 </blockquote>
 <blockquote>
 
-#### <a name="items_private_service_connection_oneOf_i1"></a>1.5.2. Property `Networks > items > private_service_connection > oneOf > IP CIDR Prefix`
+#### <a name="items_private_service_connection_oneOf_i1"></a>1.5.2. Property `Networks > Network > private_service_connection > oneOf > IP CIDR Prefix`
 
 **Title:** IP CIDR Prefix
 
@@ -278,8 +370,18 @@ Specific value: `"RESTRICTED"`
 | **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
 |                           |                                                                                                                     |
 
+**Example:** 
+
+```json
+{
+    "ip_cidr_prefix": "16",
+    "export_custom_routes": true,
+    "import_custom_routes": false
+}
+```
+
 <details>
-<summary><strong> <a name="items_private_service_connection_oneOf_i1_export_custom_routes"></a>1.5.2.1. [Optional] Property Networks > items > private_service_connection > oneOf > IP CIDR Prefix > export_custom_routes</strong>  
+<summary><strong> <a name="items_private_service_connection_oneOf_i1_export_custom_routes"></a>1.5.2.1. [Optional] Property Networks > Network > private_service_connection > oneOf > IP CIDR Prefix > export_custom_routes</strong>  
 
 </summary>
 <blockquote>
@@ -298,7 +400,7 @@ Specific value: `"RESTRICTED"`
 </details>
 
 <details>
-<summary><strong> <a name="items_private_service_connection_oneOf_i1_import_custom_routes"></a>1.5.2.2. [Optional] Property Networks > items > private_service_connection > oneOf > IP CIDR Prefix > import_custom_routes</strong>  
+<summary><strong> <a name="items_private_service_connection_oneOf_i1_import_custom_routes"></a>1.5.2.2. [Optional] Property Networks > Network > private_service_connection > oneOf > IP CIDR Prefix > import_custom_routes</strong>  
 
 </summary>
 <blockquote>
@@ -317,7 +419,7 @@ Specific value: `"RESTRICTED"`
 </details>
 
 <details>
-<summary><strong> <a name="items_private_service_connection_oneOf_i1_ip_cidr_prefix"></a>1.5.2.3. [Required] Property Networks > items > private_service_connection > oneOf > IP CIDR Prefix > ip_cidr_prefix</strong>  
+<summary><strong> <a name="items_private_service_connection_oneOf_i1_ip_cidr_prefix"></a>1.5.2.3. [Required] Property Networks > Network > private_service_connection > oneOf > IP CIDR Prefix > ip_cidr_prefix</strong>  
 
 </summary>
 <blockquote>
@@ -350,11 +452,44 @@ Specific value: `"RESTRICTED"`
 
 </blockquote>
 
+**Examples:** 
+
+```json
+[
+    {
+        "name": "......",
+        "private_service_connection": {
+            "ip_cidr_range": "192.168.0.0/24",
+            "export_custom_routes": true,
+            "import_custom_routes": false
+        },
+        "subnetworks": "......",
+        "routes": "......",
+        "firewall_rules": "....."
+    }
+]
+```
+```json
+[
+    {
+        "name": "......",
+        "private_service_connection": {
+            "ip_cidr_prefix": "16",
+            "export_custom_routes": true,
+            "import_custom_routes": false
+        },
+        "subnetworks": "......",
+        "routes": "......",
+        "firewall_rules": "....."
+    }
+]
+```
+
 </blockquote>
 </details>
 
 <details>
-<summary><strong> <a name="items_routing_mode"></a>1.6. [Optional] Property Networks > items > routing_mode</strong>  
+<summary><strong> <a name="items_routing_mode"></a>1.6. [Optional] Property Networks > Network > routing_mode</strong>  
 
 </summary>
 <blockquote>
@@ -379,7 +514,7 @@ Specific value: `"RESTRICTED"`
 
 <blockquote>
 
-#### <a name="items_routing_mode_oneOf_i0"></a>1.6.1. Property `Networks > items > routing_mode > oneOf > Global`
+#### <a name="items_routing_mode_oneOf_i0"></a>1.6.1. Property `Networks > Network > routing_mode > oneOf > Global`
 
 **Title:** Global
 
@@ -395,7 +530,7 @@ Specific value: `"GLOBAL"`
 </blockquote>
 <blockquote>
 
-#### <a name="items_routing_mode_oneOf_i1"></a>1.6.2. Property `Networks > items > routing_mode > oneOf > Regional`
+#### <a name="items_routing_mode_oneOf_i1"></a>1.6.2. Property `Networks > Network > routing_mode > oneOf > Regional`
 
 **Title:** Regional
 
@@ -412,11 +547,36 @@ Specific value: `"REGIONAL"`
 
 </blockquote>
 
+**Examples:** 
+
+```json
+[
+    {
+        "name": "......",
+        "routing_mode": "REGIONAL",
+        "subnetworks": "......",
+        "routes": "......",
+        "firewall_rules": "....."
+    }
+]
+```
+```json
+[
+    {
+        "name": "......",
+        "routing_mode": "GLOBAL",
+        "subnetworks": "......",
+        "routes": "......",
+        "firewall_rules": "....."
+    }
+]
+```
+
 </blockquote>
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks"></a>1.7. [Optional] Property Networks > items > subnetworks</strong>  
+<summary><strong> <a name="items_subnetworks"></a>1.7. [Optional] Property Networks > Network > subnetworks</strong>  
 
 </summary>
 <blockquote>
@@ -443,7 +603,7 @@ Specific value: `"REGIONAL"`
 | [Subnetwork](#items_subnetworks_items) | -           |
 |                                        |             |
 
-#### <a name="items_subnetworks_items"></a>1.7.1. Networks > items > subnetworks > Subnetwork
+#### <a name="items_subnetworks_items"></a>1.7.1. Networks > Network > subnetworks > Subnetwork
 
 **Title:** Subnetwork
 
@@ -463,7 +623,7 @@ Specific value: `"REGIONAL"`
 
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0"></a>1.7.1.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private`
+##### <a name="items_subnetworks_items_allOf_i0"></a>1.7.1.1. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private`
 
 **Title:** Private
 
@@ -534,7 +694,7 @@ Specific value: `"REGIONAL"`
 ```
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_name"></a>1.7.1.1.1.1. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > name</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_name"></a>1.7.1.1.1.1. [Optional] Property Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > name</strong>  
 
 </summary>
 <blockquote>
@@ -566,7 +726,7 @@ Specific value: `"REGIONAL"`
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_description"></a>1.7.1.1.1.2. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > description</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_description"></a>1.7.1.1.1.2. [Optional] Property Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > description</strong>  
 
 </summary>
 <blockquote>
@@ -585,7 +745,7 @@ Specific value: `"REGIONAL"`
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_region"></a>1.7.1.1.1.3. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > region</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_region"></a>1.7.1.1.1.3. [Required] Property Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > region</strong>  
 
 </summary>
 <blockquote>
@@ -638,7 +798,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_ip_cidr_range"></a>1.7.1.1.1.4. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > ip_cidr_range</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_ip_cidr_range"></a>1.7.1.1.1.4. [Required] Property Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > ip_cidr_range</strong>  
 
 </summary>
 <blockquote>
@@ -668,7 +828,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_purpose"></a>1.7.1.1.1.5. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > purpose</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_purpose"></a>1.7.1.1.1.5. [Optional] Property Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > purpose</strong>  
 
 </summary>
 <blockquote>
@@ -688,7 +848,7 @@ Specific value: `"PRIVATE"`
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_secondary_subnetworks"></a>1.7.1.1.1.6. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > secondary_subnetworks</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_secondary_subnetworks"></a>1.7.1.1.1.6. [Optional] Property Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > secondary_subnetworks</strong>  
 
 </summary>
 <blockquote>
@@ -716,7 +876,7 @@ Specific value: `"PRIVATE"`
 | [Secondary Subnetwork](#items_subnetworks_items_allOf_i0_then_secondary_subnetworks_items) | -           |
 |                                                                                            |             |
 
-##### <a name="items_subnetworks_items_allOf_i0_then_secondary_subnetworks_items"></a>1.7.1.1.1.6.1. Networks > items > subnetworks > Subnetwork > allOf > Private > Private > secondary_subnetworks > Secondary Subnetwork
+##### <a name="items_subnetworks_items_allOf_i0_then_secondary_subnetworks_items"></a>1.7.1.1.1.6.1. Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > secondary_subnetworks > Secondary Subnetwork
 
 **Title:** Secondary Subnetwork
 
@@ -726,7 +886,7 @@ Specific value: `"PRIVATE"`
 |                           |                                                                                                  |
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_secondary_subnetworks_items_nat_group_id"></a>1.7.1.1.1.6.1.1. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > secondary_subnetworks > Secondary Subnetwork > nat_group_id</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_secondary_subnetworks_items_nat_group_id"></a>1.7.1.1.1.6.1.1. [Optional] Property Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > secondary_subnetworks > Secondary Subnetwork > nat_group_id</strong>  
 
 </summary>
 <blockquote>
@@ -750,7 +910,7 @@ Specific value: `"PRIVATE"`
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_secondary_subnetworks_items_ip_cidr_range"></a>1.7.1.1.1.6.1.2. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > secondary_subnetworks > Secondary Subnetwork > ip_cidr_range</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_secondary_subnetworks_items_ip_cidr_range"></a>1.7.1.1.1.6.1.2. [Required] Property Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > secondary_subnetworks > Secondary Subnetwork > ip_cidr_range</strong>  
 
 </summary>
 <blockquote>
@@ -797,7 +957,7 @@ Specific value: `"PRIVATE"`
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_private_ip_google_access"></a>1.7.1.1.1.7. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > private_ip_google_access</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_private_ip_google_access"></a>1.7.1.1.1.7. [Optional] Property Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > private_ip_google_access</strong>  
 
 </summary>
 <blockquote>
@@ -820,7 +980,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_log_config"></a>1.7.1.1.1.8. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_log_config"></a>1.7.1.1.1.8. [Optional] Property Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config</strong>  
 
 </summary>
 <blockquote>
@@ -855,7 +1015,7 @@ Must be one of:
 ```
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_log_config_enabled"></a>1.7.1.1.1.8.1. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > enabled</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_log_config_enabled"></a>1.7.1.1.1.8.1. [Required] Property Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > enabled</strong>  
 
 </summary>
 <blockquote>
@@ -874,7 +1034,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_log_config_aggregation_interval"></a>1.7.1.1.1.8.2. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > aggregation_interval</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_log_config_aggregation_interval"></a>1.7.1.1.1.8.2. [Optional] Property Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > aggregation_interval</strong>  
 
 </summary>
 <blockquote>
@@ -901,7 +1061,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_log_config_flow_sampling"></a>1.7.1.1.1.8.3. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > flow_sampling</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_log_config_flow_sampling"></a>1.7.1.1.1.8.3. [Optional] Property Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > flow_sampling</strong>  
 
 </summary>
 <blockquote>
@@ -926,7 +1086,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata"></a>1.7.1.1.1.8.4. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata"></a>1.7.1.1.1.8.4. [Optional] Property Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata</strong>  
 
 </summary>
 <blockquote>
@@ -952,7 +1112,7 @@ Must be one of:
 
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_oneOf_i0"></a>1.7.1.1.1.8.4.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata > oneOf > Include All Metadata`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_oneOf_i0"></a>1.7.1.1.1.8.4.1. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata > oneOf > Include All Metadata`
 
 **Title:** Include All Metadata
 
@@ -968,7 +1128,7 @@ Specific value: `"INCLUDE_ALL_METADATA"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_oneOf_i1"></a>1.7.1.1.1.8.4.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata > oneOf > Exclude All Metadata`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_oneOf_i1"></a>1.7.1.1.1.8.4.2. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata > oneOf > Exclude All Metadata`
 
 **Title:** Exclude All Metadata
 
@@ -984,7 +1144,7 @@ Specific value: `"EXCLUDE_ALL_METADATA"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_oneOf_i2"></a>1.7.1.1.1.8.4.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata > oneOf > Custom Metadata`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_oneOf_i2"></a>1.7.1.1.1.8.4.3. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata > oneOf > Custom Metadata`
 
 **Title:** Custom Metadata
 
@@ -1009,7 +1169,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields"></a>1.7.1.1.1.8.5. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields"></a>1.7.1.1.1.8.5. [Optional] Property Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields</strong>  
 
 </summary>
 <blockquote>
@@ -1038,7 +1198,7 @@ Must be one of:
 | [Metadata Field](#items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items) | -           |
 |                                                                                           |             |
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items"></a>1.7.1.1.1.8.5.1. Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items"></a>1.7.1.1.1.8.5.1. Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field
 
 **Title:** Metadata Field
 
@@ -1070,7 +1230,7 @@ Must be one of:
 
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0"></a>1.7.1.1.1.8.5.1.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > IP Connection`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0"></a>1.7.1.1.1.8.5.1.1. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > IP Connection`
 
 **Title:** IP Connection
 
@@ -1093,7 +1253,7 @@ Must be one of:
 
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0_anyOf_i0"></a>1.7.1.1.1.8.5.1.1.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > IP Connection > anyOf > connection`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0_anyOf_i0"></a>1.7.1.1.1.8.5.1.1.1. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > IP Connection > anyOf > connection`
 
 **Title:** connection
 
@@ -1109,7 +1269,7 @@ Specific value: `"connection"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0_anyOf_i1"></a>1.7.1.1.1.8.5.1.1.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > IP Connection > anyOf > connection.src_ip`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0_anyOf_i1"></a>1.7.1.1.1.8.5.1.1.2. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > IP Connection > anyOf > connection.src_ip`
 
 **Title:** connection.src_ip
 
@@ -1125,7 +1285,7 @@ Specific value: `"connection.src_ip"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0_anyOf_i2"></a>1.7.1.1.1.8.5.1.1.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > IP Connection > anyOf > connection.src_port`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0_anyOf_i2"></a>1.7.1.1.1.8.5.1.1.3. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > IP Connection > anyOf > connection.src_port`
 
 **Title:** connection.src_port
 
@@ -1141,7 +1301,7 @@ Specific value: `"connection.src_port"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0_anyOf_i3"></a>1.7.1.1.1.8.5.1.1.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > IP Connection > anyOf > connection.dest_ip`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0_anyOf_i3"></a>1.7.1.1.1.8.5.1.1.4. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > IP Connection > anyOf > connection.dest_ip`
 
 **Title:** connection.dest_ip
 
@@ -1157,7 +1317,7 @@ Specific value: `"connection.dest_ip"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0_anyOf_i4"></a>1.7.1.1.1.8.5.1.1.5. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > IP Connection > anyOf > connection.dest_port`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0_anyOf_i4"></a>1.7.1.1.1.8.5.1.1.5. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > IP Connection > anyOf > connection.dest_port`
 
 **Title:** connection.dest_port
 
@@ -1173,7 +1333,7 @@ Specific value: `"connection.dest_port"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0_anyOf_i5"></a>1.7.1.1.1.8.5.1.1.6. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > IP Connection > anyOf > connection.protocol`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i0_anyOf_i5"></a>1.7.1.1.1.8.5.1.1.6. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > IP Connection > anyOf > connection.protocol`
 
 **Title:** connection.protocol
 
@@ -1193,7 +1353,7 @@ Specific value: `"connection.protocol"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i1"></a>1.7.1.1.1.8.5.1.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > start_time`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i1"></a>1.7.1.1.1.8.5.1.2. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > start_time`
 
 **Title:** start_time
 
@@ -1209,7 +1369,7 @@ Specific value: `"start_time"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i2"></a>1.7.1.1.1.8.5.1.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > end_time`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i2"></a>1.7.1.1.1.8.5.1.3. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > end_time`
 
 **Title:** end_time
 
@@ -1225,7 +1385,7 @@ Specific value: `"end_time"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i3"></a>1.7.1.1.1.8.5.1.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > bytes_sent`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i3"></a>1.7.1.1.1.8.5.1.4. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > bytes_sent`
 
 **Title:** bytes_sent
 
@@ -1241,7 +1401,7 @@ Specific value: `"bytes_sent"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i4"></a>1.7.1.1.1.8.5.1.5. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > packets_sent`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i4"></a>1.7.1.1.1.8.5.1.5. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > packets_sent`
 
 **Title:** packets_sent
 
@@ -1257,7 +1417,7 @@ Specific value: `"packets_sent"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i5"></a>1.7.1.1.1.8.5.1.6. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > rtt_msec`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i5"></a>1.7.1.1.1.8.5.1.6. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > rtt_msec`
 
 **Title:** rtt_msec
 
@@ -1273,7 +1433,7 @@ Specific value: `"rtt_msec"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i6"></a>1.7.1.1.1.8.5.1.7. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > reporter`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i6"></a>1.7.1.1.1.8.5.1.7. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > reporter`
 
 **Title:** reporter
 
@@ -1289,7 +1449,7 @@ Specific value: `"reporter"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i7"></a>1.7.1.1.1.8.5.1.8. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Instance`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i7"></a>1.7.1.1.1.8.5.1.8. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Instance`
 
 **Title:** Source Instance
 
@@ -1311,7 +1471,7 @@ Specific value: `"reporter"`
 
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i7_anyOf_i0"></a>1.7.1.1.1.8.5.1.8.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Instance > anyOf > src_instance`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i7_anyOf_i0"></a>1.7.1.1.1.8.5.1.8.1. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Instance > anyOf > src_instance`
 
 **Title:** src_instance
 
@@ -1327,7 +1487,7 @@ Specific value: `"src_instance"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i7_anyOf_i1"></a>1.7.1.1.1.8.5.1.8.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Instance > anyOf > src_instance.project_id`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i7_anyOf_i1"></a>1.7.1.1.1.8.5.1.8.2. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Instance > anyOf > src_instance.project_id`
 
 **Title:** src_instance.project_id
 
@@ -1343,7 +1503,7 @@ Specific value: `"src_instance.project_id"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i7_anyOf_i2"></a>1.7.1.1.1.8.5.1.8.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Instance > anyOf > src_instance.vm_name`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i7_anyOf_i2"></a>1.7.1.1.1.8.5.1.8.3. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Instance > anyOf > src_instance.vm_name`
 
 **Title:** src_instance.vm_name
 
@@ -1359,7 +1519,7 @@ Specific value: `"src_instance.vm_name"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i7_anyOf_i3"></a>1.7.1.1.1.8.5.1.8.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Instance > anyOf > src_instance.region`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i7_anyOf_i3"></a>1.7.1.1.1.8.5.1.8.4. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Instance > anyOf > src_instance.region`
 
 **Title:** src_instance.region
 
@@ -1375,7 +1535,7 @@ Specific value: `"src_instance.region"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i7_anyOf_i4"></a>1.7.1.1.1.8.5.1.8.5. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Instance > anyOf > src_instance.zone`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i7_anyOf_i4"></a>1.7.1.1.1.8.5.1.8.5. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Instance > anyOf > src_instance.zone`
 
 **Title:** src_instance.zone
 
@@ -1395,7 +1555,7 @@ Specific value: `"src_instance.zone"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i8"></a>1.7.1.1.1.8.5.1.9. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Instance`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i8"></a>1.7.1.1.1.8.5.1.9. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Instance`
 
 **Title:** Destination Instance
 
@@ -1417,7 +1577,7 @@ Specific value: `"src_instance.zone"`
 
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i8_anyOf_i0"></a>1.7.1.1.1.8.5.1.9.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Instance > anyOf > dest_instance`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i8_anyOf_i0"></a>1.7.1.1.1.8.5.1.9.1. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Instance > anyOf > dest_instance`
 
 **Title:** dest_instance
 
@@ -1433,7 +1593,7 @@ Specific value: `"dest_instance"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i8_anyOf_i1"></a>1.7.1.1.1.8.5.1.9.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Instance > anyOf > dest_instance.project_id`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i8_anyOf_i1"></a>1.7.1.1.1.8.5.1.9.2. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Instance > anyOf > dest_instance.project_id`
 
 **Title:** dest_instance.project_id
 
@@ -1449,7 +1609,7 @@ Specific value: `"dest_instance.project_id"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i8_anyOf_i2"></a>1.7.1.1.1.8.5.1.9.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Instance > anyOf > dest_instance.vm_name`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i8_anyOf_i2"></a>1.7.1.1.1.8.5.1.9.3. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Instance > anyOf > dest_instance.vm_name`
 
 **Title:** dest_instance.vm_name
 
@@ -1465,7 +1625,7 @@ Specific value: `"dest_instance.vm_name"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i8_anyOf_i3"></a>1.7.1.1.1.8.5.1.9.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Instance > anyOf > dest_instance.region`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i8_anyOf_i3"></a>1.7.1.1.1.8.5.1.9.4. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Instance > anyOf > dest_instance.region`
 
 **Title:** dest_instance.region
 
@@ -1481,7 +1641,7 @@ Specific value: `"dest_instance.region"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i8_anyOf_i4"></a>1.7.1.1.1.8.5.1.9.5. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Instance > anyOf > dest_instance.zone`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i8_anyOf_i4"></a>1.7.1.1.1.8.5.1.9.5. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Instance > anyOf > dest_instance.zone`
 
 **Title:** dest_instance.zone
 
@@ -1501,7 +1661,7 @@ Specific value: `"dest_instance.zone"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i9"></a>1.7.1.1.1.8.5.1.10. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source VPC`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i9"></a>1.7.1.1.1.8.5.1.10. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source VPC`
 
 **Title:** Source VPC
 
@@ -1522,7 +1682,7 @@ Specific value: `"dest_instance.zone"`
 
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i9_anyOf_i0"></a>1.7.1.1.1.8.5.1.10.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source VPC > anyOf > src_vpc`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i9_anyOf_i0"></a>1.7.1.1.1.8.5.1.10.1. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source VPC > anyOf > src_vpc`
 
 **Title:** src_vpc
 
@@ -1538,7 +1698,7 @@ Specific value: `"src_vpc"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i9_anyOf_i1"></a>1.7.1.1.1.8.5.1.10.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source VPC > anyOf > src_vpc.project_id`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i9_anyOf_i1"></a>1.7.1.1.1.8.5.1.10.2. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source VPC > anyOf > src_vpc.project_id`
 
 **Title:** src_vpc.project_id
 
@@ -1554,7 +1714,7 @@ Specific value: `"src_vpc.project_id"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i9_anyOf_i2"></a>1.7.1.1.1.8.5.1.10.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source VPC > anyOf > src_vpc.vpc_name`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i9_anyOf_i2"></a>1.7.1.1.1.8.5.1.10.3. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source VPC > anyOf > src_vpc.vpc_name`
 
 **Title:** src_vpc.vpc_name
 
@@ -1570,7 +1730,7 @@ Specific value: `"src_vpc.project_id"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i9_anyOf_i3"></a>1.7.1.1.1.8.5.1.10.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source VPC > anyOf > src_vpc.subnetwork_name`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i9_anyOf_i3"></a>1.7.1.1.1.8.5.1.10.4. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source VPC > anyOf > src_vpc.subnetwork_name`
 
 **Title:** src_vpc.subnetwork_name
 
@@ -1590,7 +1750,7 @@ Specific value: `"src_vpc.subnetwork_name"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i10"></a>1.7.1.1.1.8.5.1.11. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination VPC`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i10"></a>1.7.1.1.1.8.5.1.11. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination VPC`
 
 **Title:** Destination VPC
 
@@ -1611,7 +1771,7 @@ Specific value: `"src_vpc.subnetwork_name"`
 
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i10_anyOf_i0"></a>1.7.1.1.1.8.5.1.11.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination VPC > anyOf > dest_vpc`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i10_anyOf_i0"></a>1.7.1.1.1.8.5.1.11.1. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination VPC > anyOf > dest_vpc`
 
 **Title:** dest_vpc
 
@@ -1627,7 +1787,7 @@ Specific value: `"dest_vpc"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i10_anyOf_i1"></a>1.7.1.1.1.8.5.1.11.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination VPC > anyOf > dest_vpc.project_id`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i10_anyOf_i1"></a>1.7.1.1.1.8.5.1.11.2. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination VPC > anyOf > dest_vpc.project_id`
 
 **Title:** dest_vpc.project_id
 
@@ -1643,7 +1803,7 @@ Specific value: `"dest_vpc.project_id"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i10_anyOf_i2"></a>1.7.1.1.1.8.5.1.11.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination VPC > anyOf > dest_vpc.vpc_name`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i10_anyOf_i2"></a>1.7.1.1.1.8.5.1.11.3. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination VPC > anyOf > dest_vpc.vpc_name`
 
 **Title:** dest_vpc.vpc_name
 
@@ -1659,7 +1819,7 @@ Specific value: `"dest_vpc.project_id"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i10_anyOf_i3"></a>1.7.1.1.1.8.5.1.11.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination VPC > anyOf > dest_vpc.subnetwork_name`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i10_anyOf_i3"></a>1.7.1.1.1.8.5.1.11.4. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination VPC > anyOf > dest_vpc.subnetwork_name`
 
 **Title:** dest_vpc.subnetwork_name
 
@@ -1679,7 +1839,7 @@ Specific value: `"dest_vpc.subnetwork_name"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11"></a>1.7.1.1.1.8.5.1.12. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11"></a>1.7.1.1.1.8.5.1.12. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location`
 
 **Title:** Source Geographic Location
 
@@ -1702,7 +1862,7 @@ Specific value: `"dest_vpc.subnetwork_name"`
 
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11_anyOf_i0"></a>1.7.1.1.1.8.5.1.12.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location > anyOf > src_location`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11_anyOf_i0"></a>1.7.1.1.1.8.5.1.12.1. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location > anyOf > src_location`
 
 **Title:** src_location
 
@@ -1718,7 +1878,7 @@ Specific value: `"src_location"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11_anyOf_i1"></a>1.7.1.1.1.8.5.1.12.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location > anyOf > src_location.continent`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11_anyOf_i1"></a>1.7.1.1.1.8.5.1.12.2. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location > anyOf > src_location.continent`
 
 **Title:** src_location.continent
 
@@ -1734,7 +1894,7 @@ Specific value: `"src_location.continent"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11_anyOf_i2"></a>1.7.1.1.1.8.5.1.12.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location > anyOf > src_location.country`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11_anyOf_i2"></a>1.7.1.1.1.8.5.1.12.3. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location > anyOf > src_location.country`
 
 **Title:** src_location.country
 
@@ -1750,7 +1910,7 @@ Specific value: `"src_location.country"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11_anyOf_i3"></a>1.7.1.1.1.8.5.1.12.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location > anyOf > src_location.region`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11_anyOf_i3"></a>1.7.1.1.1.8.5.1.12.4. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location > anyOf > src_location.region`
 
 **Title:** src_location.region
 
@@ -1766,7 +1926,7 @@ Specific value: `"src_location.region"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11_anyOf_i4"></a>1.7.1.1.1.8.5.1.12.5. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location > anyOf > src_location.city`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11_anyOf_i4"></a>1.7.1.1.1.8.5.1.12.5. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location > anyOf > src_location.city`
 
 **Title:** src_location.city
 
@@ -1782,7 +1942,7 @@ Specific value: `"src_location.city"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11_anyOf_i5"></a>1.7.1.1.1.8.5.1.12.6. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location > anyOf > src_location.asn`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i11_anyOf_i5"></a>1.7.1.1.1.8.5.1.12.6. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Geographic Location > anyOf > src_location.asn`
 
 **Title:** src_location.asn
 
@@ -1802,7 +1962,7 @@ Specific value: `"src_location.asn"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12"></a>1.7.1.1.1.8.5.1.13. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12"></a>1.7.1.1.1.8.5.1.13. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location`
 
 **Title:** Destination Geographic Location
 
@@ -1825,7 +1985,7 @@ Specific value: `"src_location.asn"`
 
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12_anyOf_i0"></a>1.7.1.1.1.8.5.1.13.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location > anyOf > dest_location`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12_anyOf_i0"></a>1.7.1.1.1.8.5.1.13.1. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location > anyOf > dest_location`
 
 **Title:** dest_location
 
@@ -1841,7 +2001,7 @@ Specific value: `"dest_location"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12_anyOf_i1"></a>1.7.1.1.1.8.5.1.13.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location > anyOf > dest_location.continent`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12_anyOf_i1"></a>1.7.1.1.1.8.5.1.13.2. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location > anyOf > dest_location.continent`
 
 **Title:** dest_location.continent
 
@@ -1857,7 +2017,7 @@ Specific value: `"dest_location.continent"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12_anyOf_i2"></a>1.7.1.1.1.8.5.1.13.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location > anyOf > dest_location.country`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12_anyOf_i2"></a>1.7.1.1.1.8.5.1.13.3. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location > anyOf > dest_location.country`
 
 **Title:** dest_location.country
 
@@ -1873,7 +2033,7 @@ Specific value: `"dest_location.country"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12_anyOf_i3"></a>1.7.1.1.1.8.5.1.13.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location > anyOf > dest_location.region`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12_anyOf_i3"></a>1.7.1.1.1.8.5.1.13.4. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location > anyOf > dest_location.region`
 
 **Title:** dest_location.region
 
@@ -1889,7 +2049,7 @@ Specific value: `"dest_location.region"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12_anyOf_i4"></a>1.7.1.1.1.8.5.1.13.5. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location > anyOf > dest_location.city`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12_anyOf_i4"></a>1.7.1.1.1.8.5.1.13.5. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location > anyOf > dest_location.city`
 
 **Title:** dest_location.city
 
@@ -1905,7 +2065,7 @@ Specific value: `"dest_location.city"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12_anyOf_i5"></a>1.7.1.1.1.8.5.1.13.6. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location > anyOf > dest_location.asn`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i12_anyOf_i5"></a>1.7.1.1.1.8.5.1.13.6. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Geographic Location > anyOf > dest_location.asn`
 
 **Title:** dest_location.asn
 
@@ -1925,7 +2085,7 @@ Specific value: `"dest_location.asn"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13"></a>1.7.1.1.1.8.5.1.14. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13"></a>1.7.1.1.1.8.5.1.14. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes`
 
 **Title:** Source Google Kubernetes
 
@@ -1952,7 +2112,7 @@ Specific value: `"dest_location.asn"`
 
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i0"></a>1.7.1.1.1.8.5.1.14.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i0"></a>1.7.1.1.1.8.5.1.14.1. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details`
 
 **Title:** src_gke_details
 
@@ -1968,7 +2128,7 @@ Specific value: `"src_gke_details"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i1"></a>1.7.1.1.1.8.5.1.14.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.cluster`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i1"></a>1.7.1.1.1.8.5.1.14.2. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.cluster`
 
 **Title:** src_gke_details.cluster
 
@@ -1984,7 +2144,7 @@ Specific value: `"src_gke_details.cluster"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i2"></a>1.7.1.1.1.8.5.1.14.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.cluster.cluster_name`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i2"></a>1.7.1.1.1.8.5.1.14.3. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.cluster.cluster_name`
 
 **Title:** src_gke_details.cluster.cluster_name
 
@@ -2000,7 +2160,7 @@ Specific value: `"src_gke_details.cluster.cluster_name"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i3"></a>1.7.1.1.1.8.5.1.14.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.cluster.cluster_location`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i3"></a>1.7.1.1.1.8.5.1.14.4. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.cluster.cluster_location`
 
 **Title:** src_gke_details.cluster.cluster_location
 
@@ -2016,7 +2176,7 @@ Specific value: `"src_gke_details.cluster.cluster_location"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i4"></a>1.7.1.1.1.8.5.1.14.5. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.pod`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i4"></a>1.7.1.1.1.8.5.1.14.5. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.pod`
 
 **Title:** src_gke_details.pod
 
@@ -2032,7 +2192,7 @@ Specific value: `"src_gke_details.pod"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i5"></a>1.7.1.1.1.8.5.1.14.6. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.pod.pod_name`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i5"></a>1.7.1.1.1.8.5.1.14.6. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.pod.pod_name`
 
 **Title:** src_gke_details.pod.pod_name
 
@@ -2048,7 +2208,7 @@ Specific value: `"src_gke_details.pod.pod_name"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i6"></a>1.7.1.1.1.8.5.1.14.7. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.pod.pod_namespace`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i6"></a>1.7.1.1.1.8.5.1.14.7. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.pod.pod_namespace`
 
 **Title:** src_gke_details.pod.pod_namespace
 
@@ -2064,7 +2224,7 @@ Specific value: `"src_gke_details.pod.pod_namespace"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i7"></a>1.7.1.1.1.8.5.1.14.8. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.service`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i7"></a>1.7.1.1.1.8.5.1.14.8. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.service`
 
 **Title:** src_gke_details.service
 
@@ -2080,7 +2240,7 @@ Specific value: `"src_gke_details.service"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i8"></a>1.7.1.1.1.8.5.1.14.9. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.service.service_name`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i8"></a>1.7.1.1.1.8.5.1.14.9. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.service.service_name`
 
 **Title:** src_gke_details.service.service_name
 
@@ -2096,7 +2256,7 @@ Specific value: `"src_gke_details.service.service_name"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i9"></a>1.7.1.1.1.8.5.1.14.10. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.service.service_namespace`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i13_anyOf_i9"></a>1.7.1.1.1.8.5.1.14.10. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Source Google Kubernetes > anyOf > src_gke_details.service.service_namespace`
 
 **Title:** src_gke_details.service.service_namespace
 
@@ -2116,7 +2276,7 @@ Specific value: `"src_gke_details.service.service_namespace"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14"></a>1.7.1.1.1.8.5.1.15. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14"></a>1.7.1.1.1.8.5.1.15. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes`
 
 **Title:** Destination Google Kubernetes
 
@@ -2143,7 +2303,7 @@ Specific value: `"src_gke_details.service.service_namespace"`
 
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i0"></a>1.7.1.1.1.8.5.1.15.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i0"></a>1.7.1.1.1.8.5.1.15.1. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details`
 
 **Title:** dest_gke_details
 
@@ -2159,7 +2319,7 @@ Specific value: `"dest_gke_details"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i1"></a>1.7.1.1.1.8.5.1.15.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.cluster`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i1"></a>1.7.1.1.1.8.5.1.15.2. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.cluster`
 
 **Title:** dest_gke_details.cluster
 
@@ -2175,7 +2335,7 @@ Specific value: `"dest_gke_details.cluster"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i2"></a>1.7.1.1.1.8.5.1.15.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.cluster.cluster_name`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i2"></a>1.7.1.1.1.8.5.1.15.3. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.cluster.cluster_name`
 
 **Title:** dest_gke_details.cluster.cluster_name
 
@@ -2191,7 +2351,7 @@ Specific value: `"dest_gke_details.cluster.cluster_name"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i3"></a>1.7.1.1.1.8.5.1.15.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.cluster.cluster_location`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i3"></a>1.7.1.1.1.8.5.1.15.4. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.cluster.cluster_location`
 
 **Title:** dest_gke_details.cluster.cluster_location
 
@@ -2207,7 +2367,7 @@ Specific value: `"dest_gke_details.cluster.cluster_location"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i4"></a>1.7.1.1.1.8.5.1.15.5. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.pod`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i4"></a>1.7.1.1.1.8.5.1.15.5. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.pod`
 
 **Title:** dest_gke_details.pod
 
@@ -2223,7 +2383,7 @@ Specific value: `"dest_gke_details.pod"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i5"></a>1.7.1.1.1.8.5.1.15.6. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.pod.pod_name`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i5"></a>1.7.1.1.1.8.5.1.15.6. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.pod.pod_name`
 
 **Title:** dest_gke_details.pod.pod_name
 
@@ -2239,7 +2399,7 @@ Specific value: `"dest_gke_details.pod.pod_name"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i6"></a>1.7.1.1.1.8.5.1.15.7. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.pod.pod_namespace`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i6"></a>1.7.1.1.1.8.5.1.15.7. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.pod.pod_namespace`
 
 **Title:** dest_gke_details.pod.pod_namespace
 
@@ -2255,7 +2415,7 @@ Specific value: `"dest_gke_details.pod.pod_namespace"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i7"></a>1.7.1.1.1.8.5.1.15.8. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.service`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i7"></a>1.7.1.1.1.8.5.1.15.8. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.service`
 
 **Title:** dest_gke_details.service
 
@@ -2271,7 +2431,7 @@ Specific value: `"dest_gke_details.service"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i8"></a>1.7.1.1.1.8.5.1.15.9. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.service.service_name`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i8"></a>1.7.1.1.1.8.5.1.15.9. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.service.service_name`
 
 **Title:** dest_gke_details.service.service_name
 
@@ -2287,7 +2447,7 @@ Specific value: `"dest_gke_details.service.service_name"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i9"></a>1.7.1.1.1.8.5.1.15.10. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.service.service_namespace`
+##### <a name="items_subnetworks_items_allOf_i0_then_log_config_metadata_fields_items_anyOf_i14_anyOf_i9"></a>1.7.1.1.1.8.5.1.15.10. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > log_config > metadata_fields > Metadata Field > anyOf > Destination Google Kubernetes > anyOf > dest_gke_details.service.service_namespace`
 
 **Title:** dest_gke_details.service.service_namespace
 
@@ -2331,7 +2491,7 @@ Specific value: `"dest_gke_details.service.service_namespace"`
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_cloud_nat"></a>1.7.1.1.1.9. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_cloud_nat"></a>1.7.1.1.1.9. [Optional] Property Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat</strong>  
 
 </summary>
 <blockquote>
@@ -2359,7 +2519,7 @@ Specific value: `"dest_gke_details.service.service_namespace"`
 
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_allOf_i0"></a>1.7.1.1.1.9.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > allOf > DISABLED`
+##### <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_allOf_i0"></a>1.7.1.1.1.9.1. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > allOf > DISABLED`
 
 **Title:** DISABLED
 
@@ -2381,7 +2541,7 @@ Specific value: `"dest_gke_details.service.service_namespace"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_allOf_i1"></a>1.7.1.1.1.9.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > allOf > ALL_SUBNETWORKS`
+##### <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_allOf_i1"></a>1.7.1.1.1.9.2. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > allOf > ALL_SUBNETWORKS`
 
 **Title:** ALL_SUBNETWORKS
 
@@ -2404,7 +2564,7 @@ Specific value: `"dest_gke_details.service.service_namespace"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_allOf_i2"></a>1.7.1.1.1.9.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > allOf > PRIMARY_SUBNETWORK`
+##### <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_allOf_i2"></a>1.7.1.1.1.9.3. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > allOf > PRIMARY_SUBNETWORK`
 
 **Title:** PRIMARY_SUBNETWORK
 
@@ -2427,7 +2587,7 @@ Specific value: `"dest_gke_details.service.service_namespace"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_allOf_i3"></a>1.7.1.1.1.9.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > allOf > PRIMARY_SUBNETWORK_SELECTED_SECONDARY_SUBNETWORKS`
+##### <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_allOf_i3"></a>1.7.1.1.1.9.4. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > allOf > PRIMARY_SUBNETWORK_SELECTED_SECONDARY_SUBNETWORKS`
 
 **Title:** PRIMARY_SUBNETWORK_SELECTED_SECONDARY_SUBNETWORKS
 
@@ -2450,7 +2610,7 @@ Specific value: `"dest_gke_details.service.service_namespace"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_allOf_i4"></a>1.7.1.1.1.9.5. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > allOf > ALL_SECONDARY_SUBNETWORKS`
+##### <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_allOf_i4"></a>1.7.1.1.1.9.5. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > allOf > ALL_SECONDARY_SUBNETWORKS`
 
 **Title:** ALL_SECONDARY_SUBNETWORKS
 
@@ -2472,7 +2632,7 @@ Specific value: `"dest_gke_details.service.service_namespace"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_allOf_i5"></a>1.7.1.1.1.9.6. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > allOf > SELECTED_SECONDARY_SUBNETWORKS`
+##### <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_allOf_i5"></a>1.7.1.1.1.9.6. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > allOf > SELECTED_SECONDARY_SUBNETWORKS`
 
 **Title:** SELECTED_SECONDARY_SUBNETWORKS
 
@@ -2519,7 +2679,7 @@ Specific value: `"dest_gke_details.service.service_namespace"`
 ```
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_subnetworks_to_nat"></a>1.7.1.1.1.9.7. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > subnetworks_to_nat</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_subnetworks_to_nat"></a>1.7.1.1.1.9.7. [Optional] Property Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > subnetworks_to_nat</strong>  
 
 </summary>
 <blockquote>
@@ -2548,7 +2708,7 @@ Specific value: `"dest_gke_details.service.service_namespace"`
 
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_subnetworks_to_nat_oneOf_i0"></a>1.7.1.1.1.9.7.1. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > subnetworks_to_nat > oneOf > Disabled`
+##### <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_subnetworks_to_nat_oneOf_i0"></a>1.7.1.1.1.9.7.1. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > subnetworks_to_nat > oneOf > Disabled`
 
 **Title:** Disabled
 
@@ -2564,7 +2724,7 @@ Specific value: `"DISABLED"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_subnetworks_to_nat_oneOf_i1"></a>1.7.1.1.1.9.7.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > subnetworks_to_nat > oneOf > Primary and All Secondary Subnetworks`
+##### <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_subnetworks_to_nat_oneOf_i1"></a>1.7.1.1.1.9.7.2. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > subnetworks_to_nat > oneOf > Primary and All Secondary Subnetworks`
 
 **Title:** Primary and All Secondary Subnetworks
 
@@ -2580,7 +2740,7 @@ Specific value: `"ALL_SUBNETWORKS"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_subnetworks_to_nat_oneOf_i2"></a>1.7.1.1.1.9.7.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > subnetworks_to_nat > oneOf > Primary Subnetwork`
+##### <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_subnetworks_to_nat_oneOf_i2"></a>1.7.1.1.1.9.7.3. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > subnetworks_to_nat > oneOf > Primary Subnetwork`
 
 **Title:** Primary Subnetwork
 
@@ -2596,7 +2756,7 @@ Specific value: `"PRIMARY_SUBNETWORK"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_subnetworks_to_nat_oneOf_i3"></a>1.7.1.1.1.9.7.4. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > subnetworks_to_nat > oneOf > Primary Subnetwork and Selected Secondary Subnetworks`
+##### <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_subnetworks_to_nat_oneOf_i3"></a>1.7.1.1.1.9.7.4. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > subnetworks_to_nat > oneOf > Primary Subnetwork and Selected Secondary Subnetworks`
 
 **Title:** Primary Subnetwork and Selected Secondary Subnetworks
 
@@ -2612,7 +2772,7 @@ Specific value: `"PRIMARY_SUBNETWORK_SELECTED_SECONDARY_SUBNETWORKS"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_subnetworks_to_nat_oneOf_i4"></a>1.7.1.1.1.9.7.5. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > subnetworks_to_nat > oneOf > All Secondary Subnetworks`
+##### <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_subnetworks_to_nat_oneOf_i4"></a>1.7.1.1.1.9.7.5. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > subnetworks_to_nat > oneOf > All Secondary Subnetworks`
 
 **Title:** All Secondary Subnetworks
 
@@ -2628,7 +2788,7 @@ Specific value: `"ALL_SECONDARY_SUBNETWORKS"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_subnetworks_to_nat_oneOf_i5"></a>1.7.1.1.1.9.7.6. Property `Networks > items > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > subnetworks_to_nat > oneOf > Selected Secondary Subnetworks`
+##### <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_subnetworks_to_nat_oneOf_i5"></a>1.7.1.1.1.9.7.6. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > subnetworks_to_nat > oneOf > Selected Secondary Subnetworks`
 
 **Title:** Selected Secondary Subnetworks
 
@@ -2649,7 +2809,7 @@ Specific value: `"SELECTED_SECONDARY_SUBNETWORKS"`
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_nat_group_id"></a>1.7.1.1.1.9.8. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > nat_group_id</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i0_then_cloud_nat_nat_group_id"></a>1.7.1.1.1.9.8. [Optional] Property Networks > Network > subnetworks > Subnetwork > allOf > Private > Private > cloud_nat > nat_group_id</strong>  
 
 </summary>
 <blockquote>
@@ -2678,7 +2838,7 @@ Specific value: `"SELECTED_SECONDARY_SUBNETWORKS"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i1"></a>1.7.1.2. Property `Networks > items > subnetworks > Subnetwork > allOf > Private Service Connect`
+##### <a name="items_subnetworks_items_allOf_i1"></a>1.7.1.2. Property `Networks > Network > subnetworks > Subnetwork > allOf > Private Service Connect`
 
 **Title:** Private Service Connect
 
@@ -2708,7 +2868,7 @@ Specific value: `"SELECTED_SECONDARY_SUBNETWORKS"`
 ```
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i1_then_name"></a>1.7.1.2.1.1. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private Service Connect > Private Service Connect > name</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i1_then_name"></a>1.7.1.2.1.1. [Optional] Property Networks > Network > subnetworks > Subnetwork > allOf > Private Service Connect > Private Service Connect > name</strong>  
 
 </summary>
 <blockquote>
@@ -2740,7 +2900,7 @@ Specific value: `"SELECTED_SECONDARY_SUBNETWORKS"`
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i1_then_description"></a>1.7.1.2.1.2. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private Service Connect > Private Service Connect > description</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i1_then_description"></a>1.7.1.2.1.2. [Optional] Property Networks > Network > subnetworks > Subnetwork > allOf > Private Service Connect > Private Service Connect > description</strong>  
 
 </summary>
 <blockquote>
@@ -2759,7 +2919,7 @@ Specific value: `"SELECTED_SECONDARY_SUBNETWORKS"`
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i1_then_region"></a>1.7.1.2.1.3. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Private Service Connect > Private Service Connect > region</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i1_then_region"></a>1.7.1.2.1.3. [Required] Property Networks > Network > subnetworks > Subnetwork > allOf > Private Service Connect > Private Service Connect > region</strong>  
 
 </summary>
 <blockquote>
@@ -2812,7 +2972,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i1_then_ip_cidr_range"></a>1.7.1.2.1.4. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Private Service Connect > Private Service Connect > ip_cidr_range</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i1_then_ip_cidr_range"></a>1.7.1.2.1.4. [Required] Property Networks > Network > subnetworks > Subnetwork > allOf > Private Service Connect > Private Service Connect > ip_cidr_range</strong>  
 
 </summary>
 <blockquote>
@@ -2842,7 +3002,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i1_then_purpose"></a>1.7.1.2.1.5. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Private Service Connect > Private Service Connect > purpose</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i1_then_purpose"></a>1.7.1.2.1.5. [Optional] Property Networks > Network > subnetworks > Subnetwork > allOf > Private Service Connect > Private Service Connect > purpose</strong>  
 
 </summary>
 <blockquote>
@@ -2862,7 +3022,7 @@ Specific value: `"PRIVATE_SERVICE_CONNECT"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_subnetworks_items_allOf_i2"></a>1.7.1.3. Property `Networks > items > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer`
+##### <a name="items_subnetworks_items_allOf_i2"></a>1.7.1.3. Property `Networks > Network > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer`
 
 **Title:** Internal HTTP(s) Load Balancer
 
@@ -2901,7 +3061,7 @@ Specific value: `"PRIVATE_SERVICE_CONNECT"`
 ```
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i2_then_name"></a>1.7.1.3.1.1. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer > Ineranl HTTP(s) Load Balancer > name</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i2_then_name"></a>1.7.1.3.1.1. [Optional] Property Networks > Network > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer > Ineranl HTTP(s) Load Balancer > name</strong>  
 
 </summary>
 <blockquote>
@@ -2933,7 +3093,7 @@ Specific value: `"PRIVATE_SERVICE_CONNECT"`
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i2_then_description"></a>1.7.1.3.1.2. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer > Ineranl HTTP(s) Load Balancer > description</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i2_then_description"></a>1.7.1.3.1.2. [Optional] Property Networks > Network > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer > Ineranl HTTP(s) Load Balancer > description</strong>  
 
 </summary>
 <blockquote>
@@ -2952,7 +3112,7 @@ Specific value: `"PRIVATE_SERVICE_CONNECT"`
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i2_then_region"></a>1.7.1.3.1.3. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer > Ineranl HTTP(s) Load Balancer > region</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i2_then_region"></a>1.7.1.3.1.3. [Required] Property Networks > Network > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer > Ineranl HTTP(s) Load Balancer > region</strong>  
 
 </summary>
 <blockquote>
@@ -3005,7 +3165,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i2_then_ip_cidr_range"></a>1.7.1.3.1.4. [Required] Property Networks > items > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer > Ineranl HTTP(s) Load Balancer > ip_cidr_range</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i2_then_ip_cidr_range"></a>1.7.1.3.1.4. [Required] Property Networks > Network > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer > Ineranl HTTP(s) Load Balancer > ip_cidr_range</strong>  
 
 </summary>
 <blockquote>
@@ -3035,7 +3195,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i2_then_purpose"></a>1.7.1.3.1.5. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer > Ineranl HTTP(s) Load Balancer > purpose</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i2_then_purpose"></a>1.7.1.3.1.5. [Optional] Property Networks > Network > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer > Ineranl HTTP(s) Load Balancer > purpose</strong>  
 
 </summary>
 <blockquote>
@@ -3053,7 +3213,7 @@ Specific value: `"INTERNAL_HTTPS_LOAD_BALANCER"`
 </details>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_allOf_i2_then_role"></a>1.7.1.3.1.6. [Optional] Property Networks > items > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer > Ineranl HTTP(s) Load Balancer > role</strong>  
+<summary><strong> <a name="items_subnetworks_items_allOf_i2_then_role"></a>1.7.1.3.1.6. [Optional] Property Networks > Network > subnetworks > Subnetwork > allOf > Internal HTTP(s) Load Balancer > Ineranl HTTP(s) Load Balancer > role</strong>  
 
 </summary>
 <blockquote>
@@ -3078,7 +3238,7 @@ Must be one of:
 </blockquote>
 
 <details>
-<summary><strong> <a name="items_subnetworks_items_purpose"></a>1.7.1.4. [Optional] Property Networks > items > subnetworks > Subnetwork > purpose</strong>  
+<summary><strong> <a name="items_subnetworks_items_purpose"></a>1.7.1.4. [Optional] Property Networks > Network > subnetworks > Subnetwork > purpose</strong>  
 
 </summary>
 <blockquote>
@@ -3104,7 +3264,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat"></a>1.8. [Optional] Property Networks > items > cloud_nat</strong>  
+<summary><strong> <a name="items_cloud_nat"></a>1.8. [Optional] Property Networks > Network > cloud_nat</strong>  
 
 </summary>
 <blockquote>
@@ -3130,7 +3290,7 @@ Must be one of:
 
 <blockquote>
 
-#### <a name="items_cloud_nat_allOf_i0"></a>1.8.1. Property `Networks > items > cloud_nat > allOf > All Primary and Secondary Subnetworks`
+#### <a name="items_cloud_nat_allOf_i0"></a>1.8.1. Property `Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks`
 
 **Title:** All Primary and Secondary Subnetworks
 
@@ -3150,7 +3310,7 @@ Must be one of:
 |                           |                                                                                                                     |
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_subnetworks_to_nat"></a>1.8.1.1.1. [Optional] Property Networks > items > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > subnetworks_to_nat</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_subnetworks_to_nat"></a>1.8.1.1.1. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > subnetworks_to_nat</strong>  
 
 </summary>
 <blockquote>
@@ -3170,7 +3330,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_log_config"></a>1.8.1.1.2. [Optional] Property Networks > items > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > log_config</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_log_config"></a>1.8.1.1.2. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > log_config</strong>  
 
 </summary>
 <blockquote>
@@ -3193,7 +3353,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_min_ports_per_vm"></a>1.8.1.1.3. [Optional] Property Networks > items > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > min_ports_per_vm</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_min_ports_per_vm"></a>1.8.1.1.3. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > min_ports_per_vm</strong>  
 
 </summary>
 <blockquote>
@@ -3210,7 +3370,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_udp_idle_timeout"></a>1.8.1.1.4. [Optional] Property Networks > items > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > udp_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_udp_idle_timeout"></a>1.8.1.1.4. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > udp_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3227,7 +3387,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_icmp_idle_timeout"></a>1.8.1.1.5. [Optional] Property Networks > items > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > icmp_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_icmp_idle_timeout"></a>1.8.1.1.5. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > icmp_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3244,7 +3404,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_tcp_established_idle_timeout"></a>1.8.1.1.6. [Optional] Property Networks > items > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > tcp_established_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_tcp_established_idle_timeout"></a>1.8.1.1.6. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > tcp_established_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3261,7 +3421,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_tcp_transitory_idle_timeout"></a>1.8.1.1.7. [Optional] Property Networks > items > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > tcp_transitory_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_tcp_transitory_idle_timeout"></a>1.8.1.1.7. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > tcp_transitory_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3280,7 +3440,7 @@ Must be one of:
 </blockquote>
 <blockquote>
 
-#### <a name="items_cloud_nat_allOf_i1"></a>1.8.2. Property `Networks > items > cloud_nat > allOf > All Primary Subnetworks`
+#### <a name="items_cloud_nat_allOf_i1"></a>1.8.2. Property `Networks > Network > cloud_nat > allOf > All Primary Subnetworks`
 
 **Title:** All Primary Subnetworks
 
@@ -3300,7 +3460,7 @@ Must be one of:
 |                           |                                                                                                                     |
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_subnetworks_to_nat"></a>1.8.2.1.1. [Optional] Property Networks > items > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > subnetworks_to_nat</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_subnetworks_to_nat"></a>1.8.2.1.1. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > subnetworks_to_nat</strong>  
 
 </summary>
 <blockquote>
@@ -3320,7 +3480,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_log_config"></a>1.8.2.1.2. [Optional] Property Networks > items > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > log_config</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_log_config"></a>1.8.2.1.2. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > log_config</strong>  
 
 </summary>
 <blockquote>
@@ -3343,7 +3503,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_min_ports_per_vm"></a>1.8.2.1.3. [Optional] Property Networks > items > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > min_ports_per_vm</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_min_ports_per_vm"></a>1.8.2.1.3. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > min_ports_per_vm</strong>  
 
 </summary>
 <blockquote>
@@ -3360,7 +3520,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_udp_idle_timeout"></a>1.8.2.1.4. [Optional] Property Networks > items > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > udp_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_udp_idle_timeout"></a>1.8.2.1.4. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > udp_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3377,7 +3537,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_icmp_idle_timeout"></a>1.8.2.1.5. [Optional] Property Networks > items > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > icmp_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_icmp_idle_timeout"></a>1.8.2.1.5. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > icmp_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3394,7 +3554,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_tcp_established_idle_timeout"></a>1.8.2.1.6. [Optional] Property Networks > items > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > tcp_established_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_tcp_established_idle_timeout"></a>1.8.2.1.6. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > tcp_established_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3411,7 +3571,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_tcp_transitory_idle_timeout"></a>1.8.2.1.7. [Optional] Property Networks > items > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > tcp_transitory_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_tcp_transitory_idle_timeout"></a>1.8.2.1.7. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > tcp_transitory_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3430,7 +3590,7 @@ Must be one of:
 </blockquote>
 <blockquote>
 
-#### <a name="items_cloud_nat_allOf_i2"></a>1.8.3. Property `Networks > items > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks`
+#### <a name="items_cloud_nat_allOf_i2"></a>1.8.3. Property `Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks`
 
 **Title:** Selected Primary Subnetworks and Selected Secondary Subnetworks
 
@@ -3450,7 +3610,7 @@ Must be one of:
 |                           |                                                                                                                     |
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_subnetworks_to_nat"></a>1.8.3.1.1. [Optional] Property Networks > items > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > subnetworks_to_nat</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_subnetworks_to_nat"></a>1.8.3.1.1. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > subnetworks_to_nat</strong>  
 
 </summary>
 <blockquote>
@@ -3469,7 +3629,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups"></a>1.8.3.1.2. [Optional] Property Networks > items > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups"></a>1.8.3.1.2. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups</strong>  
 
 </summary>
 <blockquote>
@@ -3493,7 +3653,7 @@ Must be one of:
 | [items](#items_cloud_nat_allOf_i2_then_nat_groups_items) | -           |
 |                                                          |             |
 
-##### <a name="items_cloud_nat_allOf_i2_then_nat_groups_items"></a>1.8.3.1.2.1. Networks > items > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items
+##### <a name="items_cloud_nat_allOf_i2_then_nat_groups_items"></a>1.8.3.1.2.1. Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items
 
 | Type                      | `object`                                                                                                            |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
@@ -3501,7 +3661,7 @@ Must be one of:
 |                           |                                                                                                                     |
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_nat_group_id"></a>1.8.3.1.2.1.1. [Required] Property Networks > items > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > nat_group_id</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_nat_group_id"></a>1.8.3.1.2.1.1. [Required] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > nat_group_id</strong>  
 
 </summary>
 <blockquote>
@@ -3515,7 +3675,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_log_config"></a>1.8.3.1.2.1.2. [Optional] Property Networks > items > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > log_config</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_log_config"></a>1.8.3.1.2.1.2. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > log_config</strong>  
 
 </summary>
 <blockquote>
@@ -3538,7 +3698,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_min_ports_per_vm"></a>1.8.3.1.2.1.3. [Optional] Property Networks > items > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > min_ports_per_vm</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_min_ports_per_vm"></a>1.8.3.1.2.1.3. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > min_ports_per_vm</strong>  
 
 </summary>
 <blockquote>
@@ -3555,7 +3715,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_udp_idle_timeout"></a>1.8.3.1.2.1.4. [Optional] Property Networks > items > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > udp_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_udp_idle_timeout"></a>1.8.3.1.2.1.4. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > udp_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3572,7 +3732,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_icmp_idle_timeout"></a>1.8.3.1.2.1.5. [Optional] Property Networks > items > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > icmp_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_icmp_idle_timeout"></a>1.8.3.1.2.1.5. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > icmp_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3589,7 +3749,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_tcp_established_idle_timeout"></a>1.8.3.1.2.1.6. [Optional] Property Networks > items > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > tcp_established_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_tcp_established_idle_timeout"></a>1.8.3.1.2.1.6. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > tcp_established_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3606,7 +3766,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_tcp_transitory_idle_timeout"></a>1.8.3.1.2.1.7. [Optional] Property Networks > items > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > tcp_transitory_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_tcp_transitory_idle_timeout"></a>1.8.3.1.2.1.7. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > tcp_transitory_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3628,7 +3788,7 @@ Must be one of:
 </blockquote>
 <blockquote>
 
-#### <a name="items_cloud_nat_allOf_i3"></a>1.8.4. Property `Networks > items > cloud_nat > allOf > [DISABLED] All Primary and Secondary Sub`
+#### <a name="items_cloud_nat_allOf_i3"></a>1.8.4. Property `Networks > Network > cloud_nat > allOf > [DISABLED] All Primary and Secondary Sub`
 
 **Title:** [DISABLED] All Primary and Secondary Sub
 
@@ -3648,7 +3808,7 @@ Must be one of:
 |                           |                                                                                                                     |
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_subnetworks_to_nat"></a>1.8.4.1.1. [Optional] Property Networks > items > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > subnetworks_to_nat</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_subnetworks_to_nat"></a>1.8.4.1.1. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > subnetworks_to_nat</strong>  
 
 </summary>
 <blockquote>
@@ -3668,7 +3828,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_log_config"></a>1.8.4.1.2. [Optional] Property Networks > items > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > log_config</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_log_config"></a>1.8.4.1.2. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > log_config</strong>  
 
 </summary>
 <blockquote>
@@ -3691,7 +3851,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_min_ports_per_vm"></a>1.8.4.1.3. [Optional] Property Networks > items > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > min_ports_per_vm</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_min_ports_per_vm"></a>1.8.4.1.3. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > min_ports_per_vm</strong>  
 
 </summary>
 <blockquote>
@@ -3708,7 +3868,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_udp_idle_timeout"></a>1.8.4.1.4. [Optional] Property Networks > items > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > udp_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_udp_idle_timeout"></a>1.8.4.1.4. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > udp_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3725,7 +3885,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_icmp_idle_timeout"></a>1.8.4.1.5. [Optional] Property Networks > items > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > icmp_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_icmp_idle_timeout"></a>1.8.4.1.5. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > icmp_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3742,7 +3902,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_tcp_established_idle_timeout"></a>1.8.4.1.6. [Optional] Property Networks > items > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > tcp_established_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_tcp_established_idle_timeout"></a>1.8.4.1.6. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > tcp_established_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3759,7 +3919,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_tcp_transitory_idle_timeout"></a>1.8.4.1.7. [Optional] Property Networks > items > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > tcp_transitory_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_tcp_transitory_idle_timeout"></a>1.8.4.1.7. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > tcp_transitory_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3778,7 +3938,7 @@ Must be one of:
 </blockquote>
 <blockquote>
 
-#### <a name="items_cloud_nat_allOf_i4"></a>1.8.5. Property `Networks > items > cloud_nat > allOf > [DISABLED] Selected Primary Subnetworks and Selected Secondary Subnetworks`
+#### <a name="items_cloud_nat_allOf_i4"></a>1.8.5. Property `Networks > Network > cloud_nat > allOf > [DISABLED] Selected Primary Subnetworks and Selected Secondary Subnetworks`
 
 **Title:** [DISABLED] Selected Primary Subnetworks and Selected Secondary Subnetworks
 
@@ -3798,7 +3958,7 @@ Must be one of:
 |                           |                                                                                                                     |
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_subnetworks_to_nat"></a>1.8.5.1.1. [Optional] Property Networks > items > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > subnetworks_to_nat</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_subnetworks_to_nat"></a>1.8.5.1.1. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > subnetworks_to_nat</strong>  
 
 </summary>
 <blockquote>
@@ -3817,7 +3977,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups"></a>1.8.5.1.2. [Optional] Property Networks > items > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups"></a>1.8.5.1.2. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups</strong>  
 
 </summary>
 <blockquote>
@@ -3841,7 +4001,7 @@ Must be one of:
 | [items](#items_cloud_nat_allOf_i2_then_nat_groups_items) | -           |
 |                                                          |             |
 
-##### <a name="items_cloud_nat_allOf_i2_then_nat_groups_items"></a>1.8.5.1.2.1. Networks > items > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items
+##### <a name="items_cloud_nat_allOf_i2_then_nat_groups_items"></a>1.8.5.1.2.1. Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items
 
 | Type                      | `object`                                                                                                            |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
@@ -3849,7 +4009,7 @@ Must be one of:
 |                           |                                                                                                                     |
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_nat_group_id"></a>1.8.5.1.2.1.1. [Required] Property Networks > items > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > nat_group_id</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_nat_group_id"></a>1.8.5.1.2.1.1. [Required] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > nat_group_id</strong>  
 
 </summary>
 <blockquote>
@@ -3863,7 +4023,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_log_config"></a>1.8.5.1.2.1.2. [Optional] Property Networks > items > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > log_config</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_log_config"></a>1.8.5.1.2.1.2. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > log_config</strong>  
 
 </summary>
 <blockquote>
@@ -3886,7 +4046,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_min_ports_per_vm"></a>1.8.5.1.2.1.3. [Optional] Property Networks > items > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > min_ports_per_vm</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_min_ports_per_vm"></a>1.8.5.1.2.1.3. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > min_ports_per_vm</strong>  
 
 </summary>
 <blockquote>
@@ -3903,7 +4063,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_udp_idle_timeout"></a>1.8.5.1.2.1.4. [Optional] Property Networks > items > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > udp_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_udp_idle_timeout"></a>1.8.5.1.2.1.4. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > udp_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3920,7 +4080,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_icmp_idle_timeout"></a>1.8.5.1.2.1.5. [Optional] Property Networks > items > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > icmp_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_icmp_idle_timeout"></a>1.8.5.1.2.1.5. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > icmp_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3937,7 +4097,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_tcp_established_idle_timeout"></a>1.8.5.1.2.1.6. [Optional] Property Networks > items > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > tcp_established_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_tcp_established_idle_timeout"></a>1.8.5.1.2.1.6. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > tcp_established_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3954,7 +4114,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_tcp_transitory_idle_timeout"></a>1.8.5.1.2.1.7. [Optional] Property Networks > items > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > tcp_transitory_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_tcp_transitory_idle_timeout"></a>1.8.5.1.2.1.7. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > tcp_transitory_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3981,7 +4141,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_peers"></a>1.9. [Optional] Property Networks > items > peers</strong>  
+<summary><strong> <a name="items_peers"></a>1.9. [Optional] Property Networks > Network > peers</strong>  
 
 </summary>
 <blockquote>
@@ -4009,7 +4169,7 @@ Must be one of:
 | [VPC Network Peer](#items_peers_items) | -           |
 |                                        |             |
 
-#### <a name="items_peers_items"></a>1.9.1. Networks > items > peers > VPC Network Peer
+#### <a name="items_peers_items"></a>1.9.1. Networks > Network > peers > VPC Network Peer
 
 **Title:** VPC Network Peer
 
@@ -4018,8 +4178,38 @@ Must be one of:
 | **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
 |                           |                                                                                                                     |
 
+**Examples:** 
+
+```json
+{
+    "network": "prod-network"
+}
+```
+```json
+{
+    "network": "dev-network",
+    "export_custom_routes": false,
+    "import_custom_routes": true
+}
+```
+```json
+{
+    "network": "test-network",
+    "export_custom_routes": false,
+    "import_custom_routes": true,
+    "import_subnet_routes_with_public_ip": false,
+    "export_subnet_routes_with_public_ip": true
+}
+```
+```json
+{
+    "project": "remote-project-id",
+    "network": "remote-network"
+}
+```
+
 <details>
-<summary><strong> <a name="items_peers_items_project"></a>1.9.1.1. [Optional] Property Networks > items > peers > VPC Network Peer > project</strong>  
+<summary><strong> <a name="items_peers_items_project"></a>1.9.1.1. [Optional] Property Networks > Network > peers > VPC Network Peer > project</strong>  
 
 </summary>
 <blockquote>
@@ -4043,7 +4233,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_peers_items_network"></a>1.9.1.2. [Required] Property Networks > items > peers > VPC Network Peer > network</strong>  
+<summary><strong> <a name="items_peers_items_network"></a>1.9.1.2. [Required] Property Networks > Network > peers > VPC Network Peer > network</strong>  
 
 </summary>
 <blockquote>
@@ -4067,7 +4257,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_peers_items_export_custom_routes"></a>1.9.1.3. [Optional] Property Networks > items > peers > VPC Network Peer > export_custom_routes</strong>  
+<summary><strong> <a name="items_peers_items_export_custom_routes"></a>1.9.1.3. [Optional] Property Networks > Network > peers > VPC Network Peer > export_custom_routes</strong>  
 
 </summary>
 <blockquote>
@@ -4086,7 +4276,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_peers_items_import_custom_routes"></a>1.9.1.4. [Optional] Property Networks > items > peers > VPC Network Peer > import_custom_routes</strong>  
+<summary><strong> <a name="items_peers_items_import_custom_routes"></a>1.9.1.4. [Optional] Property Networks > Network > peers > VPC Network Peer > import_custom_routes</strong>  
 
 </summary>
 <blockquote>
@@ -4105,7 +4295,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_peers_items_import_subnet_routes_with_public_ip"></a>1.9.1.5. [Optional] Property Networks > items > peers > VPC Network Peer > import_subnet_routes_with_public_ip</strong>  
+<summary><strong> <a name="items_peers_items_import_subnet_routes_with_public_ip"></a>1.9.1.5. [Optional] Property Networks > Network > peers > VPC Network Peer > import_subnet_routes_with_public_ip</strong>  
 
 </summary>
 <blockquote>
@@ -4124,7 +4314,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_peers_items_export_subnet_routes_with_public_ip"></a>1.9.1.6. [Optional] Property Networks > items > peers > VPC Network Peer > export_subnet_routes_with_public_ip</strong>  
+<summary><strong> <a name="items_peers_items_export_subnet_routes_with_public_ip"></a>1.9.1.6. [Optional] Property Networks > Network > peers > VPC Network Peer > export_subnet_routes_with_public_ip</strong>  
 
 </summary>
 <blockquote>
@@ -4142,11 +4332,38 @@ Must be one of:
 </blockquote>
 </details>
 
+**Example:** 
+
+```json
+[
+    {
+        "name": "......",
+        "peers": [
+            {
+                "network": "prod-network"
+            },
+            {
+                "network": "dev-network",
+                "export_custom_routes": false,
+                "import_custom_routes": true
+            },
+            {
+                "project": "remote-project-id",
+                "network": "remote-network"
+            }
+        ],
+        "subnetworks": "......",
+        "routes": "......",
+        "firewall_rules": "....."
+    }
+]
+```
+
 </blockquote>
 </details>
 
 <details>
-<summary><strong> <a name="items_routes"></a>1.10. [Optional] Property Networks > items > routes</strong>  
+<summary><strong> <a name="items_routes"></a>1.10. [Optional] Property Networks > Network > routes</strong>  
 
 </summary>
 <blockquote>
@@ -4173,7 +4390,7 @@ Must be one of:
 | [Static Route](#items_routes_items) | -           |
 |                                     |             |
 
-#### <a name="items_routes_items"></a>1.10.1. Networks > items > routes > Static Route
+#### <a name="items_routes_items"></a>1.10.1. Networks > Network > routes > Static Route
 
 **Title:** Static Route
 
@@ -4184,17 +4401,19 @@ Must be one of:
 
 <blockquote>
 
-| All of(Requirement)                             |
-| ----------------------------------------------- |
-| [Internet Gateay](#items_routes_items_allOf_i0) |
-| [Address](#items_routes_items_allOf_i1)         |
-|                                                 |
+| All of(Requirement)                                       |
+| --------------------------------------------------------- |
+| [Next Hop Internet Gateway](#items_routes_items_allOf_i0) |
+| [Next Hop Address](#items_routes_items_allOf_i1)          |
+| [Next Hop Load Balancer](#items_routes_items_allOf_i2)    |
+| [Next Hop Instance](#items_routes_items_allOf_i3)         |
+|                                                           |
 
 <blockquote>
 
-##### <a name="items_routes_items_allOf_i0"></a>1.10.1.1. Property `Networks > items > routes > Static Route > allOf > Internet Gateay`
+##### <a name="items_routes_items_allOf_i0"></a>1.10.1.1. Property `Networks > Network > routes > Static Route > allOf > Next Hop Internet Gateway`
 
-**Title:** Internet Gateay
+**Title:** Next Hop Internet Gateway
 
 | Type                      | `object`                                                                                                            |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
@@ -4230,7 +4449,33 @@ Must be one of:
 ```
 
 <details>
-<summary><strong> <a name="items_routes_items_allOf_i0_then_description"></a>1.10.1.1.1.1. [Optional] Property Networks > items > routes > Static Route > allOf > Internet Gateay > NextHop Internet Gateway > description</strong>  
+<summary><strong> <a name="items_routes_items_allOf_i0_then_name"></a>1.10.1.1.1.1. [Optional] Property Networks > Network > routes > Static Route > allOf > Next Hop Internet Gateway > Next Hop Internet Gateway > name</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Name
+
+| Type                      | `string`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | routes.schema.json#/definitions/shared/properties/name                                                              |
+|                           |                                                                                                                     |
+
+**Description:** if this field is not provided name value will be dynamically generated.
+
+| Restrictions                      |                                                                                                                                                                   |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Min length**                    | 1                                                                                                                                                                 |
+| **Max length**                    | 63                                                                                                                                                                |
+| **Must match regular expression** | ```^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$``` [Test](https://regex101.com/?regex=%5E%28%3F%3A%5Ba-z%5D%28%3F%3A%5B-a-z0-9%5D%7B0%2C61%7D%5Ba-z0-9%5D%29%3F%29%24) |
+|                                   |                                                                                                                                                                   |
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_routes_items_allOf_i0_then_description"></a>1.10.1.1.1.2. [Optional] Property Networks > Network > routes > Static Route > allOf > Next Hop Internet Gateway > Next Hop Internet Gateway > description</strong>  
 
 </summary>
 <blockquote>
@@ -4249,7 +4494,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_routes_items_allOf_i0_then_destination"></a>1.10.1.1.1.2. [Required] Property Networks > items > routes > Static Route > allOf > Internet Gateay > NextHop Internet Gateway > destination</strong>  
+<summary><strong> <a name="items_routes_items_allOf_i0_then_destination"></a>1.10.1.1.1.3. [Required] Property Networks > Network > routes > Static Route > allOf > Next Hop Internet Gateway > Next Hop Internet Gateway > destination</strong>  
 
 </summary>
 <blockquote>
@@ -4279,7 +4524,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_routes_items_allOf_i0_then_priority"></a>1.10.1.1.1.3. [Optional] Property Networks > items > routes > Static Route > allOf > Internet Gateay > NextHop Internet Gateway > priority</strong>  
+<summary><strong> <a name="items_routes_items_allOf_i0_then_priority"></a>1.10.1.1.1.4. [Optional] Property Networks > Network > routes > Static Route > allOf > Next Hop Internet Gateway > Next Hop Internet Gateway > priority</strong>  
 
 </summary>
 <blockquote>
@@ -4305,7 +4550,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_routes_items_allOf_i0_then_tags"></a>1.10.1.1.1.4. [Optional] Property Networks > items > routes > Static Route > allOf > Internet Gateay > NextHop Internet Gateway > tags</strong>  
+<summary><strong> <a name="items_routes_items_allOf_i0_then_tags"></a>1.10.1.1.1.5. [Optional] Property Networks > Network > routes > Static Route > allOf > Next Hop Internet Gateway > Next Hop Internet Gateway > tags</strong>  
 
 </summary>
 <blockquote>
@@ -4334,7 +4579,7 @@ Must be one of:
 | [Tag](#items_routes_items_allOf_i0_then_tags_items) | -           |
 |                                                     |             |
 
-##### <a name="items_routes_items_allOf_i0_then_tags_items"></a>1.10.1.1.1.4.1. Networks > items > routes > Static Route > allOf > Internet Gateay > NextHop Internet Gateway > tags > Tag
+##### <a name="items_routes_items_allOf_i0_then_tags_items"></a>1.10.1.1.1.5.1. Networks > Network > routes > Static Route > allOf > Next Hop Internet Gateway > Next Hop Internet Gateway > tags > Tag
 
 **Title:** Tag
 
@@ -4363,7 +4608,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_routes_items_allOf_i0_then_next_hop_type"></a>1.10.1.1.1.5. [Required] Property Networks > items > routes > Static Route > allOf > Internet Gateay > NextHop Internet Gateway > next_hop_type</strong>  
+<summary><strong> <a name="items_routes_items_allOf_i0_then_next_hop_type"></a>1.10.1.1.1.6. [Required] Property Networks > Network > routes > Static Route > allOf > Next Hop Internet Gateway > Next Hop Internet Gateway > next_hop_type</strong>  
 
 </summary>
 <blockquote>
@@ -4385,9 +4630,9 @@ Specific value: `"INTERNET_GATEWAY"`
 </blockquote>
 <blockquote>
 
-##### <a name="items_routes_items_allOf_i1"></a>1.10.1.2. Property `Networks > items > routes > Static Route > allOf > Address`
+##### <a name="items_routes_items_allOf_i1"></a>1.10.1.2. Property `Networks > Network > routes > Static Route > allOf > Next Hop Address`
 
-**Title:** Address
+**Title:** Next Hop Address
 
 | Type                      | `object`                                                                                                            |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
@@ -4428,7 +4673,33 @@ Specific value: `"INTERNET_GATEWAY"`
 ```
 
 <details>
-<summary><strong> <a name="items_routes_items_allOf_i1_then_description"></a>1.10.1.2.1.1. [Optional] Property Networks > items > routes > Static Route > allOf > Address > NextHop Address > description</strong>  
+<summary><strong> <a name="items_routes_items_allOf_i1_then_name"></a>1.10.1.2.1.1. [Optional] Property Networks > Network > routes > Static Route > allOf > Next Hop Address > Next Hop Address > name</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Name
+
+| Type                      | `string`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | routes.schema.json#/definitions/shared/properties/name                                                              |
+|                           |                                                                                                                     |
+
+**Description:** if this field is not provided name value will be dynamically generated.
+
+| Restrictions                      |                                                                                                                                                                   |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Min length**                    | 1                                                                                                                                                                 |
+| **Max length**                    | 63                                                                                                                                                                |
+| **Must match regular expression** | ```^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$``` [Test](https://regex101.com/?regex=%5E%28%3F%3A%5Ba-z%5D%28%3F%3A%5B-a-z0-9%5D%7B0%2C61%7D%5Ba-z0-9%5D%29%3F%29%24) |
+|                                   |                                                                                                                                                                   |
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_routes_items_allOf_i1_then_description"></a>1.10.1.2.1.2. [Optional] Property Networks > Network > routes > Static Route > allOf > Next Hop Address > Next Hop Address > description</strong>  
 
 </summary>
 <blockquote>
@@ -4447,7 +4718,7 @@ Specific value: `"INTERNET_GATEWAY"`
 </details>
 
 <details>
-<summary><strong> <a name="items_routes_items_allOf_i1_then_destination"></a>1.10.1.2.1.2. [Required] Property Networks > items > routes > Static Route > allOf > Address > NextHop Address > destination</strong>  
+<summary><strong> <a name="items_routes_items_allOf_i1_then_destination"></a>1.10.1.2.1.3. [Required] Property Networks > Network > routes > Static Route > allOf > Next Hop Address > Next Hop Address > destination</strong>  
 
 </summary>
 <blockquote>
@@ -4477,7 +4748,7 @@ Specific value: `"INTERNET_GATEWAY"`
 </details>
 
 <details>
-<summary><strong> <a name="items_routes_items_allOf_i1_then_priority"></a>1.10.1.2.1.3. [Optional] Property Networks > items > routes > Static Route > allOf > Address > NextHop Address > priority</strong>  
+<summary><strong> <a name="items_routes_items_allOf_i1_then_priority"></a>1.10.1.2.1.4. [Optional] Property Networks > Network > routes > Static Route > allOf > Next Hop Address > Next Hop Address > priority</strong>  
 
 </summary>
 <blockquote>
@@ -4503,7 +4774,7 @@ Specific value: `"INTERNET_GATEWAY"`
 </details>
 
 <details>
-<summary><strong> <a name="items_routes_items_allOf_i1_then_tags"></a>1.10.1.2.1.4. [Optional] Property Networks > items > routes > Static Route > allOf > Address > NextHop Address > tags</strong>  
+<summary><strong> <a name="items_routes_items_allOf_i1_then_tags"></a>1.10.1.2.1.5. [Optional] Property Networks > Network > routes > Static Route > allOf > Next Hop Address > Next Hop Address > tags</strong>  
 
 </summary>
 <blockquote>
@@ -4532,7 +4803,7 @@ Specific value: `"INTERNET_GATEWAY"`
 | [Tag](#items_routes_items_allOf_i0_then_tags_items) | -           |
 |                                                     |             |
 
-##### <a name="items_routes_items_allOf_i0_then_tags_items"></a>1.10.1.2.1.4.1. Networks > items > routes > Static Route > allOf > Internet Gateay > NextHop Internet Gateway > tags > Tag
+##### <a name="items_routes_items_allOf_i0_then_tags_items"></a>1.10.1.2.1.5.1. Networks > Network > routes > Static Route > allOf > Next Hop Internet Gateway > Next Hop Internet Gateway > tags > Tag
 
 **Title:** Tag
 
@@ -4561,7 +4832,7 @@ Specific value: `"INTERNET_GATEWAY"`
 </details>
 
 <details>
-<summary><strong> <a name="items_routes_items_allOf_i1_then_next_hop_type"></a>1.10.1.2.1.5. [Required] Property Networks > items > routes > Static Route > allOf > Address > NextHop Address > next_hop_type</strong>  
+<summary><strong> <a name="items_routes_items_allOf_i1_then_next_hop_type"></a>1.10.1.2.1.6. [Required] Property Networks > Network > routes > Static Route > allOf > Next Hop Address > Next Hop Address > next_hop_type</strong>  
 
 </summary>
 <blockquote>
@@ -4581,7 +4852,7 @@ Specific value: `"ADDRESS"`
 </details>
 
 <details>
-<summary><strong> <a name="items_routes_items_allOf_i1_then_next_hop_address"></a>1.10.1.2.1.6. [Optional] Property Networks > items > routes > Static Route > allOf > Address > NextHop Address > next_hop_address</strong>  
+<summary><strong> <a name="items_routes_items_allOf_i1_then_next_hop_address"></a>1.10.1.2.1.7. [Required] Property Networks > Network > routes > Static Route > allOf > Next Hop Address > Next Hop Address > next_hop_address</strong>  
 
 </summary>
 <blockquote>
@@ -4611,11 +4882,587 @@ Specific value: `"ADDRESS"`
 </details>
 
 </blockquote>
+<blockquote>
+
+##### <a name="items_routes_items_allOf_i2"></a>1.10.1.3. Property `Networks > Network > routes > Static Route > allOf > Next Hop Load Balancer`
+
+**Title:** Next Hop Load Balancer
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+##### <a name="autogenerated_heading_24"></a>1.10.1.3.1. If (next_hop_type = "LOAD_BALANCER")
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/nexthop_load_balancer                                                                                 |
+|                           |                                                                                                                     |
+
+**Example:** 
+
+```json
+{
+    "tags": [
+        "rf1918-to-ngfw"
+    ],
+    "destination": "192.168.0.0/16",
+    "priority": 0,
+    "next_hop_type": "LOAD_BALANCER",
+    "next_hop_load_balancer_id": "projects/example-project/regions/us-central1/forwardingRules/example-load-balancer"
+}
+```
+
+<details>
+<summary><strong> <a name="items_routes_items_allOf_i2_then_name"></a>1.10.1.3.1.1. [Optional] Property Networks > Network > routes > Static Route > allOf > Next Hop Load Balancer > Next Hop Load Balancer > name</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Name
+
+| Type                      | `string`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | routes.schema.json#/definitions/shared/properties/name                                                              |
+|                           |                                                                                                                     |
+
+**Description:** if this field is not provided name value will be dynamically generated.
+
+| Restrictions                      |                                                                                                                                                                   |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Min length**                    | 1                                                                                                                                                                 |
+| **Max length**                    | 63                                                                                                                                                                |
+| **Must match regular expression** | ```^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$``` [Test](https://regex101.com/?regex=%5E%28%3F%3A%5Ba-z%5D%28%3F%3A%5B-a-z0-9%5D%7B0%2C61%7D%5Ba-z0-9%5D%29%3F%29%24) |
+|                                   |                                                                                                                                                                   |
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_routes_items_allOf_i2_then_description"></a>1.10.1.3.1.2. [Optional] Property Networks > Network > routes > Static Route > allOf > Next Hop Load Balancer > Next Hop Load Balancer > description</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Description
+
+| Type                      | `string`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | routes.schema.json#/definitions/shared/properties/description                                                       |
+|                           |                                                                                                                     |
+
+**Description:** An optional, textual description for the route. 
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_routes_items_allOf_i2_then_destination"></a>1.10.1.3.1.3. [Required] Property Networks > Network > routes > Static Route > allOf > Next Hop Load Balancer > Next Hop Load Balancer > destination</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Destination
+
+| Type                      | `string`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | routes.schema.json#/definitions/shared/properties/destination                                                       |
+|                           |                                                                                                                     |
+
+**Description:** The destination range of outgoing packets that the route will apply to.
+
+| Restrictions                      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Must match regular expression** | ```^(?:([0-9]\|[1-9][0-9]{0,1}\|1[0-9]{1,2}\|2[0-4][0-9]\|25[0-5])(\.([0-9]\|[1-9][0-9]{0,1}\|1[0-9]{1,2}\|2[0-4][0-9]\|25[0-5])){3}/(([0-9]\|[1-2][0-9]\|3[0-2])))$``` [Test](https://regex101.com/?regex=%5E%28%3F%3A%28%5B0-9%5D%7C%5B1-9%5D%5B0-9%5D%7B0%2C1%7D%7C1%5B0-9%5D%7B1%2C2%7D%7C2%5B0-4%5D%5B0-9%5D%7C25%5B0-5%5D%29%28%5C.%28%5B0-9%5D%7C%5B1-9%5D%5B0-9%5D%7B0%2C1%7D%7C1%5B0-9%5D%7B1%2C2%7D%7C2%5B0-4%5D%5B0-9%5D%7C25%5B0-5%5D%29%29%7B3%7D%2F%28%28%5B0-9%5D%7C%5B1-2%5D%5B0-9%5D%7C3%5B0-2%5D%29%29%29%24&testString=%22192.168.0.0%2F24%22) |
+|                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+
+**Example:** 
+
+```json
+"192.168.0.0/24"
+```
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_routes_items_allOf_i2_then_priority"></a>1.10.1.3.1.4. [Optional] Property Networks > Network > routes > Static Route > allOf > Next Hop Load Balancer > Next Hop Load Balancer > priority</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Priority
+
+| Type                      | `number`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Default**               | `1000`                                                                                                              |
+| **Defined in**            | routes.schema.json#/definitions/shared/properties/priority                                                          |
+|                           |                                                                                                                     |
+
+**Description:** Specifies the priority of this route relative to other routes with the same specificity. The lower the value, the higher the priority. 
+
+| Restrictions |                 |
+| ------------ | --------------- |
+| **Minimum**  | &ge; 0          |
+| **Maximum**  | &le; 2147483647 |
+|              |                 |
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_routes_items_allOf_i2_then_tags"></a>1.10.1.3.1.5. [Optional] Property Networks > Network > routes > Static Route > allOf > Next Hop Load Balancer > Next Hop Load Balancer > tags</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Network Tags
+
+| Type                      | `array of string`                                                                                                   |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | routes.schema.json#/definitions/shared/properties/tags                                                              |
+|                           |                                                                                                                     |
+
+**Description:** Identifies the set of instances that this route will apply to. If no tags are provided, the route will apply to all instances in the network. 
+
+|                      | Array restrictions |
+| -------------------- | ------------------ |
+| **Min items**        | N/A                |
+| **Max items**        | N/A                |
+| **Items unicity**    | True               |
+| **Additional items** | False              |
+| **Tuple validation** | See below          |
+|                      |                    |
+
+| Each item of this array must be                     | Description |
+| --------------------------------------------------- | ----------- |
+| [Tag](#items_routes_items_allOf_i0_then_tags_items) | -           |
+|                                                     |             |
+
+##### <a name="items_routes_items_allOf_i0_then_tags_items"></a>1.10.1.3.1.5.1. Networks > Network > routes > Static Route > allOf > Next Hop Internet Gateway > Next Hop Internet Gateway > tags > Tag
+
+**Title:** Tag
+
+| Type                      | `string`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+| Restrictions                      |                                                                                                                                     |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| **Max length**                    | 63                                                                                                                                  |
+| **Must match regular expression** | ```^([a-z]([a-z0-9-]*[a-z0-9])?)$``` [Test](https://regex101.com/?regex=%5E%28%5Ba-z%5D%28%5Ba-z0-9-%5D%2A%5Ba-z0-9%5D%29%3F%29%24) |
+|                                   |                                                                                                                                     |
+
+**Example:** 
+
+```json
+[
+    "alpha-tag",
+    "bravo-tag",
+    "charlie-tag"
+]
+```
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_routes_items_allOf_i2_then_next_hop_type"></a>1.10.1.3.1.6. [Required] Property Networks > Network > routes > Static Route > allOf > Next Hop Load Balancer > Next Hop Load Balancer > next_hop_type</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Next Hop Type
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** The type of route to be created.
+
+Specific value: `"LOAD_BALANCER"`
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_routes_items_allOf_i2_then_next_hop_load_balancer_id"></a>1.10.1.3.1.7. [Required] Property Networks > Network > routes > Static Route > allOf > Next Hop Load Balancer > Next Hop Load Balancer > next_hop_load_balancer_id</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Next Hop Load Balancer
+
+| Type                      | `string`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** Target Load Balancer that traffic should be routed to. Expected format is projects/<project_id>/regions/<region>/forwardingRules/<resource_id>
+
+| Restrictions                      |                                                                                                                                                               |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Must match regular expression** | ```^(projects/.*/regions/.*/forwardingRules/.*)$``` [Test](https://regex101.com/?regex=%5E%28projects%2F.%2A%2Fregions%2F.%2A%2FforwardingRules%2F.%2A%29%24) |
+|                                   |                                                                                                                                                               |
+
+</blockquote>
+</details>
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_routes_items_allOf_i3"></a>1.10.1.4. Property `Networks > Network > routes > Static Route > allOf > Next Hop Instance`
+
+**Title:** Next Hop Instance
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+##### <a name="autogenerated_heading_25"></a>1.10.1.4.1. If (next_hop_type = "INSTANCE")
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/nexthop_instance                                                                                      |
+|                           |                                                                                                                     |
+
+**Example:** 
+
+```json
+{
+    "tags": [
+        "rf1918-to-ngfw"
+    ],
+    "destination": "192.168.0.0/16",
+    "priority": 0,
+    "next_hop_type": "INSTANCE",
+    "next_hop_instance": "MY-INSTANCE",
+    "next_hop_instance_zone": "US-CENTRAL1-A"
+}
+```
+
+<details>
+<summary><strong> <a name="items_routes_items_allOf_i3_then_name"></a>1.10.1.4.1.1. [Optional] Property Networks > Network > routes > Static Route > allOf > Next Hop Instance > Next Hop Instance > name</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Name
+
+| Type                      | `string`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | routes.schema.json#/definitions/shared/properties/name                                                              |
+|                           |                                                                                                                     |
+
+**Description:** if this field is not provided name value will be dynamically generated.
+
+| Restrictions                      |                                                                                                                                                                   |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Min length**                    | 1                                                                                                                                                                 |
+| **Max length**                    | 63                                                                                                                                                                |
+| **Must match regular expression** | ```^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$``` [Test](https://regex101.com/?regex=%5E%28%3F%3A%5Ba-z%5D%28%3F%3A%5B-a-z0-9%5D%7B0%2C61%7D%5Ba-z0-9%5D%29%3F%29%24) |
+|                                   |                                                                                                                                                                   |
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_routes_items_allOf_i3_then_description"></a>1.10.1.4.1.2. [Optional] Property Networks > Network > routes > Static Route > allOf > Next Hop Instance > Next Hop Instance > description</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Description
+
+| Type                      | `string`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | routes.schema.json#/definitions/shared/properties/description                                                       |
+|                           |                                                                                                                     |
+
+**Description:** An optional, textual description for the route. 
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_routes_items_allOf_i3_then_destination"></a>1.10.1.4.1.3. [Required] Property Networks > Network > routes > Static Route > allOf > Next Hop Instance > Next Hop Instance > destination</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Destination
+
+| Type                      | `string`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | routes.schema.json#/definitions/shared/properties/destination                                                       |
+|                           |                                                                                                                     |
+
+**Description:** The destination range of outgoing packets that the route will apply to.
+
+| Restrictions                      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Must match regular expression** | ```^(?:([0-9]\|[1-9][0-9]{0,1}\|1[0-9]{1,2}\|2[0-4][0-9]\|25[0-5])(\.([0-9]\|[1-9][0-9]{0,1}\|1[0-9]{1,2}\|2[0-4][0-9]\|25[0-5])){3}/(([0-9]\|[1-2][0-9]\|3[0-2])))$``` [Test](https://regex101.com/?regex=%5E%28%3F%3A%28%5B0-9%5D%7C%5B1-9%5D%5B0-9%5D%7B0%2C1%7D%7C1%5B0-9%5D%7B1%2C2%7D%7C2%5B0-4%5D%5B0-9%5D%7C25%5B0-5%5D%29%28%5C.%28%5B0-9%5D%7C%5B1-9%5D%5B0-9%5D%7B0%2C1%7D%7C1%5B0-9%5D%7B1%2C2%7D%7C2%5B0-4%5D%5B0-9%5D%7C25%5B0-5%5D%29%29%7B3%7D%2F%28%28%5B0-9%5D%7C%5B1-2%5D%5B0-9%5D%7C3%5B0-2%5D%29%29%29%24&testString=%22192.168.0.0%2F24%22) |
+|                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+
+**Example:** 
+
+```json
+"192.168.0.0/24"
+```
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_routes_items_allOf_i3_then_priority"></a>1.10.1.4.1.4. [Optional] Property Networks > Network > routes > Static Route > allOf > Next Hop Instance > Next Hop Instance > priority</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Priority
+
+| Type                      | `number`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Default**               | `1000`                                                                                                              |
+| **Defined in**            | routes.schema.json#/definitions/shared/properties/priority                                                          |
+|                           |                                                                                                                     |
+
+**Description:** Specifies the priority of this route relative to other routes with the same specificity. The lower the value, the higher the priority. 
+
+| Restrictions |                 |
+| ------------ | --------------- |
+| **Minimum**  | &ge; 0          |
+| **Maximum**  | &le; 2147483647 |
+|              |                 |
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_routes_items_allOf_i3_then_tags"></a>1.10.1.4.1.5. [Optional] Property Networks > Network > routes > Static Route > allOf > Next Hop Instance > Next Hop Instance > tags</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Network Tags
+
+| Type                      | `array of string`                                                                                                   |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | routes.schema.json#/definitions/shared/properties/tags                                                              |
+|                           |                                                                                                                     |
+
+**Description:** Identifies the set of instances that this route will apply to. If no tags are provided, the route will apply to all instances in the network. 
+
+|                      | Array restrictions |
+| -------------------- | ------------------ |
+| **Min items**        | N/A                |
+| **Max items**        | N/A                |
+| **Items unicity**    | True               |
+| **Additional items** | False              |
+| **Tuple validation** | See below          |
+|                      |                    |
+
+| Each item of this array must be                     | Description |
+| --------------------------------------------------- | ----------- |
+| [Tag](#items_routes_items_allOf_i0_then_tags_items) | -           |
+|                                                     |             |
+
+##### <a name="items_routes_items_allOf_i0_then_tags_items"></a>1.10.1.4.1.5.1. Networks > Network > routes > Static Route > allOf > Next Hop Internet Gateway > Next Hop Internet Gateway > tags > Tag
+
+**Title:** Tag
+
+| Type                      | `string`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+| Restrictions                      |                                                                                                                                     |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| **Max length**                    | 63                                                                                                                                  |
+| **Must match regular expression** | ```^([a-z]([a-z0-9-]*[a-z0-9])?)$``` [Test](https://regex101.com/?regex=%5E%28%5Ba-z%5D%28%5Ba-z0-9-%5D%2A%5Ba-z0-9%5D%29%3F%29%24) |
+|                                   |                                                                                                                                     |
+
+**Example:** 
+
+```json
+[
+    "alpha-tag",
+    "bravo-tag",
+    "charlie-tag"
+]
+```
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_routes_items_allOf_i3_then_next_hop_type"></a>1.10.1.4.1.6. [Required] Property Networks > Network > routes > Static Route > allOf > Next Hop Instance > Next Hop Instance > next_hop_type</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Next Hop Type
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** The type of route to be created.
+
+Specific value: `"INSTANCE"`
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_routes_items_allOf_i3_then_next_hop_instance"></a>1.10.1.4.1.7. [Required] Property Networks > Network > routes > Static Route > allOf > Next Hop Instance > Next Hop Instance > next_hop_instance</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Next Hop Instance
+
+| Type                      | `string`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_routes_items_allOf_i3_then_next_hop_instance_zone"></a>1.10.1.4.1.8. [Required] Property Networks > Network > routes > Static Route > allOf > Next Hop Instance > Next Hop Instance > next_hop_instance_zone</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Next Hop Instance Zone
+
+| Type                      | `enum (of string)`                                                                                                  |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | regions.schema.json#/definitions/zone                                                                               |
+|                           |                                                                                                                     |
+
+Must be one of:
+* "ASIA-EAST1-A"
+* "ASIA-EAST1-B"
+* "ASIA-EAST1-C"
+* "ASIA-EAST2-A"
+* "ASIA-EAST2-B"
+* "ASIA-EAST2-C"
+* "ASIA-NORTHEAST1-A"
+* "ASIA-NORTHEAST1-B"
+* "ASIA-NORTHEAST1-C"
+* "ASIA-NORTHEAST2-A"
+* "ASIA-NORTHEAST2-B"
+* "ASIA-NORTHEAST2-C"
+* "ASIA-NORTHEAST3-A"
+* "ASIA-NORTHEAST3-B"
+* "ASIA-NORTHEAST3-C"
+* "ASIA-SOUTH1-A"
+* "ASIA-SOUTH1-B"
+* "ASIA-SOUTH1-C"
+* "ASIA-SOUTH2-A"
+* "ASIA-SOUTH2-B"
+* "ASIA-SOUTH2-C"
+* "ASIA-SOUTHEAST1-A"
+* "ASIA-SOUTHEAST1-B"
+* "ASIA-SOUTHEAST1-C"
+* "ASIA-SOUTHEAST2-A"
+* "ASIA-SOUTHEAST2-B"
+* "ASIA-SOUTHEAST2-C"
+* "AUSTRALIA-SOUTHEAST1-A"
+* "AUSTRALIA-SOUTHEAST1-B"
+* "AUSTRALIA-SOUTHEAST1-C"
+* "AUSTRALIA-SOUTHEAST2-A"
+* "AUSTRALIA-SOUTHEAST2-B"
+* "AUSTRALIA-SOUTHEAST2-C"
+* "EUROPE-CENTRAL2-A"
+* "EUROPE-CENTRAL2-B"
+* "EUROPE-CENTRAL2-C"
+* "EUROPE-NORTH1-A"
+* "EUROPE-NORTH1-B"
+* "EUROPE-NORTH1-C"
+* "EUROPE-WEST1-B"
+* "EUROPE-WEST1-C"
+* "EUROPE-WEST1-D"
+* "EUROPE-WEST2-A"
+* "EUROPE-WEST2-B"
+* "EUROPE-WEST2-C"
+* "EUROPE-WEST3-A"
+* "EUROPE-WEST3-B"
+* "EUROPE-WEST3-C"
+* "EUROPE-WEST4-A"
+* "EUROPE-WEST4-B"
+* "EUROPE-WEST4-C"
+* "EUROPE-WEST6-A"
+* "EUROPE-WEST6-B"
+* "EUROPE-WEST6-C"
+* "NORTHAMERICA-NORTHEAST1-A"
+* "NORTHAMERICA-NORTHEAST1-B"
+* "NORTHAMERICA-NORTHEAST1-C"
+* "NORTHAMERICA-NORTHEAST2-A"
+* "NORTHAMERICA-NORTHEAST2-B"
+* "NORTHAMERICA-NORTHEAST2-C"
+* "SOUTHAMERICA-EAST1-A"
+* "SOUTHAMERICA-EAST1-B"
+* "SOUTHAMERICA-EAST1-C"
+* "US-CENTRAL1-A"
+* "US-CENTRAL1-B"
+* "US-CENTRAL1-C"
+* "US-CENTRAL1-F"
+* "US-EAST1-B"
+* "US-EAST1-C"
+* "US-EAST1-D"
+* "US-EAST4-A"
+* "US-EAST4-B"
+* "US-EAST4-C"
+* "US-WEST1-A"
+* "US-WEST1-B"
+* "US-WEST1-C"
+* "US-WEST2-A"
+* "US-WEST2-B"
+* "US-WEST2-C"
+* "US-WEST3-A"
+* "US-WEST3-B"
+* "US-WEST3-C"
+* "US-WEST4-A"
+* "US-WEST4-B"
+* "US-WEST4-C"
+
+**Example:** 
+
+```json
+"US-CENTRAL1-A"
+```
+
+</blockquote>
+</details>
+
+</blockquote>
 
 </blockquote>
 
 <details>
-<summary><strong> <a name="items_routes_items_next_hop_type"></a>1.10.1.3. [Optional] Property Networks > items > routes > Static Route > next_hop_type</strong>  
+<summary><strong> <a name="items_routes_items_next_hop_type"></a>1.10.1.5. [Optional] Property Networks > Network > routes > Static Route > next_hop_type</strong>  
 
 </summary>
 <blockquote>
@@ -4631,6 +5478,8 @@ Specific value: `"ADDRESS"`
 Must be one of:
 * "INTERNET_GATEWAY"
 * "ADDRESS"
+* "INSTANCE"
+* "LOAD_BALANCER"
 
 </blockquote>
 </details>
@@ -4640,30 +5489,37 @@ Must be one of:
 ```json
 [
     {
-        "tags": [
-            "allow-internet"
+        "name": "......",
+        "subnetworks": "......",
+        "routes": [
+            {
+                "tags": [
+                    "allow-internet"
+                ],
+                "destination": "0.0.0.0/0",
+                "priority": 0,
+                "next_hop_type": "INTERNET_GATEWAY"
+            },
+            {
+                "tags": [
+                    "rf1918-to-ngfw"
+                ],
+                "destination": "192.168.0.0/16",
+                "priority": 0,
+                "next_hop_type": "ADDRESS",
+                "next_hop_address": "192.168.0.1"
+            },
+            {
+                "tags": [
+                    "rf1918-to-ngfw"
+                ],
+                "destination": "172.16.0.0/12",
+                "priority": 100,
+                "next_hop_type": "ADDRESS",
+                "next_hop_address": "192.168.0.1"
+            }
         ],
-        "destination": "0.0.0.0/0",
-        "priority": 0,
-        "next_hop_type": "INTERNET_GATEWAY"
-    },
-    {
-        "tags": [
-            "rf1918-to-ngfw"
-        ],
-        "destination": "192.168.0.0/16",
-        "priority": 0,
-        "next_hop_type": "ADDRESS",
-        "next_hop_address": "192.168.0.1"
-    },
-    {
-        "tags": [
-            "rf1918-to-ngfw"
-        ],
-        "destination": "172.16.0.0/12",
-        "priority": 100,
-        "next_hop_type": "ADDRESS",
-        "next_hop_address": "192.168.0.1"
+        "firewall_rules": "......"
     }
 ]
 ```
@@ -4671,5 +5527,76 @@ Must be one of:
 </blockquote>
 </details>
 
+**Examples:** 
+
+```json
+[
+    {
+        "name": "network-single",
+        "description": "This will create a single VPC Network and nothing else"
+    }
+]
+```
+```json
+[
+    {
+        "name": "network-alpha",
+        "description": "This will create a network alpha and nothing else"
+    },
+    {
+        "name": "network-bravo",
+        "description": "This will create a network bravo and nothing else"
+    }
+]
+```
+```json
+[
+    {
+        "name": "subnetwork-secondary-subnetworks",
+        "description": "This will create a single VPC Network, Primary Subnetwork and two Secondary Ranges",
+        "subnetworks": [
+            {
+                "region": "US-EAST4",
+                "ip_cidr_range": "172.16.0.0/24",
+                "secondary_subnetworks": [
+                    {
+                        "ip_cidr_range": "172.16.1.0/24"
+                    },
+                    {
+                        "ip_cidr_range": "172.16.2.0/24"
+                    }
+                ]
+            }
+        ]
+    }
+]
+```
+```json
+[
+    {
+        "name": "cloud-nat-all",
+        "description": "This will create a single VPC Network with Primary and Secondary Subnetworks with Cloud-NAT",
+        "routing_mode": "GLOBAL",
+        "cloud_nat": {
+            "subnetworks_to_nat": "ALL_PRIMARY_SUBNETWORKS_ALL_SECONDARY_SUBNETWORKS"
+        },
+        "subnetworks": [
+            {
+                "region": "US-WEST1",
+                "ip_cidr_range": "172.16.32.0/24",
+                "secondary_subnetworks": [
+                    {
+                        "ip_cidr_range": "10.20.32.0/24"
+                    },
+                    {
+                        "ip_cidr_range": "10.20.33.0/24"
+                    }
+                ]
+            }
+        ]
+    }
+]
+```
+
 ----------------------------------------------------------------------------------------------------------------------------
-Generated using [json-schema-for-humans](https://github.com/coveooss/json-schema-for-humans) on 2021-10-30 at 14:33:32 -0700
+Generated using [json-schema-for-humans](https://github.com/coveooss/json-schema-for-humans) on 2021-10-30 at 16:09:37 -0700
