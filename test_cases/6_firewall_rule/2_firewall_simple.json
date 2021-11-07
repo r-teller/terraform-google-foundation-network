@@ -1,33 +1,33 @@
 [
-    {
-        "name": "fw-simple",
-        "firewall_rules": [
-            {
-              "id": "allow-all-ingress",
-              "action": "allow",
-              "direction": "INGRESS",
-              "sources": [ ],
-              "targets": [ ],
-              "rules": [
-                {
-                  "protocol": "ALL",
-                  "ports": [ ]
-                }
-              ]
-            },
-            {
-              "id": "deny-all-egress",
-              "action": "deny",
-              "direction": "EGRESS",
-              "sources": [ ],
-              "targets": [ ],
-              "rules": [
-                {
-                  "protocol": "ALL",
-                  "ports": [ ]
-                }
-              ]
-            }
+  {
+    "name": "fw-simple",
+    "firewall_rules": [
+      {
+        "id": "allow-all-ingress",
+        "action": "ALLOW",
+        "direction": "INGRESS",
+        "sources": [],
+        "targets": [],
+        "rules": [
+          {
+            "protocol": "ALL",
+            "ports": []
+          }
         ]
-    }
+      },
+      {
+        "id": "deny-all-egress",
+        "action": "DENY",
+        "direction": "EGRESS",
+        "sources": [],
+        "targets": [],
+        "rules": [
+          {
+            "protocol": "ALL",
+            "ports": []
+          }
+        ]
+      }
+    ]
+  }
 ]

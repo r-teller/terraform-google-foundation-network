@@ -3,8 +3,8 @@
         "name": "fw-tags",
         "firewall_rules": [
             {
-              "id": "allow-all-ingress-to-tags",
-              "action": "allow",
+              "id": "allow-all-ingress-to-tag",
+              "action": "ALLOW",
               "direction": "INGRESS",
               "sources": [ ],
               "targets": [ "all-ingress-to-tag" ],
@@ -16,8 +16,8 @@
               ]
             },
             {
-              "id": "allow-tags-ingress-to-tags",
-              "action": "allow",
+              "id": "allow-tag-ingress-to-tag",
+              "action": "ALLOW",
               "direction": "INGRESS",
               "sources": [ "some-source-tags" ],
               "targets": [ "some-target-tags" ],
@@ -30,7 +30,7 @@
             },
             {
               "id": "deny-tag-to-all-egress",
-              "action": "deny",
+              "action": "DENY",
               "direction": "EGRESS",
               "sources": [ "tag-to-all-egress" ],
               "targets": [ ],
@@ -43,7 +43,7 @@
             },
             {
               "id": "deny-tag-to-range-egress",
-              "action": "deny",
+              "action": "DENY",
               "direction": "EGRESS",
               "sources": [ "tag-to-range-egress" ],
               "targets": [ "192.168.0.0/24" ],

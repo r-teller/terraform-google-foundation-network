@@ -1,0 +1,354 @@
+{
+    "$id": "firewall_rules.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Firewall Rules",
+    "definitions": {
+        "shared": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Words go here, IF not specified name will based on id field",
+                    "pattern": "^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$",
+                    "minLength": 1,
+                    "maxLength": 63,
+                    "examples": [
+                        "<prefix>-<environment>-<network>-subnet-<192-168-0-0-24>"
+                    ]
+                },
+                "id": {
+                    "type": "string",
+                    "description": "Words go here, IF not specified name will based on id field",
+                    "pattern": "^[a-z][a-z0-9-]{0,23}$",
+                    "minLength": 1,
+                    "maxLength": 24,
+                    "examples": [
+                        "<prefix>-<environment>-<network>-subnet-<192-168-0-0-24>"
+                    ]
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description of this subnetwork."
+                },
+                "action": {
+                    "type": "string",
+                    "enum": [
+                        "ALLOW",
+                        "DENY"
+                    ]
+                },
+                "direction": {
+                    "type": "string",
+                    "enum": [
+                        "INGRESS",
+                        "EGRESS"
+                    ],
+                    "default": "INGRESS"
+                },
+                "ip_protocol_number_rule": {
+                    "type": "object",
+                    "title": "IP Protocol Number Rule",
+                    "additionalProperties": false,
+                    "required": [
+                        "protocol",
+                        "ports"
+                    ],
+                    "properties": {
+                        "protocol": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 255
+                        },
+                        "ports": {
+                            "type": "array",
+                            "minItems": 0,
+                            "maxItems": 0,
+                            "const": [],
+                            "default": []
+                        }
+                    }
+                },
+                "other_named_protocol_rule": {
+                    "type": "object",
+                    "title": "Other Named Protocol Rule",
+                    "additionalProperties": false,
+                    "required": [
+                        "protocol",
+                        "ports"
+                    ],
+                    "properties": {
+                        "protocol": {
+                            "type": "string",
+                            "enum": [
+                                "ALL",
+                                "ICMP",
+                                "ESP",
+                                "AH",
+                                "SCTP",
+                                "IPIP"
+                            ]
+                        },
+                        "ports": {
+                            "type": "array",
+                            "minItems": 0,
+                            "maxItems": 0,
+                            "const": [],
+                            "default": []
+                        }
+                    }
+                },
+                "tcp_udp_rule": {
+                    "type": "object",
+                    "title": "TCP/UDP Rule",
+                    "additionalProperties": false,
+                    "required": [
+                        "protocol",
+                        "ports"
+                    ],
+                    "properties": {
+                        "protocol": {
+                            "type": "string",
+                            "enum": [
+                                "TCP",
+                                "UDP"
+                            ]
+                        },
+                        "ports": {
+                            "type": "array",
+                            "minItems": 0,
+                            "uniqueItems": true,
+                            "items": {
+                                "oneOf": [
+                                    {
+                                        "title": "Port Number",
+                                        "description": "Specified port to be either allowed or denied",
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 65535
+                                    },
+                                    {
+                                        "title": "Port Range",
+                                        "description": "Range of ports to be either allowed or denied",
+                                        "type": "string",
+                                        "pattern": "^[0-9]+-[0-9]+$"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "rules": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "minItems": 1,
+                    "items": {
+                        "allOf": [
+                            {
+                                "if": {
+                                    "properties": {
+                                        "protocol": {
+                                            "const":"string",
+                                            "pattern": "(TCP|UDP|SCTP)"
+                                        }
+                                    },
+                                    "required": [
+                                        "protocol"
+                                    ]
+                                },
+                                "then": {
+                                    "$ref": "#/definitions/shared/properties/tcp_udp_rule"
+                                }
+                            },
+                            {
+                                "if": {
+                                    "properties": {
+                                        "protocol": {
+                                            "const": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "protocol"
+                                    ]
+                                },
+                                "then": {
+                                    "$ref": "#/definitions/shared/properties/ip_protocol_number_rule"
+                                }
+                            },
+                            {
+                                "if": {
+                                    "properties": {
+                                        "protocol": {
+                                            "const": "ALL"
+                                        }
+                                    },
+                                    "required": [
+                                        "protocol"
+                                    ]
+                                },
+                                "then": {
+                                    "$ref": "#/definitions/shared/properties/other_named_protocol_rule"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "ingress_rule": {
+            "title": "Ingress Firewall Rule",
+            "description": "wors go here",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "title": "Name",
+                    "$ref": "#/definitions/shared/properties/name"
+                },
+                "id": {
+                    "title": "Id",
+                    "$ref": "#/definitions/shared/properties/id"
+                },
+                "description": {
+                    "title": "Description",
+                    "$ref": "#/definitions/shared/properties/name"
+                },
+                "direction": {
+                    "title": "Direction",
+                    "$ref": "#/definitions/shared/properties/direction",
+                    "const": "INGRESS"
+                },
+                "action": {
+                    "title": "Action",
+                    "$ref": "#/definitions/shared/properties/action"
+                },
+                "sources": {},
+                "targets": {},
+                "rules": {
+                    "title": "Rules",
+                    "$ref": "#/definitions/shared/properties/rules"
+                }
+            },
+            "oneOf": [
+                {
+                    "required": [
+                        "name",
+                        "rules",
+                        "sources",
+                        "targets"
+                    ]
+                },
+                {
+                    "required": [
+                        "id",
+                        "rules",
+                        "sources",
+                        "targets"
+                    ]
+                }
+            ]
+        },
+        "egress_rule": {
+            "title": "Egress Firewall Rule",
+            "description": "wors go here",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "title": "Name",
+                    "$ref": "#/definitions/shared/properties/name"
+                },
+                "id": {
+                    "title": "Id",
+                    "$ref": "#/definitions/shared/properties/id"
+                },
+                "description": {
+                    "title": "Description",
+                    "$ref": "#/definitions/shared/properties/name"
+                },
+                "direction": {
+                    "title": "Direction",
+                    "$ref": "#/definitions/shared/properties/direction",
+                    "const": "EGRESS"
+                },
+                "action": {
+                    "title": "Action",
+                    "$ref": "#/definitions/shared/properties/action"
+                },
+                "sources": {},
+                "targets": {},
+                "rules": {
+                    "title": "Rules",
+                    "$ref": "#/definitions/shared/properties/rules"
+                }
+            },
+            "oneOf": [
+                {
+                    "required": [
+                        "name",
+                        "rules",
+                        "sources",
+                        "targets"
+                    ]
+                },
+                {
+                    "required": [
+                        "id",
+                        "rules",
+                        "sources",
+                        "targets"
+                    ]
+                }
+            ]
+        },
+        "firewall_rules": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 0,
+            "maxItems": 100,
+            "items": {
+                "type": "object",
+                "title": "Firewall Rule",
+                "properties": {
+                    "direction": {
+                        "$ref": "firewall_rules.schema.json#/definitions/shared/properties/direction"
+                    }
+                },
+                "allOf": [
+                    {
+                        "title": "Ingress Rule",
+                        "description": "Words go here",
+                        "if": {
+                            "properties": {
+                                "direction": {
+                                    "const": "INGRESS"
+                                }
+                            },
+                            "required": [
+                                "direction"
+                            ]
+                        },
+                        "then": {
+                            "$ref": "#/definitions/ingress_rule"
+                        }
+                    },
+                    {
+                        "title": "Egress Rule",
+                        "description": "Words go here",
+                        "if": {
+                            "properties": {
+                                "direction": {
+                                    "const": "EGRESS"
+                                }
+                            },
+                            "required": [
+                                "direction"
+                            ]
+                        },
+                        "then": {
+                            "$ref": "#/definitions/egress_rule"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -3310,7 +3310,29 @@ Must be one of:
 |                           |                                                                                                                     |
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_subnetworks_to_nat"></a>1.8.1.1.1. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > subnetworks_to_nat</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_endpoint_independent_mapping"></a>1.8.1.1.1. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > endpoint_independent_mapping</strong>  
+
+</summary>
+<blockquote>
+
+| Type                      | `enum (of string)`                                                                                                  |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Default**               | `"DISABLED"`                                                                                                        |
+| **Defined in**            | cloud_nat.schema.json#/definitions/shared/properties/endpoint_independent_mapping                                   |
+|                           |                                                                                                                     |
+
+**Description:** Enable endpoint-independent mapping for the NAT (as defined in RFC 5128).
+
+Must be one of:
+* "ENABLED"
+* "DISABLED"
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_subnetworks_to_nat"></a>1.8.1.1.2. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > subnetworks_to_nat</strong>  
 
 </summary>
 <blockquote>
@@ -3330,7 +3352,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_log_config"></a>1.8.1.1.2. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > log_config</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_log_config"></a>1.8.1.1.3. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > log_config</strong>  
 
 </summary>
 <blockquote>
@@ -3353,7 +3375,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_min_ports_per_vm"></a>1.8.1.1.3. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > min_ports_per_vm</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_min_ports_per_vm"></a>1.8.1.1.4. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > min_ports_per_vm</strong>  
 
 </summary>
 <blockquote>
@@ -3370,7 +3392,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_udp_idle_timeout"></a>1.8.1.1.4. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > udp_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_udp_idle_timeout"></a>1.8.1.1.5. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > udp_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3387,7 +3409,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_icmp_idle_timeout"></a>1.8.1.1.5. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > icmp_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_icmp_idle_timeout"></a>1.8.1.1.6. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > icmp_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3404,7 +3426,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_tcp_established_idle_timeout"></a>1.8.1.1.6. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > tcp_established_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_tcp_established_idle_timeout"></a>1.8.1.1.7. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > tcp_established_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3421,7 +3443,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_tcp_transitory_idle_timeout"></a>1.8.1.1.7. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > tcp_transitory_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_tcp_transitory_idle_timeout"></a>1.8.1.1.8. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > tcp_transitory_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3460,7 +3482,29 @@ Must be one of:
 |                           |                                                                                                                     |
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_subnetworks_to_nat"></a>1.8.2.1.1. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > subnetworks_to_nat</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_endpoint_independent_mapping"></a>1.8.2.1.1. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > endpoint_independent_mapping</strong>  
+
+</summary>
+<blockquote>
+
+| Type                      | `enum (of string)`                                                                                                  |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Default**               | `"DISABLED"`                                                                                                        |
+| **Defined in**            | cloud_nat.schema.json#/definitions/shared/properties/endpoint_independent_mapping                                   |
+|                           |                                                                                                                     |
+
+**Description:** Enable endpoint-independent mapping for the NAT (as defined in RFC 5128).
+
+Must be one of:
+* "ENABLED"
+* "DISABLED"
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_subnetworks_to_nat"></a>1.8.2.1.2. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > subnetworks_to_nat</strong>  
 
 </summary>
 <blockquote>
@@ -3480,7 +3524,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_log_config"></a>1.8.2.1.2. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > log_config</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_log_config"></a>1.8.2.1.3. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > log_config</strong>  
 
 </summary>
 <blockquote>
@@ -3503,7 +3547,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_min_ports_per_vm"></a>1.8.2.1.3. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > min_ports_per_vm</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_min_ports_per_vm"></a>1.8.2.1.4. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > min_ports_per_vm</strong>  
 
 </summary>
 <blockquote>
@@ -3520,7 +3564,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_udp_idle_timeout"></a>1.8.2.1.4. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > udp_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_udp_idle_timeout"></a>1.8.2.1.5. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > udp_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3537,7 +3581,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_icmp_idle_timeout"></a>1.8.2.1.5. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > icmp_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_icmp_idle_timeout"></a>1.8.2.1.6. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > icmp_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3554,7 +3598,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_tcp_established_idle_timeout"></a>1.8.2.1.6. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > tcp_established_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_tcp_established_idle_timeout"></a>1.8.2.1.7. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > tcp_established_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3571,7 +3615,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_tcp_transitory_idle_timeout"></a>1.8.2.1.7. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > tcp_transitory_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_tcp_transitory_idle_timeout"></a>1.8.2.1.8. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > tcp_transitory_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3610,7 +3654,29 @@ Must be one of:
 |                           |                                                                                                                     |
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_subnetworks_to_nat"></a>1.8.3.1.1. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > subnetworks_to_nat</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_endpoint_independent_mapping"></a>1.8.3.1.1. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > endpoint_independent_mapping</strong>  
+
+</summary>
+<blockquote>
+
+| Type                      | `enum (of string)`                                                                                                  |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Default**               | `"DISABLED"`                                                                                                        |
+| **Defined in**            | cloud_nat.schema.json#/definitions/shared/properties/endpoint_independent_mapping                                   |
+|                           |                                                                                                                     |
+
+**Description:** Enable endpoint-independent mapping for the NAT (as defined in RFC 5128).
+
+Must be one of:
+* "ENABLED"
+* "DISABLED"
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_subnetworks_to_nat"></a>1.8.3.1.2. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > subnetworks_to_nat</strong>  
 
 </summary>
 <blockquote>
@@ -3629,7 +3695,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups"></a>1.8.3.1.2. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups"></a>1.8.3.1.3. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups</strong>  
 
 </summary>
 <blockquote>
@@ -3653,7 +3719,7 @@ Must be one of:
 | [items](#items_cloud_nat_allOf_i2_then_nat_groups_items) | -           |
 |                                                          |             |
 
-##### <a name="items_cloud_nat_allOf_i2_then_nat_groups_items"></a>1.8.3.1.2.1. Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items
+##### <a name="items_cloud_nat_allOf_i2_then_nat_groups_items"></a>1.8.3.1.3.1. Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items
 
 | Type                      | `object`                                                                                                            |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
@@ -3661,7 +3727,7 @@ Must be one of:
 |                           |                                                                                                                     |
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_nat_group_id"></a>1.8.3.1.2.1.1. [Required] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > nat_group_id</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_nat_group_id"></a>1.8.3.1.3.1.1. [Required] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > nat_group_id</strong>  
 
 </summary>
 <blockquote>
@@ -3675,7 +3741,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_log_config"></a>1.8.3.1.2.1.2. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > log_config</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_log_config"></a>1.8.3.1.3.1.2. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > log_config</strong>  
 
 </summary>
 <blockquote>
@@ -3698,7 +3764,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_min_ports_per_vm"></a>1.8.3.1.2.1.3. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > min_ports_per_vm</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_min_ports_per_vm"></a>1.8.3.1.3.1.3. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > min_ports_per_vm</strong>  
 
 </summary>
 <blockquote>
@@ -3715,7 +3781,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_udp_idle_timeout"></a>1.8.3.1.2.1.4. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > udp_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_udp_idle_timeout"></a>1.8.3.1.3.1.4. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > udp_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3732,7 +3798,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_icmp_idle_timeout"></a>1.8.3.1.2.1.5. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > icmp_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_icmp_idle_timeout"></a>1.8.3.1.3.1.5. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > icmp_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3749,7 +3815,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_tcp_established_idle_timeout"></a>1.8.3.1.2.1.6. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > tcp_established_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_tcp_established_idle_timeout"></a>1.8.3.1.3.1.6. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > tcp_established_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3766,7 +3832,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_tcp_transitory_idle_timeout"></a>1.8.3.1.2.1.7. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > tcp_transitory_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_tcp_transitory_idle_timeout"></a>1.8.3.1.3.1.7. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > tcp_transitory_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3808,7 +3874,29 @@ Must be one of:
 |                           |                                                                                                                     |
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_subnetworks_to_nat"></a>1.8.4.1.1. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > subnetworks_to_nat</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_endpoint_independent_mapping"></a>1.8.4.1.1. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > endpoint_independent_mapping</strong>  
+
+</summary>
+<blockquote>
+
+| Type                      | `enum (of string)`                                                                                                  |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Default**               | `"DISABLED"`                                                                                                        |
+| **Defined in**            | cloud_nat.schema.json#/definitions/shared/properties/endpoint_independent_mapping                                   |
+|                           |                                                                                                                     |
+
+**Description:** Enable endpoint-independent mapping for the NAT (as defined in RFC 5128).
+
+Must be one of:
+* "ENABLED"
+* "DISABLED"
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_subnetworks_to_nat"></a>1.8.4.1.2. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > subnetworks_to_nat</strong>  
 
 </summary>
 <blockquote>
@@ -3828,7 +3916,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_log_config"></a>1.8.4.1.2. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > log_config</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_log_config"></a>1.8.4.1.3. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > log_config</strong>  
 
 </summary>
 <blockquote>
@@ -3851,7 +3939,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_min_ports_per_vm"></a>1.8.4.1.3. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > min_ports_per_vm</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_min_ports_per_vm"></a>1.8.4.1.4. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > min_ports_per_vm</strong>  
 
 </summary>
 <blockquote>
@@ -3868,7 +3956,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_udp_idle_timeout"></a>1.8.4.1.4. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > udp_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_udp_idle_timeout"></a>1.8.4.1.5. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > udp_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3885,7 +3973,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_icmp_idle_timeout"></a>1.8.4.1.5. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > icmp_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_icmp_idle_timeout"></a>1.8.4.1.6. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > icmp_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3902,7 +3990,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_tcp_established_idle_timeout"></a>1.8.4.1.6. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > tcp_established_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_tcp_established_idle_timeout"></a>1.8.4.1.7. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > tcp_established_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3919,7 +4007,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i0_then_tcp_transitory_idle_timeout"></a>1.8.4.1.7. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > tcp_transitory_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i0_then_tcp_transitory_idle_timeout"></a>1.8.4.1.8. [Optional] Property Networks > Network > cloud_nat > allOf > All Primary and Secondary Subnetworks > then > tcp_transitory_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -3958,7 +4046,29 @@ Must be one of:
 |                           |                                                                                                                     |
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_subnetworks_to_nat"></a>1.8.5.1.1. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > subnetworks_to_nat</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_endpoint_independent_mapping"></a>1.8.5.1.1. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > endpoint_independent_mapping</strong>  
+
+</summary>
+<blockquote>
+
+| Type                      | `enum (of string)`                                                                                                  |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Default**               | `"DISABLED"`                                                                                                        |
+| **Defined in**            | cloud_nat.schema.json#/definitions/shared/properties/endpoint_independent_mapping                                   |
+|                           |                                                                                                                     |
+
+**Description:** Enable endpoint-independent mapping for the NAT (as defined in RFC 5128).
+
+Must be one of:
+* "ENABLED"
+* "DISABLED"
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_subnetworks_to_nat"></a>1.8.5.1.2. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > subnetworks_to_nat</strong>  
 
 </summary>
 <blockquote>
@@ -3977,7 +4087,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups"></a>1.8.5.1.2. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups"></a>1.8.5.1.3. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups</strong>  
 
 </summary>
 <blockquote>
@@ -4001,7 +4111,7 @@ Must be one of:
 | [items](#items_cloud_nat_allOf_i2_then_nat_groups_items) | -           |
 |                                                          |             |
 
-##### <a name="items_cloud_nat_allOf_i2_then_nat_groups_items"></a>1.8.5.1.2.1. Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items
+##### <a name="items_cloud_nat_allOf_i2_then_nat_groups_items"></a>1.8.5.1.3.1. Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items
 
 | Type                      | `object`                                                                                                            |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
@@ -4009,7 +4119,7 @@ Must be one of:
 |                           |                                                                                                                     |
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_nat_group_id"></a>1.8.5.1.2.1.1. [Required] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > nat_group_id</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_nat_group_id"></a>1.8.5.1.3.1.1. [Required] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > nat_group_id</strong>  
 
 </summary>
 <blockquote>
@@ -4023,7 +4133,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_log_config"></a>1.8.5.1.2.1.2. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > log_config</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_log_config"></a>1.8.5.1.3.1.2. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > log_config</strong>  
 
 </summary>
 <blockquote>
@@ -4046,7 +4156,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_min_ports_per_vm"></a>1.8.5.1.2.1.3. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > min_ports_per_vm</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_min_ports_per_vm"></a>1.8.5.1.3.1.3. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > min_ports_per_vm</strong>  
 
 </summary>
 <blockquote>
@@ -4063,7 +4173,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_udp_idle_timeout"></a>1.8.5.1.2.1.4. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > udp_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_udp_idle_timeout"></a>1.8.5.1.3.1.4. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > udp_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -4080,7 +4190,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_icmp_idle_timeout"></a>1.8.5.1.2.1.5. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > icmp_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_icmp_idle_timeout"></a>1.8.5.1.3.1.5. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > icmp_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -4097,7 +4207,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_tcp_established_idle_timeout"></a>1.8.5.1.2.1.6. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > tcp_established_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_tcp_established_idle_timeout"></a>1.8.5.1.3.1.6. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > tcp_established_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -4114,7 +4224,7 @@ Must be one of:
 </details>
 
 <details>
-<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_tcp_transitory_idle_timeout"></a>1.8.5.1.2.1.7. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > tcp_transitory_idle_timeout</strong>  
+<summary><strong> <a name="items_cloud_nat_allOf_i2_then_nat_groups_items_tcp_transitory_idle_timeout"></a>1.8.5.1.3.1.7. [Optional] Property Networks > Network > cloud_nat > allOf > Selected Primary Subnetworks and Selected Secondary Subnetworks > then > nat_groups > items > tcp_transitory_idle_timeout</strong>  
 
 </summary>
 <blockquote>
@@ -4557,7 +4667,7 @@ Must be one of:
 
 **Title:** Network Tags
 
-| Type                      | `array of string`                                                                                                   |
+| Type                      | `array`                                                                                                             |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
 | **Defined in**            | routes.schema.json#/definitions/shared/properties/tags                                                              |
@@ -4574,25 +4684,38 @@ Must be one of:
 | **Tuple validation** | See below          |
 |                      |                    |
 
-| Each item of this array must be                     | Description |
-| --------------------------------------------------- | ----------- |
-| [Tag](#items_routes_items_allOf_i0_then_tags_items) | -           |
-|                                                     |             |
+| Each item of this array must be                     | Description                                                                          |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| [tag](#items_routes_items_allOf_i0_then_tags_items) | Strings added to a tags field in a resource, such as Compute Engine virtual mach ... |
+|                                                     |                                                                                      |
 
-##### <a name="items_routes_items_allOf_i0_then_tags_items"></a>1.10.1.1.1.5.1. Networks > Network > routes > Static Route > allOf > Next Hop Internet Gateway > Next Hop Internet Gateway > tags > Tag
-
-**Title:** Tag
+##### <a name="items_routes_items_allOf_i0_then_tags_items"></a>1.10.1.1.1.5.1. Networks > Network > routes > Static Route > allOf > Next Hop Internet Gateway > Next Hop Internet Gateway > tags > tag
 
 | Type                      | `string`                                                                                                            |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | shared.schema.json#/definitions/shared/properties/tag                                                               |
 |                           |                                                                                                                     |
 
-| Restrictions                      |                                                                                                                                     |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| **Max length**                    | 63                                                                                                                                  |
-| **Must match regular expression** | ```^([a-z]([a-z0-9-]*[a-z0-9])?)$``` [Test](https://regex101.com/?regex=%5E%28%5Ba-z%5D%28%5Ba-z0-9-%5D%2A%5Ba-z0-9%5D%29%3F%29%24) |
-|                                   |                                                                                                                                     |
+**Description:** Strings added to a tags field in a resource, such as Compute Engine virtual machine (VM) instances or instance templates. Tags enable you to make firewall rules and routes applicable to specific VM instances.
+
+| Restrictions                      |                                                                                                                                                                |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Max length**                    | 63                                                                                                                                                             |
+| **Must match regular expression** | ```^([a-z]([a-z0-9-]*[a-z0-9])?)$``` [Test](https://regex101.com/?regex=%5E%28%5Ba-z%5D%28%5Ba-z0-9-%5D%2A%5Ba-z0-9%5D%29%3F%29%24&testString=%22alpha-tag%22) |
+|                                   |                                                                                                                                                                |
+
+**Examples:** 
+
+```json
+"alpha-tag"
+```
+```json
+"bravo-tag"
+```
+```json
+"charlie-tag"
+```
 
 **Example:** 
 
@@ -4731,7 +4854,7 @@ Specific value: `"INTERNET_GATEWAY"`
 | **Defined in**            | routes.schema.json#/definitions/shared/properties/destination                                                       |
 |                           |                                                                                                                     |
 
-**Description:** The destination range of outgoing packets that the route will apply to.
+**Description:** IP space allocated to this subnetwork in CIDR format.
 
 | Restrictions                      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -4781,7 +4904,7 @@ Specific value: `"INTERNET_GATEWAY"`
 
 **Title:** Network Tags
 
-| Type                      | `array of string`                                                                                                   |
+| Type                      | `array`                                                                                                             |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
 | **Defined in**            | routes.schema.json#/definitions/shared/properties/tags                                                              |
@@ -4798,25 +4921,38 @@ Specific value: `"INTERNET_GATEWAY"`
 | **Tuple validation** | See below          |
 |                      |                    |
 
-| Each item of this array must be                     | Description |
-| --------------------------------------------------- | ----------- |
-| [Tag](#items_routes_items_allOf_i0_then_tags_items) | -           |
-|                                                     |             |
+| Each item of this array must be                     | Description                                                                          |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| [tag](#items_routes_items_allOf_i0_then_tags_items) | Strings added to a tags field in a resource, such as Compute Engine virtual mach ... |
+|                                                     |                                                                                      |
 
-##### <a name="items_routes_items_allOf_i0_then_tags_items"></a>1.10.1.2.1.5.1. Networks > Network > routes > Static Route > allOf > Next Hop Internet Gateway > Next Hop Internet Gateway > tags > Tag
-
-**Title:** Tag
+##### <a name="items_routes_items_allOf_i0_then_tags_items"></a>1.10.1.2.1.5.1. Networks > Network > routes > Static Route > allOf > Next Hop Internet Gateway > Next Hop Internet Gateway > tags > tag
 
 | Type                      | `string`                                                                                                            |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | shared.schema.json#/definitions/shared/properties/tag                                                               |
 |                           |                                                                                                                     |
 
-| Restrictions                      |                                                                                                                                     |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| **Max length**                    | 63                                                                                                                                  |
-| **Must match regular expression** | ```^([a-z]([a-z0-9-]*[a-z0-9])?)$``` [Test](https://regex101.com/?regex=%5E%28%5Ba-z%5D%28%5Ba-z0-9-%5D%2A%5Ba-z0-9%5D%29%3F%29%24) |
-|                                   |                                                                                                                                     |
+**Description:** Strings added to a tags field in a resource, such as Compute Engine virtual machine (VM) instances or instance templates. Tags enable you to make firewall rules and routes applicable to specific VM instances.
+
+| Restrictions                      |                                                                                                                                                                |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Max length**                    | 63                                                                                                                                                             |
+| **Must match regular expression** | ```^([a-z]([a-z0-9-]*[a-z0-9])?)$``` [Test](https://regex101.com/?regex=%5E%28%5Ba-z%5D%28%5Ba-z0-9-%5D%2A%5Ba-z0-9%5D%29%3F%29%24&testString=%22alpha-tag%22) |
+|                                   |                                                                                                                                                                |
+
+**Examples:** 
+
+```json
+"alpha-tag"
+```
+```json
+"bravo-tag"
+```
+```json
+"charlie-tag"
+```
 
 **Example:** 
 
@@ -4974,7 +5110,7 @@ Specific value: `"ADDRESS"`
 | **Defined in**            | routes.schema.json#/definitions/shared/properties/destination                                                       |
 |                           |                                                                                                                     |
 
-**Description:** The destination range of outgoing packets that the route will apply to.
+**Description:** IP space allocated to this subnetwork in CIDR format.
 
 | Restrictions                      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -5024,7 +5160,7 @@ Specific value: `"ADDRESS"`
 
 **Title:** Network Tags
 
-| Type                      | `array of string`                                                                                                   |
+| Type                      | `array`                                                                                                             |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
 | **Defined in**            | routes.schema.json#/definitions/shared/properties/tags                                                              |
@@ -5041,25 +5177,38 @@ Specific value: `"ADDRESS"`
 | **Tuple validation** | See below          |
 |                      |                    |
 
-| Each item of this array must be                     | Description |
-| --------------------------------------------------- | ----------- |
-| [Tag](#items_routes_items_allOf_i0_then_tags_items) | -           |
-|                                                     |             |
+| Each item of this array must be                     | Description                                                                          |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| [tag](#items_routes_items_allOf_i0_then_tags_items) | Strings added to a tags field in a resource, such as Compute Engine virtual mach ... |
+|                                                     |                                                                                      |
 
-##### <a name="items_routes_items_allOf_i0_then_tags_items"></a>1.10.1.3.1.5.1. Networks > Network > routes > Static Route > allOf > Next Hop Internet Gateway > Next Hop Internet Gateway > tags > Tag
-
-**Title:** Tag
+##### <a name="items_routes_items_allOf_i0_then_tags_items"></a>1.10.1.3.1.5.1. Networks > Network > routes > Static Route > allOf > Next Hop Internet Gateway > Next Hop Internet Gateway > tags > tag
 
 | Type                      | `string`                                                                                                            |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | shared.schema.json#/definitions/shared/properties/tag                                                               |
 |                           |                                                                                                                     |
 
-| Restrictions                      |                                                                                                                                     |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| **Max length**                    | 63                                                                                                                                  |
-| **Must match regular expression** | ```^([a-z]([a-z0-9-]*[a-z0-9])?)$``` [Test](https://regex101.com/?regex=%5E%28%5Ba-z%5D%28%5Ba-z0-9-%5D%2A%5Ba-z0-9%5D%29%3F%29%24) |
-|                                   |                                                                                                                                     |
+**Description:** Strings added to a tags field in a resource, such as Compute Engine virtual machine (VM) instances or instance templates. Tags enable you to make firewall rules and routes applicable to specific VM instances.
+
+| Restrictions                      |                                                                                                                                                                |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Max length**                    | 63                                                                                                                                                             |
+| **Must match regular expression** | ```^([a-z]([a-z0-9-]*[a-z0-9])?)$``` [Test](https://regex101.com/?regex=%5E%28%5Ba-z%5D%28%5Ba-z0-9-%5D%2A%5Ba-z0-9%5D%29%3F%29%24&testString=%22alpha-tag%22) |
+|                                   |                                                                                                                                                                |
+
+**Examples:** 
+
+```json
+"alpha-tag"
+```
+```json
+"bravo-tag"
+```
+```json
+"charlie-tag"
+```
 
 **Example:** 
 
@@ -5211,7 +5360,7 @@ Specific value: `"LOAD_BALANCER"`
 | **Defined in**            | routes.schema.json#/definitions/shared/properties/destination                                                       |
 |                           |                                                                                                                     |
 
-**Description:** The destination range of outgoing packets that the route will apply to.
+**Description:** IP space allocated to this subnetwork in CIDR format.
 
 | Restrictions                      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -5261,7 +5410,7 @@ Specific value: `"LOAD_BALANCER"`
 
 **Title:** Network Tags
 
-| Type                      | `array of string`                                                                                                   |
+| Type                      | `array`                                                                                                             |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
 | **Defined in**            | routes.schema.json#/definitions/shared/properties/tags                                                              |
@@ -5278,25 +5427,38 @@ Specific value: `"LOAD_BALANCER"`
 | **Tuple validation** | See below          |
 |                      |                    |
 
-| Each item of this array must be                     | Description |
-| --------------------------------------------------- | ----------- |
-| [Tag](#items_routes_items_allOf_i0_then_tags_items) | -           |
-|                                                     |             |
+| Each item of this array must be                     | Description                                                                          |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| [tag](#items_routes_items_allOf_i0_then_tags_items) | Strings added to a tags field in a resource, such as Compute Engine virtual mach ... |
+|                                                     |                                                                                      |
 
-##### <a name="items_routes_items_allOf_i0_then_tags_items"></a>1.10.1.4.1.5.1. Networks > Network > routes > Static Route > allOf > Next Hop Internet Gateway > Next Hop Internet Gateway > tags > Tag
-
-**Title:** Tag
+##### <a name="items_routes_items_allOf_i0_then_tags_items"></a>1.10.1.4.1.5.1. Networks > Network > routes > Static Route > allOf > Next Hop Internet Gateway > Next Hop Internet Gateway > tags > tag
 
 | Type                      | `string`                                                                                                            |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | shared.schema.json#/definitions/shared/properties/tag                                                               |
 |                           |                                                                                                                     |
 
-| Restrictions                      |                                                                                                                                     |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| **Max length**                    | 63                                                                                                                                  |
-| **Must match regular expression** | ```^([a-z]([a-z0-9-]*[a-z0-9])?)$``` [Test](https://regex101.com/?regex=%5E%28%5Ba-z%5D%28%5Ba-z0-9-%5D%2A%5Ba-z0-9%5D%29%3F%29%24) |
-|                                   |                                                                                                                                     |
+**Description:** Strings added to a tags field in a resource, such as Compute Engine virtual machine (VM) instances or instance templates. Tags enable you to make firewall rules and routes applicable to specific VM instances.
+
+| Restrictions                      |                                                                                                                                                                |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Max length**                    | 63                                                                                                                                                             |
+| **Must match regular expression** | ```^([a-z]([a-z0-9-]*[a-z0-9])?)$``` [Test](https://regex101.com/?regex=%5E%28%5Ba-z%5D%28%5Ba-z0-9-%5D%2A%5Ba-z0-9%5D%29%3F%29%24&testString=%22alpha-tag%22) |
+|                                   |                                                                                                                                                                |
+
+**Examples:** 
+
+```json
+"alpha-tag"
+```
+```json
+"bravo-tag"
+```
+```json
+"charlie-tag"
+```
 
 **Example:** 
 
@@ -5527,6 +5689,1113 @@ Must be one of:
 </blockquote>
 </details>
 
+<details>
+<summary><strong> <a name="items_firewall_rules"></a>1.11. [Optional] Property Networks > Network > firewall_rules</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Firewall Rules
+
+| Type                      | `array of object`                                                                                                   |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | firewall_rules.schema.json#/definitions/firewall_rules                                                              |
+|                           |                                                                                                                     |
+
+|                      | Array restrictions |
+| -------------------- | ------------------ |
+| **Min items**        | 0                  |
+| **Max items**        | 100                |
+| **Items unicity**    | True               |
+| **Additional items** | False              |
+| **Tuple validation** | See below          |
+|                      |                    |
+
+| Each item of this array must be              | Description |
+| -------------------------------------------- | ----------- |
+| [Firewall Rule](#items_firewall_rules_items) | -           |
+|                                              |             |
+
+#### <a name="items_firewall_rules_items"></a>1.11.1. Networks > Network > firewall_rules > Firewall Rule
+
+**Title:** Firewall Rule
+
+| Type                      | `combining`                                                                                                         |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+<blockquote>
+
+| All of(Requirement)                                  |
+| ---------------------------------------------------- |
+| [Ingress Rule](#items_firewall_rules_items_allOf_i0) |
+| [Egress Rule](#items_firewall_rules_items_allOf_i1)  |
+|                                                      |
+
+<blockquote>
+
+##### <a name="items_firewall_rules_items_allOf_i0"></a>1.11.1.1. Property `Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule`
+
+**Title:** Ingress Rule
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** Words go here
+
+##### <a name="autogenerated_heading_26"></a>1.11.1.1.1. If (direction = "INGRESS")
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/ingress_rule                                                                                          |
+|                           |                                                                                                                     |
+
+**Description:** wors go here
+
+<blockquote>
+
+| One of(Option)                                               |
+| ------------------------------------------------------------ |
+| [item 0](#items_firewall_rules_items_allOf_i0_then_oneOf_i0) |
+| [item 1](#items_firewall_rules_items_allOf_i0_then_oneOf_i1) |
+|                                                              |
+
+<blockquote>
+
+##### <a name="items_firewall_rules_items_allOf_i0_then_oneOf_i0"></a>1.11.1.1.1.1. Property `Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > oneOf > item 0`
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+##### <a name="autogenerated_heading_27"></a>1.11.1.1.1.1.1. The following properties are required
+* name
+* rules
+* sources
+* targets
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_firewall_rules_items_allOf_i0_then_oneOf_i1"></a>1.11.1.1.1.2. Property `Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > oneOf > item 1`
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+##### <a name="autogenerated_heading_28"></a>1.11.1.1.1.2.1. The following properties are required
+* id
+* rules
+* sources
+* targets
+
+</blockquote>
+
+</blockquote>
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i0_then_name"></a>1.11.1.1.1.3. [Optional] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > name</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Name
+
+| Type                      | `string`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/shared/properties/name                                                                                |
+|                           |                                                                                                                     |
+
+**Description:** Words go here, IF not specified name will based on id field
+
+| Restrictions                      |                                                                                                                                                                                                                                                             |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Min length**                    | 1                                                                                                                                                                                                                                                           |
+| **Max length**                    | 63                                                                                                                                                                                                                                                          |
+| **Must match regular expression** | ```^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$``` [Test](https://regex101.com/?regex=%5E%28%3F%3A%5Ba-z%5D%28%3F%3A%5B-a-z0-9%5D%7B0%2C61%7D%5Ba-z0-9%5D%29%3F%29%24&testString=%22%3Cprefix%3E-%3Cenvironment%3E-%3Cnetwork%3E-subnet-%3C192-168-0-0-24%3E%22) |
+|                                   |                                                                                                                                                                                                                                                             |
+
+**Example:** 
+
+```json
+"<prefix>-<environment>-<network>-subnet-<192-168-0-0-24>"
+```
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i0_then_id"></a>1.11.1.1.1.4. [Optional] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > id</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Id
+
+| Type                      | `string`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/shared/properties/id                                                                                  |
+|                           |                                                                                                                     |
+
+**Description:** Words go here, IF not specified name will based on id field
+
+| Restrictions                      |                                                                                                                                                                                                     |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Min length**                    | 1                                                                                                                                                                                                   |
+| **Max length**                    | 24                                                                                                                                                                                                  |
+| **Must match regular expression** | ```^[a-z][a-z0-9-]{0,23}$``` [Test](https://regex101.com/?regex=%5E%5Ba-z%5D%5Ba-z0-9-%5D%7B0%2C23%7D%24&testString=%22%3Cprefix%3E-%3Cenvironment%3E-%3Cnetwork%3E-subnet-%3C192-168-0-0-24%3E%22) |
+|                                   |                                                                                                                                                                                                     |
+
+**Example:** 
+
+```json
+"<prefix>-<environment>-<network>-subnet-<192-168-0-0-24>"
+```
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i0_then_description"></a>1.11.1.1.1.5. [Optional] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > description</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Description
+
+| Type                      | `string`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/shared/properties/name                                                                                |
+|                           |                                                                                                                     |
+
+**Description:** Words go here, IF not specified name will based on id field
+
+| Restrictions                      |                                                                                                                                                                                                                                                             |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Min length**                    | 1                                                                                                                                                                                                                                                           |
+| **Max length**                    | 63                                                                                                                                                                                                                                                          |
+| **Must match regular expression** | ```^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$``` [Test](https://regex101.com/?regex=%5E%28%3F%3A%5Ba-z%5D%28%3F%3A%5B-a-z0-9%5D%7B0%2C61%7D%5Ba-z0-9%5D%29%3F%29%24&testString=%22%3Cprefix%3E-%3Cenvironment%3E-%3Cnetwork%3E-subnet-%3C192-168-0-0-24%3E%22) |
+|                                   |                                                                                                                                                                                                                                                             |
+
+**Example:** 
+
+```json
+"<prefix>-<environment>-<network>-subnet-<192-168-0-0-24>"
+```
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i0_then_direction"></a>1.11.1.1.1.6. [Optional] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > direction</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Direction
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Default**               | `"INGRESS"`                                                                                                         |
+| **Defined in**            | #/definitions/shared/properties/direction                                                                           |
+|                           |                                                                                                                     |
+
+Must be one of:
+* "INGRESS"
+* "EGRESS"
+Specific value: `"INGRESS"`
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i0_then_action"></a>1.11.1.1.1.7. [Optional] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > action</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Action
+
+| Type                      | `enum (of string)`                                                                                                  |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/shared/properties/action                                                                              |
+|                           |                                                                                                                     |
+
+Must be one of:
+* "ALLOW"
+* "DENY"
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i0_then_sources"></a>1.11.1.1.1.8. [Optional] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > sources</strong>  
+
+</summary>
+<blockquote>
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i0_then_targets"></a>1.11.1.1.1.9. [Optional] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > targets</strong>  
+
+</summary>
+<blockquote>
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i0_then_rules"></a>1.11.1.1.1.10. [Optional] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Rules
+
+| Type                      | `array`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/shared/properties/rules                                                                               |
+|                           |                                                                                                                     |
+
+|                      | Array restrictions |
+| -------------------- | ------------------ |
+| **Min items**        | 1                  |
+| **Max items**        | N/A                |
+| **Items unicity**    | True               |
+| **Additional items** | False              |
+| **Tuple validation** | See below          |
+|                      |                    |
+
+| Each item of this array must be                                | Description |
+| -------------------------------------------------------------- | ----------- |
+| [items](#items_firewall_rules_items_allOf_i0_then_rules_items) | -           |
+|                                                                |             |
+
+##### <a name="items_firewall_rules_items_allOf_i0_then_rules_items"></a>1.11.1.1.1.10.1. Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items
+
+| Type                      | `combining`                                                                                                         |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+<blockquote>
+
+| All of(Requirement)                                                      |
+| ------------------------------------------------------------------------ |
+| [item 0](#items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i0) |
+| [item 1](#items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i1) |
+| [item 2](#items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i2) |
+|                                                                          |
+
+<blockquote>
+
+##### <a name="items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i0"></a>1.11.1.1.1.10.1.1. Property `Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items > allOf > item 0`
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+##### <a name="autogenerated_heading_29"></a>1.11.1.1.1.10.1.1.1. If (protocol = "string")
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/shared/properties/tcp_udp_rule                                                                        |
+|                           |                                                                                                                     |
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i0_then_protocol"></a>1.11.1.1.1.10.1.1.1.1. [Required] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items > allOf > item 0 > TCP/UDP Rule > protocol</strong>  
+
+</summary>
+<blockquote>
+
+| Type                      | `enum (of string)`                                                                                                  |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+Must be one of:
+* "TCP"
+* "UDP"
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i0_then_ports"></a>1.11.1.1.1.10.1.1.1.2. [Required] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items > allOf > item 0 > TCP/UDP Rule > ports</strong>  
+
+</summary>
+<blockquote>
+
+| Type                      | `array`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+|                      | Array restrictions |
+| -------------------- | ------------------ |
+| **Min items**        | 0                  |
+| **Max items**        | N/A                |
+| **Items unicity**    | True               |
+| **Additional items** | False              |
+| **Tuple validation** | See below          |
+|                      |                    |
+
+| Each item of this array must be                                                          | Description |
+| ---------------------------------------------------------------------------------------- | ----------- |
+| [items](#items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i0_then_ports_items) | -           |
+|                                                                                          |             |
+
+##### <a name="items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i0_then_ports_items"></a>1.11.1.1.1.10.1.1.1.2.1. Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items > allOf > item 0 > TCP/UDP Rule > ports > items
+
+| Type                      | `combining`                                                                                                         |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+<blockquote>
+
+| One of(Option)                                                                                          |
+| ------------------------------------------------------------------------------------------------------- |
+| [Port Number](#items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i0_then_ports_items_oneOf_i0) |
+| [Port Range](#items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i0_then_ports_items_oneOf_i1)  |
+|                                                                                                         |
+
+<blockquote>
+
+##### <a name="items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i0_then_ports_items_oneOf_i0"></a>1.11.1.1.1.10.1.1.1.2.1.1. Property `Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items > allOf > item 0 > TCP/UDP Rule > ports > items > oneOf > Port Number`
+
+**Title:** Port Number
+
+| Type                      | `number`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** Specified port to be either allowed or denied
+
+| Restrictions |            |
+| ------------ | ---------- |
+| **Minimum**  | &ge; 0     |
+| **Maximum**  | &le; 65535 |
+|              |            |
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i0_then_ports_items_oneOf_i1"></a>1.11.1.1.1.10.1.1.1.2.1.2. Property `Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items > allOf > item 0 > TCP/UDP Rule > ports > items > oneOf > Port Range`
+
+**Title:** Port Range
+
+| Type                      | `string`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** Range of ports to be either allowed or denied
+
+| Restrictions                      |                                                                                           |
+| --------------------------------- | ----------------------------------------------------------------------------------------- |
+| **Must match regular expression** | ```^[0-9]+-[0-9]+$``` [Test](https://regex101.com/?regex=%5E%5B0-9%5D%2B-%5B0-9%5D%2B%24) |
+|                                   |                                                                                           |
+
+</blockquote>
+
+</blockquote>
+
+</blockquote>
+</details>
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i1"></a>1.11.1.1.1.10.1.2. Property `Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items > allOf > item 1`
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+##### <a name="autogenerated_heading_30"></a>1.11.1.1.1.10.1.2.1. If (protocol = "number")
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/shared/properties/ip_protocol_number_rule                                                             |
+|                           |                                                                                                                     |
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i1_then_protocol"></a>1.11.1.1.1.10.1.2.1.1. [Required] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items > allOf > item 1 > IP Protocol Number Rule > protocol</strong>  
+
+</summary>
+<blockquote>
+
+| Type                      | `number`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+| Restrictions |          |
+| ------------ | -------- |
+| **Minimum**  | &ge; 0   |
+| **Maximum**  | &le; 255 |
+|              |          |
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i1_then_ports"></a>1.11.1.1.1.10.1.2.1.2. [Required] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items > allOf > item 1 > IP Protocol Number Rule > ports</strong>  
+
+</summary>
+<blockquote>
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Default**               | `[]`                                                                                                                |
+|                           |                                                                                                                     |
+
+Specific value: `null`
+
+</blockquote>
+</details>
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i2"></a>1.11.1.1.1.10.1.3. Property `Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items > allOf > item 2`
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+##### <a name="autogenerated_heading_31"></a>1.11.1.1.1.10.1.3.1. If (protocol = "ALL")
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/shared/properties/other_named_protocol_rule                                                           |
+|                           |                                                                                                                     |
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i2_then_protocol"></a>1.11.1.1.1.10.1.3.1.1. [Required] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items > allOf > item 2 > Other Named Protocol Rule > protocol</strong>  
+
+</summary>
+<blockquote>
+
+| Type                      | `enum (of string)`                                                                                                  |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+Must be one of:
+* "ALL"
+* "ICMP"
+* "ESP"
+* "AH"
+* "SCTP"
+* "IPIP"
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i2_then_ports"></a>1.11.1.1.1.10.1.3.1.2. [Required] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items > allOf > item 2 > Other Named Protocol Rule > ports</strong>  
+
+</summary>
+<blockquote>
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Default**               | `[]`                                                                                                                |
+|                           |                                                                                                                     |
+
+Specific value: `null`
+
+</blockquote>
+</details>
+
+</blockquote>
+
+</blockquote>
+
+</blockquote>
+</details>
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_firewall_rules_items_allOf_i1"></a>1.11.1.2. Property `Networks > Network > firewall_rules > Firewall Rule > allOf > Egress Rule`
+
+**Title:** Egress Rule
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** Words go here
+
+##### <a name="autogenerated_heading_32"></a>1.11.1.2.1. If (direction = "EGRESS")
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/egress_rule                                                                                           |
+|                           |                                                                                                                     |
+
+**Description:** wors go here
+
+<blockquote>
+
+| One of(Option)                                               |
+| ------------------------------------------------------------ |
+| [item 0](#items_firewall_rules_items_allOf_i1_then_oneOf_i0) |
+| [item 1](#items_firewall_rules_items_allOf_i1_then_oneOf_i1) |
+|                                                              |
+
+<blockquote>
+
+##### <a name="items_firewall_rules_items_allOf_i1_then_oneOf_i0"></a>1.11.1.2.1.1. Property `Networks > Network > firewall_rules > Firewall Rule > allOf > Egress Rule > Egress Firewall Rule > oneOf > item 0`
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+##### <a name="autogenerated_heading_33"></a>1.11.1.2.1.1.1. The following properties are required
+* name
+* rules
+* sources
+* targets
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_firewall_rules_items_allOf_i1_then_oneOf_i1"></a>1.11.1.2.1.2. Property `Networks > Network > firewall_rules > Firewall Rule > allOf > Egress Rule > Egress Firewall Rule > oneOf > item 1`
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+##### <a name="autogenerated_heading_34"></a>1.11.1.2.1.2.1. The following properties are required
+* id
+* rules
+* sources
+* targets
+
+</blockquote>
+
+</blockquote>
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i1_then_name"></a>1.11.1.2.1.3. [Optional] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Egress Rule > Egress Firewall Rule > name</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Name
+
+| Type                      | `string`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/shared/properties/name                                                                                |
+|                           |                                                                                                                     |
+
+**Description:** Words go here, IF not specified name will based on id field
+
+| Restrictions                      |                                                                                                                                                                                                                                                             |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Min length**                    | 1                                                                                                                                                                                                                                                           |
+| **Max length**                    | 63                                                                                                                                                                                                                                                          |
+| **Must match regular expression** | ```^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$``` [Test](https://regex101.com/?regex=%5E%28%3F%3A%5Ba-z%5D%28%3F%3A%5B-a-z0-9%5D%7B0%2C61%7D%5Ba-z0-9%5D%29%3F%29%24&testString=%22%3Cprefix%3E-%3Cenvironment%3E-%3Cnetwork%3E-subnet-%3C192-168-0-0-24%3E%22) |
+|                                   |                                                                                                                                                                                                                                                             |
+
+**Example:** 
+
+```json
+"<prefix>-<environment>-<network>-subnet-<192-168-0-0-24>"
+```
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i1_then_id"></a>1.11.1.2.1.4. [Optional] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Egress Rule > Egress Firewall Rule > id</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Id
+
+| Type                      | `string`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/shared/properties/id                                                                                  |
+|                           |                                                                                                                     |
+
+**Description:** Words go here, IF not specified name will based on id field
+
+| Restrictions                      |                                                                                                                                                                                                     |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Min length**                    | 1                                                                                                                                                                                                   |
+| **Max length**                    | 24                                                                                                                                                                                                  |
+| **Must match regular expression** | ```^[a-z][a-z0-9-]{0,23}$``` [Test](https://regex101.com/?regex=%5E%5Ba-z%5D%5Ba-z0-9-%5D%7B0%2C23%7D%24&testString=%22%3Cprefix%3E-%3Cenvironment%3E-%3Cnetwork%3E-subnet-%3C192-168-0-0-24%3E%22) |
+|                                   |                                                                                                                                                                                                     |
+
+**Example:** 
+
+```json
+"<prefix>-<environment>-<network>-subnet-<192-168-0-0-24>"
+```
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i1_then_description"></a>1.11.1.2.1.5. [Optional] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Egress Rule > Egress Firewall Rule > description</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Description
+
+| Type                      | `string`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/shared/properties/name                                                                                |
+|                           |                                                                                                                     |
+
+**Description:** Words go here, IF not specified name will based on id field
+
+| Restrictions                      |                                                                                                                                                                                                                                                             |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Min length**                    | 1                                                                                                                                                                                                                                                           |
+| **Max length**                    | 63                                                                                                                                                                                                                                                          |
+| **Must match regular expression** | ```^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$``` [Test](https://regex101.com/?regex=%5E%28%3F%3A%5Ba-z%5D%28%3F%3A%5B-a-z0-9%5D%7B0%2C61%7D%5Ba-z0-9%5D%29%3F%29%24&testString=%22%3Cprefix%3E-%3Cenvironment%3E-%3Cnetwork%3E-subnet-%3C192-168-0-0-24%3E%22) |
+|                                   |                                                                                                                                                                                                                                                             |
+
+**Example:** 
+
+```json
+"<prefix>-<environment>-<network>-subnet-<192-168-0-0-24>"
+```
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i1_then_direction"></a>1.11.1.2.1.6. [Optional] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Egress Rule > Egress Firewall Rule > direction</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Direction
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Default**               | `"INGRESS"`                                                                                                         |
+| **Defined in**            | #/definitions/shared/properties/direction                                                                           |
+|                           |                                                                                                                     |
+
+Must be one of:
+* "INGRESS"
+* "EGRESS"
+Specific value: `"EGRESS"`
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i1_then_action"></a>1.11.1.2.1.7. [Optional] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Egress Rule > Egress Firewall Rule > action</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Action
+
+| Type                      | `enum (of string)`                                                                                                  |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/shared/properties/action                                                                              |
+|                           |                                                                                                                     |
+
+Must be one of:
+* "ALLOW"
+* "DENY"
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i1_then_sources"></a>1.11.1.2.1.8. [Optional] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Egress Rule > Egress Firewall Rule > sources</strong>  
+
+</summary>
+<blockquote>
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i1_then_targets"></a>1.11.1.2.1.9. [Optional] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Egress Rule > Egress Firewall Rule > targets</strong>  
+
+</summary>
+<blockquote>
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i1_then_rules"></a>1.11.1.2.1.10. [Optional] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Egress Rule > Egress Firewall Rule > rules</strong>  
+
+</summary>
+<blockquote>
+
+**Title:** Rules
+
+| Type                      | `array`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/shared/properties/rules                                                                               |
+|                           |                                                                                                                     |
+
+|                      | Array restrictions |
+| -------------------- | ------------------ |
+| **Min items**        | 1                  |
+| **Max items**        | N/A                |
+| **Items unicity**    | True               |
+| **Additional items** | False              |
+| **Tuple validation** | See below          |
+|                      |                    |
+
+| Each item of this array must be                                | Description |
+| -------------------------------------------------------------- | ----------- |
+| [items](#items_firewall_rules_items_allOf_i0_then_rules_items) | -           |
+|                                                                |             |
+
+##### <a name="items_firewall_rules_items_allOf_i0_then_rules_items"></a>1.11.1.2.1.10.1. Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items
+
+| Type                      | `combining`                                                                                                         |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+<blockquote>
+
+| All of(Requirement)                                                      |
+| ------------------------------------------------------------------------ |
+| [item 0](#items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i0) |
+| [item 1](#items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i1) |
+| [item 2](#items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i2) |
+|                                                                          |
+
+<blockquote>
+
+##### <a name="items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i0"></a>1.11.1.2.1.10.1.1. Property `Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items > allOf > item 0`
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+##### <a name="autogenerated_heading_35"></a>1.11.1.2.1.10.1.1.1. If (protocol = "string")
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/shared/properties/tcp_udp_rule                                                                        |
+|                           |                                                                                                                     |
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i0_then_protocol"></a>1.11.1.2.1.10.1.1.1.1. [Required] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items > allOf > item 0 > TCP/UDP Rule > protocol</strong>  
+
+</summary>
+<blockquote>
+
+| Type                      | `enum (of string)`                                                                                                  |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+Must be one of:
+* "TCP"
+* "UDP"
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i0_then_ports"></a>1.11.1.2.1.10.1.1.1.2. [Required] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items > allOf > item 0 > TCP/UDP Rule > ports</strong>  
+
+</summary>
+<blockquote>
+
+| Type                      | `array`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+|                      | Array restrictions |
+| -------------------- | ------------------ |
+| **Min items**        | 0                  |
+| **Max items**        | N/A                |
+| **Items unicity**    | True               |
+| **Additional items** | False              |
+| **Tuple validation** | See below          |
+|                      |                    |
+
+| Each item of this array must be                                                          | Description |
+| ---------------------------------------------------------------------------------------- | ----------- |
+| [items](#items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i0_then_ports_items) | -           |
+|                                                                                          |             |
+
+##### <a name="items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i0_then_ports_items"></a>1.11.1.2.1.10.1.1.1.2.1. Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items > allOf > item 0 > TCP/UDP Rule > ports > items
+
+| Type                      | `combining`                                                                                                         |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+<blockquote>
+
+| One of(Option)                                                                                          |
+| ------------------------------------------------------------------------------------------------------- |
+| [Port Number](#items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i0_then_ports_items_oneOf_i0) |
+| [Port Range](#items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i0_then_ports_items_oneOf_i1)  |
+|                                                                                                         |
+
+<blockquote>
+
+##### <a name="items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i0_then_ports_items_oneOf_i0"></a>1.11.1.2.1.10.1.1.1.2.1.1. Property `Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items > allOf > item 0 > TCP/UDP Rule > ports > items > oneOf > Port Number`
+
+**Title:** Port Number
+
+| Type                      | `number`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** Specified port to be either allowed or denied
+
+| Restrictions |            |
+| ------------ | ---------- |
+| **Minimum**  | &ge; 0     |
+| **Maximum**  | &le; 65535 |
+|              |            |
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i0_then_ports_items_oneOf_i1"></a>1.11.1.2.1.10.1.1.1.2.1.2. Property `Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items > allOf > item 0 > TCP/UDP Rule > ports > items > oneOf > Port Range`
+
+**Title:** Port Range
+
+| Type                      | `string`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+**Description:** Range of ports to be either allowed or denied
+
+| Restrictions                      |                                                                                           |
+| --------------------------------- | ----------------------------------------------------------------------------------------- |
+| **Must match regular expression** | ```^[0-9]+-[0-9]+$``` [Test](https://regex101.com/?regex=%5E%5B0-9%5D%2B-%5B0-9%5D%2B%24) |
+|                                   |                                                                                           |
+
+</blockquote>
+
+</blockquote>
+
+</blockquote>
+</details>
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i1"></a>1.11.1.2.1.10.1.2. Property `Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items > allOf > item 1`
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+##### <a name="autogenerated_heading_36"></a>1.11.1.2.1.10.1.2.1. If (protocol = "number")
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/shared/properties/ip_protocol_number_rule                                                             |
+|                           |                                                                                                                     |
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i1_then_protocol"></a>1.11.1.2.1.10.1.2.1.1. [Required] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items > allOf > item 1 > IP Protocol Number Rule > protocol</strong>  
+
+</summary>
+<blockquote>
+
+| Type                      | `number`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+| Restrictions |          |
+| ------------ | -------- |
+| **Minimum**  | &ge; 0   |
+| **Maximum**  | &le; 255 |
+|              |          |
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i1_then_ports"></a>1.11.1.2.1.10.1.2.1.2. [Required] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items > allOf > item 1 > IP Protocol Number Rule > ports</strong>  
+
+</summary>
+<blockquote>
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Default**               | `[]`                                                                                                                |
+|                           |                                                                                                                     |
+
+Specific value: `null`
+
+</blockquote>
+</details>
+
+</blockquote>
+<blockquote>
+
+##### <a name="items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i2"></a>1.11.1.2.1.10.1.3. Property `Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items > allOf > item 2`
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+##### <a name="autogenerated_heading_37"></a>1.11.1.2.1.10.1.3.1. If (protocol = "ALL")
+
+| Type                      | `object`                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Defined in**            | #/definitions/shared/properties/other_named_protocol_rule                                                           |
+|                           |                                                                                                                     |
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i2_then_protocol"></a>1.11.1.2.1.10.1.3.1.1. [Required] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items > allOf > item 2 > Other Named Protocol Rule > protocol</strong>  
+
+</summary>
+<blockquote>
+
+| Type                      | `enum (of string)`                                                                                                  |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+|                           |                                                                                                                     |
+
+Must be one of:
+* "ALL"
+* "ICMP"
+* "ESP"
+* "AH"
+* "SCTP"
+* "IPIP"
+
+</blockquote>
+</details>
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_allOf_i0_then_rules_items_allOf_i2_then_ports"></a>1.11.1.2.1.10.1.3.1.2. [Required] Property Networks > Network > firewall_rules > Firewall Rule > allOf > Ingress Rule > Ingress Firewall Rule > rules > items > allOf > item 2 > Other Named Protocol Rule > ports</strong>  
+
+</summary>
+<blockquote>
+
+| Type                      | `const`                                                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Default**               | `[]`                                                                                                                |
+|                           |                                                                                                                     |
+
+Specific value: `null`
+
+</blockquote>
+</details>
+
+</blockquote>
+
+</blockquote>
+
+</blockquote>
+</details>
+
+</blockquote>
+
+</blockquote>
+
+<details>
+<summary><strong> <a name="items_firewall_rules_items_direction"></a>1.11.1.3. [Optional] Property Networks > Network > firewall_rules > Firewall Rule > direction</strong>  
+
+</summary>
+<blockquote>
+
+| Type                      | `enum (of string)`                                                                                                  |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Additional properties** | [![badge](https://img.shields.io/badge/Any+type-allowed-green)](# "Additional Properties of any type are allowed.") |
+| **Default**               | `"INGRESS"`                                                                                                         |
+| **Defined in**            | firewall_rules.schema.json#/definitions/shared/properties/direction                                                 |
+|                           |                                                                                                                     |
+
+Must be one of:
+* "INGRESS"
+* "EGRESS"
+
+</blockquote>
+</details>
+
+</blockquote>
+</details>
+
 **Examples:** 
 
 ```json
@@ -5599,4 +6868,4 @@ Must be one of:
 ```
 
 ----------------------------------------------------------------------------------------------------------------------------
-Generated using [json-schema-for-humans](https://github.com/coveooss/json-schema-for-humans) on 2021-10-30 at 16:09:37 -0700
+Generated using [json-schema-for-humans](https://github.com/coveooss/json-schema-for-humans) on 2021-11-05 at 13:57:46 -0700

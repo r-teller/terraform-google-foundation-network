@@ -1,0 +1,34 @@
+[
+  {
+    "name": "fw-ip-protocol",
+    "firewall_rules": [
+      {
+        "id": "allow-http-ingress",
+        "action": "ALLOW",
+        "direction": "INGRESS",
+        "sources": [],
+        "targets": [],
+        "rules": [
+          {
+            "protocol": 58,
+            "ports": []
+          },
+          {
+            "protocol": "TCP",
+            "ports": [
+              22,
+              "80-443"
+            ]
+          },
+          {
+            "protocol": "SCTP",
+            "ports": [
+              22,
+              "80-443"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

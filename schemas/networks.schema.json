@@ -369,6 +369,10 @@
             "routes": {
                 "title": "Static Routes",
                 "$ref": "routes.schema.json#/definitions/routes"
+            },
+            "firewall_rules": {
+                "title": "Firewall Rules",
+                "$ref": "firewall_rules.schema.json#/definitions/firewall_rules"
             }
         }
     },

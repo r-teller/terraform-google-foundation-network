@@ -6,7 +6,8 @@
       "subnetworks_to_nat": "ALL_PRIMARY_SUBNETWORKS_ALL_SECONDARY_SUBNETWORKS",
       "log_config": "ALL",
       "min_ports_per_vm": 128,
-      "udp_idle_timeout": 100
+      "udp_idle_timeout": 100,
+      "endpoint_independent_mapping": "ENABLED"
     },
     "subnetworks": [
       {
@@ -31,11 +32,13 @@
       "nat_groups": [
         {
           "nat_group_id": "alpha",
-          "log_config": "ALL"
+          "log_config": "ALL",
+          "endpoint_independent_mapping": "DISABLED"
         },
         {
           "nat_group_id": "bravo",
-          "log_config": "ERRORS_ONLY"
+          "log_config": "ERRORS_ONLY",
+          "endpoint_independent_mapping": "ENABLED"
         },
         {
           "nat_group_id": "charlie",

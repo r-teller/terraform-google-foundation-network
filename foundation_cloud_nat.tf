@@ -12,11 +12,17 @@ locals {
     icmp_idle_timeout                  = 30
     tcp_established_idle_timeout       = 120
     tcp_transitory_idle_timeout        = 30
+    endpoint_independent_mapping       = "DISABLED"
     log_config                         = "DISABLED"
     source_subnetwork_ip_ranges_to_nat = "DISABLED"
     subnetworks = {
       source_ip_ranges_to_nat = "DISABLED"
     }
+  }
+
+  lookups_endpoint_independent_mapping = {
+    "DISABLED" = false
+    "ENABLED"  = true
   }
 
   lookups_source_subnetwork_ip_ranges_to_nat = {
@@ -46,6 +52,7 @@ locals {
         icmp_idle_timeout            = try(nat_group.icmp_idle_timeout, local.defaults_cloud_nat.icmp_idle_timeout)
         tcp_established_idle_timeout = try(nat_group.tcp_established_idle_timeout, local.defaults_cloud_nat.tcp_established_idle_timeout)
         tcp_transitory_idle_timeout  = try(nat_group.tcp_transitory_idle_timeout, local.defaults_cloud_nat.tcp_transitory_idle_timeout)
+        endpoint_independent_mapping = lookup(local.lookups_endpoint_independent_mapping, try(nat_group.endpoint_independent_mapping, local.defaults_cloud_nat.endpoint_independent_mapping))
       } if can(nat_group.nat_group_id)
     } if try((network.cloud_nat.subnetworks_to_nat == "SELECTED_PRIMARY_SUBNETWORKS_SELECTED_SECONDARY_SUBNETWORKS" && 0 < length(network.cloud_nat.nat_groups)), false)
   ]))...)
@@ -69,6 +76,7 @@ locals {
         icmp_idle_timeout            = try(network.cloud_nat.icmp_idle_timeout, local.defaults_cloud_nat.icmp_idle_timeout)
         tcp_established_idle_timeout = try(network.cloud_nat.tcp_established_idle_timeout, local.defaults_cloud_nat.tcp_established_idle_timeout)
         tcp_transitory_idle_timeout  = try(network.cloud_nat.tcp_transitory_idle_timeout, local.defaults_cloud_nat.tcp_transitory_idle_timeout)
+        endpoint_independent_mapping = lookup(local.lookups_endpoint_independent_mapping, try(network.cloud_nat.endpoint_independent_mapping, local.defaults_cloud_nat.endpoint_independent_mapping))
       } if try(contains(["ALL_PRIMARY_SUBNETWORKS", "ALL_PRIMARY_SUBNETWORKS_ALL_SECONDARY_SUBNETWORKS"], network.cloud_nat.subnetworks_to_nat), false)
     ] if try(contains(["ALL_PRIMARY_SUBNETWORKS", "ALL_PRIMARY_SUBNETWORKS_ALL_SECONDARY_SUBNETWORKS"], network.cloud_nat.subnetworks_to_nat), false)
   ])) : "${cloud_nat_network.network}__${cloud_nat_network.region_shortname}" => cloud_nat_network }
@@ -186,6 +194,8 @@ resource "google_compute_router_nat" "cloud_nats" {
   tcp_transitory_idle_timeout_sec  = each.value.tcp_transitory_idle_timeout
   icmp_idle_timeout_sec            = each.value.icmp_idle_timeout
   udp_idle_timeout_sec             = each.value.udp_idle_timeout
+
+  enable_endpoint_independent_mapping = each.value.endpoint_independent_mapping
 
   log_config {
     enable = contains(["ALL", "ERRORS_ONLY", "TRANSLATIONS_ONLY"], each.value.log_config)

@@ -68,7 +68,7 @@ module "test_cases__subnetwork" {
 }
 
 module "test_cases__cloud_nat" {
-  count = 0
+  count = 1
   source = "../"
 
   project_id      = local.project_id
@@ -88,7 +88,7 @@ module "test_cases__private_google_access" {
 }
 
 module "test_cases__route" {
-  count = 1
+  count = 0
   source = "../"
 
   project_id      = local.project_id
