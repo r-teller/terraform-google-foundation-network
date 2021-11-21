@@ -1,0 +1,24 @@
+{
+    "$id": "networks.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Networks",
+    "type": "array",
+    "widget": "SimpleList",
+    "items": {
+        "title": "Network",
+        "description": "A Virtual Private Cloud (VPC) network implemented inside of Google's production network",
+        "type": "object",
+        "widget": "Accordions",
+        "additionalProperties": false,
+        "required": [
+            "name"
+        ],
+        "properties": {
+            "label": {},
+            "name": {
+                "title": "Name",
+                "type": "string"
+            }
+        }
+    }
+}
