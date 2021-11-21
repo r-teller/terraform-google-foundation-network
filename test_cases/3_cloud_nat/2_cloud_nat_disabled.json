@@ -1,28 +1,9 @@
 [
   {
-    "name": "cloud-nat-disabled-selected",
+    "name": "cloud-nat-disabled",
     "routing_mode": "GLOBAL",
     "cloud_nat": {
-      "subnetworks_to_nat": "DISABLED",
-      "nat_groups": [
-        {
-          "nat_group_id": "disabled-foo-bar"
-        }
-      ]
-    },
-    "subnetworks": [
-      {
-        "region": "US-WEST1",
-        "ip_cidr_range": "172.16.32.0/24"
-      }
-    ]
-  },
-  {
-    "name": "cloud-nat-disabled-generic",
-    "routing_mode": "GLOBAL",
-    "cloud_nat": {
-      "subnetworks_to_nat": "DISABLED",
-      "min_ports_per_vm": 25
+      "subnetworks_to_nat": "DISABLED"
     },
     "subnetworks": [
       {

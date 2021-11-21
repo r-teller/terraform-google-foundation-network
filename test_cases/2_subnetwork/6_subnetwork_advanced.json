@@ -6,11 +6,10 @@
         "region": "US-EAST4",
         "private_ip_google_access": "ENABLED",
         "log_config": {
-          "enabled": false,
+          "enabled": true,
           "aggregation_interval": "INTERVAL_5_SEC",
           "flow_sampling": 50,
-          "metadata": "INCLUDE_ALL_METADATA",
-          "metadata_fields": []
+          "metadata": "INCLUDE_ALL_METADATA"
         },
         "ip_cidr_range": "172.16.0.0/24"
       },
@@ -26,8 +25,7 @@
           "enabled": true,
           "aggregation_interval": "INTERVAL_5_SEC",
           "flow_sampling": 50,
-          "metadata": "INCLUDE_ALL_METADATA",
-          "metadata_fields": []
+          "metadata": "INCLUDE_ALL_METADATA"
         },
         "ip_cidr_range": "172.16.32.0/24"
       },

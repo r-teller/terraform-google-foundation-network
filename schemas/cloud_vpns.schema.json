@@ -1,0 +1,14 @@
+{
+    "$id": "cloud_nat.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Cloud Nat",
+    "definitions": {
+        "shared": {},
+        "cloud_vpns": {
+            "title": "HA Cloud VPNs",
+            "description": "Coming Soon",
+            "type": "array",
+            "items": {}
+        }
+    }
+}

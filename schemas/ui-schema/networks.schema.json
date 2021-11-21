@@ -8,13 +8,13 @@
         "title": "Network",
         "description": "A Virtual Private Cloud (VPC) network implemented inside of Google's production network",
         "type": "object",
-        "widget":"Accordions",
+        "widget": "Accordions",
         "additionalProperties": false,
         "required": [
             "name"
         ],
         "properties": {
-            "label":{},
+            "label": {},
             "name": {
                 "title": "Name",
                 "description": "This field will be used be combine with [environment] and [prefix] to generate a unique VPC name",
@@ -291,21 +291,111 @@
                         "const": "REGIONAL"
                     }
                 ],
-                "default": "REGIONAL",
+                "default": "REGIONAL"
+            },
+            "subnetworks": {
+                "title": "Subnetworks",
+                "$ref": "subnetworks.schema.json#/definitions/subnetworks"
+            },
+            "cloud_nat": {
+                "title": "Cloud NAT",
+                "$ref": "cloud_nat.schema.json#/definitions/cloud_nat"
+            },
+            "peers": {
+                "title": "VPC Network Peers",
+                "description": "Collection of VPC Peers that enables you to connect VPC networks so that workloads in different VPC networks can communicate internally.",
+                "type": "array",
+                "widget": "SimpleList",
+                "uniqueItems": true,
+                "items": {
+                    "title": "VPC Network Peer",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "project": {
+                            "title": "Project",
+                            "description": "The name of the project for the peer network. If not specified, defaults to current project.",
+                            "type": "string",
+                            "examples": [
+                                "remote-project-id"
+                            ]
+                        },
+                        "network": {
+                            "title": "Peer Network",
+                            "description": "The name of the network to be peered with the current network.",
+                            "type": "string",
+                            "examples": [
+                                "prod-network"
+                            ]
+                        },
+                        "export_custom_routes": {
+                            "title": "Export Custom Routes",
+                            "description": "If true, the network will export custom routes to peer network.",
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "import_custom_routes": {
+                            "title": "Import Custom Routes",
+                            "description": "If true, the network will import custom routes from peer network.",
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "import_subnet_routes_with_public_ip": {
+                            "title": "Import Subnet Routes with Public IP Addresses",
+                            "description": "If true, the network will import subnet routes with addresses in the public IP ranges from peer network.",
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "export_subnet_routes_with_public_ip": {
+                            "title": "Export Subnet Routes with Public IP Addresses",
+                            "description": "If true, the network will export subnet routes with addresses in the public IP ranges from peer network.",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "required": [
+                        "network"
+                    ],
+                    "examples": [
+                        {
+                            "network": "prod-network"
+                        },
+                        {
+                            "network": "dev-network",
+                            "export_custom_routes": false,
+                            "import_custom_routes": true
+                        },
+                        {
+                            "network": "test-network",
+                            "export_custom_routes": false,
+                            "import_custom_routes": true,
+                            "import_subnet_routes_with_public_ip": false,
+                            "export_subnet_routes_with_public_ip": true
+                        },
+                        {
+                            "project": "remote-project-id",
+                            "network": "remote-network"
+                        }
+                    ]
+                },
                 "examples": [
                     [
                         {
                             "name": "......",
-                            "routing_mode": "REGIONAL",
-                            "subnetworks": "......",
-                            "routes": "......",
-                            "firewall_rules": "....."
-                        }
-                    ],
-                    [
-                        {
-                            "name": "......",
-                            "routing_mode": "GLOBAL",
+                            "peers": [
+                                {
+                                    "network": "prod-network"
+                                },
+                                {
+                                    "network": "dev-network",
+                                    "export_custom_routes": false,
+                                    "import_custom_routes": true
+                                },
+                                {
+                                    "project": "remote-project-id",
+                                    "network": "remote-network"
+                                }
+                            ],
                             "subnetworks": "......",
                             "routes": "......",
                             "firewall_rules": "....."
@@ -313,86 +403,14 @@
                     ]
                 ]
             },
-            "subnetworks": {
-                "$ref": "subnetworks.schema.json#/definitions/subnetworks"
-            },
-            "cloud_nat": {
-                "$ref": "cloud_nat.schema.json#/definitions/cloud_nat"
-            },
-            "peers": {
-                "$ref": "network_peers.schema.json#"
-            },
             "routes": {
+                "title": "Static Routes",
                 "$ref": "routes.schema.json#/definitions/routes"
             },
             "firewall_rules": {
+                "title": "Firewall Rules",
                 "$ref": "firewall_rules.schema.json#/definitions/firewall_rules"
-            },
-            "cloud_vpns":{
-                "$ref": "cloud_vpns.schema.json#/definitions/cloud_vpns"
             }
         }
-    },
-    "examples": [
-        [
-            {
-                "name": "network-single",
-                "description": "This will create a single VPC Network and nothing else"
-            }
-        ],
-        [
-            {
-                "name": "network-alpha",
-                "description": "This will create a network alpha and nothing else"
-            },
-            {
-                "name": "network-bravo",
-                "description": "This will create a network bravo and nothing else"
-            }
-        ],
-        [
-            {
-                "name": "subnetwork-secondary-subnetworks",
-                "description": "This will create a single VPC Network, Primary Subnetwork and two Secondary Ranges",
-                "subnetworks": [
-                    {
-                        "region": "US-EAST4",
-                        "ip_cidr_range": "172.16.0.0/24",
-                        "secondary_subnetworks": [
-                            {
-                                "ip_cidr_range": "172.16.1.0/24"
-                            },
-                            {
-                                "ip_cidr_range": "172.16.2.0/24"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        [
-            {
-                "name": "cloud-nat-all",
-                "description": "This will create a single VPC Network with Primary and Secondary Subnetworks with Cloud-NAT",
-                "routing_mode": "GLOBAL",
-                "cloud_nat": {
-                    "subnetworks_to_nat": "ALL_PRIMARY_SUBNETWORKS_ALL_SECONDARY_SUBNETWORKS"
-                },
-                "subnetworks": [
-                    {
-                        "region": "US-WEST1",
-                        "ip_cidr_range": "172.16.32.0/24",
-                        "secondary_subnetworks": [
-                            {
-                                "ip_cidr_range": "10.20.32.0/24"
-                            },
-                            {
-                                "ip_cidr_range": "10.20.33.0/24"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    ]
+    }
 }
