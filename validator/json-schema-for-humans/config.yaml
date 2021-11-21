@@ -1,9 +1,0 @@
-link_to_reused_ref: false
-custom_template_path: /home/r-teller/terraform-google-foundation-network/validator/json-schema-for-humans/templates/md_nested/base.md
-# templates_directory: /home/r-teller/terraform-google-foundation-network/validator/json-schema-for-humans/templates
-# template_name: md
-show_toc: false
-markdown_options:  
-  break-on-newline: true
-template_md_options:
-  badge_as_image: true

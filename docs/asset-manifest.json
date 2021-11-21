@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/static/css/main.31a08b8e.chunk.css",
-    "main.js": "/static/js/main.a2b6eb88.chunk.js",
-    "main.js.map": "/static/js/main.a2b6eb88.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.83c3e0c4.js",
-    "runtime-main.js.map": "/static/js/runtime-main.83c3e0c4.js.map",
-    "static/js/2.34cd81ab.chunk.js": "/static/js/2.34cd81ab.chunk.js",
-    "static/js/2.34cd81ab.chunk.js.map": "/static/js/2.34cd81ab.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.67d0c4859dd25fa137c58faa1cb251b3.js": "/precache-manifest.67d0c4859dd25fa137c58faa1cb251b3.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.31a08b8e.chunk.css.map": "/static/css/main.31a08b8e.chunk.css.map",
-    "static/js/2.34cd81ab.chunk.js.LICENSE.txt": "/static/js/2.34cd81ab.chunk.js.LICENSE.txt"
+    "main.css": "/terraform-google-foundation-network/static/css/main.31a08b8e.chunk.css",
+    "main.js": "/terraform-google-foundation-network/static/js/main.ba9e7501.chunk.js",
+    "main.js.map": "/terraform-google-foundation-network/static/js/main.ba9e7501.chunk.js.map",
+    "runtime-main.js": "/terraform-google-foundation-network/static/js/runtime-main.a49daf47.js",
+    "runtime-main.js.map": "/terraform-google-foundation-network/static/js/runtime-main.a49daf47.js.map",
+    "static/js/2.12d21659.chunk.js": "/terraform-google-foundation-network/static/js/2.12d21659.chunk.js",
+    "static/js/2.12d21659.chunk.js.map": "/terraform-google-foundation-network/static/js/2.12d21659.chunk.js.map",
+    "index.html": "/terraform-google-foundation-network/index.html",
+    "precache-manifest.39d63a981753b669b8d14a094dbb4832.js": "/terraform-google-foundation-network/precache-manifest.39d63a981753b669b8d14a094dbb4832.js",
+    "service-worker.js": "/terraform-google-foundation-network/service-worker.js",
+    "static/css/main.31a08b8e.chunk.css.map": "/terraform-google-foundation-network/static/css/main.31a08b8e.chunk.css.map",
+    "static/js/2.12d21659.chunk.js.LICENSE.txt": "/terraform-google-foundation-network/static/js/2.12d21659.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.83c3e0c4.js",
-    "static/js/2.34cd81ab.chunk.js",
+    "static/js/runtime-main.a49daf47.js",
+    "static/js/2.12d21659.chunk.js",
     "static/css/main.31a08b8e.chunk.css",
-    "static/js/main.a2b6eb88.chunk.js"
+    "static/js/main.ba9e7501.chunk.js"
   ]
 }

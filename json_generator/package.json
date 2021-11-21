@@ -1,7 +1,8 @@
 {
-  "name": "my-app",
+  "name": "gcp-network-foundation",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "homepage": "https://r-teller.github.io/terraform-google-foundation-network/",
   "dependencies": {
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",

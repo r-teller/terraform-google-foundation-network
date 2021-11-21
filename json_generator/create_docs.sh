@@ -5,8 +5,9 @@ json-dereference -s networks.schema.json  -o "${pwd}/src/Schema/resolved.schema.
 popd
 rm -rf ./public/documentation/*
 generate-schema-doc ./src/Schema/resolved.schema.json ./public/documentation/index.html
-# rm -rf ./build  package_lock.json
+
 npm install
 npm run build
+rm -rf ../docs/*
 cp -r ./build/* ../docs
 # rm .\public\documentation\*
