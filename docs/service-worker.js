@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/terraform-google-foundation-network/precache-manifest.39d63a981753b669b8d14a094dbb4832.js"
+  "/terraform-google-foundation-network/precache-manifest.74445101d3fd44dd2da06794b3b5a0fd.js"
 );
 
 self.addEventListener('message', (event) => {

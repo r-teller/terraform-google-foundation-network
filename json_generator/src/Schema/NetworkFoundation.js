@@ -12,6 +12,7 @@ import {
 
 import { Modal, Box, Grid, Paper, styled } from '@mui/material';
 
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import EditIcon from '@mui/icons-material/Edit';
 
@@ -112,7 +113,6 @@ const Generator = () => {
                                 />
                             </IconButton>
                         </Tooltip>
-
                         <Tooltip title={copyIconText}
                             onClose={handleCopyIconClose}
                             onClick={handleCopyIconClick}
@@ -145,6 +145,13 @@ const Generator = () => {
                                 />
                             </Box>
                         </Modal>
+                        <Tooltip title="Network Foundation Documentation">
+                            <IconButton>
+                                <MenuBookIcon
+                                    onClick={() => window.open(document.location.pathname + "/documentation", "_blank")}
+                                />
+                            </IconButton>
+                        </Tooltip>
                     </Item>
                 </Grid>
                 <Grid item xs={12}>
