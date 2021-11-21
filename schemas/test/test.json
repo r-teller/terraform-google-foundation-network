@@ -1,0 +1,90 @@
+{
+    "type": "object",
+    "properties": {
+        "selector": {
+            "type": "string",
+            "enum": [
+                "text",
+                "checkbox",
+                "nothing"
+            ]
+        }
+    },
+    "order": [
+        "selector"
+    ],
+    "allOf": [
+        {
+            "title": "foo",
+            "if": {
+                "type": "object",
+                "properties": {
+                    "selector": {
+                        "type": "string",
+                        "const": "text"
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "selector": {
+                        "type": "string",
+                        "const": "text"
+                    },
+                    "textInput": {
+                        "type": "string"
+                    }
+                },
+                "order": [
+                    "textInput"
+                ]
+            }
+        },
+        {
+            "title": "bar",
+            "if": {
+                "type": "object",
+                "properties": {
+                    "selector": {
+                        "type": "string",
+                        "const": "text"
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "selector": {
+                        "type": "string",
+                        "const": "checkbox"
+                    },
+                    "checkboxInput": {
+                        "type": "boolean"
+                    }
+                },
+                "order": [
+                    "checkboxInput"
+                ]
+            }
+        },
+        {
+            "title": "foobar",
+            "if": {
+                "type": "object",
+                "properties": {
+                    "selector": {
+                        "type": "string",
+                        "const": "nothing"
+                    }
+                }
+            },
+            "then": {
+                "properties": {
+                    "selector": {
+                        "type": "string",
+                        "const": "nothing"
+                    }
+                }
+            }
+        }
+    ]
+}

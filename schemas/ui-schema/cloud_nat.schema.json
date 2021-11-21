@@ -1,0 +1,242 @@
+{
+    "$id": "cloud_nat.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Cloud Nat",
+    "definitions": {
+        "shared": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "endpoint_independent_mapping": {
+                    "title": "Endpoint Independent Mapping",
+                    "type": "string",
+                    "widget": "Select",
+                    "enum": [
+                        "ENABLED",
+                        "DISABLED"
+                    ],
+                    "description": "Enable endpoint-independent mapping for the NAT (as defined in RFC 5128).",
+                    "default": "DISABLED"
+                },
+                "subnetworks_to_nat": {
+                    "type": "string",
+                    "widget": "Select",
+                    "enum": [
+                        "ALL_PRIMARY_SUBNETWORKS",
+                        "ALL_PRIMARY_SUBNETWORKS_ALL_SECONDARY_SUBNETWORKS",
+                        "SELECTED_PRIMARY_SUBNETWORKS_SELECTED_SECONDARY_SUBNETWORKS",
+                        "DISABLED"
+                    ],
+                    "default": "DISABLED"
+                },
+                "log_config": {
+                    "type": "string",
+                    "widget": "Select",
+                    "enum": [
+                        "ALL",
+                        "ERRORS_ONLY",
+                        "TRANSLATIONS_ONLY",
+                        "DISABLED"
+                    ],
+                    "default": "DISABLED",
+                    "description": "Enable logging for the NAT. Logs will be exported to Stackdriver."
+                },
+                "min_ports_per_vm": {
+                    "type": "integer",
+                    "default": 64,
+                    "description": "Minimum number of ports allocated to a VM from this NAT."
+                },
+                "udp_idle_timeout": {
+                    "type": "integer",
+                    "default": 30,
+                    "description": "Timeout in seconds for UDP connections."
+                },
+                "icmp_idle_timeout": {
+                    "type": "integer",
+                    "default": 30,
+                    "description": "Timeout in seconds for ICMP connections."
+                },
+                "tcp_established_idle_timeout": {
+                    "type": "integer",
+                    "default": 120,
+                    "description": "Timeout in seconds for TCP established connections."
+                },
+                "tcp_transitory_idle_timeout": {
+                    "type": "integer",
+                    "default": 30,
+                    "description": "Timeout in seconds for TCP transitory connections."
+                }
+            }
+        },
+        "selected": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "subnetworks_to_nat": {
+                    "type": "string",
+                    "enum": [
+                        "SELECTED_PRIMARY_SUBNETWORKS_SELECTED_SECONDARY_SUBNETWORKS",
+                        "DISABLED"
+                    ],
+                    "default": "DISABLED"
+                },
+                "nat_groups": {
+                    "type": "array",
+                    "widget": "SimpleList",
+                    "minItems": 0,
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "nat_group_id"
+                        ],
+                        "properties": {
+                            "nat_group_id": {
+                                "type": "string"
+                            },
+                            "endpoint_independent_mapping": {
+                                "$ref": "cloud_nat.schema.json#/definitions/shared/properties/endpoint_independent_mapping"
+                            },
+                            "log_config": {
+                                "$ref": "cloud_nat.schema.json#/definitions/shared/properties/log_config"
+                            },
+                            "min_ports_per_vm": {
+                                "$ref": "cloud_nat.schema.json#/definitions/shared/properties/min_ports_per_vm"
+                            },
+                            "udp_idle_timeout": {
+                                "$ref": "cloud_nat.schema.json#/definitions/shared/properties/udp_idle_timeout"
+                            },
+                            "icmp_idle_timeout": {
+                                "$ref": "cloud_nat.schema.json#/definitions/shared/properties/icmp_idle_timeout"
+                            },
+                            "tcp_established_idle_timeout": {
+                                "$ref": "cloud_nat.schema.json#/definitions/shared/properties/tcp_established_idle_timeout"
+                            },
+                            "tcp_transitory_idle_timeout": {
+                                "$ref": "cloud_nat.schema.json#/definitions/shared/properties/tcp_transitory_idle_timeout"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "generic": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "endpoint_independent_mapping": {
+                    "$ref": "cloud_nat.schema.json#/definitions/shared/properties/endpoint_independent_mapping"
+                },
+                "subnetworks_to_nat": {
+                    "type": "string",
+                    "enum": [
+                        "ALL_PRIMARY_SUBNETWORKS_ALL_SECONDARY_SUBNETWORKS",
+                        "ALL_PRIMARY_SUBNETWORKS",
+                        "DISABLED"
+                    ],
+                    "default": "DISABLED"
+                },
+                "log_config": {
+                    "$ref": "cloud_nat.schema.json#/definitions/shared/properties/log_config"
+                },
+                "min_ports_per_vm": {
+                    "$ref": "cloud_nat.schema.json#/definitions/shared/properties/min_ports_per_vm"
+                },
+                "udp_idle_timeout": {
+                    "$ref": "cloud_nat.schema.json#/definitions/shared/properties/udp_idle_timeout"
+                },
+                "icmp_idle_timeout": {
+                    "$ref": "cloud_nat.schema.json#/definitions/shared/properties/icmp_idle_timeout"
+                },
+                "tcp_established_idle_timeout": {
+                    "$ref": "cloud_nat.schema.json#/definitions/shared/properties/tcp_established_idle_timeout"
+                },
+                "tcp_transitory_idle_timeout": {
+                    "$ref": "cloud_nat.schema.json#/definitions/shared/properties/tcp_transitory_idle_timeout"
+                }
+            }
+        },
+        "cloud_nat": {
+            "type": "object",
+            "title": "Cloud Nat",
+            "properties": {
+                "subnetworks_to_nat": {
+                    "$ref": "cloud_nat.schema.json#/definitions/shared/properties/subnetworks_to_nat"
+                }
+            },
+            "allOf": [
+                {
+                    "title": "All Primary and Secondary Subnetworks",
+                    "description": "Automatically nat all egress traffic from all primary and secondary subnetworks in this network",
+                    "if": {
+                        "properties": {
+                            "subnetworks_to_nat": {
+                                "type": "string",
+                                "const": "ALL_PRIMARY_SUBNETWORKS_ALL_SECONDARY_SUBNETWORKS"
+                            }
+                        },
+                        "required": [
+                            "subnetworks_to_nat"
+                        ]
+                    },
+                    "then": {
+                        "$ref": "#/definitions/generic"
+                    }
+                },
+                {
+                    "title": "All Primary Subnetworks",
+                    "description": "Automatically nat all egress traffic from all primary subnetworks in this network",
+                    "if": {
+                        "properties": {
+                            "subnetworks_to_nat": {
+                                "type": "string",
+                                "const": "ALL_PRIMARY_SUBNETWORKS"
+                            }
+                        },
+                        "required": [
+                            "subnetworks_to_nat"
+                        ]
+                    },
+                    "then": {
+                        "$ref": "#/definitions/generic"
+                    }
+                },
+                {
+                    "title": "Selected Primary Subnetworks and Selected Secondary Subnetworks",
+                    "description": "Allows you to select specific primary and secondary subnetworks to nat based on nat_group_id",
+                    "if": {
+                        "properties": {
+                            "subnetworks_to_nat": {
+                                "type": "string",
+                                "const": "SELECTED_PRIMARY_SUBNETWORKS_SELECTED_SECONDARY_SUBNETWORKS"
+                            }
+                        }
+                    },
+                    "then": {
+                        "$ref": "#/definitions/selected"
+                    }
+                },
+                {
+                    "title": "[DISABLED] All Primary and Secondary Sub",
+                    "description": "Disabled placeholder for GENERIC cloud nat, when DISABLED nothing is configured within GCP",
+                    "if": {
+                        "properties": {
+                            "subnetworks_to_nat": {
+                                "type": "string",
+                                "const": "DISABLED"
+                            }
+                        }
+                    },
+                    "then": {
+                        "additionalProperties": false,
+                        "properties": {
+                            "subnetworks_to_nat": {
+                                "const": "DISABLED"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

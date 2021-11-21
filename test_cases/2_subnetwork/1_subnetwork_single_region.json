@@ -3,7 +3,7 @@
     "name": "subnetwork-single-region",
     "subnetworks": [
       {
-        "region": "us-east4",
+        "region": "US-EAST4",
         "ip_cidr_range": "172.16.0.0/24"
       }
     ]

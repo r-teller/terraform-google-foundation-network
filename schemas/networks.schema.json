@@ -1,0 +1,398 @@
+{
+    "$id": "networks.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Networks",
+    "type": "array",
+    "widget": "GenericList",
+    "items": {
+        "title": "Network",
+        "description": "A Virtual Private Cloud (VPC) network implemented inside of Google's production network",
+        "type": "object",
+        "widget":"Accordions",
+        "additionalProperties": false,
+        "required": [
+            "name"
+        ],
+        "properties": {
+            "label":{},
+            "name": {
+                "title": "Name",
+                "description": "This field will be used be combine with [environment] and [prefix] to generate a unique VPC name",
+                "type": "string",
+                "examples": [
+                    {
+                        "name": "alpha",
+                        "subnetworks": "......",
+                        "routes": "......",
+                        "firewall_rules": "....."
+                    },
+                    {
+                        "name": "bravo",
+                        "subnetworks": "......",
+                        "routes": "......",
+                        "firewall_rules": "....."
+                    }
+                ]
+            },
+            "project_id": {
+                "title": "Project ID",
+                "description": "To be implemented",
+                "readOnly": true,
+                "$comment": "To be implemented"
+            },
+            "description": {
+                "title": "Description",
+                "description": "Description to be used for the created Network",
+                "type": "string"
+            },
+            "mtu": {
+                "title": "MTU",
+                "description": "Maximum transmission unit (MTU) is the size of the largest IP packet that can be transmitted on this network.",
+                "type": "number",
+                "widget": "Select",
+                "enum": [
+                    1460,
+                    1500
+                ],
+                "default": 1460,
+                "examples": [
+                    [
+                        {
+                            "name": "......",
+                            "mtu": 1460,
+                            "subnetworks": "......",
+                            "routes": "......",
+                            "firewall_rules": "....."
+                        },
+                        {
+                            "name": "......",
+                            "mtu": 1500,
+                            "subnetworks": "......",
+                            "routes": "......",
+                            "firewall_rules": "....."
+                        }
+                    ]
+                ]
+            },
+            "private_google_access": {
+                "title": "Private Google Access",
+                "description": "Private Google Access for is an alternative to connecting to Google APIs and services over the internet. Setting this to PRIVATE or RESTRICTED will deploy the required Cloud DNS and Routing functionality to enable this feature.",
+                "type": "string",
+                "widget": "Select",
+                "enum": [
+                    "DISABLED",
+                    "PRIVATE",
+                    "RESTRICTED"
+                ],
+                "oneOf": [
+                    {
+                        "title": "Disabled",
+                        "description": "Does not deploy GCP configuration required for Private Google Access",
+                        "const": "DISABLED"
+                    },
+                    {
+                        "title": "Private",
+                        "description": "Enables API access to most Google APIs and services regardless of whether they are supported by VPC Service Controls.",
+                        "const": "PRIVATE"
+                    },
+                    {
+                        "title": "Restricted",
+                        "description": "Provides access to Cloud and Developer APIs that support VPC Service Controls. Blocks access to Google APIs and services that do not support VPC Service Controls.",
+                        "const": "RESTRICTED"
+                    }
+                ],
+                "default": "DISABLED",
+                "examples": [
+                    [
+                        {
+                            "name": "......",
+                            "private_google_access": "DISABLED",
+                            "subnetworks": "......",
+                            "routes": "......",
+                            "firewall_rules": "....."
+                        }
+                    ],
+                    [
+                        {
+                            "name": "......",
+                            "private_google_access": "PRIVATE",
+                            "subnetworks": "......",
+                            "routes": "......",
+                            "firewall_rules": "....."
+                        }
+                    ],
+                    [
+                        {
+                            "name": "......",
+                            "private_google_access": "RESTRICTED",
+                            "subnetworks": "......",
+                            "routes": "......",
+                            "firewall_rules": "....."
+                        }
+                    ]
+                ]
+            },
+            "private_service_connection": {
+                "title": "Private Service Connection",
+                "description": "Allows private consumption of services across VPC networks that belong to different groups, teams, projects, or organizations",
+                "type": "object",
+                "properties": {
+                    "subnet_allocation_method": {
+                        "type": "string",
+                        "widget": "Select",
+                        "enum": [
+                            "IP_CIDR_RANGE",
+                            "IP_CIDR_PREFIX",
+                            "DISABLED"
+                        ],
+                        "default": "DISABLED"
+                    }
+                },
+                "allOf": [
+                    {
+                        "title": "IP CIDR Range",
+                        "description": "WORD WORDS WORDS - IP CIDR RANGE - WORDS WORDS WORDS",
+                        "if": {
+                            "properties": {
+                                "subnet_allocation_method": {
+                                    "type": "string",
+                                    "const": "IP_CIDR_RANGE"
+                                }
+                            }
+                        },
+                        "then": {
+                            "properties": {
+                                "export_custom_routes": {
+                                    "title": "Export Custom Routes",
+                                    "description": "If true, the network will export custom routes to peer network.",
+                                    "type": "boolean",
+                                    "default": false
+                                },
+                                "import_custom_routes": {
+                                    "title": "Import Custom Routes",
+                                    "description": "If true, the network will import custom routes from peer network.",
+                                    "type": "boolean",
+                                    "default": false
+                                },
+                                "ip_cidr_range": {
+                                    "title": "IP CIDR Range",
+                                    "$ref": "subnetworks.schema.json#/definitions/shared/properties/ip_cidr_range"
+                                }
+                            },
+                            "required": [
+                                "ip_cidr_range"
+                            ],
+                            "examples": [
+                                {
+                                    "ip_cidr_range": "192.168.0.0/24",
+                                    "export_custom_routes": true,
+                                    "import_custom_routes": false
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "IP CIDR Prefix",
+                        "description": "WORD WORDS WORDS - IP CIDR PREFIX - WORDS WORDS WORDS",
+                        "if": {
+                            "properties": {
+                                "subnet_allocation_method": {
+                                    "type": "string",
+                                    "const": "IP_CIDR_PREFIX"
+                                }
+                            }
+                        },
+                        "then": {
+                            "properties": {
+                                "export_custom_routes": {
+                                    "title": "Export Custom Routes",
+                                    "description": "If true, the network will export custom routes to peer network.",
+                                    "type": "boolean",
+                                    "default": false
+                                },
+                                "import_custom_routes": {
+                                    "title": "Import Custom Routes",
+                                    "description": "If true, the network will import custom routes from peer network.",
+                                    "type": "boolean",
+                                    "default": false
+                                },
+                                "ip_cidr_prefix": {
+                                    "title": "IP CIDR PRefix",
+                                    "description": "IP CIDR prefix used for this connection. Google will automtically allocated a IP CIDR Range based on the provided prefix",
+                                    "type": "integer",
+                                    "minimum": 8,
+                                    "maximum": 30,
+                                    "examples": [
+                                        16
+                                    ],
+                                    "default": 16
+                                }
+                            },
+                            "required": [
+                                "ip_cidr_prefix"
+                            ],
+                            "examples": [
+                                {
+                                    "ip_cidr_prefix": 16,
+                                    "export_custom_routes": true,
+                                    "import_custom_routes": false
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "examples": [
+                    [
+                        {
+                            "name": "......",
+                            "private_service_connection": {
+                                "ip_cidr_range": "192.168.0.0/24",
+                                "export_custom_routes": true,
+                                "import_custom_routes": false
+                            },
+                            "subnetworks": "......",
+                            "routes": "......",
+                            "firewall_rules": "....."
+                        }
+                    ],
+                    [
+                        {
+                            "name": "......",
+                            "private_service_connection": {
+                                "ip_cidr_prefix": "16",
+                                "export_custom_routes": true,
+                                "import_custom_routes": false
+                            },
+                            "subnetworks": "......",
+                            "routes": "......",
+                            "firewall_rules": "....."
+                        }
+                    ]
+                ]
+            },
+            "routing_mode": {
+                "type": "string",
+                "widget": "Select",
+                "title": "Routing Mode",
+                "description": "The BGP routing mode for this network. ",
+                "enum": [
+                    "GLOBAL",
+                    "REGIONAL"
+                ],
+                "oneOf": [
+                    {
+                        "title": "Global",
+                        "description": "Cloud Routers in this network advertise subnetworks from all regions to their BGP peers, and program instances in all regions with the router's best learned BGP routes.",
+                        "const": "GLOBAL"
+                    },
+                    {
+                        "title": "Regional",
+                        "description": "Cloud Routers in this network advertise subnetworks from their local region only to their BGP peers, and program instances in their local region only with the router's best learned BGP routes. ",
+                        "const": "REGIONAL"
+                    }
+                ],
+                "default": "REGIONAL",
+                "examples": [
+                    [
+                        {
+                            "name": "......",
+                            "routing_mode": "REGIONAL",
+                            "subnetworks": "......",
+                            "routes": "......",
+                            "firewall_rules": "....."
+                        }
+                    ],
+                    [
+                        {
+                            "name": "......",
+                            "routing_mode": "GLOBAL",
+                            "subnetworks": "......",
+                            "routes": "......",
+                            "firewall_rules": "....."
+                        }
+                    ]
+                ]
+            },
+            "subnetworks": {
+                "$ref": "subnetworks.schema.json#/definitions/subnetworks"
+            },
+            "cloud_nat": {
+                "$ref": "cloud_nat.schema.json#/definitions/cloud_nat"
+            },
+            "peers": {
+                "$ref": "network_peers.schema.json#"
+            },
+            "routes": {
+                "$ref": "routes.schema.json#/definitions/routes"
+            },
+            "firewall_rules": {
+                "$ref": "firewall_rules.schema.json#/definitions/firewall_rules"
+            },
+            "cloud_vpns":{
+                "$ref": "cloud_vpns.schema.json#/definitions/cloud_vpns"
+            }
+        }
+    },
+    "examples": [
+        [
+            {
+                "name": "network-single",
+                "description": "This will create a single VPC Network and nothing else"
+            }
+        ],
+        [
+            {
+                "name": "network-alpha",
+                "description": "This will create a network alpha and nothing else"
+            },
+            {
+                "name": "network-bravo",
+                "description": "This will create a network bravo and nothing else"
+            }
+        ],
+        [
+            {
+                "name": "subnetwork-secondary-subnetworks",
+                "description": "This will create a single VPC Network, Primary Subnetwork and two Secondary Ranges",
+                "subnetworks": [
+                    {
+                        "region": "US-EAST4",
+                        "ip_cidr_range": "172.16.0.0/24",
+                        "secondary_subnetworks": [
+                            {
+                                "ip_cidr_range": "172.16.1.0/24"
+                            },
+                            {
+                                "ip_cidr_range": "172.16.2.0/24"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "name": "cloud-nat-all",
+                "description": "This will create a single VPC Network with Primary and Secondary Subnetworks with Cloud-NAT",
+                "routing_mode": "GLOBAL",
+                "cloud_nat": {
+                    "subnetworks_to_nat": "ALL_PRIMARY_SUBNETWORKS_ALL_SECONDARY_SUBNETWORKS"
+                },
+                "subnetworks": [
+                    {
+                        "region": "US-WEST1",
+                        "ip_cidr_range": "172.16.32.0/24",
+                        "secondary_subnetworks": [
+                            {
+                                "ip_cidr_range": "10.20.32.0/24"
+                            },
+                            {
+                                "ip_cidr_range": "10.20.33.0/24"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "$id": "networks.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Networks",
+    "type": "array",
+    "widget": "GenericList",
+    "items": {
+        "title": "Network",
+        "description": "A Virtual Private Cloud (VPC) network implemented inside of Google's production network",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+            "firewall_rules": {
+                "title": "Firewall Rules",
+                "$ref": "firewall_rules.schema.json#/definitions/firewall_rules"
+            }
+        }
+    },
+    "default": [
+        [
+            {
+                "firewall_rules": [
+                    {
+                        "direction": "INGRESS"
+                    }
+                ]
+            }
+        ]
+    ]
+}

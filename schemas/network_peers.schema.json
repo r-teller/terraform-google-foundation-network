@@ -1,0 +1,102 @@
+{
+    "title": "VPC Network Peers",
+    "description": "Collection of VPC Peers that enables you to connect VPC networks so that workloads in different VPC networks can communicate internally.",
+    "type": "array",
+    "widget": "SimpleList",
+    "uniqueItems": true,
+    "items": {
+        "title": "VPC Network Peer",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+            "project": {
+                "title": "Project",
+                "description": "The name of the project for the peer network. If not specified, defaults to current project.",
+                "type": "string",
+                "examples": [
+                    "remote-project-id"
+                ]
+            },
+            "network": {
+                "title": "Peer Network",
+                "description": "The name of the network to be peered with the current network.",
+                "type": "string",
+                "examples": [
+                    "prod-network"
+                ]
+            },
+            "export_custom_routes": {
+                "title": "Export Custom Routes",
+                "description": "If true, the network will export custom routes to peer network.",
+                "type": "boolean",
+                "default": false
+            },
+            "import_custom_routes": {
+                "title": "Import Custom Routes",
+                "description": "If true, the network will import custom routes from peer network.",
+                "type": "boolean",
+                "default": false
+            },
+            "import_subnet_routes_with_public_ip": {
+                "title": "Import Subnet Routes with Public IP Addresses",
+                "description": "If true, the network will import subnet routes with addresses in the public IP ranges from peer network.",
+                "type": "boolean",
+                "default": false
+            },
+            "export_subnet_routes_with_public_ip": {
+                "title": "Export Subnet Routes with Public IP Addresses",
+                "description": "If true, the network will export subnet routes with addresses in the public IP ranges from peer network.",
+                "type": "boolean",
+                "default": false
+            }
+        },
+        "required": [
+            "network"
+        ],
+        "examples": [
+            {
+                "network": "prod-network"
+            },
+            {
+                "network": "dev-network",
+                "export_custom_routes": false,
+                "import_custom_routes": true
+            },
+            {
+                "network": "test-network",
+                "export_custom_routes": false,
+                "import_custom_routes": true,
+                "import_subnet_routes_with_public_ip": false,
+                "export_subnet_routes_with_public_ip": true
+            },
+            {
+                "project": "remote-project-id",
+                "network": "remote-network"
+            }
+        ]
+    },
+    "examples": [
+        [
+            {
+                "name": "......",
+                "peers": [
+                    {
+                        "network": "prod-network"
+                    },
+                    {
+                        "network": "dev-network",
+                        "export_custom_routes": false,
+                        "import_custom_routes": true
+                    },
+                    {
+                        "project": "remote-project-id",
+                        "network": "remote-network"
+                    }
+                ],
+                "subnetworks": "......",
+                "routes": "......",
+                "firewall_rules": "....."
+            }
+        ]
+    ]
+}
