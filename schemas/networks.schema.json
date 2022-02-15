@@ -11,13 +11,30 @@
         "widget":"Accordions",
         "additionalProperties": false,
         "required": [
-            "name"
+            "label"
         ],
         "properties": {
-            "label":{},
+            "label":{
+                "title": "Label",
+                "description": "This field will be used to combine with [environment] and [prefix] to generate a unique VPC name",
+                "type": "string",
+                "examples": [
+                    {
+                        "label": "alpha",
+                        "subnetworks": "......",
+                        "routes": "......",
+                        "firewall_rules": "....."
+                    },
+                    {
+                        "label": "bravo",
+                        "subnetworks": "......",
+                        "routes": "......",
+                        "firewall_rules": "....."
+                    }
+                ]},
             "name": {
                 "title": "Name",
-                "description": "This field will be used be combine with [environment] and [prefix] to generate a unique VPC name",
+                "description": "This field will be used to explitly name this resource",
                 "type": "string",
                 "examples": [
                     {
@@ -33,6 +50,13 @@
                         "firewall_rules": "....."
                     }
                 ]
+            },
+            "pre_existing":{
+                "title": "Pre-Existing",
+                "description": "If true, this resource should be pre-existing and not be created and/or updated.",
+                "type": "boolean",
+                "default": false
+                
             },
             "project_id": {
                 "title": "Project ID",

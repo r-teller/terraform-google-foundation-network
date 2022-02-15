@@ -1,0 +1,9 @@
+${
+    attributes["name"] != null
+        ? attributes["name"]
+        : format("vpc%s%s%s",
+            attributes["prefix"] == null ? "" : "-${attributes["prefix"] }",
+            attributes["environment"] == null ? "" : "-${attributes["environment"]}",
+            attributes["label"] == null ? "" : "-${attributes["label"]}",
+            )
+}
