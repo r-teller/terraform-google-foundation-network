@@ -1,12 +1,12 @@
 [
     {
-        "name": "network-peering-remote-left",
-        "peers":[
+        "label": "remote-left",
+        "peers": [
             {
-              "project": "random-project-id",
-              "network": "network-peering-remote-right",
-              "export_custom_routes": true,
-              "import_custom_routes": true
+                "project": "random-project-id",
+                "network": "network-peering-remote-right",
+                "export_custom_routes": true,
+                "import_custom_routes": true
             }
         ]
     }

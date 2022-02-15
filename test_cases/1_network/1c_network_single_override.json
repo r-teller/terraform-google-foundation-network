@@ -1,0 +1,8 @@
+[
+    {
+        "label": "network-single-charlie",
+        "project_id": "rteller-demo-host-aaaa",
+        "environment": "standbox",
+        "prefix": "panda"
+    }
+]

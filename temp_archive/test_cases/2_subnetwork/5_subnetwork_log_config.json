@@ -1,6 +1,6 @@
 [
   {
-    "label": "subnetwork-log-config",
+    "name": "subnetwork-log-config",
     "subnetworks": [
       {
         "region": "US-EAST4",
@@ -32,7 +32,7 @@
       },
       {
         "region": "US-EAST4",
-        "ip_cidr_range": "172.16.2.0/24",
+        "ip_cidr_range": "172.16.1.0/24",
         "log_config": {
           "enabled": true,
           "aggregation_interval": "INTERVAL_5_SEC",

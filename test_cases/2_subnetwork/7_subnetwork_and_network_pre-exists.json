@@ -1,6 +1,8 @@
 [
   {
-    "label": "subnetwork-single-region",
+    "name": "network-pre-exists",
+    "pre_existing": true,
+    "label": "network-pre-exists",
     "subnetworks": [
       {
         "region": "US-EAST4",

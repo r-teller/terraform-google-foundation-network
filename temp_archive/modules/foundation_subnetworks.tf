@@ -19,12 +19,12 @@ locals {
     }
   }
 
-  subnetworks = merge([
-    for key, network in
-    { for x in var.network_configs : templatefile("${path.module}/templates/network.tftpl", { attributes = { name = try(x.name, null), label = try(x.label, null), prefix = try(x.prefix, var.prefix, null), environment = try(x.environment, var.environment, null) } }) => x } : {
-      for primary_subnetwork in network.subnetworks : "${key}-${lower(primary_subnetwork.region)}-${try(primary_subnetwork.name, primary_subnetwork.ip_cidr_range)}" => {
-        name    = templatefile("${path.module}/templates/subnetwork_primary.tftpl", { attributes = { name = try(primary_subnetwork.name, null), label = try(network.label, null), region = module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)], cidr = try(primary_subnetwork.ip_cidr_range, null) } })
-        network = key
+  subnetworks = merge(flatten([
+    for network in var.network_configs : {
+      for primary_subnetwork in network.subnetworks : "${network.name}-${lower(primary_subnetwork.region)}-${try(primary_subnetwork.name, primary_subnetwork.ip_cidr_range)}" => {
+        name    = try(primary_subnetwork.name, "${network.name}-${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}-primary-${replace(primary_subnetwork.ip_cidr_range, "//|\\./", "-")}")
+        network = "${var.prefix}-${var.environment}-vpc-${network.name}"
+
         purpose = try(primary_subnetwork.purpose, "PRIVATE")
 
         // First Check
@@ -46,7 +46,7 @@ locals {
 
         secondary_subnetworks = try(
           [for secondary_subnetwork in primary_subnetwork.secondary_subnetworks : {
-            range_name    = templatefile("${path.module}/templates/subnetwork_secondary.tftpl", { attributes = { name = try(secondary_subnetwork.name, null), label = try(network.label, null), region = module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)], cidr = try(secondary_subnetwork.ip_cidr_range, null) } })
+            range_name    = try(secondary_subnetwork.name, "${network.name}-${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}-secondary-${replace(secondary_subnetwork.ip_cidr_range, "//|\\./", "-")}")
             ip_cidr_range = secondary_subnetwork.ip_cidr_range
         }], [])
 
@@ -59,10 +59,10 @@ locals {
         }
       }
     } if can(network.subnetworks)
-  ]...)
+  ])...)
 }
 
-# // Creates all subnetwork types except those with role BACKUP
+// Creates all subnetwork types except those with role BACKUP
 resource "google_compute_subnetwork" "subnetworks" {
   provider = google-beta
 
@@ -90,6 +90,7 @@ resource "google_compute_subnetwork" "subnetworks" {
       metadata_fields      = each.value.log_config.metadata_fields
     }
   }
+
   depends_on = [
     google_compute_network.networks
   ]
@@ -106,7 +107,7 @@ resource "google_compute_subnetwork" "subnetworks_backup" {
   region        = each.value.region
   network       = each.value.network
   ip_cidr_range = each.value.ip_cidr_range
-
+ 
   purpose = each.value.purpose
   role    = each.value.role
 

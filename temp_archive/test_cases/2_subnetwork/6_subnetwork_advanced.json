@@ -1,6 +1,6 @@
 [
   {
-    "label": "subnetwork-advanced-alpha",
+    "name": "subnetwork-advanced-alpha",
     "subnetworks": [
       {
         "region": "US-EAST4",

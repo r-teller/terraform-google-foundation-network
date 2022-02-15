@@ -1,0 +1,32 @@
+[
+    {
+        "name": "network-private-service-connection-cidr",
+        "private_service_connection": {
+            "subnet_allocation_method": "IP_CIDR_RANGE",
+            "ip_cidr_range": "192.168.255.0/24"
+        }
+    },
+    {
+        "name": "network-private-service-connection-export",
+        "private_service_connection": {
+            "subnet_allocation_method": "IP_CIDR_RANGE",
+            "ip_cidr_range": "192.168.255.0/24",
+            "export_custom_routes": true
+        }
+    },
+    {
+        "name": "network-private-service-connection-import",
+        "private_service_connection": {
+            "subnet_allocation_method": "IP_CIDR_RANGE",
+            "ip_cidr_range": "192.168.255.0/24",
+            "import_custom_routes": true
+        }
+    },
+    {
+        "name": "network-private-service-connection-prefix",
+        "private_service_connection": {
+            "subnet_allocation_method": "IP_CIDR_PREFIX",
+            "ip_cidr_prefix": 16
+        }
+    }
+]
