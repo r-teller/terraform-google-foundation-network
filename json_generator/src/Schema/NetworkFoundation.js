@@ -25,6 +25,12 @@ import { UIRootRenderer } from '@ui-schema/ui-schema/UIRootRenderer';
 import { makeTranslator } from "@ui-schema/ui-schema/Translate/makeTranslator";
 import { widgets } from "@ui-schema/ds-material";
 import { en } from '@ui-schema/dictionary'
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import networksSchema from './network.schema';
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -55,11 +61,12 @@ const editModalStyle = {
 
 const tEN = makeTranslator(dicEN, 'en');
 
-const networksSchema = require("./resolved.schema.json")
+// const networksSchema = require("./resolved.schema.json")
 const combineSchema = {
     "type": "object",
     "properties": {
-        "networks": networksSchema
+        "networks": networksSchema()
+        // "networks": networksSchema
     }
 };
 
@@ -99,6 +106,20 @@ const Generator = () => {
     const onChange = React.useCallback((storeKeys, scopes, updater, deleteOnEmpty, type) => {
         setStore(storeUpdater(storeKeys, scopes, updater, deleteOnEmpty, type))
     }, [setStore])
+
+    const [type, setType] = React.useState(false);
+    const handleTypeChange = (e) => {
+        setType(e.target.value);
+        const getSchema =  networksSchema(e.target.value === 'basic');
+        setSchema(
+            createOrderedMap({
+                "type": "object",
+                "properties": {
+                    "networks": getSchema
+                }
+            })
+        );
+    }
 
 
     return (
@@ -155,6 +176,21 @@ const Generator = () => {
                     </Item>
                 </Grid>
                 <Grid item xs={12}>
+                    <Item>
+                        <FormControl>
+                            <FormLabel id="template_type">Template Type</FormLabel>
+                            <RadioGroup
+                                row
+                                aria-labelledby="template_type"
+                                name="template_type"
+                                value={type}
+                                onChange={(e) => handleTypeChange(e)}
+                            >
+                                <FormControlLabel value="basic" control={<Radio />} label="Basic" />
+                                <FormControlLabel value="advance" control={<Radio />} label="Advanced" />
+                            </RadioGroup>
+                        </FormControl>
+                    </Item>
                     <Item>
                         <UIStoreProvider
                             store={store}
