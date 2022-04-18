@@ -11,11 +11,8 @@
           "flow_sampling": 50,
           "metadata": "CUSTOM_METADATA",
           "metadata_fields": [
-            "connection.src_ip",
             "src_vpc",
             "src_vpc.project_id",
-            "connection.dest_ip",
-            "start_time",
             "dest_instance"
           ]
         }

@@ -90,8 +90,9 @@ resource "google_compute_subnetwork" "subnetworks" {
       metadata_fields      = each.value.log_config.metadata_fields
     }
   }
+
   depends_on = [
-    google_compute_network.networks
+    google_compute_network.networks,
   ]
 }
 
@@ -111,6 +112,34 @@ resource "google_compute_subnetwork" "subnetworks_backup" {
   role    = each.value.role
 
   depends_on = [
-    google_compute_subnetwork.subnetworks
+    google_compute_network.networks,
+    google_compute_subnetwork.subnetworks,
+  ]
+}
+
+
+resource "google_compute_subnetwork" "subnetworksv2" {
+  ip_cidr_range            = "172.16.0.0/24"
+  name                     = "sb-p-subnetwork-log-config-use4-172-16-0-0-24"
+  network                  = "vpc-test-cases-subnetwork-log-config"
+  private_ip_google_access = true
+  project                  = "rteller-demo-host-aaaa"
+  purpose                  = "PRIVATE"
+  region                   = "us-east4"
+  secondary_ip_range       = []
+
+  log_config {
+    aggregation_interval = "INTERVAL_5_SEC"
+    filter_expr          = "true"
+    flow_sampling        = 0.5
+    metadata             = "CUSTOM_METADATA"
+    metadata_fields = [
+      "src_instance",
+      "dest_instance",
+    ]
+  }
+
+  depends_on = [
+    google_compute_network.networks,
   ]
 }

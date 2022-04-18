@@ -108,18 +108,6 @@
                                 "type": "string",
                                 "widget": "Select",
                                 "enum": [
-                                    "connection",
-                                    "connection.src_ip",
-                                    "connection.src_port",
-                                    "connection.dest_ip",
-                                    "connection.dest_port",
-                                    "connection.protocol",
-                                    "start_time",
-                                    "end_time",
-                                    "bytes_sent",
-                                    "packets_sent",
-                                    "rtt_msec",
-                                    "reporter",
                                     "src_instance",
                                     "src_instance.project_id",
                                     "src_instance.vm_name",
@@ -172,71 +160,6 @@
                                     "dest_gke_details.service.service_namespace"
                                 ],
                                 "anyOf": [
-                                    {
-                                        "title": "IP Connection",
-                                        "anyOf": [
-                                            {
-                                                "title": "connection",
-                                                "description": "5-Tuple describing this connection.",
-                                                "const": "connection"
-                                            },
-                                            {
-                                                "title": "connection.src_ip",
-                                                "description": "Connection Source IP address",
-                                                "const": "connection.src_ip"
-                                            },
-                                            {
-                                                "title": "connection.src_port",
-                                                "description": "Connection Source port",
-                                                "const": "connection.src_port"
-                                            },
-                                            {
-                                                "title": "connection.dest_ip",
-                                                "description": "Connection Destination IP address",
-                                                "const": "connection.dest_ip"
-                                            },
-                                            {
-                                                "title": "connection.dest_port",
-                                                "description": "Connection Destination Port",
-                                                "const": "connection.dest_port"
-                                            },
-                                            {
-                                                "title": "connection.protocol",
-                                                "description": "Connection IANA protocol number",
-                                                "const": "connection.protocol"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "title": "start_time",
-                                        "description": "Timestamp (RFC 3339 date string format) of the first observed packet during the aggregated time interval.",
-                                        "const": "start_time"
-                                    },
-                                    {
-                                        "title": "end_time",
-                                        "description": "Timestamp (RFC 3339 date string format) of the last observed packet during the aggregated time interval",
-                                        "const": "end_time"
-                                    },
-                                    {
-                                        "title": "bytes_sent",
-                                        "description": "Amount of bytes sent from the source to the destination",
-                                        "const": "bytes_sent"
-                                    },
-                                    {
-                                        "title": "packets_sent",
-                                        "description": "Number of packets sent from the source to the destination",
-                                        "const": "packets_sent"
-                                    },
-                                    {
-                                        "title": "rtt_msec",
-                                        "description": "Latency as measured during the time interval, for TCP flows only. The measured latency is the time elapsed between sending a SEQ and receiving a corresponding ACK. The latency result is the sum of the network RTT and any time consumed by the application",
-                                        "const": "rtt_msec"
-                                    },
-                                    {
-                                        "title": "reporter",
-                                        "description": "The side which reported the flow. Can be either SRC or DEST.",
-                                        "const": "reporter"
-                                    },
                                     {
                                         "title": "Source Instance",
                                         "anyOf": [
@@ -532,13 +455,12 @@
                             "default": [],
                             "examples": [
                                 [
-                                    "connection",
                                     "src_vpc",
                                     "dest_vpc"
                                 ],
                                 [
-                                    "connection.dest_ip",
-                                    "connection.src_ip"
+                                    "src_instance.vm_name",
+                                    "dest_instance.vm_name"
                                 ]
                             ]
                         }
@@ -596,7 +518,7 @@
         "private": {
             "title": "Private",
             "type": "object",
-            "widget":"Accordions",
+            "widget": "Accordions",
             "required": [
                 "ip_cidr_range",
                 "region"
@@ -977,7 +899,7 @@
         "private_service_connect": {
             "title": "Private Service Connect",
             "type": "object",
-            "widget":"Accordions",
+            "widget": "Accordions",
             "additionalProperties": false,
             "required": [
                 "ip_cidr_range",
@@ -1017,7 +939,7 @@
         "internal_https_load_balancer": {
             "title": "Ineranl HTTP(s) Load Balancer",
             "type": "object",
-            "widget":"Accordions",
+            "widget": "Accordions",
             "additionalProperties": false,
             "required": [
                 "ip_cidr_range",
