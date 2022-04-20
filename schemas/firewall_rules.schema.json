@@ -27,7 +27,7 @@
                 },
                 "description": {
                     "type": "string",
-                    "description": "Description of this subnetwork."
+                    "description": "Description of this firewall rule."
                 },
                 "action": {
                     "type": "string",

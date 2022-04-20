@@ -17,9 +17,16 @@ locals {
     peers        = []
   }
 
-  network_configs = { for network in var.network_configs : templatefile("${path.module}/templates/network.tftpl", { attributes = { name = try(network.name, null), label = try(network.label, null), prefix = try(network.prefix, var.prefix, null), environment = try(network.environment, var.environment, null) } }) => {
-    pre_existing            = try(network.pre_existing, false)
-    explicit_name           = try(network.name, null)
+  network_configs = { for network in var.network_configs : templatefile("${path.module}/templates/network.tftpl", {
+    attributes = {
+      name        = try(network.name, null),
+      label       = network.label
+      prefix      = try(network.prefix, var.prefix, null),
+      environment = try(network.environment, var.environment, null)
+    } }) => {
+
+    pre_existing  = try(network.pre_existing, false)
+    explicit_name = try(network.name, null)
 
     project_id              = try(network.project_id, var.project_id)
     routing_mode            = try(network.routing_mode, local.defaults_network.routing_mode)
@@ -28,7 +35,13 @@ locals {
 
     peers = try([for peer in network.peers : {
       local_project_id = try(network.project_id, var.project_id)
-      local_network    = templatefile("${path.module}/templates/network.tftpl", { attributes = { name = try(network.name, null), label = try(network.label, null), prefix = try(network.prefix, var.prefix, null), environment = try(network.environment, var.environment, null) } })
+      local_network = templatefile("${path.module}/templates/network.tftpl", {
+        attributes = {
+          name        = try(network.name, null),
+          label       = network.label
+          prefix      = try(network.prefix, var.prefix, null),
+          environment = try(network.environment, var.environment, null)
+      } })
 
       // If peer project is specified use that, otherwise default to the project_id used for this VPC
       remote_project_id = try(peer.project, try(network.project_id, var.project_id))
@@ -38,7 +51,13 @@ locals {
       // 3a - If step 2 is true network field matches one of the labels collected in step 1 --> generate vpc name based on naming standard
       // 3b - If step 2 is false network field does not matche any labels collected in step 1 --> use the provided vpc name as an explicit field
       remote_network = contains([for value in var.network_configs : value.label if !can(value.name)], peer.network) ? (
-        templatefile("${path.module}/templates/network.tftpl", { attributes = { name = null, label = try(peer.network, null), prefix = try(network.prefix, var.prefix, null), environment = try(network.environment, var.environment, null) } })
+        templatefile("${path.module}/templates/network.tftpl", {
+          attributes = {
+            name        = null,
+            label       = try(peer.network, null),
+            prefix      = try(network.prefix, var.prefix, null),
+            environment = try(network.environment, var.environment, null)
+        } })
       ) : peer.network
 
       import_custom_routes = try(peer.import_custom_routes, null)

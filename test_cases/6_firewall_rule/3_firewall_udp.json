@@ -1,0 +1,69 @@
+[
+  {
+    "label": "fw-udp",
+    "firewall_rules": [
+      {
+        "id": "allow-udp-all-ingress",
+        "action": "ALLOW",
+        "direction": "INGRESS",
+        "sources": [],
+        "targets": [],
+        "rules": [
+          {
+            "protocol": "UDP",
+            "ports": []
+          }
+        ]
+      },
+      {
+        "id": "allow-udp-dns-ingress",
+        "action": "ALLOW",
+        "direction": "INGRESS",
+        "sources": [],
+        "targets": [],
+        "rules": [
+          {
+            "protocol": "UDP",
+            "ports": [
+              53
+            ]
+          }
+        ]
+      },
+      {
+        "id": "allow-udp-range-ingress",
+        "action": "ALLOW",
+        "direction": "INGRESS",
+        "sources": [],
+        "targets": [],
+        "rules": [
+          {
+            "protocol": "UDP",
+            "port_ranges": [
+              "80-443"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "allow-udp-mixed-ingress",
+        "action": "ALLOW",
+        "direction": "INGRESS",
+        "sources": [],
+        "targets": [],
+        "rules": [
+          {
+            "protocol": "UDP",
+            "ports": [
+              22,
+              3389
+            ],
+            "port_ranges": [
+              "80-443"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

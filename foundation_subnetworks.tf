@@ -21,48 +21,68 @@ locals {
 
   subnetworks = merge([
     for key, network in
-    { for x in var.network_configs : templatefile("${path.module}/templates/network.tftpl", { attributes = { name = try(x.name, null), label = try(x.label, null), prefix = try(x.prefix, var.prefix, null), environment = try(x.environment, var.environment, null) } }) => x } : {
-      for primary_subnetwork in network.subnetworks : "${key}-${lower(primary_subnetwork.region)}-${try(primary_subnetwork.name, primary_subnetwork.ip_cidr_range)}" => {
-        name    = templatefile("${path.module}/templates/subnetwork_primary.tftpl", { attributes = { name = try(primary_subnetwork.name, null), label = try(network.label, null), region = module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)], cidr = try(primary_subnetwork.ip_cidr_range, null) } })
-        network = key
-        purpose = try(primary_subnetwork.purpose, "PRIVATE")
+    { for x in var.network_configs : templatefile("${path.module}/templates/network.tftpl", {
+      attributes = {
+        name        = try(x.name, null),
+        label       = x.label,
+        prefix      = try(x.prefix, var.prefix, null),
+        environment = try(x.environment, var.environment, null),
+      } }) => x } : { for primary_subnetwork in network.subnetworks : "${key}-${lower(primary_subnetwork.region)}-${try(primary_subnetwork.name, primary_subnetwork.ip_cidr_range)}" => {
+      name = templatefile("${path.module}/templates/subnetwork_primary.tftpl", {
+        attributes = {
+          name        = try(primary_subnetwork.name, null),
+          label       = network.label,
+          prefix      = try(network.prefix, var.prefix, null),
+          environment = try(network.environment, var.environment, null)
+          region      = module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)],
+          cidr        = try(primary_subnetwork.ip_cidr_range, null),
+      } })
 
-        // First Check
-        //// Is primary_subnetwork.purpose either OneOf["INTERNAL_HTTPS_LOAD_BALANCER"], if so primary_subnetwork.role is set to value from JSON
-        // else
-        //// primary_subnetwork.role is set to null
-        role = (contains(["INTERNAL_HTTPS_LOAD_BALANCER"], try(primary_subnetwork.purpose, "PRIVATE"))) ? try(primary_subnetwork.role, "ACTIVE") : null
+      network = key
+      purpose = try(primary_subnetwork.purpose, "PRIVATE")
 
-        // First Check
-        //// Is primary_subnetwork.purpose either OneOf["INTERNAL_HTTPS_LOAD_BALANCER","PRIVATE_SERVICE_CONNECT"], if so primary_subnetwork.private_ip_google_access == false
-        // Second Check
-        //// Is primary_subnetwork.private_ip_google_access set to DISABLED, if so primary_subnetwork.private_ip_google_access == false
-        // else
-        //// primary_subnetwork.private_ip_google_access == true        
-        private_ip_google_access = (contains(["INTERNAL_HTTPS_LOAD_BALANCER", "PRIVATE_SERVICE_CONNECT"], try(primary_subnetwork.purpose, "PRIVATE"))) ? false : (contains(["DISABLED"], try(primary_subnetwork.private_ip_google_access, "ENABLED"))) ? false : true
+      // First Check
+      //// Is primary_subnetwork.purpose either OneOf["INTERNAL_HTTPS_LOAD_BALANCER"], if so primary_subnetwork.role is set to value from JSON
+      // else
+      //// primary_subnetwork.role is set to null
+      role = (contains(["INTERNAL_HTTPS_LOAD_BALANCER"], try(primary_subnetwork.purpose, "PRIVATE"))) ? try(primary_subnetwork.role, "ACTIVE") : null
 
-        region        = lower(primary_subnetwork.region)
-        ip_cidr_range = primary_subnetwork.ip_cidr_range
+      // First Check
+      //// Is primary_subnetwork.purpose either OneOf["INTERNAL_HTTPS_LOAD_BALANCER","PRIVATE_SERVICE_CONNECT"], if so primary_subnetwork.private_ip_google_access == false
+      // Second Check
+      //// Is primary_subnetwork.private_ip_google_access set to DISABLED, if so primary_subnetwork.private_ip_google_access == false
+      // else
+      //// primary_subnetwork.private_ip_google_access == true        
+      private_ip_google_access = (contains(["INTERNAL_HTTPS_LOAD_BALANCER", "PRIVATE_SERVICE_CONNECT"], try(primary_subnetwork.purpose, "PRIVATE"))) ? false : (contains(["DISABLED"], try(primary_subnetwork.private_ip_google_access, "ENABLED"))) ? false : true
 
-        secondary_subnetworks = try(
-          [for secondary_subnetwork in primary_subnetwork.secondary_subnetworks : {
-            range_name    = templatefile("${path.module}/templates/subnetwork_secondary.tftpl", { attributes = { name = try(secondary_subnetwork.name, null), label = try(network.label, null), region = module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)], cidr = try(secondary_subnetwork.ip_cidr_range, null) } })
-            ip_cidr_range = secondary_subnetwork.ip_cidr_range
-        }], [])
+      region        = lower(primary_subnetwork.region)
+      ip_cidr_range = primary_subnetwork.ip_cidr_range
 
-        log_config = {
-          enabled              = (try(primary_subnetwork.log_config.enabled, false) && try(primary_subnetwork.purpose, "PRIVATE") == "PRIVATE") ? true : false
-          aggregation_interval = try(primary_subnetwork.log_config.aggregation_interval, "INTERVAL_5_SEC")
-          flow_sampling        = try(primary_subnetwork.log_config.flow_sampling, 50) / 100
-          metadata             = try(primary_subnetwork.log_config.metadata, local.subnetwork_defaults.log_config.metadata)
-          metadata_fields      = (try(primary_subnetwork.log_config.metadata, local.subnetwork_defaults.log_config.metadata) == "CUSTOM_METADATA") ? try(primary_subnetwork.log_config.metadata_fields, local.subnetwork_defaults.log_config.metadata_fields) : []
-        }
+      secondary_subnetworks = try(
+        [for secondary_subnetwork in primary_subnetwork.secondary_subnetworks : {
+          range_name = templatefile("${path.module}/templates/subnetwork_secondary.tftpl", {
+            attributes = {
+              name   = try(secondary_subnetwork.name, null),
+              label  = network.label,
+              region = module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)],
+              cidr   = try(secondary_subnetwork.ip_cidr_range, null)
+          } })
+          ip_cidr_range = secondary_subnetwork.ip_cidr_range
+      }], [])
+
+      log_config = {
+        enabled              = (try(primary_subnetwork.log_config.enabled, false) && try(primary_subnetwork.purpose, "PRIVATE") == "PRIVATE") ? true : false
+        aggregation_interval = try(primary_subnetwork.log_config.aggregation_interval, "INTERVAL_5_SEC")
+        flow_sampling        = try(primary_subnetwork.log_config.flow_sampling, 50) / 100
+        metadata             = try(primary_subnetwork.log_config.metadata, local.subnetwork_defaults.log_config.metadata)
+        metadata_fields      = (try(primary_subnetwork.log_config.metadata, local.subnetwork_defaults.log_config.metadata) == "CUSTOM_METADATA") ? try(primary_subnetwork.log_config.metadata_fields, local.subnetwork_defaults.log_config.metadata_fields) : []
+      }
       }
     } if can(network.subnetworks)
   ]...)
 }
 
-# // Creates all subnetwork types except those with role BACKUP
+# Creates all subnetwork types except those with role BACKUP
 resource "google_compute_subnetwork" "subnetworks" {
   provider = google-beta
 
@@ -114,32 +134,5 @@ resource "google_compute_subnetwork" "subnetworks_backup" {
   depends_on = [
     google_compute_network.networks,
     google_compute_subnetwork.subnetworks,
-  ]
-}
-
-
-resource "google_compute_subnetwork" "subnetworksv2" {
-  ip_cidr_range            = "172.16.0.0/24"
-  name                     = "sb-p-subnetwork-log-config-use4-172-16-0-0-24"
-  network                  = "vpc-test-cases-subnetwork-log-config"
-  private_ip_google_access = true
-  project                  = "rteller-demo-host-aaaa"
-  purpose                  = "PRIVATE"
-  region                   = "us-east4"
-  secondary_ip_range       = []
-
-  log_config {
-    aggregation_interval = "INTERVAL_5_SEC"
-    filter_expr          = "true"
-    flow_sampling        = 0.5
-    metadata             = "CUSTOM_METADATA"
-    metadata_fields = [
-      "src_instance",
-      "dest_instance",
-    ]
-  }
-
-  depends_on = [
-    google_compute_network.networks,
   ]
 }

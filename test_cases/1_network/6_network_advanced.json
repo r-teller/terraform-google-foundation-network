@@ -1,6 +1,6 @@
 [
     {
-        "name": "network-advanced",
+        "label": "network-advanced",
         "mtu": 1500,
         "routing_mode": "GLOBAL"
     }

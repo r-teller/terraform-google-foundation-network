@@ -8,7 +8,7 @@
                 "name": {
                     "type": "string",
                     "deleteOnEmpty": true,
-                    "description": "if this field is not provided ip_cidr_range value will be dynamically generated based on the ip_cidr_range. WARNING, if this field is not set changing the ip_cidr_range will change the name dynamically generated.",
+                    "description": "If this field is not provided ip_cidr_range value will be dynamically generated based on the ip_cidr_range. WARNING, if this field is not set changing the ip_cidr_range will change the name dynamically generated.",
                     "pattern": "^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$",
                     "minLength": 1,
                     "maxLength": 63,

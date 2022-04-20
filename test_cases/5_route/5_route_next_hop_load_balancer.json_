@@ -1,0 +1,19 @@
+[
+    {
+        "label": "routes-nh-lb",
+        "subnetworks": [
+            {
+                "region": "US-CENTRAL1",
+                "ip_cidr_range": "192.168.0.0/24"
+            }
+        ],
+        "routes": [
+            {
+                "destination": "1.1.1.1/32",
+                "priority": 100,
+                "next_hop_type": "LOAD_BALANCER",
+                "next_hop_load_balancer_id": "projects/example-project/regions/us-central1/forwardingRules/example-load-balancer"
+            }
+        ]
+    }
+]

@@ -14,24 +14,6 @@
             "label"
         ],
         "properties": {
-            "label":{
-                "title": "Label",
-                "description": "This field will be used to combine with [environment] and [prefix] to generate a unique VPC name",
-                "type": "string",
-                "examples": [
-                    {
-                        "label": "alpha",
-                        "subnetworks": "......",
-                        "routes": "......",
-                        "firewall_rules": "....."
-                    },
-                    {
-                        "label": "bravo",
-                        "subnetworks": "......",
-                        "routes": "......",
-                        "firewall_rules": "....."
-                    }
-                ]},
             "name": {
                 "title": "Name",
                 "description": "This field will be used to explitly name this resource",
@@ -51,6 +33,24 @@
                     }
                 ]
             },
+            "label":{
+                "title": "Label",
+                "description": "This field will be used to combine with [environment] and [prefix] to generate a unique VPC name",
+                "type": "string",
+                "examples": [
+                    {
+                        "label": "alpha",
+                        "subnetworks": "......",
+                        "routes": "......",
+                        "firewall_rules": "....."
+                    },
+                    {
+                        "label": "bravo",
+                        "subnetworks": "......",
+                        "routes": "......",
+                        "firewall_rules": "....."
+                    }
+                ]},
             "pre_existing":{
                 "title": "Pre-Existing",
                 "description": "If true, this resource should be pre-existing and not be created and/or updated.",
@@ -60,12 +60,25 @@
             },
             "project_id": {
                 "title": "Project ID",
-                "description": "To be implemented",
-                "readOnly": true,
-                "$comment": "To be implemented"
+                "deleteOnEmpty": true,
+                "description": "If specified this 'Project ID' value will override the default value specified in the Terraform module",
+                "type": "string"
+            },
+            "environment": {
+                "title": "Environment",
+                "deleteOnEmpty": true,
+                "description": "If specified this 'Environment' value will override the default value specified in the Terraform module",
+                "type": "string"
+            },
+            "prefix": {
+                "title": "Prefix",
+                "deleteOnEmpty": true,
+                "description": "If specified this 'Prefix' value will override the default value specified in the Terraform module",
+                "type": "string"
             },
             "description": {
                 "title": "Description",
+                "deleteOnEmpty": true,
                 "description": "Description to be used for the created Network",
                 "type": "string"
             },
