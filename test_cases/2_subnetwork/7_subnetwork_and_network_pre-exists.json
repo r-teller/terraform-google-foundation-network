@@ -1,0 +1,18 @@
+[
+  {
+    "name": "network-pre-exists",
+    "pre_existing": true,
+    "label": "network-pre-exists",
+    "subnetworks": [
+      {
+        "region": "US-EAST4",
+        "ip_cidr_range": "172.16.0.0/24"
+      },
+      {
+        "name": "subnetwork-for-network-pre-exists",
+        "region": "US-EAST4",
+        "ip_cidr_range": "172.16.1.0/24"
+      }
+    ]
+  }
+]

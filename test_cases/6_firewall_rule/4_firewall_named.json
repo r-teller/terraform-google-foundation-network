@@ -1,0 +1,33 @@
+[
+  {
+    "label": "fw-named",
+    "firewall_rules": [
+      {
+        "name": "allow-tcp-all-ingress",
+        "action": "ALLOW",
+        "direction": "INGRESS",
+        "sources": [],
+        "targets": [],
+        "rules": [
+          {
+            "protocol": "TCP",
+            "ports": []
+          }
+        ]
+      },
+      {
+        "name": "allow-udp-all-ingress",
+        "action": "ALLOW",
+        "direction": "INGRESS",
+        "sources": [],
+        "targets": [],
+        "rules": [
+          {
+            "protocol": "UDP",
+            "ports": []
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,6 +1,7 @@
 [
   {
     "name": "cloud-nat-disabled",
+    "label": "cloud-nat-disabled",
     "routing_mode": "GLOBAL",
     "cloud_nat": {
       "subnetworks_to_nat": "DISABLED"

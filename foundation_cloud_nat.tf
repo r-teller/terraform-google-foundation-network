@@ -3,8 +3,6 @@
 // Terraform - https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_router_nat
 // GCLOUD - https://cloud.google.com/sdk/gcloud/reference/compute/routers/nats/create
 
-
-
 locals {
   defaults_cloud_nat = {
     min_ports_per_vm                   = 64
@@ -44,7 +42,14 @@ locals {
   cloud_nat_groups = merge(distinct(flatten([
     for network in var.network_configs : {
       for nat_group in network.cloud_nat.nat_groups : "${var.prefix}-${var.environment}-vpc-${network.name}__${nat_group.nat_group_id}" => {
-        network                      = "${var.prefix}-${var.environment}-vpc-${network.name}"
+        network = templatefile("${path.module}/templates/network.tftpl", {
+          attributes = {
+            name        = try(network.name, null),
+            label       = network.label,
+            prefix      = try(network.prefix, var.prefix, null),
+            environment = try(network.environment, var.environment, null)
+        } })
+
         nat_group_id                 = nat_group.nat_group_id
         log_config                   = try(nat_group.log_config, local.defaults_cloud_nat.log_config)
         min_ports_per_vm             = try(nat_group.min_ports_per_vm, local.defaults_cloud_nat.min_ports_per_vm)
@@ -60,13 +65,37 @@ locals {
   cloud_nat_networks = { for cloud_nat_network in distinct(flatten([
     for network in var.network_configs : [
       for primary_subnetwork in network.subnetworks : {
-        region            = lower(primary_subnetwork.region)
-        region_shortname  = module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]
-        network           = "${var.prefix}-${var.environment}-vpc-${network.name}"
-        network_shortname = network.name
+        region           = lower(primary_subnetwork.region)
+        region_shortname = module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]
 
-        name   = "${network.name}-${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}-router-nat"
-        router = "${network.name}-${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}-router-nat"
+        network = templatefile("${path.module}/templates/network.tftpl", {
+          attributes = {
+            name        = try(network.name, null),
+            label       = network.label,
+            prefix      = try(network.prefix, var.prefix, null),
+            environment = try(network.environment, var.environment, null)
+        } })
+
+        network_shortname = try(network.label, network.name)
+
+        name = templatefile("${path.module}/templates/cloud_nat.tftpl", {
+          attributes = {
+            name        = null,
+            label       = network.label,
+            prefix      = try(network.prefix, var.prefix, null),
+            environment = try(network.environment, var.environment, null),
+            region      = module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)],
+        } })
+
+        router = templatefile("${path.module}/templates/cloud_router.tftpl", {
+          attributes = {
+            name        = null,
+            label       = network.label,
+            prefix      = try(network.prefix, var.prefix, null),
+            environment = try(network.environment, var.environment, null),
+            region      = module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)],
+            purpose     = "nat"
+        } })
 
         source_subnetwork_ip_ranges_to_nat = try(lookup(local.lookups_source_subnetwork_ip_ranges_to_nat, network.cloud_nat.subnetworks_to_nat), local.defaults_cloud_nat.source_subnetwork_ip_ranges_to_nat)
 
@@ -91,13 +120,46 @@ locals {
   cloud_nat_primary_subnetworks = distinct(flatten([
     for network in var.network_configs : [
       for primary_subnetwork in network.subnetworks : {
-        region            = lower(primary_subnetwork.region)
-        network           = "${var.prefix}-${var.environment}-vpc-${network.name}"
-        network_shortname = network.name
+        region = lower(primary_subnetwork.region)
 
-        router = "${network.name}-${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}-router-nat"
+        network = templatefile("${path.module}/templates/network.tftpl", {
+          attributes = {
+            name        = try(network.name, null),
+            label       = network.label
+            prefix      = try(network.prefix, var.prefix, null),
+            environment = try(network.environment, var.environment, null)
+        } })
 
-        primary_subnetwork_name = try(primary_subnetwork.name, "${network.name}-${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}-primary-${replace(primary_subnetwork.ip_cidr_range, "//|\\./", "-")}")
+        network_shortname = try(network.label, network.name)
+
+        name = templatefile("${path.module}/templates/cloud_nat.tftpl", {
+          attributes = {
+            name        = null,
+            label       = network.label
+            prefix      = try(network.prefix, var.prefix, null),
+            environment = try(network.environment, var.environment, null),
+            region      = module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)],
+        } })
+
+        router = templatefile("${path.module}/templates/cloud_router.tftpl", {
+          attributes = {
+            name        = null,
+            label       = network.label
+            prefix      = try(network.prefix, var.prefix, null),
+            environment = try(network.environment, var.environment, null),
+            region      = module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)],
+            purpose     = "nat"
+        } })
+
+        primary_subnetwork_name = templatefile("${path.module}/templates/subnetwork_primary.tftpl", {
+          attributes = {
+            name        = try(primary_subnetwork.name, null),
+            label       = network.label
+            prefix      = try(network.prefix, var.prefix, null),
+            environment = try(network.environment, var.environment, null)
+            region      = module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)],
+            cidr        = try(primary_subnetwork.ip_cidr_range, null),
+        } })
 
         nat_group_id         = primary_subnetwork.cloud_nat.nat_group_id
         mapping_nat_group_id = "${var.prefix}-${var.environment}-vpc-${network.name}__${primary_subnetwork.cloud_nat.nat_group_id}__${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}"
@@ -112,14 +174,54 @@ locals {
     for network in var.network_configs : [
       for primary_subnetwork in network.subnetworks : [
         for secondary_subnetwork in primary_subnetwork.secondary_subnetworks : {
-          region            = lower(primary_subnetwork.region)
-          network           = "${var.prefix}-${var.environment}-vpc-${network.name}"
-          network_shortname = network.name
+          region = lower(primary_subnetwork.region)
 
-          router = "${network.name}-${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}-router-nat"
+          network = templatefile("${path.module}/templates/network.tftpl", {
+            attributes = {
+              name        = try(network.name, null),
+              label       = network.label
+              prefix      = try(network.prefix, var.prefix, null),
+              environment = try(network.environment, var.environment, null)
+          } })
 
-          primary_subnetwork_name   = try(primary_subnetwork.name, "${network.name}-${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}-primary-${replace(primary_subnetwork.ip_cidr_range, "//|\\./", "-")}")
-          secondary_subnetwork_name = "${network.name}-${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}-secondary-${replace(secondary_subnetwork.ip_cidr_range, "//|\\./", "-")}"
+          network_shortname = try(network.label, network.name)
+
+          name = templatefile("${path.module}/templates/cloud_nat.tftpl", {
+            attributes = {
+              name        = null,
+              label       = network.label
+              prefix      = try(network.prefix, var.prefix, null),
+              environment = try(network.environment, var.environment, null),
+              region      = module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)],
+          } })
+
+          router = templatefile("${path.module}/templates/cloud_router.tftpl", {
+            attributes = {
+              name        = null,
+              label       = network.label
+              prefix      = try(network.prefix, var.prefix, null),
+              environment = try(network.environment, var.environment, null),
+              region      = module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)],
+              purpose     = "nat"
+          } })
+
+          primary_subnetwork_name = templatefile("${path.module}/templates/subnetwork_primary.tftpl", {
+            attributes = {
+              name        = try(primary_subnetwork.name, null),
+              label       = network.label
+              prefix      = try(network.prefix, var.prefix, null),
+              environment = try(network.environment, var.environment, null)
+              region      = module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)],
+              cidr        = try(primary_subnetwork.ip_cidr_range, null),
+          } })
+
+          secondary_subnetwork_name = templatefile("${path.module}/templates/subnetwork_secondary.tftpl", {
+            attributes = {
+              name   = try(secondary_subnetwork.name, null),
+              label  = network.label,
+              region = module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)],
+              cidr   = try(secondary_subnetwork.ip_cidr_range, null)
+          } })
 
           nat_group_id         = secondary_subnetwork.nat_group_id
           mapping_nat_group_id = "${var.prefix}-${var.environment}-vpc-${network.name}__${secondary_subnetwork.nat_group_id}__${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}"
@@ -142,12 +244,13 @@ locals {
     network_shortname    = x.network_shortname
     region               = x.region
     router               = x.router
+    name                 = x.name
   }])
 
   cloud_nat_mapped_subnetwork_nat_groups = { for values in local.mapping_nat_group_ids : values.mapping_nat_group_id => merge({
     net_group_id = values.nat_group_id
     router       = values.router
-    name         = "${values.router}-${values.nat_group_id}"
+    name         = "${values.name}-${values.nat_group_id}"
     region       = values.region
 
     source_subnetwork_ip_ranges_to_nat = "LIST_OF_SUBNETWORKS"
@@ -174,6 +277,7 @@ resource "google_compute_router" "cloud_nat_routers" {
 
   depends_on = [
     google_compute_network.networks,
+    google_compute_subnetwork.subnetworks,
   ]
 }
 
@@ -205,7 +309,7 @@ resource "google_compute_router_nat" "cloud_nats" {
   dynamic "subnetwork" {
     for_each = try(each.value.subnetworks, [])
     content {
-      name                     = "projects/${var.project_id}/regions/${each.value.region}/subnetworks/${subnetwork.value.name}"
+      name                     = "https://www.googleapis.com/compute/v1/projects/${var.project_id}/regions/${each.value.region}/subnetworks/${subnetwork.value.name}"
       secondary_ip_range_names = subnetwork.value.secondary_ip_range_names
       source_ip_ranges_to_nat  = subnetwork.value.source_ip_ranges_to_nat
     }

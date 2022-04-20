@@ -1,6 +1,6 @@
 [
   {
-    "name": "fw-udp",
+    "label": "fw-udp",
     "firewall_rules": [
       {
         "id": "allow-udp-all-ingress",

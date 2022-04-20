@@ -1,18 +1,35 @@
 locals {
   defaults_firewall_rule = {
-    priority = 1000
-    disabled = false
+    name       = "UNKNOWN",
+    id         = "UNKNOWN",
+    priority   = 1000,
+    disabled   = false,
+    direction  = "ingress",
+    log_config = "DISABLED",
   }
   _firewall_rules = flatten([for network in var.network_configs : [
     for firewall_rule in network.firewall_rules : {
-      id             = firewall_rule.id
-      network        = "${var.prefix}-${var.environment}-vpc-${network.name}"
-      network_name = network.name
+      name        = try(firewall_rule.name, local.defaults_firewall_rule.name)
+      description = try(firewall_rule.description, firewall_rule.id, null)
+      id          = try(firewall_rule.id, local.defaults_firewall_rule.id)
 
-      priority       = try(firewall_rule.priority, 1000)
-      rule_action    = lower(firewall_rule.action)
-      rule_direction = upper(try(firewall_rule.direction, "ingress"))
-      disabled = try(firewall_rule.disabled,false)
+      project_id  = try(network.project_id, var.project_id)
+      prefix      = try(network.prefix, var.prefix, null)
+      environment = try(network.environment, var.environment, null)
+
+      network = templatefile("${path.module}/templates/network.tftpl", {
+        attributes = {
+          name        = try(network.name, null),
+          label       = network.label
+          prefix      = try(network.prefix, var.prefix, null),
+          environment = try(network.environment, var.environment, null)
+      } })
+
+      priority    = try(firewall_rule.priority, local.defaults_firewall_rule.priority)
+      rule_action = lower(firewall_rule.action)
+
+      rule_direction = upper(try(firewall_rule.direction, local.defaults_firewall_rule.direction))
+      disabled       = try(firewall_rule.disabled, local.defaults_firewall_rule.disabled)
 
       source_service_accounts = [for x in firewall_rule.sources : x if length(split("@", x)) > 1 && !can(cidrnetmask(x))]
       source_tags             = [for x in firewall_rule.sources : x if length(split("@", x)) < 2 && !can(cidrnetmask(x))]
@@ -22,12 +39,20 @@ locals {
       target_tags             = [for x in firewall_rule.targets : x if length(split("@", x)) < 2 && !can(cidrnetmask(x))]
       target_cidrs            = [for x in firewall_rule.targets : x if can(cidrnetmask(x))]
 
-      log_config = try(firewall_rule.log_config, "DISABLED")
+      log_config = try(firewall_rule.log_config, local.defaults_firewall_rule.log_config)
       rules      = try(firewall_rule.rules, null)
     }
   ] if can(network.firewall_rules)])
 
-  firewall_rules = { for firewall_rule in local._firewall_rules : "${firewall_rule.id}-${uuidv5("x500","PREFIX=${var.prefix},ENVIRONMENT=${var.environment},NETWORK=${firewall_rule.network_name},ID=${firewall_rule.id}")}" =>
+  firewall_rules = { for firewall_rule in local._firewall_rules : format("fw-%s", uuidv5("x500",
+    format("PREFIX=%s,ENVIRONMENT=%s,PROJECT_ID=%s,NETWORK=%s,NAME=%s,ID=%s",
+      firewall_rule.prefix,
+      firewall_rule.environment,
+      firewall_rule.project_id,
+      firewall_rule.network,
+      firewall_rule.name,
+      firewall_rule.id,
+    ))) =>
     merge(firewall_rule, {
       source_ranges = length(concat(firewall_rule.source_service_accounts, firewall_rule.source_tags, firewall_rule.source_cidrs)) > 0 ? firewall_rule.source_cidrs : ["0.0.0.0/0"]
       target_ranges = length(concat(firewall_rule.target_service_accounts, firewall_rule.target_tags, firewall_rule.target_cidrs)) > 0 ? firewall_rule.target_cidrs : ["0.0.0.0/0"]
@@ -37,8 +62,8 @@ locals {
 
 resource "google_compute_firewall" "firewall_rule" {
   for_each = local.firewall_rules
-  name     = each.key
-  project  = var.project_id
+  name     = each.value.name != "UNKNOWN" ? each.value.name : each.key
+  project  = each.value.project_id
   network  = each.value.network
 
   direction               = each.value.rule_direction
@@ -63,7 +88,7 @@ resource "google_compute_firewall" "firewall_rule" {
     iterator = rule
     content {
       protocol = lower(rule.value.protocol)
-      ports    = rule.value.ports
+      ports    = concat(try(rule.value.ports, []), try(rule.value.port_ranges, []))
     }
   }
   dynamic "deny" {
@@ -71,7 +96,7 @@ resource "google_compute_firewall" "firewall_rule" {
     iterator = rule
     content {
       protocol = lower(rule.value.protocol)
-      ports    = rule.value.ports
+      ports    = concat(try(rule.value.ports, []), try(rule.value.port_ranges, []))
     }
   }
 

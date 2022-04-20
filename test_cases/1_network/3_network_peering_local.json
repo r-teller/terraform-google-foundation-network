@@ -1,21 +1,43 @@
 [
     {
         "name": "network-peering-local-left",
-        "peers":[
+        "label": "local-left-alpha",
+        "peers": [
             {
-              "network": "test-cases-vpc-network-peering-local-right",
-              "export_custom_routes": true,
-              "import_custom_routes": true
+                "network": "network-peering-local-right",
+                "export_custom_routes": true,
+                "import_custom_routes": true
             }
         ]
     },
     {
         "name": "network-peering-local-right",
-        "peers":[
+        "label": "local-right-alpha",
+        "peers": [
             {
-              "network": "network-peering-local-left",
-              "export_custom_routes": false,
-              "import_custom_routes": true
+                "network": "network-peering-local-left",
+                "export_custom_routes": false,
+                "import_custom_routes": true
+            }
+        ]
+    },
+    {
+        "label": "local-left-bravo",
+        "peers": [
+            {
+                "network": "local-right-bravo",
+                "export_custom_routes": true,
+                "import_custom_routes": true
+            }
+        ]
+    },
+    {
+        "label": "local-right-bravo",
+        "peers": [
+            {
+                "network": "local-left-bravo",
+                "export_custom_routes": false,
+                "import_custom_routes": true
             }
         ]
     }

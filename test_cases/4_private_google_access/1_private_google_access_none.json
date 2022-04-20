@@ -1,5 +1,6 @@
 [
     {
-        "name": "pga-none"        
+        "name": "pga-none",
+        "label": "pga-none"
     }
 ]

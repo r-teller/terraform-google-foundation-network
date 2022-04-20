@@ -1,6 +1,6 @@
 [
     {
-        "name": "routes-nh-lb",
+        "label": "routes-nh-lb",
         "subnetworks": [
             {
                 "region": "US-CENTRAL1",

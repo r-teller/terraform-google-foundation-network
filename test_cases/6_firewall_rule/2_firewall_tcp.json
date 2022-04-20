@@ -1,6 +1,6 @@
 [
   {
-    "name": "fw-tcp",
+    "label": "fw-tcp",
     "firewall_rules": [
       {
         "id": "allow-tcp-all-ingress",

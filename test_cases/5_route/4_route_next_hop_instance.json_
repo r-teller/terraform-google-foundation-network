@@ -1,6 +1,6 @@
 [
     {
-        "name": "routes-nh-instance",
+        "label": "routes-nh-instance",
         "subnetworks": [
             {
                 "region": "US-CENTRAL1",

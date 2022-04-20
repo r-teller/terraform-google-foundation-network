@@ -1,16 +1,17 @@
 [
   {
     "name": "cloud-nat-selected-mix",
+    "label": "cloud-nat-selected-mix",
     "routing_mode": "GLOBAL",
     "cloud_nat": {
       "subnetworks_to_nat": "SELECTED_PRIMARY_SUBNETWORKS_SELECTED_SECONDARY_SUBNETWORKS",
       "nat_groups": [
-          {
-              "nat_group_id": "asdfasdf"
-          },
-          {
-              "nat_group_id": "aaaa"
-          }
+        {
+          "nat_group_id": "asdfasdf"
+        },
+        {
+          "nat_group_id": "aaaa"
+        }
       ]
     },
     "subnetworks": [
@@ -18,8 +19,8 @@
         "region": "US-WEST1",
         "ip_cidr_range": "172.16.34.0/24",
         "cloud_nat": {
-            "nat_group_id": "aaaa",
-            "subnetworks_to_nat": "PRIMARY_SUBNETWORK_SELECTED_SECONDARY_SUBNETWORKS"
+          "nat_group_id": "aaaa",
+          "subnetworks_to_nat": "PRIMARY_SUBNETWORK_SELECTED_SECONDARY_SUBNETWORKS"
         },
         "secondary_subnetworks": [
           {
@@ -34,8 +35,8 @@
         "region": "US-WEST1",
         "ip_cidr_range": "172.16.35.0/24",
         "cloud_nat": {
-            "nat_group_id": "aaaa",
-            "subnetworks_to_nat": "PRIMARY_SUBNETWORK_SELECTED_SECONDARY_SUBNETWORKS"
+          "nat_group_id": "aaaa",
+          "subnetworks_to_nat": "PRIMARY_SUBNETWORK_SELECTED_SECONDARY_SUBNETWORKS"
         },
         "secondary_subnetworks": [
           {
@@ -55,15 +56,15 @@
         "region": "US-EAST4",
         "ip_cidr_range": "172.16.64.0/24",
         "cloud_nat": {
-            "subnetworks_to_nat": "SELECTED_SECONDARY_SUBNETWORKS"
+          "subnetworks_to_nat": "SELECTED_SECONDARY_SUBNETWORKS"
         }
       },
       {
         "region": "US-WEST1",
         "ip_cidr_range": "172.16.36.0/24",
         "cloud_nat": {
-            "nat_group_id": "aaaa",
-            "subnetworks_to_nat": "SELECTED_SECONDARY_SUBNETWORKS"
+          "nat_group_id": "aaaa",
+          "subnetworks_to_nat": "SELECTED_SECONDARY_SUBNETWORKS"
         },
         "secondary_subnetworks": [
           {

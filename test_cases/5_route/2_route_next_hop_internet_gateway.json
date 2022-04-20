@@ -1,6 +1,6 @@
 [
     {
-        "name": "routes-nh-igw",
+        "label": "routes-nh-igw",
         "subnetworks": [
             {
                 "region": "US-CENTRAL1",

@@ -1,0 +1,10 @@
+${
+    attributes["name"] != null
+        ? attributes["name"]
+        : format("cn%s%s%s%s",
+            attributes["prefix"] == null ? "" : "-${attributes["prefix"] }",
+            attributes["environment"] == null ? "" : "-${attributes["environment"]}",
+            attributes["label"] == null ? "" : "-${attributes["label"]}",
+            attributes["region"] == null ? "" : "-${attributes["region"] }",
+        )
+}

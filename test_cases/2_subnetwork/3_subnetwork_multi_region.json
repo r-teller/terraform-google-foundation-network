@@ -1,6 +1,6 @@
 [
   {
-    "name": "subnetwork-multi-region",
+    "label": "subnetwork-multi-region",
     "subnetworks": [
       {
         "region": "US-EAST4",

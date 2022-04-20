@@ -1,6 +1,7 @@
 [
   {
     "name": "cloud-nat-all",
+    "label": "cloud-nat-all",
     "routing_mode": "GLOBAL",
     "cloud_nat": {
       "subnetworks_to_nat": "ALL_PRIMARY_SUBNETWORKS_ALL_SECONDARY_SUBNETWORKS"

@@ -1,7 +1,9 @@
 # Local staging directories
+**/.staging/
 **/.staging/*
 
 # Local .terraform directories
+**/.terraform/
 **/.terraform/*
 
 # .tfstate files

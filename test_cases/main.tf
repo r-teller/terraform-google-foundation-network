@@ -1,7 +1,7 @@
 locals {
   project_id  = "rteller-demo-host-aaaa"
-  prefix      = "test" // Make optional
-  environment = ""     // Make optional
+  prefix      = "demo"   // Make optional
+  environment = "shared" // Make optional
 
   test_cases__network__network_config_path = "./1_network"
   test_cases__network__network_config_sets = fileset(local.test_cases__network__network_config_path, "*.json")
@@ -48,37 +48,38 @@ locals {
 }
 
 module "test_cases__network" {
-  count = 0
+  count  = 1
   source = "../"
 
   project_id      = local.project_id
   prefix          = local.prefix
-  environment     = "cases"
+  environment     = local.environment
   network_configs = local.test_cases__network__network_configs
 }
 
+
 module "test_cases__subnetwork" {
-  count = 0
+  count  = 0
   source = "../"
 
   project_id      = local.project_id
   prefix          = local.prefix
-  environment     = "cases"
+  environment     = local.environment
   network_configs = local.test_cases__subnetwork__network_configs
 }
 
 module "test_cases__cloud_nat" {
-  count = 1
+  count  = 0
   source = "../"
 
   project_id      = local.project_id
   prefix          = local.prefix
-  environment     = "cases"
+  environment     = local.environment
   network_configs = local.test_cases__cloud_nat__network_configs
 }
 
 module "test_cases__private_google_access" {
-  count = 0
+  count  = 0
   source = "../"
 
   project_id      = local.project_id
@@ -88,12 +89,12 @@ module "test_cases__private_google_access" {
 }
 
 module "test_cases__route" {
-  count = 0
+  count  = 0
   source = "../"
 
   project_id      = local.project_id
   prefix          = local.prefix
-  environment     = "cases"
+  environment     = local.environment
   network_configs = local.test_cases__route__network_configs
 }
 
@@ -103,6 +104,6 @@ module "test_cases__firewall_rule" {
 
   project_id      = local.project_id
   prefix          = local.prefix
-  environment     = "cases"
+  environment     = local.environment
   network_configs = local.test_cases__firewall_rule__network_configs
 }

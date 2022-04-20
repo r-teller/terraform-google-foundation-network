@@ -1,0 +1,14 @@
+[
+    {
+        "name": "pga-combo-private",
+        "label": "pga-private",
+        "private_google_access": "PRIVATE",
+        "project_id": "rteller-demo-host-bbbb-341117"
+    },
+    {
+        "name": "pga-combo-restricted",
+        "label": "pga-restricted",
+        "private_google_access": "RESTRICTED",
+        "project_id": "rteller-demo-host-aaaa"
+    }
+]

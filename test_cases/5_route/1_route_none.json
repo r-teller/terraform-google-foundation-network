@@ -1,6 +1,6 @@
 [
     {
-        "name": "routes-none",
+        "label": "routes-none",
         "subnetworks": [
             {
                 "region": "US-CENTRAL1",

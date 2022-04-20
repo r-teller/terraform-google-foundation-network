@@ -1,0 +1,8 @@
+${
+    attributes["name"] != null
+        ? attributes["name"]
+        : format("dns%s%s",
+            attributes["fqdn"] == null ? "" : "-${replace(attributes["fqdn"], "//|\\./", "-")}",
+            attributes["suffix"] == null ? "" : "-${attributes["suffix"]}",
+            )
+}

@@ -1,6 +1,6 @@
 [
     {
-        "name": "fw-none",
+        "label": "fw-none",
         "firewall_rules": [ ]
     }
 ]

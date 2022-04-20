@@ -1,0 +1,10 @@
+[
+    {
+        "label": "network-double-charlie",
+        "project_id":"rteller-demo-host-aaaa"
+    },
+    {
+        "label": "network-double-delta",
+        "project_id":"rteller-demo-host-bbbb"
+    }
+]

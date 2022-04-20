@@ -1,6 +1,6 @@
 [
     {
-        "name": "routes-nh-address",
+        "label": "routes-nh-address",
         "subnetworks": [
             {
                 "region": "US-CENTRAL1",

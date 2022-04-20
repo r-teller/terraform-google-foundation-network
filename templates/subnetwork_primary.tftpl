@@ -1,0 +1,11 @@
+${
+    attributes["name"] != null
+        ? attributes["name"]
+        : format("sb%s%s%s%s%s",
+            attributes["prefix"] == null ? "" : "-${attributes["prefix"] }",
+            attributes["environment"] == null ? "" : "-${attributes["environment"]}",
+            attributes["label"] == null ? "" : "-${attributes["label"]}",
+            attributes["region"] == null ? "" : "-${attributes["region"] }",
+            attributes["cidr"] == null ? "" : "-${replace(attributes["cidr"], "//|\\./", "-")}",
+            )
+}

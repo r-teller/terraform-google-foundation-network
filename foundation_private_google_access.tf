@@ -7,162 +7,124 @@
 // Cloud DNS - Record Set
 //// Terraform - https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/dns_record_set
 
-
-
 resource "random_id" "random_id_pga" {
-  count       = can(local.map_private_google_access["PRIVATE"]) ? 1 : 0
+  for_each = local.map_private_google_access
+  #   count       = can(local.map_private_google_access["PRIVATE"]) ? 1 : 0
   byte_length = 2
 }
 
 locals {
-  defaults_private_google_access = {
-    mode = "DISABLED"
-  }
+  private_google_access_domains = [
+    {
+      mode    = "PRIVATE",
+      name    = "private.googleapis.com.",
+      cname   = "*.googleapis.com.",
+      domain  = "googleapis.com.",
+      records = ["199.36.153.8", "199.36.153.9", "199.36.153.10", "199.36.153.11"]
+      }, {
 
-  private_google_access_networks = [for network in var.network_configs : {
-    name         = "${var.prefix}-${var.environment}-vpc-${network.name}"
-    network_name = network.name
+      mode    = "PRIVATE",
+      name    = "private.gcr.com.",
+      cname   = "*.gcr.com.",
+      domain  = "gcr.com.",
+      records = ["199.36.153.8", "199.36.153.9", "199.36.153.10", "199.36.153.11"]
+    },
+    {
+      mode    = "RESTRICTED",
+      name    = "restricted.googleapis.com",
+      cname   = "*.googleapis.com.",
+      domain  = "googleapis.com.",
+      records = ["199.36.153.4", "199.36.153.5", "199.36.153.6", "199.36.153.7"]
+      }, {
+      mode    = "RESTRICTED"
+      name    = "restricted.gcr.com.",
+      cname   = "*.gcr.com.",
+      domain  = "gcr.com.",
+      records = ["199.36.153.4", "199.36.153.5", "199.36.153.6", "199.36.153.7"]
+    }
+  ]
 
-    id   = "projects/${var.project_id}/global/networks/${var.prefix}-${var.environment}-vpc-${network.name}"
+  private_google_access_modes = flatten(distinct(local.private_google_access_domains.*.mode))
+
+  private_google_access_configs = [for network in var.network_configs : {
+    project_id  = try(network.project_id, var.project_id)
+    prefix      = try(network.prefix, var.prefix, null)
+    environment = try(network.environment, var.environment, null)
+
+    network = templatefile("${path.module}/templates/network.tftpl", {
+      attributes = {
+        name        = try(network.name, null),
+        label       = network.label,
+        prefix      = try(network.prefix, var.prefix, null),
+        environment = try(network.environment, var.environment, null)
+    } })
+
     mode = network.private_google_access
-    } if try(contains(["PRIVATE", "RESTRICTED"], network.private_google_access), false)
+    } if try(contains(local.private_google_access_modes, network.private_google_access), false)
   ]
 
-  map_private_google_access = merge([for mode in ["PRIVATE", "RESTRICTED"] : {
-    for network in local.private_google_access_networks : mode => [
-      network.id
-    ] if network.mode == mode
+  map_private_google_access = merge([for config in local.private_google_access_configs : {
+    for domain in local.private_google_access_domains : format("%s__%s__%s__%s", config.mode, config.network, config.project_id, domain.name) => merge(config, domain, { id = format("https://www.googleapis.com/compute/v1/projects/%s/global/networks/%s", config.project_id, config.network) }) if config.mode == domain.mode
   }]...)
+
 }
 
-######## Private Google Access Zones ########
+resource "google_dns_managed_zone" "managed_zones" {
+  for_each = local.map_private_google_access
+  project  = each.value.project_id
+  name = templatefile("${path.module}/templates/cloud_dns_zone.tftpl", {
+    attributes = {
+      name   = null,
+      fqdn   = each.value.name,
+      suffix = random_id.random_id_pga[each.key].hex,
+  } })
 
-resource "google_dns_managed_zone" "managed_zone_private" {
-  count = can(local.map_private_google_access["PRIVATE"]) ? 1 : 0
-
-  project = var.project_id
-
-  name     = "dns-private-googleapis-com-${random_id.random_id_pga[0].hex}"
-  dns_name = "googleapis.com."
-
+  dns_name = each.value.domain
 
   visibility = "private"
 
   private_visibility_config {
-    dynamic "networks" {
-      for_each = local.map_private_google_access["PRIVATE"]
-      content {
-        network_url = networks.value
-      }
+    networks {
+      network_url = each.value.id
     }
   }
+
 
   depends_on = [
     google_compute_network.networks
   ]
 }
 
-resource "google_dns_record_set" "dns_record_set_a_private" {
-  count   = can(local.map_private_google_access["PRIVATE"]) ? 1 : 0
-  project = var.project_id
+resource "google_dns_record_set" "dns_record_set_a" {
+  for_each = local.map_private_google_access
+  project  = each.value.project_id
 
-  name         = "private.${google_dns_managed_zone.managed_zone_private[0].dns_name}"
-  managed_zone = google_dns_managed_zone.managed_zone_private[0].name
+  name         = each.value.name
+  managed_zone = google_dns_managed_zone.managed_zones[each.key].name
   type         = "A"
   ttl          = 300
 
-  rrdatas = ["199.36.153.8", "199.36.153.9", "199.36.153.10", "199.36.153.11"]
-}
-
-resource "google_dns_record_set" "dns_record_set_cname_private" {
-  count   = can(local.map_private_google_access["PRIVATE"]) ? 1 : 0
-  project = var.project_id
-
-  name         = "*.${google_dns_managed_zone.managed_zone_private[0].dns_name}"
-  managed_zone = google_dns_managed_zone.managed_zone_private[0].name
-  type         = "CNAME"
-  ttl          = 300
-
-  rrdatas = ["private.googleapis.com."]
-}
-
-######## Restricted Google Access Zones ########
-
-resource "google_dns_managed_zone" "managed_zone_restricted" {
-  count    = can(local.map_private_google_access["RESTRICTED"]) ? 1 : 0
-  project  = var.project_id
-  name     = "dns-restricted-googleapis-com-${random_id.random_id_pga[0].hex}"
-  dns_name = "googleapis.com."
-
-
-  visibility = "private"
-
-  private_visibility_config {
-    dynamic "networks" {
-      for_each = local.map_private_google_access["RESTRICTED"]
-      content {
-        network_url = networks.value
-      }
-    }
-  }
+  rrdatas = each.value.records
 
   depends_on = [
-    google_compute_network.networks
+    google_compute_network.networks,
+    google_dns_managed_zone.managed_zones,
   ]
 }
 
-resource "google_dns_record_set" "dns_record_set_a_restricted" {
-  count   = can(local.map_private_google_access["RESTRICTED"]) ? 1 : 0
-  project = var.project_id
+resource "google_dns_record_set" "dns_record_set_cname" {
+  for_each = local.map_private_google_access
+  project  = each.value.project_id
 
-  name         = "restricted.${google_dns_managed_zone.managed_zone_restricted[0].dns_name}"
-  managed_zone = google_dns_managed_zone.managed_zone_restricted[0].name
-  type         = "A"
-  ttl          = 300
-
-  rrdatas = ["199.36.153.8", "199.36.153.9", "199.36.153.10", "199.36.153.11"]
-}
-
-resource "google_dns_record_set" "dns_record_set_cname_restricted" {
-  count   = can(local.map_private_google_access["RESTRICTED"]) ? 1 : 0
-  project = var.project_id
-
-  name         = "*.${google_dns_managed_zone.managed_zone_restricted[0].dns_name}"
-  managed_zone = google_dns_managed_zone.managed_zone_restricted[0].name
+  name         = each.value.cname
+  managed_zone = google_dns_managed_zone.managed_zones[each.key].name
   type         = "CNAME"
   ttl          = 300
 
-  rrdatas = ["restricted.googleapis.com."]
+  rrdatas = [each.value.name]
+
+  depends_on = [
+    google_compute_network.networks,
+    google_dns_managed_zone.managed_zones,
+  ]
 }
-
-######## Private/Restricted Google Access Routes ########
-
-# resource "google_compute_route" "route_next_hop_gateway_restricted" {
-#   for_each = toset(try([for x in local.map_private_google_access["RESTRICTED"] : regex("global/networks/(?P<network>[^/]*)", x).network], []))
-
-#   project          = var.project_id
-#   name             = "${each.key}-psa-${random_id.random_id_pga[0].hex}"
-#   network          = each.key
-#   dest_range       = "199.36.153.4/30"
-#   next_hop_gateway = "default-internet-gateway"
-#   priority         = 0
-
-#   depends_on = [
-#     google_compute_network.networks
-#   ]
-# }
-
-# resource "google_compute_route" "route_next_hop_gateway_private" {
-#   for_each = toset(try([for x in local.map_private_google_access["PRIVATE"] : regex("global/networks/(?P<network>[^/]*)", x).network], []))
-
-#   project          = var.project_id
-#   name             = "${each.key}-psa-${random_id.random_id_pga[0].hex}"
-#   network          = each.key
-#   dest_range       = "199.36.153.8/30"
-#   next_hop_gateway = "default-internet-gateway"
-#   priority         = 0
-
-#   depends_on = [
-#     google_compute_network.networks
-#   ]
-# }

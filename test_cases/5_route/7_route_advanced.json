@@ -1,6 +1,6 @@
 [
     {
-        "name": "routes-advanced",
+        "label": "routes-advanced",
         "subnetworks": [
             {
                 "region": "US-CENTRAL1",

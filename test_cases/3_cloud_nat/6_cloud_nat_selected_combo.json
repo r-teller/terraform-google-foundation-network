@@ -1,6 +1,7 @@
 [
   {
     "name": "cloud-nat-selected-combo",
+    "label": "cloud-nat-selected-combo",
     "routing_mode": "GLOBAL",
     "cloud_nat": {
       "subnetworks_to_nat": "SELECTED_PRIMARY_SUBNETWORKS_SELECTED_SECONDARY_SUBNETWORKS",
@@ -100,7 +101,7 @@
         "region": "US-WEST1",
         "ip_cidr_range": "172.16.36.0/24",
         "cloud_nat": {
-            "nat_group_id": "aaaa",
+            "nat_group_id": "asdfasdf",
             "subnetworks_to_nat": "SELECTED_SECONDARY_SUBNETWORKS"
         },
         "secondary_subnetworks": [
