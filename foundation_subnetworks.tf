@@ -38,8 +38,9 @@ locals {
           cidr        = try(primary_subnetwork.ip_cidr_range, null),
       } })
 
-      network = key
-      purpose = try(primary_subnetwork.purpose, "PRIVATE")
+      project_id = try(network.project_id, var.project_id)
+      network    = key
+      purpose    = try(primary_subnetwork.purpose, "PRIVATE")
 
       // First Check
       //// Is primary_subnetwork.purpose either OneOf["INTERNAL_HTTPS_LOAD_BALANCER"], if so primary_subnetwork.role is set to value from JSON
@@ -86,10 +87,10 @@ locals {
 resource "google_compute_subnetwork" "subnetworks" {
   provider = google-beta
 
-  project  = var.project_id
   for_each = { for key, value in local.subnetworks : key => value if value.role != "BACKUP" }
 
   name          = each.value.name
+  project       = each.value.project_id
   region        = each.value.region
   network       = each.value.network
   ip_cidr_range = each.value.ip_cidr_range
@@ -119,11 +120,11 @@ resource "google_compute_subnetwork" "subnetworks" {
 # Backup Networks Need to be created After the primary network is setup
 resource "google_compute_subnetwork" "subnetworks_backup" {
   provider = google-beta
-
-  project  = var.project_id
+  
   for_each = { for key, value in local.subnetworks : key => value if value.role == "BACKUP" }
 
   name          = each.value.name
+  project       = each.value.project_id
   region        = each.value.region
   network       = each.value.network
   ip_cidr_range = each.value.ip_cidr_range

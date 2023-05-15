@@ -41,7 +41,7 @@ locals {
 
   cloud_nat_groups = merge(distinct(flatten([
     for network in var.network_configs : {
-      for nat_group in network.cloud_nat.nat_groups : "${var.prefix}-${var.environment}-vpc-${network.name}__${nat_group.nat_group_id}" => {
+      for nat_group in network.cloud_nat.nat_groups : "${var.prefix}-${var.environment}-vpc-${network.label}__${nat_group.nat_group_id}" => {
         network = templatefile("${path.module}/templates/network.tftpl", {
           attributes = {
             name        = try(network.name, null),
@@ -68,6 +68,7 @@ locals {
         region           = lower(primary_subnetwork.region)
         region_shortname = module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]
 
+        project_id = try(network.project_id, var.project_id)
         network = templatefile("${path.module}/templates/network.tftpl", {
           attributes = {
             name        = try(network.name, null),
@@ -122,6 +123,7 @@ locals {
       for primary_subnetwork in network.subnetworks : {
         region = lower(primary_subnetwork.region)
 
+        project_id = try(network.project_id, var.project_id)
         network = templatefile("${path.module}/templates/network.tftpl", {
           attributes = {
             name        = try(network.name, null),
@@ -162,10 +164,10 @@ locals {
         } })
 
         nat_group_id         = primary_subnetwork.cloud_nat.nat_group_id
-        mapping_nat_group_id = "${var.prefix}-${var.environment}-vpc-${network.name}__${primary_subnetwork.cloud_nat.nat_group_id}__${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}"
+        mapping_nat_group_id = "${var.prefix}-${var.environment}-vpc-${network.label}__${primary_subnetwork.cloud_nat.nat_group_id}__${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}"
 
         source_ip_ranges_to_nat = ["PRIMARY_IP_RANGE"]
-      } if can(lookup(local.cloud_nat_groups, "${var.prefix}-${var.environment}-vpc-${network.name}__${primary_subnetwork.cloud_nat.nat_group_id}")) &&
+      } if can(lookup(local.cloud_nat_groups, "${var.prefix}-${var.environment}-vpc-${network.label}__${primary_subnetwork.cloud_nat.nat_group_id}")) &&
       try(contains(["ALL_SUBNETWORKS", "PRIMARY_SUBNETWORK", "PRIMARY_SUBNETWORK_SELECTED_SECONDARY_SUBNETWORKS"], primary_subnetwork.cloud_nat.subnetworks_to_nat), false)
     ] if can(network.subnetworks)
   ]))
@@ -176,6 +178,7 @@ locals {
         for secondary_subnetwork in primary_subnetwork.secondary_subnetworks : {
           region = lower(primary_subnetwork.region)
 
+          project_id = try(network.project_id, var.project_id)
           network = templatefile("${path.module}/templates/network.tftpl", {
             attributes = {
               name        = try(network.name, null),
@@ -224,10 +227,10 @@ locals {
           } })
 
           nat_group_id         = secondary_subnetwork.nat_group_id
-          mapping_nat_group_id = "${var.prefix}-${var.environment}-vpc-${network.name}__${secondary_subnetwork.nat_group_id}__${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}"
+          mapping_nat_group_id = "${var.prefix}-${var.environment}-vpc-${network.label}__${secondary_subnetwork.nat_group_id}__${module.gcp_utils.region_short_name_map[lower(primary_subnetwork.region)]}"
 
           source_ip_ranges_to_nat = ["LIST_OF_SECONDARY_IP_RANGES"]
-        } if can(lookup(local.cloud_nat_groups, "${var.prefix}-${var.environment}-vpc-${network.name}__${secondary_subnetwork.nat_group_id}"))
+        } if can(lookup(local.cloud_nat_groups, "${var.prefix}-${var.environment}-vpc-${network.label}__${secondary_subnetwork.nat_group_id}"))
       ] if can(primary_subnetwork.secondary_subnetworks) &&
       try(contains(["SELECTED_SECONDARY_SUBNETWORKS", "PRIMARY_SUBNETWORK_SELECTED_SECONDARY_SUBNETWORKS"], primary_subnetwork.cloud_nat.subnetworks_to_nat), false)
     ] if can(network.subnetworks)
@@ -241,6 +244,7 @@ locals {
   mapping_nat_group_ids = distinct([for x in local.cloud_nat_subnetworks : {
     mapping_nat_group_id = x.mapping_nat_group_id,
     nat_group_id         = x.nat_group_id
+    project_id           = x.project_id
     network_shortname    = x.network_shortname
     region               = x.region
     router               = x.router
@@ -252,6 +256,7 @@ locals {
     router       = values.router
     name         = "${values.name}-${values.nat_group_id}"
     region       = values.region
+    project_id   = values.project_id
 
     source_subnetwork_ip_ranges_to_nat = "LIST_OF_SUBNETWORKS"
 
@@ -267,10 +272,10 @@ locals {
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_router
 resource "google_compute_router" "cloud_nat_routers" {
-  project = var.project_id
+  for_each = { for y in distinct([for x in local.cloud_nats : { router = x.router, region = x.region, network = x.network, project_id = x.project_id }]) : y.router => y }
 
-  for_each = { for y in distinct([for x in local.cloud_nats : { router = x.router, region = x.region, network = x.network }]) : y.router => y }
-  name     = each.value.router
+  name    = each.value.router
+  project = each.value.project_id
 
   network = each.value.network
   region  = each.value.region
@@ -284,7 +289,7 @@ resource "google_compute_router" "cloud_nat_routers" {
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_router_nat
 resource "google_compute_router_nat" "cloud_nats" {
   for_each = local.cloud_nats
-  project  = var.project_id
+  project  = each.value.project_id
 
   name                               = each.value.name
   router                             = each.value.router
@@ -309,7 +314,7 @@ resource "google_compute_router_nat" "cloud_nats" {
   dynamic "subnetwork" {
     for_each = try(each.value.subnetworks, [])
     content {
-      name                     = "https://www.googleapis.com/compute/v1/projects/${var.project_id}/regions/${each.value.region}/subnetworks/${subnetwork.value.name}"
+      name                     = "https://www.googleapis.com/compute/v1/projects/${each.value.project_id}/regions/${each.value.region}/subnetworks/${subnetwork.value.name}"
       secondary_ip_range_names = subnetwork.value.secondary_ip_range_names
       source_ip_ranges_to_nat  = subnetwork.value.source_ip_ranges_to_nat
     }

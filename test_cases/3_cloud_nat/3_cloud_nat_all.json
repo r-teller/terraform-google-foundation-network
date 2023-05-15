@@ -1,7 +1,38 @@
 [
   {
-    "name": "cloud-nat-all",
-    "label": "cloud-nat-all",
+    "name": "cloud-nat-all-a",
+    "label": "cloud-nat-all-a",
+    "routing_mode": "GLOBAL",
+    "cloud_nat": {
+      "subnetworks_to_nat": "ALL_PRIMARY_SUBNETWORKS_ALL_SECONDARY_SUBNETWORKS"
+    },
+    "subnetworks": [
+      {
+        "region": "US-WEST1",
+        "ip_cidr_range": "172.16.32.0/24",
+        "secondary_subnetworks": [
+          {
+            "ip_cidr_range": "10.20.32.0/24"
+          },
+          {
+            "ip_cidr_range": "10.20.33.0/24"
+          }
+        ]
+      },
+      {
+        "region": "US-WEST1",
+        "ip_cidr_range": "172.16.33.0/24"
+      },
+      {
+        "region": "US-EAST4",
+        "ip_cidr_range": "172.16.34.0/24"
+      }
+    ]
+  },
+  {
+    "name": "cloud-nat-all-b",
+    "project_id": "rteller-demo-hst-e265-aaaa",
+    "label": "cloud-nat-all-b",
     "routing_mode": "GLOBAL",
     "cloud_nat": {
       "subnetworks_to_nat": "ALL_PRIMARY_SUBNETWORKS_ALL_SECONDARY_SUBNETWORKS"

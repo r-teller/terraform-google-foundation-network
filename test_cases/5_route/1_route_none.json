@@ -1,6 +1,18 @@
 [
     {
-        "label": "routes-none",
+        "label": "routes-none-a",
+        "project_id": "rteller-demo-svc-e265-aaaa",
+        "subnetworks": [
+            {
+                "region": "US-CENTRAL1",
+                "ip_cidr_range": "192.168.0.0/24"
+            }
+        ],
+        "routes": []
+    },
+    {
+        "label": "routes-none-b",
+        "project_id": "rteller-demo-svc-e265-aaab",
         "subnetworks": [
             {
                 "region": "US-CENTRAL1",

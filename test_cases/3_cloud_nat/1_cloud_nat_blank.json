@@ -1,7 +1,20 @@
 [
   {
-    "name": "cloud-nat-blank",
-    "label": "cloud-nat-blank",
+    "name": "cloud-nat-blank-a",
+    "label": "cloud-nat-blank-a",
+    "routing_mode": "GLOBAL",
+    "cloud_nat": {},
+    "subnetworks": [
+      {
+        "region": "US-WEST1",
+        "ip_cidr_range": "172.16.32.0/24"
+      }
+    ]
+  },
+  {
+    "name": "cloud-nat-blank-b",
+    "project_id": "rteller-demo-hst-e265-aaaa",
+    "label": "cloud-nat-blank-b",
     "routing_mode": "GLOBAL",
     "cloud_nat": {},
     "subnetworks": [

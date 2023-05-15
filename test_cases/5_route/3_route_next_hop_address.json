@@ -1,6 +1,33 @@
 [
     {
-        "label": "routes-nh-address",
+        "label": "routes-nh-address-a",
+        "project_id": "rteller-demo-svc-e265-aaaa",
+        "subnetworks": [
+            {
+                "region": "US-CENTRAL1",
+                "ip_cidr_range": "192.168.0.0/24"
+            }
+        ],
+        "routes": [
+            {
+                "destination": "1.1.1.1/32",
+                "priority": 100,
+                "next_hop_type": "ADDRESS",
+                "next_hop_address": "192.168.0.253"
+            },
+            {
+                "tags": [
+                    "alpha"
+                ],
+                "destination": "2.2.2.2/32",
+                "next_hop_type": "ADDRESS",
+                "next_hop_address": "192.168.0.252"
+            }
+        ]
+    },
+    {
+        "label": "routes-nh-address-b",
+        "project_id": "rteller-demo-svc-e265-aaab",
         "subnetworks": [
             {
                 "region": "US-CENTRAL1",

@@ -1,6 +1,28 @@
 [
     {
-        "label": "routes-named",
+        "label": "routes-named-a",
+        "project_id": "rteller-demo-svc-e265-aaaa",
+        "subnetworks": [
+            {
+                "region": "US-CENTRAL1",
+                "ip_cidr_range": "192.168.0.0/24"
+            }
+        ],
+        "routes": [
+            {
+                "name": "default-route",
+                "tags": [
+                    "internet-access"
+                ],
+                "destination": "0.0.0.0/0",
+                "priority": 0,
+                "next_hop_type": "INTERNET_GATEWAY"
+            }
+        ]
+    },
+    {
+        "label": "routes-named-b",
+        "project_id": "rteller-demo-svc-e265-aaab",
         "subnetworks": [
             {
                 "region": "US-CENTRAL1",

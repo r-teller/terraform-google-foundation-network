@@ -1,7 +1,22 @@
 [
   {
-    "name": "cloud-nat-disabled",
-    "label": "cloud-nat-disabled",
+    "name": "cloud-nat-disabled-a",
+    "label": "cloud-nat-disabled-a",
+    "routing_mode": "GLOBAL",
+    "cloud_nat": {
+      "subnetworks_to_nat": "DISABLED"
+    },
+    "subnetworks": [
+      {
+        "region": "US-WEST1",
+        "ip_cidr_range": "172.16.32.0/24"
+      }
+    ]
+  },
+  {
+    "name": "cloud-nat-disabled-b",
+    "project_id": "rteller-demo-hst-e265-aaaa",
+    "label": "cloud-nat-disabled-b",
     "routing_mode": "GLOBAL",
     "cloud_nat": {
       "subnetworks_to_nat": "DISABLED"
