@@ -13,7 +13,7 @@ locals {
 
 module "network" {
   source  = "r-teller/foundation-network/google"
-  version = "~> 0.11.0"
+  version = "~> 0.13.0"
 
   project_id      = local.project_id
   prefix          = local.prefix
