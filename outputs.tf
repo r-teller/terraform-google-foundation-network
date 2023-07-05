@@ -18,8 +18,15 @@ output "network_peering_maps" {
 // STOP -- Output Section for foundation_networks.tf //
 
 // START -- Output Section for foundation_subnetworks.tf //
+output "resource_subnetworks" {
+  value = google_compute_subnetwork.subnetworks
+}
 
-output "subnetworks"  {
+output "resource_subnetworks_backup" {
+  value = google_compute_subnetwork.subnetworks_backup
+}
+
+output "subnetworks" {
   value = local.subnetworks
 }
 
